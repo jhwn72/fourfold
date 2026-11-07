@@ -89,7 +89,7 @@ export default function MapStage({ site: selected, listings, onSelect, focus, ci
   return (
     <div className="stage-dark" style={{ position: "relative", height: "100%", background: "#000", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0 }}>{stage}</div>
-      <span className="eyebrow" style={{ position: "absolute", top: inset ? 82 : 64, left: inset + 16, right: 16, color: labelColor, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", zIndex: 2, pointerEvents: "none" }}>
+      <span className="eyebrow" style={{ position: "absolute", top: inset ? 96 : 72, left: inset + 24, right: 24, color: labelColor, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", zIndex: 2, pointerEvents: "none" }}>
         {site ? `${site.address}${site.parcel ? " · " + Math.round(site.parcel.area_sqft).toLocaleString() + " sq ft" : ""}` : "Santa Ana · every parcel"}
       </span>
       <span className="ff-viewswitch" style={{ position: "absolute", display: "flex", gap: 8, zIndex: 3 }} data-theme-scope="dark">

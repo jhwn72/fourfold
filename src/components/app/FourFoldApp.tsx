@@ -96,7 +96,7 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
           <>
             <h1 className={a.title}>One house.<span className="second">Four homes.</span></h1>
             <p className={a.lede}>Investors can&apos;t split a lot under SB 9 unless they live there 3 years. Nonprofits can (<a href="https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf" target="_blank" rel="noreferrer">HCD, p.2</a>).</p>
-            <div className="card" style={{ marginTop: 16 }}>
+            <div className="card" style={{ marginTop: 18 }}>
               <div className={a.cardHead}><span className="eyebrow">Santa Ana listings, ranked</span><span className="chiptag">2026-11-07</span></div>
               <ol className={a.list}>
                 {results.map((r, i) => (
