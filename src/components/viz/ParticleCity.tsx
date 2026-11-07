@@ -44,7 +44,7 @@ void main() {
   bool cand = vCode > 0.5 && vCode < 1.5;
   bool dist = vCode > 1.5;
   vec3 col = cand ? mix(uAccent, uInk, uTech) : uInk;
-  float a = cand ? 0.55 : (dist ? 0.4 : 0.2);
+  float a = cand ? 0.42 : (dist ? 0.4 : 0.2);
   if (uTech > 0.5) a = cand ? 0.95 : (dist ? 0.55 : 0.3);
   gl_FragColor = vec4(col, a * soft * (0.75 + 0.25 * vRand));
 }`;

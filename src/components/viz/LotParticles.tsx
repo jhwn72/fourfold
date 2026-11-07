@@ -55,8 +55,8 @@ void main() {
   if (d > 0.5) discard;
   float soft = smoothstep(0.5, 0.05, d);
   vec3 col = uInk;
-  float a = 0.75;
-  if (vGroup == 0.0) a = 0.13;
+  float a = 0.9;
+  if (vGroup == 0.0) a = 0.16;
   else if (vGroup == 2.0) { col = uAccent; a = 0.95; }
   else if (vGroup == 3.0) a = 0.45;
   else if (vGroup == 4.0) { col = uAccent; a = 0.8; }
@@ -193,7 +193,7 @@ export default function LotParticles({ model, view, height = 420, replayKey = 0 
       mat.uniforms.uScale.value = Math.min(1.4, Math.max(0.7, W / 700));
       const tilt = THREE.MathUtils.lerp(0.9, 0.0001, blend);
       const a = THREE.MathUtils.lerp(az, 0, blend);
-      const dist = THREE.MathUtils.lerp(d * 0.95, d, blend);
+      const dist = THREE.MathUtils.lerp(d * 1.3, d * 1.05, blend);
       camera.position.set(Math.sin(tilt) * Math.sin(a) * dist, Math.cos(tilt) * dist + THREE.MathUtils.lerp(4, 0, blend), Math.sin(tilt) * Math.cos(a) * dist);
       camera.up.set(0, 1, 0).lerp(new THREE.Vector3(0, 0, -1), blend).normalize();
       camera.lookAt(0, THREE.MathUtils.lerp(6, 0, blend), 0);

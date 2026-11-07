@@ -4,7 +4,10 @@ import { buildCallSheet } from "@/lib/callsheet";
 import type { SiteResult } from "@/lib/types";
 
 export default function NextCallCard({ r }: { r: SiteResult }) {
-  const { groups, email } = buildCallSheet(r);
+  const sheet = buildCallSheet(r);
+  const email = sheet.email;
+  // Lead with the listing agent: one call settles tenants, rent rules and covenants.
+  const groups = [...sheet.groups].sort((a, b) => (a[0] === "Listing agent" ? -1 : b[0] === "Listing agent" ? 1 : 0));
   const [copied, setCopied] = useState(false);
   if (!groups.length) return null;
   const [who, items] = groups[0];
