@@ -26,3 +26,5 @@ build/
 next-env.d.ts
 *.tsbuildinfo
 .next-qa/
+.next-*/
+node_modules
