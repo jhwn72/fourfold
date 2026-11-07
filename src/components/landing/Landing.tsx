@@ -49,8 +49,6 @@ export default function Landing({ listings, bbox, stats }: { listings: TileListi
       <nav className={s.nav} aria-label="Main">
         <Link href="/" className={s.glyph} aria-label="FourFold home"><span /><span /><span /><span /></Link>
         <Link href="/method" className={s.link}>How it works</Link>
-        <Link href="/clusters" className={s.link}>Site groups</Link>
-        <Link href="/app?window=check" className={s.ghost}>Check an address</Link>
         <Link href="/app" className={s.solid}>Open FourFold</Link>
       </nav>
 
