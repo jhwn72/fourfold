@@ -64,15 +64,15 @@ export default function LotBlueprint({ model, height = 420 }: { model: LotModel;
     <svg viewBox={`0 0 ${W.toFixed(1)} ${H.toFixed(1)}`} width="100%" height={height} preserveAspectRatio="xMidYMid meet" role="img" aria-label="Technical drawing of the parcel with dimensions, split and setbacks" style={{ display: "block" }}>
       <defs>
         <pattern id="hatch" width={model.extent / 60} height={model.extent / 60} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <line x1="0" y1="0" x2="0" y2={model.extent / 60} stroke="rgba(244,244,244,0.25)" strokeWidth={sw} />
+          <line x1="0" y1="0" x2="0" y2={model.extent / 60} stroke="var(--faint)" strokeWidth={sw} />
         </pattern>
       </defs>
       {/* Grid every 10 ft */}
-      {Array.from({ length: Math.ceil(W / 10) + 1 }, (_, i) => <line key={`gx${i}`} x1={i * 10} y1={0} x2={i * 10} y2={H} stroke="rgba(255,255,255,0.04)" strokeWidth={sw} />)}
-      {Array.from({ length: Math.ceil(H / 10) + 1 }, (_, i) => <line key={`gy${i}`} x1={0} y1={i * 10} x2={W} y2={i * 10} stroke="rgba(255,255,255,0.04)" strokeWidth={sw} />)}
+      {Array.from({ length: Math.ceil(W / 10) + 1 }, (_, i) => <line key={`gx${i}`} x1={i * 10} y1={0} x2={i * 10} y2={H} stroke="var(--grid)" strokeWidth={sw} />)}
+      {Array.from({ length: Math.ceil(H / 10) + 1 }, (_, i) => <line key={`gy${i}`} x1={0} y1={i * 10} x2={W} y2={i * 10} stroke="var(--grid)" strokeWidth={sw} />)}
       <polygon points={pts(model.ring)} fill="none" stroke={ink} strokeWidth={sw * 2} />
       {lots && lots.map((l, i) => <polygon key={`sb${i}`} points={pts(inset(l, 4))} fill="none" stroke={faint} strokeWidth={sw} strokeDasharray={`${sw * 6} ${sw * 5}`} />)}
-      {model.buildings.map((b, i) => <polygon key={`b${i}`} points={pts(b)} fill="url(#hatch)" stroke="rgba(244,244,244,0.55)" strokeWidth={sw} />)}
+      {model.buildings.map((b, i) => <polygon key={`b${i}`} points={pts(b)} fill="url(#hatch)" stroke="var(--muted)" strokeWidth={sw} />)}
       {model.line && <line x1={X(model.line[0][0])} y1={Y(model.line[0][1])} x2={X(model.line[1][0])} y2={Y(model.line[1][1])} stroke={accent} strokeWidth={sw * 2.2} strokeDasharray={`${sw * 10} ${sw * 6}`} />}
       {lots && lots.map((l, i) => {
         const lc = centroid(l);

@@ -15,7 +15,7 @@ export default function LotViewer({ parcel, split, buildings = [], homes, keep, 
   const model = useMemo(() => buildLotModel(parcel, showSplit ? split : null, buildings, homes, keep), [parcel, split, buildings, homes, keep, showSplit]);
   const kept = keep === "fits_a" || keep === "fits_b";
   return (
-    <div style={{ border: "1px solid var(--line)", borderRadius: "var(--radius-card)", background: "#050505", overflow: "hidden" }}>
+    <div style={{ border: "1px solid var(--line)", borderRadius: "var(--radius-card)", background: "var(--viz-bg)", overflow: "hidden" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, padding: "10px 12px", borderBottom: "1px solid var(--line)", flexWrap: "wrap" }}>
         <span className="eyebrow">APN {parcel.apn} · {Math.round(parcel.area_sqft).toLocaleString()} sq ft</span>
         <span style={{ display: "flex", gap: 8, alignItems: "center" }}>

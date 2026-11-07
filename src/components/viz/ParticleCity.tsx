@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import type { ViewMode } from "./ViewSwitch";
 import { useReducedMotion } from "./useReducedMotion";
+import { useTheme } from "../theme";
 
 const VERT = `
 attribute float aCode;
@@ -33,6 +34,7 @@ void main() {
 
 const FRAG = `
 uniform float uTech;
+uniform float uLight;
 uniform vec3 uAccent;
 uniform vec3 uInk;
 varying float vCode;
@@ -46,6 +48,7 @@ void main() {
   vec3 col = cand ? mix(uAccent, uInk, uTech) : uInk;
   float a = cand ? 0.42 : (dist ? 0.4 : 0.2);
   if (uTech > 0.5) a = cand ? 0.95 : (dist ? 0.55 : 0.3);
+  if (uLight > 0.5) a = min(1.0, a * (cand ? 2.0 : 1.4));
   gl_FragColor = vec4(col, a * soft * (0.75 + 0.25 * vRand));
 }`;
 
@@ -56,6 +59,7 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
   const overlay = useRef<HTMLCanvasElement>(null);
   const modeRef = useRef<ViewMode>(mode);
   const reduced = useReducedMotion();
+  const theme = useTheme();
   const reducedRef = useRef(reduced);
   reducedRef.current = reduced;
   modeRef.current = mode;
@@ -87,8 +91,8 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
     const accent = new THREE.Color(css.getPropertyValue("--accent").trim() || "#ffb36b");
     const ink = new THREE.Color(css.getPropertyValue("--text").trim() || "#f4f4f4");
     const mat = new THREE.ShaderMaterial({
-      vertexShader: VERT, fragmentShader: FRAG, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-      uniforms: { uT: { value: reducedRef.current ? 1 : 0 }, uSize: { value: 1 }, uTech: { value: 0 }, uRef: { value: 4000 }, uPR: { value: renderer.getPixelRatio() }, uAccent: { value: accent }, uInk: { value: ink } },
+      vertexShader: VERT, fragmentShader: FRAG, transparent: true, depthWrite: false, blending: theme === "light" ? THREE.NormalBlending : THREE.AdditiveBlending,
+      uniforms: { uT: { value: reducedRef.current ? 1 : 0 }, uSize: { value: 1 }, uTech: { value: 0 }, uLight: { value: theme === "light" ? 1 : 0 }, uRef: { value: 4000 }, uPR: { value: renderer.getPixelRatio() }, uAccent: { value: accent }, uInk: { value: ink } },
     });
     const cloud = new THREE.Points(geo, mat);
     const scene = new THREE.Scene();
@@ -134,7 +138,7 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
       tech += ((m === "tech" ? 1 : 0) - tech) * k;
       mat.uniforms.uT.value = reducedRef.current ? 1 : Math.min(1, t / 2.6);
       mat.uniforms.uTech.value = tech;
-      mat.blending = tech > 0.5 ? THREE.NormalBlending : THREE.AdditiveBlending;
+      mat.blending = tech > 0.5 || theme === "light" ? THREE.NormalBlending : THREE.AdditiveBlending;
       if (!reducedRef.current && m === "3d") az += 0.0009;
       const d = fitDist();
       mat.uniforms.uRef.value = d;
@@ -167,11 +171,12 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
       ctx.clearRect(0, 0, W, H);
       if (a < 0.02) return;
       ctx.globalAlpha = a;
-      ctx.strokeStyle = "rgba(255,255,255,0.08)";
+      const cssNow = getComputedStyle(document.documentElement);
+      ctx.strokeStyle = cssNow.getPropertyValue("--grid").trim() || "rgba(255,255,255,0.06)";
       ctx.lineWidth = 1;
       const mono = getComputedStyle(document.body).getPropertyValue("--font-mono") || "monospace";
       ctx.font = `10px ${mono}`;
-      ctx.fillStyle = "rgba(244,244,244,0.45)";
+      ctx.fillStyle = cssNow.getPropertyValue("--faint").trim() || "rgba(244,244,244,0.45)";
       for (let gx = -Math.ceil(w / 2 / MILE) * MILE; gx <= w / 2; gx += MILE) {
         const [x1, y1] = project(gx, -h / 2), [x2, y2] = project(gx, h / 2);
         ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
@@ -183,7 +188,7 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
       // Scale bar (1 mile) bottom left
       const [sx1] = project(0, 0), [sx2] = project(MILE, 0);
       const len = Math.abs(sx2 - sx1);
-      ctx.strokeStyle = "rgba(244,244,244,0.7)";
+      ctx.strokeStyle = cssNow.getPropertyValue("--muted").trim() || "rgba(244,244,244,0.7)";
       ctx.beginPath(); ctx.moveTo(16, H - 20); ctx.lineTo(16 + len, H - 20); ctx.moveTo(16, H - 24); ctx.lineTo(16, H - 16); ctx.moveTo(16 + len, H - 24); ctx.lineTo(16 + len, H - 16); ctx.stroke();
       ctx.fillText("1 MI  ·  GRID 1 MI  ·  STATE PLANE CA VI (FT)", 16, H - 30);
       // North arrow top right
@@ -198,7 +203,7 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
       geo.dispose(); mat.dispose(); renderer.dispose();
       if (renderer.domElement.parentNode === el) el.removeChild(renderer.domElement);
     };
-  }, [points, bbox]);
+  }, [points, bbox, theme]);
 
   return (
     <div style={{ position: "relative", height, width: "100%" }} aria-label="Map of every Santa Ana parcel; highlighted dots pass the first SB 9 screen" role="img">

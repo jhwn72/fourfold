@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import s from "./NavBar.module.css";
+import ThemeToggle from "./ThemeToggle";
 
 const ITEMS = [
   { href: "/", label: "Sites" },
@@ -40,6 +41,7 @@ export default function NavBar() {
           ))}
         </nav>
         <div className={s.right}>
+          <ThemeToggle />
           <Link href="/check" className={`btn-primary ${s.cta}`}>
             <span className={s.ctaLong}>Check an address →</span>
             <span className={s.ctaShort}>Check</span>

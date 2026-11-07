@@ -20,7 +20,7 @@ export default function CityHero({ height = 520 }: { height?: number }) {
     return () => { live = false; };
   }, []);
   return (
-    <div style={{ position: "relative", border: "1px solid var(--line)", borderRadius: "var(--radius-card)", overflow: "hidden", background: "#050505" }}>
+    <div style={{ position: "relative", border: "1px solid var(--line)", borderRadius: "var(--radius-card)", overflow: "hidden", background: "var(--viz-bg)" }}>
       <div style={{ position: "absolute", top: 12, left: 14, right: 14, zIndex: 2, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, flexWrap: "wrap", pointerEvents: "none" }}>
         <span className="eyebrow">Santa Ana · every parcel · one dot each</span>
         <span style={{ pointerEvents: "auto" }}><ViewSwitch mode={mode} onChange={setMode} /></span>

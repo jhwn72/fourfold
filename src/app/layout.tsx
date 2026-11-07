@@ -14,7 +14,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Set the saved theme before paint so there is no flash. Default is dark. */}
+        <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem("fourfold-theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}` }} />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <NavBar />
         <main className="container">{children}</main>

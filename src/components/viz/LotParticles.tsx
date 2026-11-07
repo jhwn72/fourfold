@@ -6,6 +6,7 @@ import * as THREE from "three";
 import type { LotModel } from "./lotModel";
 import { pointInRing } from "./lotModel";
 import { useReducedMotion } from "./useReducedMotion";
+import { useTheme } from "../theme";
 
 // Groups: 0 ground fill, 1 outline, 2 split line, 3 existing building, 4 new home, 5 existing home marker
 const VERT = `
@@ -71,6 +72,7 @@ export default function LotParticles({ model, view, height = 420, replayKey = 0 
   const viewRef = useRef(view);
   viewRef.current = view;
   const reduced = useReducedMotion();
+  const theme = useTheme();
   const reducedRef = useRef(reduced);
   reducedRef.current = reduced;
 
@@ -154,7 +156,7 @@ export default function LotParticles({ model, view, height = 420, replayKey = 0 
     const css = getComputedStyle(document.documentElement);
     const sepAmt = E * 0.035;
     const mat = new THREE.ShaderMaterial({
-      vertexShader: VERT, fragmentShader: FRAG, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      vertexShader: VERT, fragmentShader: FRAG, transparent: true, depthWrite: false, blending: theme === "light" ? THREE.NormalBlending : THREE.AdditiveBlending,
       uniforms: {
         uT: { value: 0 }, uSep: { value: new THREE.Vector2(model.sepDir[0] * sepAmt, -model.sepDir[1] * sepAmt) },
         uRef: { value: 300 }, uPR: { value: renderer.getPixelRatio() }, uScale: { value: 1 },
@@ -202,7 +204,7 @@ export default function LotParticles({ model, view, height = 420, replayKey = 0 
     };
     raf = requestAnimationFrame(tick);
     return () => { cancelAnimationFrame(raf); ro.disconnect(); geo.dispose(); mat.dispose(); renderer.dispose(); if (renderer.domElement.parentNode === el) el.removeChild(renderer.domElement); };
-  }, [model, replayKey]);
+  }, [model, replayKey, theme]);
 
   return <div ref={wrap} style={{ height, width: "100%" }} role="img" aria-label="Particle drawing of the real parcel, split into two lots with homes" />;
 }
