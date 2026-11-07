@@ -33,6 +33,11 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
   const four = r.max_homes === 4;
   const investor = r.asking_price ? Math.round(r.asking_price / 2) : null;
   const diff = r.land_cost_per_home != null ? BRIEF_LAND_PER_HOME - r.land_cost_per_home : null;
+  const mapListings = RESULTS.results.map((x, i) => ({
+    id: x.id, n: i + 1, verdict: x.verdict, ring: x.parcel ? x.parcel.rings[0] : null,
+    split: x.split ? { lot_a: x.split.lot_a, lot_b: x.split.lot_b, line: x.split.line } : null,
+    buildings: x.buildings ?? [], homes: x.max_homes,
+  }));
   const tenantQuote = ev.flags.find((f) => f.flag === "tenant_occupied" && f.present)?.quote;
 
   return (
@@ -80,7 +85,7 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 16, alignItems: "stretch" }}>
         <div style={{ minWidth: 0 }}>
-          {r.parcel ? <LotViewer parcel={r.parcel} split={r.split} buildings={r.buildings} homes={r.max_homes} keep={r.keep_house} height={380} /> : <div className="card">No parcel polygon.</div>}
+          {r.parcel ? <LotViewer parcel={r.parcel} split={r.split} buildings={r.buildings} homes={r.max_homes} keep={r.keep_house} height={380} mapListings={mapListings} siteId={r.id} /> : <div className="card">No parcel polygon.</div>}
         </div>
         <div style={{ minWidth: 0 }}><NextCallCard r={r} /></div>
       </div>

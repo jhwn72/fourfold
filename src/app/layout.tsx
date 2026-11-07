@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import FontSwitcher from "@/components/FontSwitcher";
 import NavBar from "@/components/NavBar";
+import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "FourFold",
@@ -14,12 +13,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={fontVariables} suppressHydrationWarning>
       <head>
-        {/* Set the saved theme before paint so there is no flash. Default is dark. */}
-        <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem("fourfold-theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}` }} />
+        {/* Set the saved theme and fonts before paint so there is no flash. Default theme is light. */}
+        <script dangerouslySetInnerHTML={{ __html: `try{var d=document.documentElement;var t=localStorage.getItem("fourfold-theme");d.dataset.theme=t==="dark"?"dark":"light";var f=JSON.parse(localStorage.getItem("fourfold-fonts")||"null");if(f){d.style.setProperty("--font-choice-sans","var("+f.text+")");d.style.setProperty("--font-choice-mono","var("+f.label+")");}}catch(e){}` }} />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>
         <NavBar />
         <main className="container">{children}</main>
         <footer className="site-footer">
@@ -28,6 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             Data checked 2026-11-07 · <a href="https://github.com/jhwn72/fourfold" target="_blank" rel="noreferrer" style={{ color: "var(--muted)" }}>GitHub</a>
           </div>
         </footer>
+        <FontSwitcher />
       </body>
     </html>
   );

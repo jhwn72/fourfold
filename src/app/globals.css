@@ -28,27 +28,33 @@
   --possible: #ffcf7a;
   --possible-bg: rgba(255, 207, 122, 0.12);
   --viz-bg: #050505;
+  --panel: #0c0c0c;
+  --tick: rgba(255, 255, 255, 0.35);
+  --map-bg: #000000;
   --header-bg: rgba(7, 7, 7, 0.82);
   --grid: rgba(255, 255, 255, 0.05);
   --hover: rgba(255, 255, 255, 0.08);
   --primary-bg: rgba(255, 255, 255, 0.92);
   --primary-bg-hover: #ffffff;
   --primary-fg: #111111;
-  --radius-card: 12px;
-  --radius-row: 10px;
-  --radius-control: 8px;
+  --radius-card: 2px;
+  --radius-row: 3px;
+  --radius-control: 3px;
   --ease: cubic-bezier(0.6, 0, 0.2, 1);
   --ease-out: cubic-bezier(0.2, 0.6, 0.2, 1);
   --fast: 0.2s;
   --medium: 0.3s;
   --slow: 0.45s;
   color-scheme: dark;
+  /* Fonts: next/font sets each --font-* variable on <html>; the font switcher picks which one is used. */
+  --font-sans: var(--font-choice-sans, var(--font-geist-sans)), -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --font-mono: var(--font-choice-mono, var(--font-geist-mono)), ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 /* Light mode. Tango and Norrvik are dark only, so these values are the dark roles inverted: paper white,
    ink text, hairlines in black. The accent is a darker amber so it passes AA on white. Placeholders, John to confirm. */
 :root[data-theme="light"] {
-  --bg: #f7f7f5;
+  --bg: #ededeb;
   --surface: rgba(0, 0, 0, 0.025);
   --surface-2: rgba(0, 0, 0, 0.05);
   --fill-active: #ffffff;
@@ -70,6 +76,8 @@
   --possible: #8a5a00;
   --possible-bg: rgba(138, 90, 0, 0.1);
   --viz-bg: #fbfbfa;
+  --panel: #ffffff;
+  --tick: rgba(0, 0, 0, 0.45);
   --header-bg: rgba(247, 247, 245, 0.85);
   --grid: rgba(0, 0, 0, 0.06);
   --hover: rgba(0, 0, 0, 0.05);
@@ -82,9 +90,6 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
-  /* Font vars live on body because next/font sets --font-geist-* on the body element. */
-  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
   font-family: var(--font-sans);
   font-weight: 400;
   color: var(--text);
@@ -127,9 +132,32 @@ code, pre, .mono { font-family: var(--font-mono); }
 .faint { color: var(--faint); }
 
 .card {
+  position: relative;
   border: 1px solid var(--line); border-radius: var(--radius-card);
-  background: var(--surface); padding: 18px; margin: 14px 0;
+  background: var(--panel); padding: 18px; margin: 14px 0;
 }
+/* Corner "+" ticks (reference: dashboard cards) */
+.card::before, .tick::before {
+  content: ""; position: absolute; inset: -5px; pointer-events: none;
+  background:
+    linear-gradient(var(--tick), var(--tick)) 0 4px / 9px 1px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) 4px 0 / 1px 9px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) 100% 4px / 9px 1px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) calc(100% - 4px) 0 / 1px 9px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) 0 calc(100% - 4px) / 9px 1px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) 4px 100% / 1px 9px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) 100% calc(100% - 4px) / 9px 1px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) calc(100% - 4px) 100% / 1px 9px no-repeat;
+}
+.tick { position: relative; }
+.iconbtn {
+  width: 36px; height: 36px; padding: 0; display: inline-grid; place-items: center;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 3px;
+  font-family: var(--font-mono); font-size: 12px; color: var(--text);
+}
+.chiptag { display: inline-block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--line-strong); padding: 2px 6px; border-radius: 2px; color: var(--muted); }
+.statbar { height: 3px; background: var(--line); margin-top: 6px; }
+.statbar > i { display: block; height: 100%; background: var(--text); }
 
 table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
 th, td { border-bottom: 1px solid var(--line); padding: 9px 10px; text-align: left; vertical-align: top; }
@@ -139,7 +167,7 @@ tbody tr:hover { background: var(--surface); }
 
 .status {
   font-family: var(--font-mono); font-weight: 500; font-size: 11px; letter-spacing: 0.06em;
-  padding: 3px 8px; border-radius: 999px; white-space: nowrap; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 2px; white-space: nowrap; text-transform: uppercase;
 }
 .PASS { background: var(--pass-bg); color: var(--pass); }
 .FAIL { background: var(--fail-bg); color: var(--fail); }
@@ -203,3 +231,4 @@ pre { background: var(--surface-2); border: 1px solid var(--line); border-radius
 /* Theme toggle */
 .theme-toggle { padding: 5px 10px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-color: var(--line); }
 @media (max-width: 720px) { .theme-toggle-wide { display: none; } }
+.mapbtn { padding: 4px 10px; font-size: 12px; background: var(--panel); }
