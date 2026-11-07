@@ -1,3 +1,4 @@
+import Hint from "@/components/Hint";
 import data from "../../../data/citywide.json";
 import CityHero from "@/components/viz/CityHero";
 import CandidateList from "@/components/CandidateList";
@@ -35,7 +36,7 @@ export default function CityPage() {
     <section>
       <header className={s.head}>
         <span className="eyebrow">Santa Ana · citywide first screen · {screened} UTC</span>
-        <h1>{n(CITY.counts.candidates)} Santa Ana lots pass the first screen<span className="second">Checked on parcel centers. Not a verdict.</span></h1>
+        <h1>{n(CITY.counts.candidates)} Santa Ana lots pass the first screen<span className="second">Checked at parcel centers <Hint /></span></h1>
         <p className={s.lede}>
           Same rules as the address check, run once over the whole city from public map layers. Any city with parcel,
           zoning and hazard layers can be screened the same way.
