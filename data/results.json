@@ -1,0 +1,2804 @@
+{
+ "generated_at": "2026-11-07T19:00:34.990Z",
+ "city": "Santa Ana",
+ "results": [
+  {
+   "id": "sa-04",
+   "address": "1209 S Townsend St",
+   "city": "Santa Ana",
+   "asking_price": 865000,
+   "listing_source_url": "https://www.zillow.com/homedetails/1209-S-Townsend-St-Santa-Ana-CA-92704/25208047_zpid/",
+   "date_collected": "2026-11-07",
+   "parcel": {
+    "apn": "109-453-19",
+    "site_address": "1209 S TOWNSEND ST",
+    "rings": [
+     [
+      [
+       6061659.0829238,
+       2213716.710016817
+      ],
+      [
+       6061559.102808803,
+       2213718.230026901
+      ],
+      [
+       6061560.262911469,
+       2213783.220054388
+      ],
+      [
+       6061660.243026465,
+       2213781.700044304
+      ],
+      [
+       6061659.0829238,
+       2213716.710016817
+      ]
+     ]
+    ],
+    "area_sqft": 6499.473789572716,
+    "assessor_area_sqft": 6499.473791054194,
+    "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0"
+   },
+   "checks": [
+    {
+     "id": "parcel",
+     "test": "Address matches a Santa Ana parcel",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "rule": "Needed to run every other test.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "APN 109-453-19, 1209 S TOWNSEND ST",
+     "checked_at": "2026-11-07T19:00:31.414Z",
+     "note": "Matched APN 109-453-19."
+    },
+    {
+     "id": "zoning",
+     "test": "Single-family residential zone",
+     "source_name": "City of Santa Ana, Zoning Classifications (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_ZoningClassifications/FeatureServer/0",
+     "rule": "HCD SB 9 Fact Sheet (Sept 2024) p.2: single-family residential zones only. Gov. Code 65852.21(a), 66411.7(a)(3)(A).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "R1 (Single-Family Residence)",
+     "checked_at": "2026-11-07T19:00:31.456Z",
+     "note": "Zoned single-family."
+    },
+    {
+     "id": "lot_split",
+     "test": "Lot can split into two lots of at least 1,200 sq ft, neither under 40%",
+     "status": "PASS",
+     "value": "Lot 6,499 sq ft; equal split = 3,250 + 3,250 sq ft",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "checked_at": "2026-11-07T19:00:31.414Z",
+     "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,499 sq ft (matches).",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
+     "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "flood",
+     "test": "Not in a FEMA special flood hazard area",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:31.508Z",
+     "value": "FEMA: X (area with reduced flood risk due to levee)",
+     "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
+     "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+     "note": "Not in a special flood hazard area. County copy agrees."
+    },
+    {
+     "id": "fire",
+     "test": "Not in a very high fire hazard severity zone",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:31.458Z",
+     "value": "Not in a mapped LRA fire hazard zone",
+     "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
+     "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
+     "note": "Not in a very high fire hazard severity zone. Map vintage may predate CAL FIRE's 2025 LRA maps."
+    },
+    {
+     "id": "historic",
+     "test": "Not a historic property, landmark, or contributing structure in a historic district",
+     "source_name": "City of Santa Ana, Historic Properties by Category (ArcGIS REST); City of Santa Ana, Historic Districts (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/0",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
+     "affects_verdict": true,
+     "status": "UNKNOWN",
+     "checked_at": "2026-11-07T19:00:31.479Z",
+     "value": "Not on Santa Ana's historic list or in a city historic district",
+     "note": "City data is clean. The State Historic Resources Inventory was not checked.",
+     "next_step": "Ask the city planning desk to confirm no state or local historic listing."
+    },
+    {
+     "id": "tenant",
+     "test": "No tenant in the last 3 years",
+     "status": "UNKNOWN",
+     "value": "Not checked: no public data on tenancy",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until the seller confirms.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3; Gov. Code 65852.21(a)(3), 66411.7(a)(3)(D).",
+     "next_step": "Ask the listing agent for 3 years of occupancy history.",
+     "affects_verdict": true,
+     "possible_fail": false
+    },
+    {
+     "id": "rent_restricted",
+     "test": "Not rent-restricted, rent-controlled, or Ellis Act withdrawn (15 years)",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3.",
+     "next_step": "Ask the listing agent and the city housing division about covenants, rent control and Ellis Act history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "prior_split",
+     "test": "Not created by a prior SB 9 split, and no adjacent split by the same owner",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; SB 9 Fact Sheet (Sept 2024) p.6.",
+     "next_step": "Ask the city planning desk for the parcel's map history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "fault",
+     "test": "Not in an earthquake fault zone",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check the CGS EQ Zapp map (its data service needed a token when tested).",
+     "affects_verdict": true
+    },
+    {
+     "id": "environment",
+     "test": "Not wetlands, habitat, farmland, conservation easement, or hazardous waste site",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check DTSC EnviroStor and ask the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "landslide",
+     "test": "Not in a CGS landslide zone (site risk, does not change the verdict)",
+     "source_name": "California Geological Survey, Landslide Zones",
+     "source_url": "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0",
+     "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
+     "affects_verdict": false,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:31.483Z",
+     "value": "Not in a mapped landslide zone",
+     "note": "No mapped landslide zone."
+    }
+   ],
+   "verdict": "LIKELY YES",
+   "verdict_reason": "Passes zoning, lot size, flood and fire checks on public data. 6 items still need confirming with the agent or city.",
+   "max_homes": 4,
+   "land_cost_per_home": 216250,
+   "split": {
+    "lot_a": [
+     [
+      6061659.0829238,
+      2213716.710016817
+     ],
+     [
+      6061609.178872033,
+      2213717.468714303
+     ],
+     [
+      6061610.166963236,
+      2213782.4613569016
+     ],
+     [
+      6061660.243026465,
+      2213781.700044304
+     ]
+    ],
+    "lot_b": [
+     [
+      6061609.178872033,
+      2213717.468714303
+     ],
+     [
+      6061559.102808803,
+      2213718.230026901
+     ],
+     [
+      6061560.262911468,
+      2213783.220054388
+     ],
+     [
+      6061610.166963236,
+      2213782.4613569016
+     ]
+    ],
+    "lot_a_sqft": 3249.7368947267532,
+    "lot_b_sqft": 3249.7368948459625,
+    "line": [
+     [
+      6061610.166963236,
+      2213782.4613569016
+     ],
+     [
+      6061609.178872033,
+      2213717.468714303
+     ]
+    ]
+   },
+   "listing_evidence": {
+    "status": "skipped",
+    "note": "Listing reader off: no ANTHROPIC_API_KEY set.",
+    "flags": []
+   },
+   "unknown_count": 6,
+   "computed_at": "2026-11-07T19:00:31.508Z",
+   "listed_lot_sqft": 6500,
+   "description": "Listing summary: Three-bedroom, two-bathroom single-family home with a private backyard. Description does not establish occupancy or tenant history.",
+   "description_type": "summary"
+  },
+  {
+   "id": "sa-05",
+   "address": "927 S Laurel St",
+   "city": "Santa Ana",
+   "asking_price": 889000,
+   "listing_source_url": "https://www.zillow.com/homedetails/927-S-Laurel-St-Santa-Ana-CA-92704/25260306_zpid/",
+   "date_collected": "2026-11-07",
+   "parcel": {
+    "apn": "144-372-04",
+    "site_address": "927 S LAUREL ST",
+    "rings": [
+     [
+      [
+       6055625.182918131,
+       2215306.2898428887
+      ],
+      [
+       6055624.972944796,
+       2215263.919848889
+      ],
+      [
+       6055624.892892465,
+       2215247.7899598926
+      ],
+      [
+       6055520.9528116435,
+       2215248.2998013943
+      ],
+      [
+       6055521.262850389,
+       2215306.800012484
+      ],
+      [
+       6055625.182918131,
+       2215306.2898428887
+      ]
+     ]
+    ],
+    "area_sqft": 6080.069737860002,
+    "assessor_area_sqft": 6080.069738357033,
+    "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0"
+   },
+   "checks": [
+    {
+     "id": "parcel",
+     "test": "Address matches a Santa Ana parcel",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "rule": "Needed to run every other test.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "APN 144-372-04, 927 S LAUREL ST",
+     "checked_at": "2026-11-07T19:00:31.908Z",
+     "note": "Matched APN 144-372-04."
+    },
+    {
+     "id": "zoning",
+     "test": "Single-family residential zone",
+     "source_name": "City of Santa Ana, Zoning Classifications (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_ZoningClassifications/FeatureServer/0",
+     "rule": "HCD SB 9 Fact Sheet (Sept 2024) p.2: single-family residential zones only. Gov. Code 65852.21(a), 66411.7(a)(3)(A).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "R1 (Single-Family Residence)",
+     "checked_at": "2026-11-07T19:00:31.953Z",
+     "note": "Zoned single-family."
+    },
+    {
+     "id": "lot_split",
+     "test": "Lot can split into two lots of at least 1,200 sq ft, neither under 40%",
+     "status": "PASS",
+     "value": "Lot 6,080 sq ft; equal split = 3,040 + 3,040 sq ft",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "checked_at": "2026-11-07T19:00:31.908Z",
+     "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,080 sq ft (matches).",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
+     "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "flood",
+     "test": "Not in a FEMA special flood hazard area",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:32.010Z",
+     "value": "FEMA: X (area with reduced flood risk due to levee)",
+     "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
+     "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+     "note": "Not in a special flood hazard area. County copy agrees."
+    },
+    {
+     "id": "fire",
+     "test": "Not in a very high fire hazard severity zone",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:31.953Z",
+     "value": "Not in a mapped LRA fire hazard zone",
+     "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
+     "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
+     "note": "Not in a very high fire hazard severity zone. Map vintage may predate CAL FIRE's 2025 LRA maps."
+    },
+    {
+     "id": "historic",
+     "test": "Not a historic property, landmark, or contributing structure in a historic district",
+     "source_name": "City of Santa Ana, Historic Properties by Category (ArcGIS REST); City of Santa Ana, Historic Districts (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/0",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
+     "affects_verdict": true,
+     "status": "UNKNOWN",
+     "checked_at": "2026-11-07T19:00:31.973Z",
+     "value": "Not on Santa Ana's historic list or in a city historic district",
+     "note": "City data is clean. The State Historic Resources Inventory was not checked.",
+     "next_step": "Ask the city planning desk to confirm no state or local historic listing."
+    },
+    {
+     "id": "tenant",
+     "test": "No tenant in the last 3 years",
+     "status": "UNKNOWN",
+     "value": "Not checked: no public data on tenancy",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until the seller confirms.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3; Gov. Code 65852.21(a)(3), 66411.7(a)(3)(D).",
+     "next_step": "Ask the listing agent for 3 years of occupancy history.",
+     "affects_verdict": true,
+     "possible_fail": false
+    },
+    {
+     "id": "rent_restricted",
+     "test": "Not rent-restricted, rent-controlled, or Ellis Act withdrawn (15 years)",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3.",
+     "next_step": "Ask the listing agent and the city housing division about covenants, rent control and Ellis Act history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "prior_split",
+     "test": "Not created by a prior SB 9 split, and no adjacent split by the same owner",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; SB 9 Fact Sheet (Sept 2024) p.6.",
+     "next_step": "Ask the city planning desk for the parcel's map history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "fault",
+     "test": "Not in an earthquake fault zone",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check the CGS EQ Zapp map (its data service needed a token when tested).",
+     "affects_verdict": true
+    },
+    {
+     "id": "environment",
+     "test": "Not wetlands, habitat, farmland, conservation easement, or hazardous waste site",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check DTSC EnviroStor and ask the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "landslide",
+     "test": "Not in a CGS landslide zone (site risk, does not change the verdict)",
+     "source_name": "California Geological Survey, Landslide Zones",
+     "source_url": "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0",
+     "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
+     "affects_verdict": false,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:31.982Z",
+     "value": "Not in a mapped landslide zone",
+     "note": "No mapped landslide zone."
+    }
+   ],
+   "verdict": "LIKELY YES",
+   "verdict_reason": "Passes zoning, lot size, flood and fire checks on public data. 6 items still need confirming with the agent or city.",
+   "max_homes": 4,
+   "land_cost_per_home": 222250,
+   "split": {
+    "lot_a": [
+     [
+      6055573.216270587,
+      2215306.5449601547
+     ],
+     [
+      6055625.182918131,
+      2215306.2898428887
+     ],
+     [
+      6055624.972944796,
+      2215263.9198488886
+     ],
+     [
+      6055624.892892465,
+      2215247.789959892
+     ],
+     [
+      6055572.929318871,
+      2215248.0448489226
+     ]
+    ],
+    "lot_b": [
+     [
+      6055573.216270587,
+      2215306.5449601547
+     ],
+     [
+      6055572.929318871,
+      2215248.0448489226
+     ],
+     [
+      6055520.9528116435,
+      2215248.2998013943
+     ],
+     [
+      6055521.262850389,
+      2215306.800012484
+     ]
+    ],
+    "lot_a_sqft": 3040.0348689109087,
+    "lot_b_sqft": 3040.034868955612,
+    "line": [
+     [
+      6055573.216271632,
+      2215306.545173253
+     ],
+     [
+      6055572.929318871,
+      2215248.0448489226
+     ]
+    ]
+   },
+   "listing_evidence": {
+    "status": "skipped",
+    "note": "Listing reader off: no ANTHROPIC_API_KEY set.",
+    "flags": []
+   },
+   "unknown_count": 6,
+   "computed_at": "2026-11-07T19:00:32.010Z",
+   "listed_lot_sqft": 6084,
+   "description": "Listing excerpt: The home is ready for a comprehensive renovation. Listing summary: Three bedrooms, two bathrooms, two-car garage and backyard.",
+   "description_type": "excerpt+summary"
+  },
+  {
+   "id": "sa-06",
+   "address": "1213 S Corta Dr",
+   "city": "Santa Ana",
+   "asking_price": 899000,
+   "listing_source_url": "https://www.zillow.com/homedetails/1213-S-Corta-Dr-Santa-Ana-CA-92704/25204509_zpid/",
+   "date_collected": "2026-11-07",
+   "parcel": {
+    "apn": "108-384-06",
+    "site_address": "1213 S CORTA DR",
+    "rings": [
+     [
+      [
+       6050003.112797469,
+       2214082.5600069016
+      ],
+      [
+       6050002.882811055,
+       2214022.559798807
+      ],
+      [
+       6049893.252780974,
+       2214022.9298768044
+      ],
+      [
+       6049893.462754309,
+       2214082.930084899
+      ],
+      [
+       6050003.112797469,
+       2214082.5600069016
+      ]
+     ]
+    ],
+    "area_sqft": 6578.506422491744,
+    "assessor_area_sqft": 6578.506421476464,
+    "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0"
+   },
+   "checks": [
+    {
+     "id": "parcel",
+     "test": "Address matches a Santa Ana parcel",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "rule": "Needed to run every other test.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "APN 108-384-06, 1213 S CORTA DR",
+     "checked_at": "2026-11-07T19:00:32.431Z",
+     "note": "Matched APN 108-384-06."
+    },
+    {
+     "id": "zoning",
+     "test": "Single-family residential zone",
+     "source_name": "City of Santa Ana, Zoning Classifications (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_ZoningClassifications/FeatureServer/0",
+     "rule": "HCD SB 9 Fact Sheet (Sept 2024) p.2: single-family residential zones only. Gov. Code 65852.21(a), 66411.7(a)(3)(A).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "R1 (Single-Family Residence)",
+     "checked_at": "2026-11-07T19:00:32.472Z",
+     "note": "Zoned single-family."
+    },
+    {
+     "id": "lot_split",
+     "test": "Lot can split into two lots of at least 1,200 sq ft, neither under 40%",
+     "status": "PASS",
+     "value": "Lot 6,579 sq ft; equal split = 3,289 + 3,289 sq ft",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "checked_at": "2026-11-07T19:00:32.431Z",
+     "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,579 sq ft (matches).",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
+     "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "flood",
+     "test": "Not in a FEMA special flood hazard area",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:32.536Z",
+     "value": "FEMA: X (area with reduced flood risk due to levee)",
+     "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
+     "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+     "note": "Not in a special flood hazard area. County copy agrees."
+    },
+    {
+     "id": "fire",
+     "test": "Not in a very high fire hazard severity zone",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:32.470Z",
+     "value": "Not in a mapped LRA fire hazard zone",
+     "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
+     "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
+     "note": "Not in a very high fire hazard severity zone. Map vintage may predate CAL FIRE's 2025 LRA maps."
+    },
+    {
+     "id": "historic",
+     "test": "Not a historic property, landmark, or contributing structure in a historic district",
+     "source_name": "City of Santa Ana, Historic Properties by Category (ArcGIS REST); City of Santa Ana, Historic Districts (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/0",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
+     "affects_verdict": true,
+     "status": "UNKNOWN",
+     "checked_at": "2026-11-07T19:00:32.492Z",
+     "value": "Not on Santa Ana's historic list or in a city historic district",
+     "note": "City data is clean. The State Historic Resources Inventory was not checked.",
+     "next_step": "Ask the city planning desk to confirm no state or local historic listing."
+    },
+    {
+     "id": "tenant",
+     "test": "No tenant in the last 3 years",
+     "status": "UNKNOWN",
+     "value": "Not checked: no public data on tenancy",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until the seller confirms.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3; Gov. Code 65852.21(a)(3), 66411.7(a)(3)(D).",
+     "next_step": "Ask the listing agent for 3 years of occupancy history.",
+     "affects_verdict": true,
+     "possible_fail": false
+    },
+    {
+     "id": "rent_restricted",
+     "test": "Not rent-restricted, rent-controlled, or Ellis Act withdrawn (15 years)",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3.",
+     "next_step": "Ask the listing agent and the city housing division about covenants, rent control and Ellis Act history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "prior_split",
+     "test": "Not created by a prior SB 9 split, and no adjacent split by the same owner",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; SB 9 Fact Sheet (Sept 2024) p.6.",
+     "next_step": "Ask the city planning desk for the parcel's map history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "fault",
+     "test": "Not in an earthquake fault zone",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check the CGS EQ Zapp map (its data service needed a token when tested).",
+     "affects_verdict": true
+    },
+    {
+     "id": "environment",
+     "test": "Not wetlands, habitat, farmland, conservation easement, or hazardous waste site",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check DTSC EnviroStor and ask the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "landslide",
+     "test": "Not in a CGS landslide zone (site risk, does not change the verdict)",
+     "source_name": "California Geological Survey, Landslide Zones",
+     "source_url": "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0",
+     "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
+     "affects_verdict": false,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:32.496Z",
+     "value": "Not in a mapped landslide zone",
+     "note": "No mapped landslide zone."
+    }
+   ],
+   "verdict": "LIKELY YES",
+   "verdict_reason": "Passes zoning, lot size, flood and fire checks on public data. 6 items still need confirming with the agent or city.",
+   "max_homes": 4,
+   "land_cost_per_home": 224750,
+   "split": {
+    "lot_a": [
+     [
+      6049948.279054322,
+      2214082.745075336
+     ],
+     [
+      6049948.07654844,
+      2214022.7448082604
+     ],
+     [
+      6049893.252780974,
+      2214022.9298768044
+     ],
+     [
+      6049893.462754309,
+      2214082.9300848986
+     ]
+    ],
+    "lot_b": [
+     [
+      6049948.279054322,
+      2214082.745075336
+     ],
+     [
+      6050003.112797469,
+      2214082.560006901
+     ],
+     [
+      6050002.882811054,
+      2214022.5597988064
+     ],
+     [
+      6049948.07654844,
+      2214022.7448082604
+     ]
+    ],
+    "lot_a_sqft": 3289.2532111406326,
+    "lot_b_sqft": 3289.253211244473,
+    "line": [
+     [
+      6049948.076548326,
+      2214022.744774493
+     ],
+     [
+      6049948.279054322,
+      2214082.745075336
+     ]
+    ]
+   },
+   "listing_evidence": {
+    "status": "skipped",
+    "note": "Listing reader off: no ANTHROPIC_API_KEY set.",
+    "flags": []
+   },
+   "unknown_count": 6,
+   "computed_at": "2026-11-07T19:00:32.536Z",
+   "listed_lot_sqft": 6578,
+   "description": "Listing excerpt: DO NOT DISTURB TENANTS. Tenant-occupied property in a desirable Santa Ana location near Mile Square Park. Listing summary: Occupied with potentially limited access.",
+   "description_type": "excerpt+summary"
+  },
+  {
+   "id": "sa-08",
+   "address": "1217 S Huron Dr",
+   "city": "Santa Ana",
+   "asking_price": 949000,
+   "listing_source_url": "https://www.redfin.com/CA/Santa-Ana/1217-S-Huron-Dr-92704/home/3538203",
+   "date_collected": "2026-11-07",
+   "parcel": {
+    "apn": "109-691-15",
+    "site_address": "1217 S HURON DR",
+    "rings": [
+     [
+      [
+       6057925.363029048,
+       2214058.480002567
+      ],
+      [
+       6057930.214069217,
+       2214028.8448912203
+      ],
+      [
+       6057935.8029688,
+       2213999.3400289714
+      ],
+      [
+       6057837.742797464,
+       2213977.4499808997
+      ],
+      [
+       6057824.6729417145,
+       2214036.009903148
+      ],
+      [
+       6057925.363029048,
+       2214058.480002567
+      ]
+     ]
+    ],
+    "area_sqft": 6097.696490347385,
+    "assessor_area_sqft": 6097.6964897492935,
+    "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0"
+   },
+   "checks": [
+    {
+     "id": "parcel",
+     "test": "Address matches a Santa Ana parcel",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "rule": "Needed to run every other test.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "APN 109-691-15, 1217 S HURON DR",
+     "checked_at": "2026-11-07T19:00:33.479Z",
+     "note": "Matched APN 109-691-15."
+    },
+    {
+     "id": "zoning",
+     "test": "Single-family residential zone",
+     "source_name": "City of Santa Ana, Zoning Classifications (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_ZoningClassifications/FeatureServer/0",
+     "rule": "HCD SB 9 Fact Sheet (Sept 2024) p.2: single-family residential zones only. Gov. Code 65852.21(a), 66411.7(a)(3)(A).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "R1 (Single-Family Residence)",
+     "checked_at": "2026-11-07T19:00:33.522Z",
+     "note": "Zoned single-family."
+    },
+    {
+     "id": "lot_split",
+     "test": "Lot can split into two lots of at least 1,200 sq ft, neither under 40%",
+     "status": "PASS",
+     "value": "Lot 6,098 sq ft; equal split = 3,049 + 3,049 sq ft",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "checked_at": "2026-11-07T19:00:33.480Z",
+     "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,098 sq ft (matches).",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
+     "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "flood",
+     "test": "Not in a FEMA special flood hazard area",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:33.577Z",
+     "value": "FEMA: X (area with reduced flood risk due to levee)",
+     "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
+     "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+     "note": "Not in a special flood hazard area. County copy agrees."
+    },
+    {
+     "id": "fire",
+     "test": "Not in a very high fire hazard severity zone",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:33.521Z",
+     "value": "Not in a mapped LRA fire hazard zone",
+     "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
+     "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
+     "note": "Not in a very high fire hazard severity zone. Map vintage may predate CAL FIRE's 2025 LRA maps."
+    },
+    {
+     "id": "historic",
+     "test": "Not a historic property, landmark, or contributing structure in a historic district",
+     "source_name": "City of Santa Ana, Historic Properties by Category (ArcGIS REST); City of Santa Ana, Historic Districts (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/0",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
+     "affects_verdict": true,
+     "status": "UNKNOWN",
+     "checked_at": "2026-11-07T19:00:33.553Z",
+     "value": "Not on Santa Ana's historic list or in a city historic district",
+     "note": "City data is clean. The State Historic Resources Inventory was not checked.",
+     "next_step": "Ask the city planning desk to confirm no state or local historic listing."
+    },
+    {
+     "id": "tenant",
+     "test": "No tenant in the last 3 years",
+     "status": "UNKNOWN",
+     "value": "Not checked: no public data on tenancy",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until the seller confirms.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3; Gov. Code 65852.21(a)(3), 66411.7(a)(3)(D).",
+     "next_step": "Ask the listing agent for 3 years of occupancy history.",
+     "affects_verdict": true,
+     "possible_fail": false
+    },
+    {
+     "id": "rent_restricted",
+     "test": "Not rent-restricted, rent-controlled, or Ellis Act withdrawn (15 years)",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3.",
+     "next_step": "Ask the listing agent and the city housing division about covenants, rent control and Ellis Act history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "prior_split",
+     "test": "Not created by a prior SB 9 split, and no adjacent split by the same owner",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; SB 9 Fact Sheet (Sept 2024) p.6.",
+     "next_step": "Ask the city planning desk for the parcel's map history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "fault",
+     "test": "Not in an earthquake fault zone",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check the CGS EQ Zapp map (its data service needed a token when tested).",
+     "affects_verdict": true
+    },
+    {
+     "id": "environment",
+     "test": "Not wetlands, habitat, farmland, conservation easement, or hazardous waste site",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check DTSC EnviroStor and ask the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "landslide",
+     "test": "Not in a CGS landslide zone (site risk, does not change the verdict)",
+     "source_name": "California Geological Survey, Landslide Zones",
+     "source_url": "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0",
+     "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
+     "affects_verdict": false,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:33.568Z",
+     "value": "Not in a mapped landslide zone",
+     "note": "No mapped landslide zone."
+    }
+   ],
+   "verdict": "LIKELY YES",
+   "verdict_reason": "Passes zoning, lot size, flood and fire checks on public data. 6 items still need confirming with the agent or city.",
+   "max_homes": 4,
+   "land_cost_per_home": 237250,
+   "split": {
+    "lot_a": [
+     [
+      6057874.268718023,
+      2214047.077745613
+     ],
+     [
+      6057887.336346712,
+      2213988.520787347
+     ],
+     [
+      6057837.742797464,
+      2213977.449980899
+     ],
+     [
+      6057824.6729417145,
+      2214036.009903148
+     ]
+    ],
+    "lot_b": [
+     [
+      6057874.268718023,
+      2214047.077745613
+     ],
+     [
+      6057925.363029047,
+      2214058.480002567
+     ],
+     [
+      6057930.2140692165,
+      2214028.8448912203
+     ],
+     [
+      6057935.8029688,
+      2213999.3400289714
+     ],
+     [
+      6057887.336346712,
+      2213988.520787347
+     ]
+    ],
+    "lot_a_sqft": 3048.8482451438904,
+    "lot_b_sqft": 3048.8482450963857,
+    "line": [
+     [
+      6057887.337082428,
+      2213988.5174905546
+     ],
+     [
+      6057874.268718023,
+      2214047.077745613
+     ]
+    ]
+   },
+   "listing_evidence": {
+    "status": "skipped",
+    "note": "Listing reader off: no ANTHROPIC_API_KEY set.",
+    "flags": []
+   },
+   "unknown_count": 6,
+   "computed_at": "2026-11-07T19:00:33.577Z",
+   "listed_lot_sqft": 6060,
+   "description": "Listing summary: Four-bedroom, two-bathroom single-family home. Description reports a filled backyard pool and claims city approval. Advertises potential ADU and JADU subject to verification.",
+   "description_type": "summary"
+  },
+  {
+   "id": "sa-10",
+   "address": "2121 Valencia St",
+   "city": "Santa Ana",
+   "asking_price": 949000,
+   "listing_source_url": "https://www.zillow.com/homedetails/2121-Valencia-St-Santa-Ana-CA-92706/25091400_zpid/",
+   "date_collected": "2026-11-07",
+   "parcel": {
+    "apn": "003-131-15",
+    "site_address": "2121 VALENCIA AVE",
+    "rings": [
+     [
+      [
+       6071611.192940801,
+       2225649.630048558
+      ],
+      [
+       6071759.813050389,
+       2225645.9801214784
+      ],
+      [
+       6071758.862921059,
+       2225595.99006398
+      ],
+      [
+       6071610.232968971,
+       2225599.63999106
+      ],
+      [
+       6071611.192940801,
+       2225649.630048558
+      ]
+     ]
+    ],
+    "area_sqft": 7433.259702265263,
+    "assessor_area_sqft": 7433.259702287664,
+    "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0"
+   },
+   "checks": [
+    {
+     "id": "parcel",
+     "test": "Address matches a Santa Ana parcel",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "rule": "Needed to run every other test.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "APN 003-131-15, 2121 VALENCIA AVE",
+     "checked_at": "2026-11-07T19:00:34.531Z",
+     "note": "Matched APN 003-131-15."
+    },
+    {
+     "id": "zoning",
+     "test": "Single-family residential zone",
+     "source_name": "City of Santa Ana, Zoning Classifications (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_ZoningClassifications/FeatureServer/0",
+     "rule": "HCD SB 9 Fact Sheet (Sept 2024) p.2: single-family residential zones only. Gov. Code 65852.21(a), 66411.7(a)(3)(A).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "R1 (Single-Family Residence)",
+     "checked_at": "2026-11-07T19:00:34.575Z",
+     "note": "Zoned single-family."
+    },
+    {
+     "id": "lot_split",
+     "test": "Lot can split into two lots of at least 1,200 sq ft, neither under 40%",
+     "status": "PASS",
+     "value": "Lot 7,433 sq ft; equal split = 3,717 + 3,717 sq ft",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "checked_at": "2026-11-07T19:00:34.531Z",
+     "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 7,433 sq ft (matches).",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
+     "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "flood",
+     "test": "Not in a FEMA special flood hazard area",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:34.689Z",
+     "value": "FEMA: X (area of minimal flood hazard)",
+     "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
+     "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+     "note": "Not in a special flood hazard area. County copy agrees."
+    },
+    {
+     "id": "fire",
+     "test": "Not in a very high fire hazard severity zone",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:34.613Z",
+     "value": "Not in a mapped LRA fire hazard zone",
+     "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
+     "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
+     "note": "Not in a very high fire hazard severity zone. Map vintage may predate CAL FIRE's 2025 LRA maps."
+    },
+    {
+     "id": "historic",
+     "test": "Not a historic property, landmark, or contributing structure in a historic district",
+     "source_name": "City of Santa Ana, Historic Properties by Category (ArcGIS REST); City of Santa Ana, Historic Districts (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/0",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
+     "affects_verdict": true,
+     "status": "UNKNOWN",
+     "checked_at": "2026-11-07T19:00:34.595Z",
+     "value": "Not on Santa Ana's historic list or in a city historic district",
+     "note": "City data is clean. The State Historic Resources Inventory was not checked.",
+     "next_step": "Ask the city planning desk to confirm no state or local historic listing."
+    },
+    {
+     "id": "tenant",
+     "test": "No tenant in the last 3 years",
+     "status": "UNKNOWN",
+     "value": "Not checked: no public data on tenancy",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until the seller confirms.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3; Gov. Code 65852.21(a)(3), 66411.7(a)(3)(D).",
+     "next_step": "Ask the listing agent for 3 years of occupancy history.",
+     "affects_verdict": true,
+     "possible_fail": false
+    },
+    {
+     "id": "rent_restricted",
+     "test": "Not rent-restricted, rent-controlled, or Ellis Act withdrawn (15 years)",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3.",
+     "next_step": "Ask the listing agent and the city housing division about covenants, rent control and Ellis Act history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "prior_split",
+     "test": "Not created by a prior SB 9 split, and no adjacent split by the same owner",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; SB 9 Fact Sheet (Sept 2024) p.6.",
+     "next_step": "Ask the city planning desk for the parcel's map history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "fault",
+     "test": "Not in an earthquake fault zone",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check the CGS EQ Zapp map (its data service needed a token when tested).",
+     "affects_verdict": true
+    },
+    {
+     "id": "environment",
+     "test": "Not wetlands, habitat, farmland, conservation easement, or hazardous waste site",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check DTSC EnviroStor and ask the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "landslide",
+     "test": "Not in a CGS landslide zone (site risk, does not change the verdict)",
+     "source_name": "California Geological Survey, Landslide Zones",
+     "source_url": "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0",
+     "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
+     "affects_verdict": false,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:34.613Z",
+     "value": "Not in a mapped landslide zone",
+     "note": "No mapped landslide zone."
+    }
+   ],
+   "verdict": "LIKELY YES",
+   "verdict_reason": "Passes zoning, lot size, flood and fire checks on public data. 6 items still need confirming with the agent or city.",
+   "max_homes": 4,
+   "land_cost_per_home": 237250,
+   "split": {
+    "lot_a": [
+     [
+      6071685.639104888,
+      2225647.8017423414
+     ],
+     [
+      6071759.813050388,
+      2225645.9801214784
+     ],
+     [
+      6071758.862921057,
+      2225595.99006398
+     ],
+     [
+      6071684.411656142,
+      2225597.818374385
+     ]
+    ],
+    "lot_b": [
+     [
+      6071611.192940801,
+      2225649.6300485577
+     ],
+     [
+      6071685.639104888,
+      2225647.8017423414
+     ],
+     [
+      6071684.411656142,
+      2225597.818374385
+     ],
+     [
+      6071610.23296897,
+      2225599.63999106
+     ]
+    ],
+    "lot_a_sqft": 3716.6298511624336,
+    "lot_b_sqft": 3716.629851102829,
+    "line": [
+     [
+      6071685.63910786,
+      2225647.801863341
+     ],
+     [
+      6071684.411656142,
+      2225597.818374385
+     ]
+    ]
+   },
+   "listing_evidence": {
+    "status": "skipped",
+    "note": "Listing reader off: no ANTHROPIC_API_KEY set.",
+    "flags": []
+   },
+   "unknown_count": 6,
+   "computed_at": "2026-11-07T19:00:34.689Z",
+   "listed_lot_sqft": 7438,
+   "description": "Listing summary: Three-bedroom, one-bathroom single-family home with a side driveway, detached two-car garage, covered patio and backyard.",
+   "description_type": "summary"
+  },
+  {
+   "id": "sa-02",
+   "address": "617 S Corwin Ct",
+   "city": "Santa Ana",
+   "asking_price": 824777,
+   "listing_source_url": "https://www.zillow.com/homedetails/617-S-Corwin-Ct-Santa-Ana-CA-92704/25259974_zpid/",
+   "date_collected": "2026-11-07",
+   "parcel": {
+    "apn": "144-283-01",
+    "site_address": "617 S CORWIN CT",
+    "rings": [
+     [
+      [
+       6055926.053051308,
+       2216472.5201219767
+      ],
+      [
+       6055829.713020891,
+       2216473.509949401
+      ],
+      [
+       6055829.952849805,
+       2216531.410096064
+      ],
+      [
+       6055830.149371713,
+       2216533.766390562
+      ],
+      [
+       6055830.713675052,
+       2216536.062645808
+      ],
+      [
+       6055831.631652221,
+       2216538.241775304
+      ],
+      [
+       6055832.880337387,
+       2216540.2496453077
+      ],
+      [
+       6055834.429218799,
+       2216542.0363871455
+      ],
+      [
+       6055836.239582643,
+       2216543.55770956
+      ],
+      [
+       6055838.26615338,
+       2216544.7758829743
+      ],
+      [
+       6055840.459062383,
+       2216545.660395637
+      ],
+      [
+       6055842.763519719,
+       2216546.18959406
+      ],
+      [
+       6055845.122766972,
+       2216546.350026816
+      ],
+      [
+       6055911.442844301,
+       2216545.6800806373
+      ],
+      [
+       6055914.0373273045,
+       2216545.4284407347
+      ],
+      [
+       6055916.54946138,
+       2216544.7315917313
+      ],
+      [
+       6055918.902803138,
+       2216543.6105309725
+      ],
+      [
+       6055921.02681464,
+       2216542.0990510583
+      ],
+      [
+       6055922.856863469,
+       2216540.243083641
+      ],
+      [
+       6055924.338487804,
+       2216538.0980748087
+      ],
+      [
+       6055925.426412135,
+       2216535.72931315
+      ],
+      [
+       6055926.0878281295,
+       2216533.2076646388
+      ],
+      [
+       6055926.303050801,
+       2216530.6099008173
+      ],
+      [
+       6055926.053051308,
+       2216472.5201219767
+      ]
+     ]
+    ],
+    "area_sqft": 6935.350863397121,
+    "assessor_area_sqft": 6935.350863777472,
+    "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0"
+   },
+   "checks": [
+    {
+     "id": "parcel",
+     "test": "Address matches a Santa Ana parcel",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "rule": "Needed to run every other test.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "APN 144-283-01, 617 S CORWIN CT",
+     "checked_at": "2026-11-07T19:00:30.416Z",
+     "note": "Matched APN 144-283-01."
+    },
+    {
+     "id": "zoning",
+     "test": "Single-family residential zone",
+     "source_name": "City of Santa Ana, Zoning Classifications (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_ZoningClassifications/FeatureServer/0",
+     "rule": "HCD SB 9 Fact Sheet (Sept 2024) p.2: single-family residential zones only. Gov. Code 65852.21(a), 66411.7(a)(3)(A).",
+     "affects_verdict": true,
+     "status": "UNKNOWN",
+     "possible_fail": true,
+     "value": "A1 (General Agricultural)",
+     "checked_at": "2026-11-07T19:00:30.457Z",
+     "note": "Possible FAIL: zoned General Agricultural. HCD says agricultural zones are not SB 9 zones, but this one holds a house; the city decides whether its primary purpose is single-family.",
+     "next_step": "Ask the Santa Ana planning desk whether SB 9 applies in the A1 zone."
+    },
+    {
+     "id": "lot_split",
+     "test": "Lot can split into two lots of at least 1,200 sq ft, neither under 40%",
+     "status": "PASS",
+     "value": "Lot 6,935 sq ft; equal split = 3,468 + 3,468 sq ft",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "checked_at": "2026-11-07T19:00:30.416Z",
+     "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,935 sq ft (matches).",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
+     "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "flood",
+     "test": "Not in a FEMA special flood hazard area",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:30.522Z",
+     "value": "FEMA: X (area with reduced flood risk due to levee)",
+     "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
+     "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+     "note": "Not in a special flood hazard area. County copy agrees."
+    },
+    {
+     "id": "fire",
+     "test": "Not in a very high fire hazard severity zone",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:30.461Z",
+     "value": "Not in a mapped LRA fire hazard zone",
+     "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
+     "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
+     "note": "Not in a very high fire hazard severity zone. Map vintage may predate CAL FIRE's 2025 LRA maps."
+    },
+    {
+     "id": "historic",
+     "test": "Not a historic property, landmark, or contributing structure in a historic district",
+     "source_name": "City of Santa Ana, Historic Properties by Category (ArcGIS REST); City of Santa Ana, Historic Districts (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/0",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
+     "affects_verdict": true,
+     "status": "UNKNOWN",
+     "checked_at": "2026-11-07T19:00:30.481Z",
+     "value": "Not on Santa Ana's historic list or in a city historic district",
+     "note": "City data is clean. The State Historic Resources Inventory was not checked.",
+     "next_step": "Ask the city planning desk to confirm no state or local historic listing."
+    },
+    {
+     "id": "tenant",
+     "test": "No tenant in the last 3 years",
+     "status": "UNKNOWN",
+     "value": "Not checked: no public data on tenancy",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until the seller confirms.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3; Gov. Code 65852.21(a)(3), 66411.7(a)(3)(D).",
+     "next_step": "Ask the listing agent for 3 years of occupancy history.",
+     "affects_verdict": true,
+     "possible_fail": false
+    },
+    {
+     "id": "rent_restricted",
+     "test": "Not rent-restricted, rent-controlled, or Ellis Act withdrawn (15 years)",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3.",
+     "next_step": "Ask the listing agent and the city housing division about covenants, rent control and Ellis Act history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "prior_split",
+     "test": "Not created by a prior SB 9 split, and no adjacent split by the same owner",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; SB 9 Fact Sheet (Sept 2024) p.6.",
+     "next_step": "Ask the city planning desk for the parcel's map history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "fault",
+     "test": "Not in an earthquake fault zone",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check the CGS EQ Zapp map (its data service needed a token when tested).",
+     "affects_verdict": true
+    },
+    {
+     "id": "environment",
+     "test": "Not wetlands, habitat, farmland, conservation easement, or hazardous waste site",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check DTSC EnviroStor and ask the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "landslide",
+     "test": "Not in a CGS landslide zone (site risk, does not change the verdict)",
+     "source_name": "California Geological Survey, Landslide Zones",
+     "source_url": "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0",
+     "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
+     "affects_verdict": false,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:30.495Z",
+     "value": "Not in a mapped landslide zone",
+     "note": "No mapped landslide zone."
+    }
+   ],
+   "verdict": "UNKNOWN",
+   "verdict_reason": "Possible FAIL to confirm: single-family residential zone.",
+   "max_homes": 4,
+   "land_cost_per_home": 206194,
+   "split": {
+    "lot_a": [
+     [
+      6055926.053051308,
+      2216472.5201219767
+     ],
+     [
+      6055877.672953687,
+      2216473.017194141
+     ],
+     [
+      6055878.422941847,
+      2216546.0136381118
+     ],
+     [
+      6055911.442844301,
+      2216545.6800806373
+     ],
+     [
+      6055914.0373273045,
+      2216545.4284407347
+     ],
+     [
+      6055916.54946138,
+      2216544.731591732
+     ],
+     [
+      6055918.902803138,
+      2216543.610530973
+     ],
+     [
+      6055921.02681464,
+      2216542.0990510583
+     ],
+     [
+      6055922.856863469,
+      2216540.243083641
+     ],
+     [
+      6055924.338487804,
+      2216538.0980748087
+     ],
+     [
+      6055925.426412135,
+      2216535.7293131496
+     ],
+     [
+      6055926.0878281295,
+      2216533.207664639
+     ],
+     [
+      6055926.303050801,
+      2216530.6099008173
+     ]
+    ],
+    "lot_b": [
+     [
+      6055877.672953687,
+      2216473.017194141
+     ],
+     [
+      6055829.713020891,
+      2216473.509949401
+     ],
+     [
+      6055829.952849804,
+      2216531.410096064
+     ],
+     [
+      6055830.149371713,
+      2216533.766390562
+     ],
+     [
+      6055830.713675052,
+      2216536.062645808
+     ],
+     [
+      6055831.631652221,
+      2216538.2417753045
+     ],
+     [
+      6055832.880337388,
+      2216540.2496453077
+     ],
+     [
+      6055834.429218799,
+      2216542.0363871455
+     ],
+     [
+      6055836.239582643,
+      2216543.55770956
+     ],
+     [
+      6055838.26615338,
+      2216544.7758829743
+     ],
+     [
+      6055840.459062383,
+      2216545.660395637
+     ],
+     [
+      6055842.763519719,
+      2216546.1895940597
+     ],
+     [
+      6055845.122766972,
+      2216546.350026816
+     ],
+     [
+      6055878.422941847,
+      2216546.0136381118
+     ]
+    ],
+    "lot_a_sqft": 3467.6754315365106,
+    "lot_b_sqft": 3467.675431707459,
+    "line": [
+     [
+      6055878.423000396,
+      2216546.0193367796
+     ],
+     [
+      6055877.672953687,
+      2216473.017194141
+     ]
+    ]
+   },
+   "listing_evidence": {
+    "status": "skipped",
+    "note": "Listing reader off: no ANTHROPIC_API_KEY set.",
+    "flags": []
+   },
+   "unknown_count": 7,
+   "computed_at": "2026-11-07T19:00:30.522Z",
+   "listed_lot_sqft": 7104,
+   "description": "Listing excerpt: Great corner lot with a large backyard. Listing summary: Three bedrooms, two bathrooms. Description advertises future ADU potential.",
+   "description_type": "excerpt+summary"
+  },
+  {
+   "id": "sa-01",
+   "address": "4202 W Fay Cir",
+   "city": "Santa Ana",
+   "asking_price": 849900,
+   "listing_source_url": "https://www.zillow.com/homedetails/4202-W-Fay-Cir-Santa-Ana-CA-92703/461108825_zpid/",
+   "date_collected": "2026-11-07",
+   "parcel": {
+    "apn": "198-331-18",
+    "site_address": "4202 FAY CIR",
+    "rings": [
+     [
+      [
+       6052687.182888642,
+       2221991.1800163984
+      ],
+      [
+       6052686.832823724,
+       2221940.180118397
+      ],
+      [
+       6052584.502975881,
+       2222036.1198871434
+      ],
+      [
+       6052589.445551306,
+       2222042.352486223
+      ],
+      [
+       6052593.291016057,
+       2222049.316054985
+      ],
+      [
+       6052595.9330711365,
+       2222056.818992734
+      ],
+      [
+       6052597.299538225,
+       2222064.6555912346
+      ],
+      [
+       6052597.35301581,
+       2222072.6099716425
+      ],
+      [
+       6052687.772782475,
+       2222079.60011515
+      ],
+      [
+       6052687.66287455,
+       2222062.1798743904
+      ],
+      [
+       6052687.182888642,
+       2221991.1800163984
+      ]
+     ]
+    ],
+    "area_sqft": 8682.480544567108,
+    "assessor_area_sqft": 8682.480544339247,
+    "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0"
+   },
+   "checks": [
+    {
+     "id": "parcel",
+     "test": "Address matches a Santa Ana parcel",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "rule": "Needed to run every other test.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "APN 198-331-18, 4202 FAY CIR",
+     "checked_at": "2026-11-07T19:00:29.811Z",
+     "note": "Matched APN 198-331-18."
+    },
+    {
+     "id": "zoning",
+     "test": "Single-family residential zone",
+     "source_name": "City of Santa Ana, Zoning Classifications (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_ZoningClassifications/FeatureServer/0",
+     "rule": "HCD SB 9 Fact Sheet (Sept 2024) p.2: single-family residential zones only. Gov. Code 65852.21(a), 66411.7(a)(3)(A).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "R1 (Single-Family Residence)",
+     "checked_at": "2026-11-07T19:00:29.866Z",
+     "note": "Zoned single-family."
+    },
+    {
+     "id": "lot_split",
+     "test": "Lot can split into two lots of at least 1,200 sq ft, neither under 40%",
+     "status": "PASS",
+     "value": "Lot 8,682 sq ft; equal split = 4,341 + 4,341 sq ft",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "checked_at": "2026-11-07T19:00:29.819Z",
+     "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 8,682 sq ft (matches).",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
+     "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "flood",
+     "test": "Not in a FEMA special flood hazard area",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
+     "affects_verdict": true,
+     "status": "FAIL",
+     "checked_at": "2026-11-07T19:00:30.078Z",
+     "value": "FEMA: A",
+     "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
+     "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+     "note": "Part of the parcel is in a special flood hazard area. Excluded unless a statutory exception applies. County copy agrees.",
+     "next_step": "Ask a civil engineer whether the site can meet FEMA floodplain requirements."
+    },
+    {
+     "id": "fire",
+     "test": "Not in a very high fire hazard severity zone",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:29.897Z",
+     "value": "Not in a mapped LRA fire hazard zone",
+     "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
+     "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
+     "note": "Not in a very high fire hazard severity zone. Map vintage may predate CAL FIRE's 2025 LRA maps."
+    },
+    {
+     "id": "historic",
+     "test": "Not a historic property, landmark, or contributing structure in a historic district",
+     "source_name": "City of Santa Ana, Historic Properties by Category (ArcGIS REST); City of Santa Ana, Historic Districts (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/0",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
+     "affects_verdict": true,
+     "status": "UNKNOWN",
+     "checked_at": "2026-11-07T19:00:29.927Z",
+     "value": "Not on Santa Ana's historic list or in a city historic district",
+     "note": "City data is clean. The State Historic Resources Inventory was not checked.",
+     "next_step": "Ask the city planning desk to confirm no state or local historic listing."
+    },
+    {
+     "id": "tenant",
+     "test": "No tenant in the last 3 years",
+     "status": "UNKNOWN",
+     "value": "Not checked: no public data on tenancy",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until the seller confirms.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3; Gov. Code 65852.21(a)(3), 66411.7(a)(3)(D).",
+     "next_step": "Ask the listing agent for 3 years of occupancy history.",
+     "affects_verdict": true,
+     "possible_fail": false
+    },
+    {
+     "id": "rent_restricted",
+     "test": "Not rent-restricted, rent-controlled, or Ellis Act withdrawn (15 years)",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3.",
+     "next_step": "Ask the listing agent and the city housing division about covenants, rent control and Ellis Act history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "prior_split",
+     "test": "Not created by a prior SB 9 split, and no adjacent split by the same owner",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; SB 9 Fact Sheet (Sept 2024) p.6.",
+     "next_step": "Ask the city planning desk for the parcel's map history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "fault",
+     "test": "Not in an earthquake fault zone",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check the CGS EQ Zapp map (its data service needed a token when tested).",
+     "affects_verdict": true
+    },
+    {
+     "id": "environment",
+     "test": "Not wetlands, habitat, farmland, conservation easement, or hazardous waste site",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check DTSC EnviroStor and ask the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "landslide",
+     "test": "Not in a CGS landslide zone (site risk, does not change the verdict)",
+     "source_name": "California Geological Survey, Landslide Zones",
+     "source_url": "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0",
+     "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
+     "affects_verdict": false,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:29.998Z",
+     "value": "Not in a mapped landslide zone",
+     "note": "No mapped landslide zone."
+    }
+   ],
+   "verdict": "NO",
+   "verdict_reason": "Failed: not in a fema special flood hazard area (FEMA: A).",
+   "max_homes": 0,
+   "land_cost_per_home": null,
+   "split": {
+    "lot_a": [
+     [
+      6052687.182888642,
+      2221991.1800163994
+     ],
+     [
+      6052686.832823724,
+      2221940.180118398
+     ],
+     [
+      6052621.46179235,
+      2222001.468997107
+     ],
+     [
+      6052687.725755936,
+      2222072.1464794455
+     ],
+     [
+      6052687.66287455,
+      2222062.1798743904
+     ]
+    ],
+    "lot_b": [
+     [
+      6052621.46179235,
+      2222001.468997107
+     ],
+     [
+      6052584.502975881,
+      2222036.1198871443
+     ],
+     [
+      6052589.445551306,
+      2222042.352486222
+     ],
+     [
+      6052593.291016057,
+      2222049.316054985
+     ],
+     [
+      6052595.9330711365,
+      2222056.818992734
+     ],
+     [
+      6052597.299538225,
+      2222064.6555912346
+     ],
+     [
+      6052597.35301581,
+      2222072.609971642
+     ],
+     [
+      6052687.772782476,
+      2222079.60011515
+     ],
+     [
+      6052687.725755936,
+      2222072.1464794455
+     ]
+    ],
+    "lot_a_sqft": 4341.240272287279,
+    "lot_b_sqft": 4341.240272326395,
+    "line": [
+     [
+      6052691.466838765,
+      2222076.136737518
+     ],
+     [
+      6052621.46179235,
+      2222001.468997107
+     ]
+    ]
+   },
+   "listing_evidence": {
+    "status": "skipped",
+    "note": "Listing reader off: no ANTHROPIC_API_KEY set.",
+    "flags": []
+   },
+   "unknown_count": 6,
+   "computed_at": "2026-11-07T19:00:30.079Z",
+   "listed_lot_sqft": 10001,
+   "description": "Listing summary: Single-family fixer with a large backyard. Zillow labels this listing Foreclosure and Real Estate Owned.",
+   "description_type": "summary"
+  },
+  {
+   "id": "sa-03",
+   "address": "1629 S Townsend St",
+   "city": "Santa Ana",
+   "asking_price": 785000,
+   "listing_source_url": "https://www.zillow.com/homedetails/1629-S-Townsend-St-Santa-Ana-CA-92704/25454028_zpid/",
+   "date_collected": "2026-11-07",
+   "parcel": {
+    "apn": "408-243-12",
+    "site_address": "1629 S TOWNSEND ST",
+    "rings": [
+     [
+      [
+       6059970.9327567965,
+       2211419.0098878145
+      ],
+      [
+       6060090.912831798,
+       2211416.7100236416
+      ],
+      [
+       6060089.952859968,
+       2211366.7097955644
+      ],
+      [
+       6059969.972784966,
+       2211369.0198303163
+      ],
+      [
+       6059970.9327567965,
+       2211419.0098878145
+      ]
+     ]
+    ],
+    "area_sqft": 6000.633667945862,
+    "assessor_area_sqft": 6000.63366833713,
+    "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0"
+   },
+   "checks": [
+    {
+     "id": "parcel",
+     "test": "Address matches a Santa Ana parcel",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "rule": "Needed to run every other test.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "APN 408-243-12, 1629 S TOWNSEND ST",
+     "checked_at": "2026-11-07T19:00:30.891Z",
+     "note": "Matched APN 408-243-12."
+    },
+    {
+     "id": "zoning",
+     "test": "Single-family residential zone",
+     "source_name": "City of Santa Ana, Zoning Classifications (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_ZoningClassifications/FeatureServer/0",
+     "rule": "HCD SB 9 Fact Sheet (Sept 2024) p.2: single-family residential zones only. Gov. Code 65852.21(a), 66411.7(a)(3)(A).",
+     "affects_verdict": true,
+     "status": "FAIL",
+     "value": "R2 (Two-Family Residence)",
+     "checked_at": "2026-11-07T19:00:30.931Z",
+     "note": "Not a single-family zone, so SB 9 does not apply."
+    },
+    {
+     "id": "lot_split",
+     "test": "Lot can split into two lots of at least 1,200 sq ft, neither under 40%",
+     "status": "PASS",
+     "value": "Lot 6,001 sq ft; equal split = 3,000 + 3,000 sq ft",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "checked_at": "2026-11-07T19:00:30.891Z",
+     "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,001 sq ft (matches).",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
+     "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "flood",
+     "test": "Not in a FEMA special flood hazard area",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:30.995Z",
+     "value": "FEMA: X (area with reduced flood risk due to levee)",
+     "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
+     "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+     "note": "Not in a special flood hazard area. County copy agrees."
+    },
+    {
+     "id": "fire",
+     "test": "Not in a very high fire hazard severity zone",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:30.932Z",
+     "value": "Not in a mapped LRA fire hazard zone",
+     "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
+     "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
+     "note": "Not in a very high fire hazard severity zone. Map vintage may predate CAL FIRE's 2025 LRA maps."
+    },
+    {
+     "id": "historic",
+     "test": "Not a historic property, landmark, or contributing structure in a historic district",
+     "source_name": "City of Santa Ana, Historic Properties by Category (ArcGIS REST); City of Santa Ana, Historic Districts (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/0",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
+     "affects_verdict": true,
+     "status": "UNKNOWN",
+     "checked_at": "2026-11-07T19:00:30.952Z",
+     "value": "Not on Santa Ana's historic list or in a city historic district",
+     "note": "City data is clean. The State Historic Resources Inventory was not checked.",
+     "next_step": "Ask the city planning desk to confirm no state or local historic listing."
+    },
+    {
+     "id": "tenant",
+     "test": "No tenant in the last 3 years",
+     "status": "UNKNOWN",
+     "value": "Not checked: no public data on tenancy",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until the seller confirms.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3; Gov. Code 65852.21(a)(3), 66411.7(a)(3)(D).",
+     "next_step": "Ask the listing agent for 3 years of occupancy history.",
+     "affects_verdict": true,
+     "possible_fail": false
+    },
+    {
+     "id": "rent_restricted",
+     "test": "Not rent-restricted, rent-controlled, or Ellis Act withdrawn (15 years)",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3.",
+     "next_step": "Ask the listing agent and the city housing division about covenants, rent control and Ellis Act history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "prior_split",
+     "test": "Not created by a prior SB 9 split, and no adjacent split by the same owner",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; SB 9 Fact Sheet (Sept 2024) p.6.",
+     "next_step": "Ask the city planning desk for the parcel's map history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "fault",
+     "test": "Not in an earthquake fault zone",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check the CGS EQ Zapp map (its data service needed a token when tested).",
+     "affects_verdict": true
+    },
+    {
+     "id": "environment",
+     "test": "Not wetlands, habitat, farmland, conservation easement, or hazardous waste site",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check DTSC EnviroStor and ask the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "landslide",
+     "test": "Not in a CGS landslide zone (site risk, does not change the verdict)",
+     "source_name": "California Geological Survey, Landslide Zones",
+     "source_url": "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0",
+     "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
+     "affects_verdict": false,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:30.962Z",
+     "value": "Not in a mapped landslide zone",
+     "note": "No mapped landslide zone."
+    }
+   ],
+   "verdict": "NO",
+   "verdict_reason": "Failed: single-family residential zone (R2 (Two-Family Residence)).",
+   "max_homes": 0,
+   "land_cost_per_home": null,
+   "split": {
+    "lot_a": [
+     [
+      6060030.927148144,
+      2211417.85987227
+     ],
+     [
+      6060090.912831797,
+      2211416.7100236416
+     ],
+     [
+      6060089.952859968,
+      2211366.709795564
+     ],
+     [
+      6060029.964568298,
+      2211367.8647793266
+     ]
+    ],
+    "lot_b": [
+     [
+      6059970.9327567965,
+      2211419.009887814
+     ],
+     [
+      6060030.927148144,
+      2211417.85987227
+     ],
+     [
+      6060029.964568298,
+      2211367.8647793266
+     ],
+     [
+      6059969.972784967,
+      2211369.019830316
+     ]
+    ],
+    "lot_a_sqft": 3000.3168339133263,
+    "lot_b_sqft": 3000.3168338537216,
+    "line": [
+     [
+      6060030.92724601,
+      2211417.8649553065
+     ],
+     [
+      6060029.964568298,
+      2211367.8647793266
+     ]
+    ]
+   },
+   "listing_evidence": {
+    "status": "skipped",
+    "note": "Listing reader off: no ANTHROPIC_API_KEY set.",
+    "flags": []
+   },
+   "unknown_count": 6,
+   "computed_at": "2026-11-07T19:00:30.995Z",
+   "listed_lot_sqft": 6500,
+   "description": "Listing summary: Two-bedroom, two-bathroom single-family home with a garage and backyard. Description does not establish occupancy or tenant history.",
+   "description_type": "summary"
+  },
+  {
+   "id": "sa-07",
+   "address": "5510 Roosevelt Ave",
+   "city": "Santa Ana",
+   "asking_price": 899900,
+   "listing_source_url": "https://www.zillow.com/homedetails/5510-Roosevelt-Ave-Santa-Ana-CA-92703/25189880_zpid/",
+   "date_collected": "2026-11-07",
+   "parcel": {
+    "apn": "099-212-03",
+    "site_address": "5510 ROOSEVELT AVE",
+    "rings": [
+     [
+      [
+       6047565.382764801,
+       2220625.8900960535
+      ],
+      [
+       6047518.382858798,
+       2220626.129924983
+      ],
+      [
+       6047519.7129086405,
+       2220763.2700706422
+      ],
+      [
+       6047566.712814644,
+       2220763.020071149
+      ],
+      [
+       6047565.382764801,
+       2220625.8900960535
+      ]
+     ]
+    ],
+    "area_sqft": 6445.6606957912445,
+    "assessor_area_sqft": 6445.660695031296,
+    "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0"
+   },
+   "checks": [
+    {
+     "id": "parcel",
+     "test": "Address matches a Santa Ana parcel",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "rule": "Needed to run every other test.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "APN 099-212-03, 5510 ROOSEVELT AVE",
+     "checked_at": "2026-11-07T19:00:32.956Z",
+     "note": "Matched APN 099-212-03."
+    },
+    {
+     "id": "zoning",
+     "test": "Single-family residential zone",
+     "source_name": "City of Santa Ana, Zoning Classifications (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_ZoningClassifications/FeatureServer/0",
+     "rule": "HCD SB 9 Fact Sheet (Sept 2024) p.2: single-family residential zones only. Gov. Code 65852.21(a), 66411.7(a)(3)(A).",
+     "affects_verdict": true,
+     "status": "FAIL",
+     "value": "R2 (Two-Family Residence)",
+     "checked_at": "2026-11-07T19:00:32.999Z",
+     "note": "Not a single-family zone, so SB 9 does not apply."
+    },
+    {
+     "id": "lot_split",
+     "test": "Lot can split into two lots of at least 1,200 sq ft, neither under 40%",
+     "status": "PASS",
+     "value": "Lot 6,446 sq ft; equal split = 3,223 + 3,223 sq ft",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "checked_at": "2026-11-07T19:00:32.956Z",
+     "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,446 sq ft (matches).",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
+     "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "flood",
+     "test": "Not in a FEMA special flood hazard area",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
+     "affects_verdict": true,
+     "status": "FAIL",
+     "checked_at": "2026-11-07T19:00:33.056Z",
+     "value": "FEMA: A",
+     "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
+     "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+     "note": "Part of the parcel is in a special flood hazard area. Excluded unless a statutory exception applies. County copy agrees.",
+     "next_step": "Ask a civil engineer whether the site can meet FEMA floodplain requirements."
+    },
+    {
+     "id": "fire",
+     "test": "Not in a very high fire hazard severity zone",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:32.999Z",
+     "value": "Not in a mapped LRA fire hazard zone",
+     "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
+     "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
+     "note": "Not in a very high fire hazard severity zone. Map vintage may predate CAL FIRE's 2025 LRA maps."
+    },
+    {
+     "id": "historic",
+     "test": "Not a historic property, landmark, or contributing structure in a historic district",
+     "source_name": "City of Santa Ana, Historic Properties by Category (ArcGIS REST); City of Santa Ana, Historic Districts (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/0",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
+     "affects_verdict": true,
+     "status": "UNKNOWN",
+     "checked_at": "2026-11-07T19:00:33.035Z",
+     "value": "Not on Santa Ana's historic list or in a city historic district",
+     "note": "City data is clean. The State Historic Resources Inventory was not checked.",
+     "next_step": "Ask the city planning desk to confirm no state or local historic listing."
+    },
+    {
+     "id": "tenant",
+     "test": "No tenant in the last 3 years",
+     "status": "UNKNOWN",
+     "value": "Not checked: no public data on tenancy",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until the seller confirms.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3; Gov. Code 65852.21(a)(3), 66411.7(a)(3)(D).",
+     "next_step": "Ask the listing agent for 3 years of occupancy history.",
+     "affects_verdict": true,
+     "possible_fail": false
+    },
+    {
+     "id": "rent_restricted",
+     "test": "Not rent-restricted, rent-controlled, or Ellis Act withdrawn (15 years)",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3.",
+     "next_step": "Ask the listing agent and the city housing division about covenants, rent control and Ellis Act history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "prior_split",
+     "test": "Not created by a prior SB 9 split, and no adjacent split by the same owner",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; SB 9 Fact Sheet (Sept 2024) p.6.",
+     "next_step": "Ask the city planning desk for the parcel's map history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "fault",
+     "test": "Not in an earthquake fault zone",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check the CGS EQ Zapp map (its data service needed a token when tested).",
+     "affects_verdict": true
+    },
+    {
+     "id": "environment",
+     "test": "Not wetlands, habitat, farmland, conservation easement, or hazardous waste site",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check DTSC EnviroStor and ask the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "landslide",
+     "test": "Not in a CGS landslide zone (site risk, does not change the verdict)",
+     "source_name": "California Geological Survey, Landslide Zones",
+     "source_url": "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0",
+     "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
+     "affects_verdict": false,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:33.024Z",
+     "value": "Not in a mapped landslide zone",
+     "note": "No mapped landslide zone."
+    }
+   ],
+   "verdict": "NO",
+   "verdict_reason": "Failed: single-family residential zone (R2 (Two-Family Residence)); not in a fema special flood hazard area (FEMA: A).",
+   "max_homes": 0,
+   "land_cost_per_home": null,
+   "split": {
+    "lot_a": [
+     [
+      6047566.046767325,
+      2220694.349672968
+     ],
+     [
+      6047565.382764801,
+      2220625.8900960535
+     ],
+     [
+      6047518.382858798,
+      2220626.1299249833
+     ],
+     [
+      6047519.04890674,
+      2220694.805480396
+     ]
+    ],
+    "lot_b": [
+     [
+      6047566.046767325,
+      2220694.349672968
+     ],
+     [
+      6047519.04890674,
+      2220694.805480396
+     ],
+     [
+      6047519.712908641,
+      2220763.2700706422
+     ],
+     [
+      6047566.712814643,
+      2220763.020071149
+     ]
+    ],
+    "lot_a_sqft": 3222.830347810843,
+    "lot_b_sqft": 3222.8303478211164,
+    "line": [
+     [
+      6047566.046816715,
+      2220694.349672489
+     ],
+     [
+      6047519.048906739,
+      2220694.805480396
+     ]
+    ]
+   },
+   "listing_evidence": {
+    "status": "skipped",
+    "note": "Listing reader off: no ANTHROPIC_API_KEY set.",
+    "flags": []
+   },
+   "unknown_count": 6,
+   "computed_at": "2026-11-07T19:00:33.056Z",
+   "listed_lot_sqft": 6439,
+   "description": "Listing summary: Renovated three-bedroom, two-bathroom single-family home. Description advertises a fenced backyard and original garage with utilities and possible future ADU development.",
+   "description_type": "summary"
+  },
+  {
+   "id": "sa-09",
+   "address": "408 N Jackson St",
+   "city": "Santa Ana",
+   "asking_price": 870000,
+   "listing_source_url": "https://www.redfin.com/CA/Santa-Ana/408-N-Jackson-St-92703/home/3898305",
+   "date_collected": "2026-11-07",
+   "parcel": {
+    "apn": "198-241-02",
+    "site_address": "408 N JACKSON ST",
+    "rings": [
+     [
+      [
+       6055144.442737892,
+       2219981.4697969705
+      ],
+      [
+       6055274.67279239,
+       2219978.4599604756
+      ],
+      [
+       6055284.382746726,
+       2219968.609914556
+      ],
+      [
+       6055284.093049139,
+       2219925.880013138
+      ],
+      [
+       6055144.082830474,
+       2219927.0201027244
+      ],
+      [
+       6055144.442737892,
+       2219981.4697969705
+      ]
+     ]
+    ],
+    "area_sqft": 7430.409412562847,
+    "assessor_area_sqft": 7430.409412557699,
+    "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0"
+   },
+   "checks": [
+    {
+     "id": "parcel",
+     "test": "Address matches a Santa Ana parcel",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "rule": "Needed to run every other test.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "value": "APN 198-241-02, 408 N JACKSON ST",
+     "checked_at": "2026-11-07T19:00:33.921Z",
+     "note": "Matched APN 198-241-02."
+    },
+    {
+     "id": "zoning",
+     "test": "Single-family residential zone",
+     "source_name": "City of Santa Ana, Zoning Classifications (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_ZoningClassifications/FeatureServer/0",
+     "rule": "HCD SB 9 Fact Sheet (Sept 2024) p.2: single-family residential zones only. Gov. Code 65852.21(a), 66411.7(a)(3)(A).",
+     "affects_verdict": true,
+     "status": "FAIL",
+     "value": "R2 (Two-Family Residence)",
+     "checked_at": "2026-11-07T19:00:34.052Z",
+     "note": "Not a single-family zone, so SB 9 does not apply."
+    },
+    {
+     "id": "lot_split",
+     "test": "Lot can split into two lots of at least 1,200 sq ft, neither under 40%",
+     "status": "PASS",
+     "value": "Lot 7,430 sq ft; equal split = 3,715 + 3,715 sq ft",
+     "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
+     "checked_at": "2026-11-07T19:00:33.921Z",
+     "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 7,430 sq ft (matches).",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
+     "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "flood",
+     "test": "Not in a FEMA special flood hazard area",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:34.098Z",
+     "value": "FEMA: X (area with reduced flood risk due to levee)",
+     "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
+     "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+     "note": "Not in a special flood hazard area. County copy agrees."
+    },
+    {
+     "id": "fire",
+     "test": "Not in a very high fire hazard severity zone",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
+     "affects_verdict": true,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:34.043Z",
+     "value": "Not in a mapped LRA fire hazard zone",
+     "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
+     "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
+     "note": "Not in a very high fire hazard severity zone. Map vintage may predate CAL FIRE's 2025 LRA maps."
+    },
+    {
+     "id": "historic",
+     "test": "Not a historic property, landmark, or contributing structure in a historic district",
+     "source_name": "City of Santa Ana, Historic Properties by Category (ArcGIS REST); City of Santa Ana, Historic Districts (ArcGIS REST)",
+     "source_url": "https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/0",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
+     "affects_verdict": true,
+     "status": "UNKNOWN",
+     "checked_at": "2026-11-07T19:00:34.077Z",
+     "value": "Not on Santa Ana's historic list or in a city historic district",
+     "note": "City data is clean. The State Historic Resources Inventory was not checked.",
+     "next_step": "Ask the city planning desk to confirm no state or local historic listing."
+    },
+    {
+     "id": "tenant",
+     "test": "No tenant in the last 3 years",
+     "status": "UNKNOWN",
+     "value": "Not checked: no public data on tenancy",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until the seller confirms.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3; Gov. Code 65852.21(a)(3), 66411.7(a)(3)(D).",
+     "next_step": "Ask the listing agent for 3 years of occupancy history.",
+     "affects_verdict": true,
+     "possible_fail": false
+    },
+    {
+     "id": "rent_restricted",
+     "test": "Not rent-restricted, rent-controlled, or Ellis Act withdrawn (15 years)",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.2-3.",
+     "next_step": "Ask the listing agent and the city housing division about covenants, rent control and Ellis Act history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "prior_split",
+     "test": "Not created by a prior SB 9 split, and no adjacent split by the same owner",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; SB 9 Fact Sheet (Sept 2024) p.6.",
+     "next_step": "Ask the city planning desk for the parcel's map history.",
+     "affects_verdict": true
+    },
+    {
+     "id": "fault",
+     "test": "Not in an earthquake fault zone",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check the CGS EQ Zapp map (its data service needed a token when tested).",
+     "affects_verdict": true
+    },
+    {
+     "id": "environment",
+     "test": "Not wetlands, habitat, farmland, conservation easement, or hazardous waste site",
+     "status": "UNKNOWN",
+     "value": "Not checked: no free public data",
+     "source_name": "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
+     "source_url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
+     "checked_at": "2026-11-07T20:00:00.000Z",
+     "note": "UNKNOWN until someone confirms it.",
+     "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K).",
+     "next_step": "Check DTSC EnviroStor and ask the city planning desk.",
+     "affects_verdict": true
+    },
+    {
+     "id": "landslide",
+     "test": "Not in a CGS landslide zone (site risk, does not change the verdict)",
+     "source_name": "California Geological Survey, Landslide Zones",
+     "source_url": "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0",
+     "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
+     "affects_verdict": false,
+     "status": "PASS",
+     "checked_at": "2026-11-07T19:00:34.067Z",
+     "value": "Not in a mapped landslide zone",
+     "note": "No mapped landslide zone."
+    }
+   ],
+   "verdict": "NO",
+   "verdict_reason": "Failed: single-family residential zone (R2 (Two-Family Residence)).",
+   "max_homes": 0,
+   "land_cost_per_home": null,
+   "split": {
+    "lot_a": [
+     [
+      6055213.357119059,
+      2219979.877069237
+     ],
+     [
+      6055274.672792389,
+      2219978.4599604756
+     ],
+     [
+      6055284.382746726,
+      2219968.6099145557
+     ],
+     [
+      6055284.093049138,
+      2219925.880013138
+     ],
+     [
+      6055212.922145405,
+      2219926.459550881
+     ]
+    ],
+    "lot_b": [
+     [
+      6055144.44273789,
+      2219981.4697969705
+     ],
+     [
+      6055213.357119059,
+      2219979.877069237
+     ],
+     [
+      6055212.922145405,
+      2219926.459550881
+     ],
+     [
+      6055144.082830473,
+      2219927.020102724
+     ]
+    ],
+    "lot_a_sqft": 3715.2047063315854,
+    "lot_b_sqft": 3715.204706311226,
+    "line": [
+     [
+      6055213.365518432,
+      2219980.908565475
+     ],
+     [
+      6055212.922145405,
+      2219926.459550881
+     ]
+    ]
+   },
+   "listing_evidence": {
+    "status": "skipped",
+    "note": "Listing reader off: no ANTHROPIC_API_KEY set.",
+    "flags": []
+   },
+   "unknown_count": 6,
+   "computed_at": "2026-11-07T19:00:34.098Z",
+   "listed_lot_sqft": 7505,
+   "description": "Listing excerpt: 2 HOUSE ON A LOT 7500+ SQFT, READY TO BUILT. Listing summary: Corner lot with alley access. Description claims approved plans for a detached 898-square-foot ADU, rather than clearly establishing a completed second home.",
+   "description_type": "excerpt+summary"
+  }
+ ]
+}

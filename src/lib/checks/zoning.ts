@@ -42,6 +42,12 @@ export async function zoningCheck(parcel: Parcel): Promise<CheckResult> {
     const allSf = zones.every((z) => SINGLE_FAMILY.has(z.cls));
     const anySf = zones.some((z) => SINGLE_FAMILY.has(z.cls));
     const specific = zones.some((z) => /^(SD|SP)/.test(z.cls));
+    // A1 "General Agricultural" in Santa Ana can cover ordinary house lots. HCD (Sept 2024 p.2) says agricultural
+    // zones are not SB 9 zones, but the test is the zone's primary purpose, so we do not call it a clear FAIL.
+    const agri = zones.some((z) => z.cls === "A1");
+    if (agri && !anySf) {
+      return { ...base, status: "UNKNOWN", possible_fail: true, value, checked_at: now(), note: "Possible FAIL: zoned General Agricultural. HCD says agricultural zones are not SB 9 zones, but this one holds a house; the city decides whether its primary purpose is single-family.", next_step: "Ask the Santa Ana planning desk whether SB 9 applies in the A1 zone." };
+    }
     if (allSf) {
       return { ...base, status: "PASS", value, checked_at: now(), note: "Zoned single-family." + overlayNote + (zones.some((z) => z.cls === "RE") ? " RE treated as single-family (ASSUMPTION, confirm in the zoning code)." : "") };
     }

@@ -54,7 +54,7 @@ export function decide(checks: CheckResult[], hasParcel: boolean, price: number 
     reason = "Could not find this address in the Santa Ana parcel data.";
   } else if (fails.length) {
     verdict = "NO";
-    reason = "Fails: " + fails.map((c) => c.test.toLowerCase()).join("; ") + ".";
+    reason = "Failed: " + fails.map((c) => `${c.test.toLowerCase()} (${c.value})`).join("; ") + ".";
   } else if (possible.length) {
     verdict = "UNKNOWN";
     reason = "Possible FAIL to confirm: " + possible.map((c) => c.test.toLowerCase()).join("; ") + ".";

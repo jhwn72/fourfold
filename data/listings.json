@@ -1,0 +1,112 @@
+[
+  {
+    "id": "sa-01",
+    "address": "4202 W Fay Cir",
+    "city": "Santa Ana",
+    "asking_price": 849900,
+    "listed_lot_sqft": 10001,
+    "description": "Listing summary: Single-family fixer with a large backyard. Zillow labels this listing Foreclosure and Real Estate Owned.",
+    "source_url": "https://www.zillow.com/homedetails/4202-W-Fay-Cir-Santa-Ana-CA-92703/461108825_zpid/",
+    "date_collected": "2026-11-07",
+    "description_type": "summary"
+  },
+  {
+    "id": "sa-02",
+    "address": "617 S Corwin Ct",
+    "city": "Santa Ana",
+    "asking_price": 824777,
+    "listed_lot_sqft": 7104,
+    "description": "Listing excerpt: Great corner lot with a large backyard. Listing summary: Three bedrooms, two bathrooms. Description advertises future ADU potential.",
+    "source_url": "https://www.zillow.com/homedetails/617-S-Corwin-Ct-Santa-Ana-CA-92704/25259974_zpid/",
+    "date_collected": "2026-11-07",
+    "description_type": "excerpt+summary"
+  },
+  {
+    "id": "sa-03",
+    "address": "1629 S Townsend St",
+    "city": "Santa Ana",
+    "asking_price": 785000,
+    "listed_lot_sqft": 6500,
+    "description": "Listing summary: Two-bedroom, two-bathroom single-family home with a garage and backyard. Description does not establish occupancy or tenant history.",
+    "source_url": "https://www.zillow.com/homedetails/1629-S-Townsend-St-Santa-Ana-CA-92704/25454028_zpid/",
+    "date_collected": "2026-11-07",
+    "description_type": "summary"
+  },
+  {
+    "id": "sa-04",
+    "address": "1209 S Townsend St",
+    "city": "Santa Ana",
+    "asking_price": 865000,
+    "listed_lot_sqft": 6500,
+    "description": "Listing summary: Three-bedroom, two-bathroom single-family home with a private backyard. Description does not establish occupancy or tenant history.",
+    "source_url": "https://www.zillow.com/homedetails/1209-S-Townsend-St-Santa-Ana-CA-92704/25208047_zpid/",
+    "date_collected": "2026-11-07",
+    "description_type": "summary"
+  },
+  {
+    "id": "sa-05",
+    "address": "927 S Laurel St",
+    "city": "Santa Ana",
+    "asking_price": 889000,
+    "listed_lot_sqft": 6084,
+    "description": "Listing excerpt: The home is ready for a comprehensive renovation. Listing summary: Three bedrooms, two bathrooms, two-car garage and backyard.",
+    "source_url": "https://www.zillow.com/homedetails/927-S-Laurel-St-Santa-Ana-CA-92704/25260306_zpid/",
+    "date_collected": "2026-11-07",
+    "description_type": "excerpt+summary"
+  },
+  {
+    "id": "sa-06",
+    "address": "1213 S Corta Dr",
+    "city": "Santa Ana",
+    "asking_price": 899000,
+    "listed_lot_sqft": 6578,
+    "description": "Listing excerpt: DO NOT DISTURB TENANTS. Tenant-occupied property in a desirable Santa Ana location near Mile Square Park. Listing summary: Occupied with potentially limited access.",
+    "source_url": "https://www.zillow.com/homedetails/1213-S-Corta-Dr-Santa-Ana-CA-92704/25204509_zpid/",
+    "date_collected": "2026-11-07",
+    "description_type": "excerpt+summary"
+  },
+  {
+    "id": "sa-07",
+    "address": "5510 Roosevelt Ave",
+    "city": "Santa Ana",
+    "asking_price": 899900,
+    "listed_lot_sqft": 6439,
+    "description": "Listing summary: Renovated three-bedroom, two-bathroom single-family home. Description advertises a fenced backyard and original garage with utilities and possible future ADU development.",
+    "source_url": "https://www.zillow.com/homedetails/5510-Roosevelt-Ave-Santa-Ana-CA-92703/25189880_zpid/",
+    "date_collected": "2026-11-07",
+    "description_type": "summary"
+  },
+  {
+    "id": "sa-08",
+    "address": "1217 S Huron Dr",
+    "city": "Santa Ana",
+    "asking_price": 949000,
+    "listed_lot_sqft": 6060,
+    "description": "Listing summary: Four-bedroom, two-bathroom single-family home. Description reports a filled backyard pool and claims city approval. Advertises potential ADU and JADU subject to verification.",
+    "source_url": "https://www.redfin.com/CA/Santa-Ana/1217-S-Huron-Dr-92704/home/3538203",
+    "date_collected": "2026-11-07",
+    "description_type": "summary"
+  },
+  {
+    "id": "sa-09",
+    "address": "408 N Jackson St",
+    "city": "Santa Ana",
+    "asking_price": 870000,
+    "listed_lot_sqft": 7505,
+    "description": "Listing excerpt: 2 HOUSE ON A LOT 7500+ SQFT, READY TO BUILT. Listing summary: Corner lot with alley access. Description claims approved plans for a detached 898-square-foot ADU, rather than clearly establishing a completed second home.",
+    "source_url": "https://www.redfin.com/CA/Santa-Ana/408-N-Jackson-St-92703/home/3898305",
+    "date_collected": "2026-11-07",
+    "description_type": "excerpt+summary"
+  },
+  {
+    "id": "sa-10",
+    "address": "2121 Valencia St",
+    "city": "Santa Ana",
+    "asking_price": 949000,
+    "listed_lot_sqft": 7438,
+    "description": "Listing summary: Three-bedroom, one-bathroom single-family home with a side driveway, detached two-car garage, covered patio and backyard.",
+    "source_url": "https://www.zillow.com/homedetails/2121-Valencia-St-Santa-Ana-CA-92706/25091400_zpid/",
+    "date_collected": "2026-11-07",
+    "description_type": "summary"
+  }
+]
