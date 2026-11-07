@@ -1,8 +1,8 @@
 import Link from "next/link";
 import LiveCheck from "@/components/LiveCheck";
-import { money } from "@/components/Checklist";
+import { money, perHomeText } from "@/components/Checklist";
 import { RESULTS } from "@/lib/results";
-import { BRIEF_LAND_PER_HOME } from "@/lib/sb9";
+import { BRIEF_LAND_PER_HOME } from "@/lib/constants";
 
 export default function Home() {
   const rows = RESULTS.results;
@@ -33,7 +33,7 @@ export default function Home() {
                 <td><span className={`status verdict-${r.verdict.replace(" ", "_")}`}>{r.verdict}</span></td>
                 <td>{r.max_homes ?? "UNKNOWN"}</td>
                 <td>{money(r.asking_price)}</td>
-                <td>{money(r.land_cost_per_home)}{r.land_cost_per_home != null && <div className="muted">{r.land_cost_per_home <= BRIEF_LAND_PER_HOME ? "below" : "above"} $360k example</div>}</td>
+                <td>{perHomeText(r.land_cost_per_home, r.max_homes)}{r.land_cost_per_home != null && <div className="muted">{r.land_cost_per_home <= BRIEF_LAND_PER_HOME ? "below" : "above"} $360k example</div>}</td>
                 <td>{r.unknown_count}</td>
                 <td className="muted">{r.verdict_reason}</td>
               </tr>

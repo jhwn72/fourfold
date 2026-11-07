@@ -1,4 +1,4 @@
-import { BRIEF_LAND_PER_HOME } from "@/lib/sb9";
+import { BRIEF_LAND_PER_HOME } from "@/lib/constants";
 import { money } from "./Checklist";
 
 export default function CostCompare({ price, homes, perHome }: { price: number | null; homes: number | null; perHome: number | null }) {
@@ -10,7 +10,7 @@ export default function CostCompare({ price, homes, perHome }: { price: number |
           {money(price)} ÷ {homes} homes = <strong>{money(perHome)}</strong> per home
         </p>
       ) : (
-        <p>UNKNOWN{price == null ? ": no asking price." : homes ? "." : ": SB 9 does not appear to apply."}</p>
+        <p>{homes === 0 ? "n/a: SB 9 does not appear to apply, so there is no 4-home split to divide by." : price == null ? "UNKNOWN: no asking price." : "UNKNOWN."}</p>
       )}
       <p className="muted">
         Compare: the brief&apos;s worked example uses {money(BRIEF_LAND_PER_HOME)} per home for land and building purchase{" "}

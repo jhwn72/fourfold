@@ -22,9 +22,7 @@ import { now, unknownFromError } from "./checks/util";
 import { SRC } from "./sources";
 import type { CheckResult, ListingEvidence, SiteResult, Verdict } from "./types";
 
-/** ASSUMPTION: the brief's worked example, "Land and building purchase (Lane 1) $360k" per home.
- *  Mock numbers from docs/background.md, not a real deal. */
-export const BRIEF_LAND_PER_HOME = 360_000;
+export { BRIEF_LAND_PER_HOME } from "./constants";
 
 export const NO_EVIDENCE: ListingEvidence = { status: "skipped", note: "No listing description to read.", flags: [] };
 
@@ -40,6 +38,18 @@ export type ListingInput = {
 
 const LIVE_IDS = ["zoning", "lot_split", "flood", "fire"];
 
+// Short plain-language labels for verdict reasons.
+const FAIL_LABEL: Record<string, string> = {
+  parcel: "address not found",
+  zoning: "not a single-family zone",
+  lot_split: "lot too small to split",
+  flood: "in a FEMA special flood hazard area",
+  fire: "in a very high fire hazard zone",
+  historic: "listed historic resource",
+  tenant: "listing suggests a tenant",
+};
+const label = (c: CheckResult) => FAIL_LABEL[c.id] ?? c.test.toLowerCase();
+
 export function decide(checks: CheckResult[], hasParcel: boolean, price: number | null) {
   let verdict: Verdict;
   let reason: string;
@@ -54,10 +64,10 @@ export function decide(checks: CheckResult[], hasParcel: boolean, price: number 
     reason = "Could not find this address in the Santa Ana parcel data.";
   } else if (fails.length) {
     verdict = "NO";
-    reason = "Failed: " + fails.map((c) => `${c.test.toLowerCase()} (${c.value})`).join("; ") + ".";
+    reason = "Fails: " + fails.map((c) => `${label(c)} (${c.value})`).join("; ") + ".";
   } else if (possible.length) {
     verdict = "UNKNOWN";
-    reason = "Possible FAIL to confirm: " + possible.map((c) => c.test.toLowerCase()).join("; ") + ".";
+    reason = "Possible FAIL to confirm: " + possible.map(label).join("; ") + ".";
   } else if (liveUnknown.length) {
     verdict = "UNKNOWN";
     reason = "Could not check: " + liveUnknown.map((c) => c.test.toLowerCase()).join("; ") + ".";

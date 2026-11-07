@@ -23,6 +23,10 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
         {r.listed_lot_sqft ? ` · listing says ${r.listed_lot_sqft.toLocaleString()} sq ft` : ""}
         {r.listing_source_url && <> · <a href={r.listing_source_url} target="_blank" rel="noreferrer">listing</a> (collected {r.date_collected})</>}
       </p>
+      <p style={{ fontSize: 17 }}>
+        <span className={`status verdict-${r.verdict.replace(" ", "_")}`} style={{ fontSize: 15 }}>{r.verdict}</span>{" "}
+        {r.verdict_reason} <span className="muted">Max homes: {r.max_homes ?? "UNKNOWN"}.</span>
+      </p>
       <div style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "flex-start" }}>
         <div style={{ flex: "1 1 300px" }}>
           {r.parcel ? <LotSvg parcel={r.parcel} split={r.split} homes={r.max_homes} /> : <p>No parcel polygon.</p>}

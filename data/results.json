@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-07T19:00:34.990Z",
+ "generated_at": "2026-11-07T19:07:26.438Z",
  "city": "Santa Ana",
  "results": [
   {
@@ -50,7 +50,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 109-453-19, 1209 S TOWNSEND ST",
-     "checked_at": "2026-11-07T19:00:31.414Z",
+     "checked_at": "2026-11-07T19:07:22.054Z",
      "note": "Matched APN 109-453-19."
     },
     {
@@ -62,7 +62,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "R1 (Single-Family Residence)",
-     "checked_at": "2026-11-07T19:00:31.456Z",
+     "checked_at": "2026-11-07T19:07:22.100Z",
      "note": "Zoned single-family."
     },
     {
@@ -72,7 +72,7 @@
      "value": "Lot 6,499 sq ft; equal split = 3,250 + 3,250 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:00:31.414Z",
+     "checked_at": "2026-11-07T19:07:22.054Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,499 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -84,7 +84,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:31.508Z",
+     "checked_at": "2026-11-07T19:07:22.666Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -96,7 +96,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:31.458Z",
+     "checked_at": "2026-11-07T19:07:22.666Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -110,7 +110,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:00:31.479Z",
+     "checked_at": "2026-11-07T19:07:22.128Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -189,7 +189,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:31.483Z",
+     "checked_at": "2026-11-07T19:07:22.666Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -254,7 +254,7 @@
     "flags": []
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:00:31.508Z",
+   "computed_at": "2026-11-07T19:07:22.666Z",
    "listed_lot_sqft": 6500,
    "description": "Listing summary: Three-bedroom, two-bathroom single-family home with a private backyard. Description does not establish occupancy or tenant history.",
    "description_type": "summary"
@@ -311,7 +311,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 144-372-04, 927 S LAUREL ST",
-     "checked_at": "2026-11-07T19:00:31.908Z",
+     "checked_at": "2026-11-07T19:07:23.092Z",
      "note": "Matched APN 144-372-04."
     },
     {
@@ -323,7 +323,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "R1 (Single-Family Residence)",
-     "checked_at": "2026-11-07T19:00:31.953Z",
+     "checked_at": "2026-11-07T19:07:23.142Z",
      "note": "Zoned single-family."
     },
     {
@@ -333,7 +333,7 @@
      "value": "Lot 6,080 sq ft; equal split = 3,040 + 3,040 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:00:31.908Z",
+     "checked_at": "2026-11-07T19:07:23.092Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,080 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -345,7 +345,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:32.010Z",
+     "checked_at": "2026-11-07T19:07:23.288Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -357,7 +357,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:31.953Z",
+     "checked_at": "2026-11-07T19:07:23.288Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -371,7 +371,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:00:31.973Z",
+     "checked_at": "2026-11-07T19:07:23.208Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -450,7 +450,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:31.982Z",
+     "checked_at": "2026-11-07T19:07:23.288Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -519,7 +519,7 @@
     "flags": []
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:00:32.010Z",
+   "computed_at": "2026-11-07T19:07:23.289Z",
    "listed_lot_sqft": 6084,
    "description": "Listing excerpt: The home is ready for a comprehensive renovation. Listing summary: Three bedrooms, two bathrooms, two-car garage and backyard.",
    "description_type": "excerpt+summary"
@@ -572,7 +572,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 108-384-06, 1213 S CORTA DR",
-     "checked_at": "2026-11-07T19:00:32.431Z",
+     "checked_at": "2026-11-07T19:07:23.644Z",
      "note": "Matched APN 108-384-06."
     },
     {
@@ -584,7 +584,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "R1 (Single-Family Residence)",
-     "checked_at": "2026-11-07T19:00:32.472Z",
+     "checked_at": "2026-11-07T19:07:23.687Z",
      "note": "Zoned single-family."
     },
     {
@@ -594,7 +594,7 @@
      "value": "Lot 6,579 sq ft; equal split = 3,289 + 3,289 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:00:32.431Z",
+     "checked_at": "2026-11-07T19:07:23.644Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,579 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -606,7 +606,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:32.536Z",
+     "checked_at": "2026-11-07T19:07:23.885Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -618,7 +618,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:32.470Z",
+     "checked_at": "2026-11-07T19:07:23.812Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -632,7 +632,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:00:32.492Z",
+     "checked_at": "2026-11-07T19:07:23.715Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -711,7 +711,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:32.496Z",
+     "checked_at": "2026-11-07T19:07:23.885Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -776,7 +776,7 @@
     "flags": []
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:00:32.536Z",
+   "computed_at": "2026-11-07T19:07:23.885Z",
    "listed_lot_sqft": 6578,
    "description": "Listing excerpt: DO NOT DISTURB TENANTS. Tenant-occupied property in a desirable Santa Ana location near Mile Square Park. Listing summary: Occupied with potentially limited access.",
    "description_type": "excerpt+summary"
@@ -833,7 +833,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 109-691-15, 1217 S HURON DR",
-     "checked_at": "2026-11-07T19:00:33.479Z",
+     "checked_at": "2026-11-07T19:07:24.702Z",
      "note": "Matched APN 109-691-15."
     },
     {
@@ -845,7 +845,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "R1 (Single-Family Residence)",
-     "checked_at": "2026-11-07T19:00:33.522Z",
+     "checked_at": "2026-11-07T19:07:24.744Z",
      "note": "Zoned single-family."
     },
     {
@@ -855,7 +855,7 @@
      "value": "Lot 6,098 sq ft; equal split = 3,049 + 3,049 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:00:33.480Z",
+     "checked_at": "2026-11-07T19:07:24.702Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,098 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -867,7 +867,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:33.577Z",
+     "checked_at": "2026-11-07T19:07:24.855Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -879,7 +879,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:33.521Z",
+     "checked_at": "2026-11-07T19:07:24.773Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -893,7 +893,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:00:33.553Z",
+     "checked_at": "2026-11-07T19:07:24.769Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -972,7 +972,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:33.568Z",
+     "checked_at": "2026-11-07T19:07:24.800Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -1041,7 +1041,7 @@
     "flags": []
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:00:33.577Z",
+   "computed_at": "2026-11-07T19:07:24.855Z",
    "listed_lot_sqft": 6060,
    "description": "Listing summary: Four-bedroom, two-bathroom single-family home. Description reports a filled backyard pool and claims city approval. Advertises potential ADU and JADU subject to verification.",
    "description_type": "summary"
@@ -1094,7 +1094,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 003-131-15, 2121 VALENCIA AVE",
-     "checked_at": "2026-11-07T19:00:34.531Z",
+     "checked_at": "2026-11-07T19:07:25.866Z",
      "note": "Matched APN 003-131-15."
     },
     {
@@ -1106,7 +1106,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "R1 (Single-Family Residence)",
-     "checked_at": "2026-11-07T19:00:34.575Z",
+     "checked_at": "2026-11-07T19:07:25.918Z",
      "note": "Zoned single-family."
     },
     {
@@ -1116,7 +1116,7 @@
      "value": "Lot 7,433 sq ft; equal split = 3,717 + 3,717 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:00:34.531Z",
+     "checked_at": "2026-11-07T19:07:25.866Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 7,433 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -1128,7 +1128,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:34.689Z",
+     "checked_at": "2026-11-07T19:07:26.136Z",
      "value": "FEMA: X (area of minimal flood hazard)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -1140,7 +1140,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:34.613Z",
+     "checked_at": "2026-11-07T19:07:26.136Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -1154,7 +1154,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:00:34.595Z",
+     "checked_at": "2026-11-07T19:07:25.939Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -1233,7 +1233,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:34.613Z",
+     "checked_at": "2026-11-07T19:07:26.136Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -1298,7 +1298,7 @@
     "flags": []
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:00:34.689Z",
+   "computed_at": "2026-11-07T19:07:26.136Z",
    "listed_lot_sqft": 7438,
    "description": "Listing summary: Three-bedroom, one-bathroom single-family home with a side driveway, detached two-car garage, covered patio and backyard.",
    "description_type": "summary"
@@ -1427,7 +1427,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 144-283-01, 617 S CORWIN CT",
-     "checked_at": "2026-11-07T19:00:30.416Z",
+     "checked_at": "2026-11-07T19:07:20.731Z",
      "note": "Matched APN 144-283-01."
     },
     {
@@ -1440,7 +1440,7 @@
      "status": "UNKNOWN",
      "possible_fail": true,
      "value": "A1 (General Agricultural)",
-     "checked_at": "2026-11-07T19:00:30.457Z",
+     "checked_at": "2026-11-07T19:07:20.781Z",
      "note": "Possible FAIL: zoned General Agricultural. HCD says agricultural zones are not SB 9 zones, but this one holds a house; the city decides whether its primary purpose is single-family.",
      "next_step": "Ask the Santa Ana planning desk whether SB 9 applies in the A1 zone."
     },
@@ -1451,7 +1451,7 @@
      "value": "Lot 6,935 sq ft; equal split = 3,468 + 3,468 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:00:30.416Z",
+     "checked_at": "2026-11-07T19:07:20.731Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,935 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -1463,7 +1463,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:30.522Z",
+     "checked_at": "2026-11-07T19:07:20.992Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -1475,7 +1475,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:30.461Z",
+     "checked_at": "2026-11-07T19:07:20.837Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -1489,7 +1489,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:00:30.481Z",
+     "checked_at": "2026-11-07T19:07:20.811Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -1568,13 +1568,13 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:30.495Z",
+     "checked_at": "2026-11-07T19:07:20.837Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
    ],
    "verdict": "UNKNOWN",
-   "verdict_reason": "Possible FAIL to confirm: single-family residential zone.",
+   "verdict_reason": "Possible FAIL to confirm: not a single-family zone.",
    "max_homes": 4,
    "land_cost_per_home": 206194,
    "split": {
@@ -1709,7 +1709,7 @@
     "flags": []
    },
    "unknown_count": 7,
-   "computed_at": "2026-11-07T19:00:30.522Z",
+   "computed_at": "2026-11-07T19:07:20.992Z",
    "listed_lot_sqft": 7104,
    "description": "Listing excerpt: Great corner lot with a large backyard. Listing summary: Three bedrooms, two bathrooms. Description advertises future ADU potential.",
    "description_type": "excerpt+summary"
@@ -1786,7 +1786,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 198-331-18, 4202 FAY CIR",
-     "checked_at": "2026-11-07T19:00:29.811Z",
+     "checked_at": "2026-11-07T19:07:19.219Z",
      "note": "Matched APN 198-331-18."
     },
     {
@@ -1798,7 +1798,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "R1 (Single-Family Residence)",
-     "checked_at": "2026-11-07T19:00:29.866Z",
+     "checked_at": "2026-11-07T19:07:19.287Z",
      "note": "Zoned single-family."
     },
     {
@@ -1808,7 +1808,7 @@
      "value": "Lot 8,682 sq ft; equal split = 4,341 + 4,341 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:00:29.819Z",
+     "checked_at": "2026-11-07T19:07:19.227Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 8,682 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -1820,7 +1820,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "FAIL",
-     "checked_at": "2026-11-07T19:00:30.078Z",
+     "checked_at": "2026-11-07T19:07:20.388Z",
      "value": "FEMA: A",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -1833,7 +1833,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:29.897Z",
+     "checked_at": "2026-11-07T19:07:20.044Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -1847,7 +1847,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:00:29.927Z",
+     "checked_at": "2026-11-07T19:07:19.423Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -1926,13 +1926,13 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:29.998Z",
+     "checked_at": "2026-11-07T19:07:20.389Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
    ],
    "verdict": "NO",
-   "verdict_reason": "Failed: not in a fema special flood hazard area (FEMA: A).",
+   "verdict_reason": "Fails: in a FEMA special flood hazard area (FEMA: A).",
    "max_homes": 0,
    "land_cost_per_home": null,
    "split": {
@@ -2015,7 +2015,7 @@
     "flags": []
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:00:30.079Z",
+   "computed_at": "2026-11-07T19:07:20.389Z",
    "listed_lot_sqft": 10001,
    "description": "Listing summary: Single-family fixer with a large backyard. Zillow labels this listing Foreclosure and Real Estate Owned.",
    "description_type": "summary"
@@ -2068,7 +2068,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 408-243-12, 1629 S TOWNSEND ST",
-     "checked_at": "2026-11-07T19:00:30.891Z",
+     "checked_at": "2026-11-07T19:07:21.339Z",
      "note": "Matched APN 408-243-12."
     },
     {
@@ -2080,7 +2080,7 @@
      "affects_verdict": true,
      "status": "FAIL",
      "value": "R2 (Two-Family Residence)",
-     "checked_at": "2026-11-07T19:00:30.931Z",
+     "checked_at": "2026-11-07T19:07:21.400Z",
      "note": "Not a single-family zone, so SB 9 does not apply."
     },
     {
@@ -2090,7 +2090,7 @@
      "value": "Lot 6,001 sq ft; equal split = 3,000 + 3,000 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:00:30.891Z",
+     "checked_at": "2026-11-07T19:07:21.339Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,001 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -2102,7 +2102,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:30.995Z",
+     "checked_at": "2026-11-07T19:07:21.518Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -2114,7 +2114,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:30.932Z",
+     "checked_at": "2026-11-07T19:07:21.518Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -2128,7 +2128,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:00:30.952Z",
+     "checked_at": "2026-11-07T19:07:21.514Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -2207,13 +2207,13 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:30.962Z",
+     "checked_at": "2026-11-07T19:07:21.518Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
    ],
    "verdict": "NO",
-   "verdict_reason": "Failed: single-family residential zone (R2 (Two-Family Residence)).",
+   "verdict_reason": "Fails: not a single-family zone (R2 (Two-Family Residence)).",
    "max_homes": 0,
    "land_cost_per_home": null,
    "split": {
@@ -2272,7 +2272,7 @@
     "flags": []
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:00:30.995Z",
+   "computed_at": "2026-11-07T19:07:21.518Z",
    "listed_lot_sqft": 6500,
    "description": "Listing summary: Two-bedroom, two-bathroom single-family home with a garage and backyard. Description does not establish occupancy or tenant history.",
    "description_type": "summary"
@@ -2325,7 +2325,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 099-212-03, 5510 ROOSEVELT AVE",
-     "checked_at": "2026-11-07T19:00:32.956Z",
+     "checked_at": "2026-11-07T19:07:24.228Z",
      "note": "Matched APN 099-212-03."
     },
     {
@@ -2337,7 +2337,7 @@
      "affects_verdict": true,
      "status": "FAIL",
      "value": "R2 (Two-Family Residence)",
-     "checked_at": "2026-11-07T19:00:32.999Z",
+     "checked_at": "2026-11-07T19:07:24.275Z",
      "note": "Not a single-family zone, so SB 9 does not apply."
     },
     {
@@ -2347,7 +2347,7 @@
      "value": "Lot 6,446 sq ft; equal split = 3,223 + 3,223 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:00:32.956Z",
+     "checked_at": "2026-11-07T19:07:24.228Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,446 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -2359,7 +2359,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "FAIL",
-     "checked_at": "2026-11-07T19:00:33.056Z",
+     "checked_at": "2026-11-07T19:07:24.334Z",
      "value": "FEMA: A",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -2372,7 +2372,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:32.999Z",
+     "checked_at": "2026-11-07T19:07:24.296Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -2386,7 +2386,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:00:33.035Z",
+     "checked_at": "2026-11-07T19:07:24.295Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -2465,13 +2465,13 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:33.024Z",
+     "checked_at": "2026-11-07T19:07:24.361Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
    ],
    "verdict": "NO",
-   "verdict_reason": "Failed: single-family residential zone (R2 (Two-Family Residence)); not in a fema special flood hazard area (FEMA: A).",
+   "verdict_reason": "Fails: not a single-family zone (R2 (Two-Family Residence)); in a FEMA special flood hazard area (FEMA: A).",
    "max_homes": 0,
    "land_cost_per_home": null,
    "split": {
@@ -2530,7 +2530,7 @@
     "flags": []
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:00:33.056Z",
+   "computed_at": "2026-11-07T19:07:24.361Z",
    "listed_lot_sqft": 6439,
    "description": "Listing summary: Renovated three-bedroom, two-bathroom single-family home. Description advertises a fenced backyard and original garage with utilities and possible future ADU development.",
    "description_type": "summary"
@@ -2587,7 +2587,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 198-241-02, 408 N JACKSON ST",
-     "checked_at": "2026-11-07T19:00:33.921Z",
+     "checked_at": "2026-11-07T19:07:25.224Z",
      "note": "Matched APN 198-241-02."
     },
     {
@@ -2599,7 +2599,7 @@
      "affects_verdict": true,
      "status": "FAIL",
      "value": "R2 (Two-Family Residence)",
-     "checked_at": "2026-11-07T19:00:34.052Z",
+     "checked_at": "2026-11-07T19:07:25.269Z",
      "note": "Not a single-family zone, so SB 9 does not apply."
     },
     {
@@ -2609,7 +2609,7 @@
      "value": "Lot 7,430 sq ft; equal split = 3,715 + 3,715 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:00:33.921Z",
+     "checked_at": "2026-11-07T19:07:25.224Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 7,430 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -2621,7 +2621,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:34.098Z",
+     "checked_at": "2026-11-07T19:07:25.478Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -2633,7 +2633,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:34.043Z",
+     "checked_at": "2026-11-07T19:07:25.419Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -2647,7 +2647,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:00:34.077Z",
+     "checked_at": "2026-11-07T19:07:25.299Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -2726,13 +2726,13 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:00:34.067Z",
+     "checked_at": "2026-11-07T19:07:25.478Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
    ],
    "verdict": "NO",
-   "verdict_reason": "Failed: single-family residential zone (R2 (Two-Family Residence)).",
+   "verdict_reason": "Fails: not a single-family zone (R2 (Two-Family Residence)).",
    "max_homes": 0,
    "land_cost_per_home": null,
    "split": {
@@ -2795,7 +2795,7 @@
     "flags": []
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:00:34.098Z",
+   "computed_at": "2026-11-07T19:07:25.478Z",
    "listed_lot_sqft": 7505,
    "description": "Listing excerpt: 2 HOUSE ON A LOT 7500+ SQFT, READY TO BUILT. Listing summary: Corner lot with alley access. Description claims approved plans for a detached 898-square-foot ADU, rather than clearly establishing a completed second home.",
    "description_type": "excerpt+summary"

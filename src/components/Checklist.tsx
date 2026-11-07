@@ -1,6 +1,8 @@
 import type { SiteResult } from "@/lib/types";
 
 export const money = (n: number | null) => (n == null ? "UNKNOWN" : "$" + n.toLocaleString("en-US"));
+/** Per-home cost: "n/a" when SB 9 does not apply (0 homes), UNKNOWN when the price is missing. */
+export const perHomeText = (perHome: number | null, homes: number | null) => (homes === 0 ? "n/a, SB 9 does not apply" : money(perHome));
 
 export default function Checklist({ result }: { result: SiteResult }) {
   return (
@@ -9,7 +11,7 @@ export default function Checklist({ result }: { result: SiteResult }) {
         <span className={`status verdict-${result.verdict.replace(" ", "_")}`}>{result.verdict}</span>{" "}
         {result.verdict_reason}
       </p>
-      <p className="muted">Max homes: {result.max_homes ?? "UNKNOWN"} · Price: {money(result.asking_price)} · Land and building purchase per home, before construction: {money(result.land_cost_per_home)}</p>
+      <p className="muted">Max homes: {result.max_homes ?? "UNKNOWN"} · Price: {money(result.asking_price)} · Land and building purchase per home, before construction: {perHomeText(result.land_cost_per_home, result.max_homes)}</p>
       <div className="table-wrap">
         <table>
           <thead><tr><th>Test</th><th>Result</th><th>Value</th><th>Source and date checked</th></tr></thead>

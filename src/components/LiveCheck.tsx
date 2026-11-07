@@ -2,6 +2,8 @@
 import { useState } from "react";
 import type { SiteResult } from "@/lib/types";
 import Checklist from "./Checklist";
+import CostCompare from "./CostCompare";
+import LotSvg from "./LotSvg";
 
 export default function LiveCheck() {
   const [address, setAddress] = useState("");
@@ -41,7 +43,15 @@ export default function LiveCheck() {
         <button type="submit" disabled={busy}>{busy ? "Checking public data..." : "Check"}</button>
       </form>
       {error && <p className="FAIL" style={{ padding: 8 }}>Error: {error}</p>}
-      {result && <Checklist result={result} />}
+      {result && (
+        <>
+          <div style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "flex-start", marginTop: 12 }}>
+            {result.parcel && <div style={{ flex: "1 1 280px" }}><LotSvg parcel={result.parcel} split={result.split} homes={result.max_homes} /></div>}
+            <div style={{ flex: "1 1 320px" }}><CostCompare price={result.asking_price} homes={result.max_homes} perHome={result.land_cost_per_home} /></div>
+          </div>
+          <Checklist result={result} />
+        </>
+      )}
     </div>
   );
 }
