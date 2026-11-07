@@ -14,7 +14,7 @@ export default function ComparablesPage() {
     <main className="container">
       <header className={s.head}>
         <span className="eyebrow">Orange County · HCD Annual Progress Reports · {years[0]} to {years[years.length - 1]}</span>
-        <h1>Recent SB 9 projects in Orange County<span className="second">As cities reported them to the state.</span></h1>
+        <h1>{projects.length} SB 9 projects in Orange County<span className="second">From cities&apos; reports to the state</span></h1>
         <p className={s.lede}>
           Projects that Orange County cities labeled as SB 9 in their Housing Element Annual Progress Reports to HCD.
           Santa Ana is UNKNOWN: the city reports every year but labels no project as SB 9.

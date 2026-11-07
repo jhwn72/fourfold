@@ -18,7 +18,7 @@ export default function SupportPanel({ city }: { city: string }) {
       <div className={s.head}>
         <div>
           <div className="eyebrow">Local support · {city}</div>
-          <h3 className={s.title}>Does your organization have local support here?</h3>
+          <h3 className={s.title}>Local support</h3>
         </div>
         <span className={`status ${LEVEL_CLASS[result.level]}`}>{loaded ? LEVEL_TEXT[result.level] : "Loading"}</span>
       </div>

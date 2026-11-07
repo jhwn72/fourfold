@@ -66,7 +66,7 @@ export default function Comparables({ address }: { address?: string }) {
   return (
     <div className={`card ${s.card}`}>
       <span className="eyebrow">From HCD Annual Progress Report data</span>
-      <h3>Recent SB 9 projects nearby</h3>
+      <h3>SB 9 projects in OC</h3>
       <p className={s.summary}>
         <strong>{projects.length}</strong> labeled SB 9 projects in {cities} Orange County jurisdictions, {years[0]} to {years[years.length - 1]}
         {timing && <>; median {timing.medianMonths} months from building permit to completion (n = {timing.n})</>}. Santa Ana:{" "}

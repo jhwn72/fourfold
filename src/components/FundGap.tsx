@@ -66,7 +66,7 @@ export default function FundGap({ r }: { r: SiteResult }) {
 
   return (
     <div className="card">
-      <h3 style={{ marginTop: 0, marginBottom: 4 }}>Fund the gap: whole project, {homes} homes</h3>
+      <h3 style={{ marginTop: 0, marginBottom: 4 }}>Fund the gap · {homes} homes</h3>
       <p className="muted" style={{ marginTop: 0 }}>
         What the family can afford to pay + public subsidies + fundraising − the cost to create the home = $0.
         Source: Claude Impact Lab challenge brief, as quoted in docs/background.md (checked Nov 6, 2026).

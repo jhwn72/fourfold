@@ -13,7 +13,7 @@ const SECTIONS = [
   ["#sources", "Sources and assumptions"],
   ["#unknown", "What is UNKNOWN"],
   ["#real-vs-mock", "Real vs mocked"],
-  ["#wrong", "Where it gets things wrong"],
+  ["#wrong", "Where it can be wrong"],
   ["#claude", "How Claude is used"],
 ];
 
@@ -23,14 +23,14 @@ export default function MethodPage() {
   return (
     <article style={{ maxWidth: 980 }}>
       <div className="eyebrow">Method · sources · limits</div>
-      <h1>How it works.<span className="second">Code decides, Claude reads, every test has a source.</span></h1>
+      <h1>How it works<span className="second">Code decides, Claude reads, every test has a source.</span></h1>
       <nav aria-label="Sections" style={{ display: "flex", flexWrap: "wrap", gap: 8, margin: "18px 0 8px" }}>
         {SECTIONS.map(([href, label]) => <a key={href} href={href} className="chip" style={{ textDecoration: "none" }}>{label}</a>)}
       </nav>
 
       <section id="tests" style={sec}>
         <div className="eyebrow">01</div>
-        <h2 style={{ marginTop: 4 }}>SB 9 tests and where each comes from</h2>
+        <h2 style={{ marginTop: 4 }}>The SB 9 tests</h2>
         <div className="table-wrap">
           <table>
             <thead><tr><th>Test</th><th>Data</th><th>Rule source</th></tr></thead>
@@ -96,7 +96,7 @@ export default function MethodPage() {
 
       <section id="real-vs-mock" style={sec}>
         <div className="eyebrow">04</div>
-        <h2 style={{ marginTop: 4 }}>What is real and what is mocked</h2>
+        <h2 style={{ marginTop: 4 }}>Real vs. mocked</h2>
         <div className="table-wrap">
           <table>
             <thead><tr><th>Part</th><th>Status</th></tr></thead>
@@ -116,7 +116,7 @@ export default function MethodPage() {
 
       <section id="wrong" style={sec}>
         <div className="eyebrow">05</div>
-        <h2 style={{ marginTop: 4 }}>Where it gets things wrong</h2>
+        <h2 style={{ marginTop: 4 }}>Where it can be wrong</h2>
         <ul>
           <li>Lot area comes from the city polygon. It can differ from the listing (sa-01: listing 10,001 sq ft, city polygon about 8,682).</li>
           <li>&quot;Intersects&quot; means any part of the parcel. A parcel that barely touches a flood zone gets FAIL; we pull the outline in 1 ft to avoid edge-touch errors, but a sliver can still count.</li>

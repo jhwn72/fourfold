@@ -40,7 +40,7 @@ export default function GroupCard({ group, members, onBack, onSelectSite, onOpen
       <div className={a.nums}>
         <div><div className="eyebrow">Homes</div><div className={`${a.big} accent`}>{sum.homesUnknown ? (sum.homes ? `${sum.homes}+` : "UNKNOWN") : sum.homes}</div></div>
         <div><div className="eyebrow">Per home</div><div className={`${a.big} accent`}>{money(sum.perHome)}</div></div>
-        <div><div className="eyebrow">Total asking</div><div className={a.big}>{sum.priceUnknown ? (sum.totalAsking ? `${money(sum.totalAsking)}+` : "UNKNOWN") : money(sum.totalAsking)}</div></div>
+        <div><div className="eyebrow">Asking</div><div className={a.big}>{sum.priceUnknown ? (sum.totalAsking ? `${money(sum.totalAsking)}+` : "UNKNOWN") : money(sum.totalAsking)}</div></div>
         {sum.investorPerHome != null && <div><div className="eyebrow">Investor / home</div><div className={a.big}>{money(sum.investorPerHome)}</div></div>}
       </div>
       <p className="faint" style={{ fontSize: 11, margin: "6px 0 0" }}>Per home = combined asking ÷ combined homes, before construction. Asking price is not the sale price.</p>
@@ -72,7 +72,7 @@ export default function GroupCard({ group, members, onBack, onSelectSite, onOpen
       {best && (
         <div className={a.next}>
           <div className="card" style={{ margin: 0 }}>
-            <div className="eyebrow">Next call for the group</div>
+            <div className="eyebrow">Next call</div>
             <h3 style={{ margin: "6px 0 10px", fontSize: 20, fontWeight: 300 }}>{best.who}</h3>
             <ol style={{ paddingLeft: 18, margin: "0 0 12px" }}>
               {best.questions.slice(0, 2).map((q) => (

@@ -5,7 +5,7 @@ import { Star, AssumeNote } from "@/components/Assume";
 export default function CostCompare({ price, homes, perHome }: { price: number | null; homes: number | null; perHome: number | null }) {
   return (
     <div className="card">
-      <h3 style={{ marginTop: 0 }}>Land and building purchase per home, before construction</h3>
+      <h3 style={{ marginTop: 0 }}>Purchase cost per home</h3>
       {perHome != null ? (
         <p style={{ fontSize: 18 }}>
           {money(price)} ÷ {homes} homes = <strong>{money(perHome)}</strong> per home

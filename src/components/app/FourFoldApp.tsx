@@ -134,7 +134,7 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
         )}
         {tab === "sites" && !site && !off && mode === "leads" && (
           <>
-            <h1 className={a.title}>More listings.<span className="second">Not verified yet.</span></h1>
+            <h1 className={a.title}>{leads.length} leads in Anaheim and Fullerton<span className="second">Confirm each listing before you call</span></h1>
             <p className={a.lede}>Leads in Anaheim and Fullerton from web search. Confirm each on the listing page before any call.</p>
             <div className={`card ${a.section}`}>
               <div className={a.cardHead}><span className="eyebrow">Unverified leads</span></div>
@@ -154,7 +154,7 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
         )}
         {tab === "sites" && !site && !off && mode === "off" && (
           <>
-            <h1 className={a.title}>Not for sale.<span className="second">Yet.</span></h1>
+            <h1 className={a.title}>{targets.length} lots to make offers on<span className="second">Not for sale. Owners not contacted.</span></h1>
             <p className={a.lede}>Lots that pass the first screen, in dense groups, ranked by size. Owners not contacted. A first screen, not a verdict.</p>
             <div className={`card ${a.section}`}>
               <div className={a.cardHead}><span className="eyebrow">Off-market targets, 25 per city</span></div>
@@ -194,10 +194,10 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
         )}
         {tab === "sites" && !site && !off && mode === "sale" && (
           <>
-            <h1 className={a.title}>One house.<span className="second">Four homes.</span></h1>
+            <h1 className={a.title}>{results.length} houses for sale<span className="second">{results.filter((r) => r.verdict === "LIKELY YES").length} can likely become 4 homes each</span></h1>
             <p className={a.lede}>Investors can&apos;t split a lot under SB 9 unless they live there 3 years. Nonprofits can.</p>
             <div className="card" style={{ marginTop: 18 }}>
-              <div className={a.cardHead}><span className="eyebrow">Santa Ana listings, ranked</span></div>
+              <div className={a.cardHead}><span className="eyebrow">Ranked: best per home first</span></div>
               <ol className={a.list}>
                 {results.map((r, i) => (
                   <li key={r.id}>
@@ -258,7 +258,7 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
         )}
         {tab === "groups" && !g && (
           <>
-            <h1 className={a.title}>Buy close together.<span className="second">One city, one crew.</span></h1>
+            <h1 className={a.title}>Sites close together<span className="second">2+ listings within 0.5 mi: one city desk, one crew</span></h1>
             <p className={a.lede}>Viable listings within 0.5 mi<Star /> of each other.</p>
             {groups.map((x) => (
               <button key={x.key} type="button" className={`card ${a.groupCard} ${group === x.key ? a.groupOn : ""}`} onClick={() => setGroup(x.key)}>
@@ -286,7 +286,7 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
             <div className={a.seg} role="group" aria-label="City">
               {CITY_NAMES.map((n) => <button key={n} type="button" aria-pressed={cityKey === n} onClick={() => setCityKey(n)}>{n}</button>)}
             </div>
-            <h1 className={a.title}>Every lot in {cityKey}.<span className="second">A first screen, not a verdict.</span></h1>
+            <h1 className={a.title}>{fmt(cityData.candidates)} lots could split<span className="second">of {fmt(cityData.total)} in {cityKey}, on public data. Not a verdict.</span></h1>
             <div className="card">
               {[["Parcels", cityData.total], ["Single-family zone", cityData.sf], ["Big enough to split", cityData.splittable], [cityKey === "Santa Ana" ? "Pass flood, fire, historic" : "Pass flood and fire", cityData.candidates]].map(([k, v], i) => (
                 <div key={k as string} style={{ marginBottom: 10 }}>
@@ -337,7 +337,7 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
       {win === "support" && (
         <Window title="Local support" onClose={close} note><SupportPanel city={site?.city ?? "Santa Ana"} /><h3 style={{ marginTop: 20 }}>Your organization</h3><OrgProfile /></Window>
       )}
-      {win === "check" && <Window title="Check any Santa Ana address" onClose={close} size="sm"><LiveCheck heading={false} /></Window>}
+      {win === "check" && <Window title="Check an address" onClose={close} size="sm"><LiveCheck heading={false} /></Window>}
       {win === "more" && (
         <Window title="More" onClose={close} size="sm">
           <div className={a.moreGrid}>

@@ -20,7 +20,7 @@ export default function ClustersPage() {
     <section>
       <header className={s.head}>
         <span className="eyebrow">{RESULTS.city} · {RESULTS.results.length} listings · collected {collected}</span>
-        <h1>Site groups<span className="second">Buy close together. One city, one crew, one neighborhood.</span></h1>
+        <h1>Site groups<span className="second">Listings within 0.5 mi of each other</span></h1>
         <p className={s.lede}>
           Building one house in each of ten places means ten acquisitions, ten plan checks and ten contractor
           mobilizations. Sites near each other can share one purchase push, one city planning desk, one crew and one

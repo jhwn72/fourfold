@@ -1,14 +1,14 @@
 import type { SiteResult } from "@/lib/types";
 import { money } from "./Checklist";
 
-// Why a nonprofit wins this house. HCD fact sheet (April 2026) p.2: an applicant for an urban lot split must sign an
+// Nonprofit vs investor. HCD fact sheet (April 2026) p.2: an applicant for an urban lot split must sign an
 // affidavit to live in one unit for 3 years, "unless the applicant is a community land trust or nonprofit organization."
 export default function InvestorCard({ r }: { r: SiteResult }) {
   if (r.max_homes !== 4) return null;
   const keep = r.keep_house === "fits_a" || r.keep_house === "fits_b";
   return (
     <div className="card" style={{ background: "var(--surface)" }}>
-      <h3 style={{ marginTop: 0 }}>Why a nonprofit wins this house</h3>
+      <h3 style={{ marginTop: 0 }}>Nonprofit vs investor</h3>
       <table>
         <thead><tr><th></th><th>Investor (won&apos;t live there)</th><th>Nonprofit or land trust</th></tr></thead>
         <tbody>

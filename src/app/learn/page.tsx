@@ -20,7 +20,7 @@ export default async function LearnPage() {
     <main className="container">
       <header className={s.head}>
         <span className="eyebrow">Continual learning · from real project outcomes</span>
-        <h1>Project outcomes<span className="second">What FourFold has learned from projects that really happened.</span></h1>
+        <h1>Project outcomes<span className="second">Each real project recorded here sharpens the next check</span></h1>
         <p className={s.lede}>
           When an organization pursues a site, what really happened (dates, the city&apos;s answers, what FourFold got right
           or wrong, actual costs) goes into an outcome record. Code learns from the records: it adjusts checks the city
