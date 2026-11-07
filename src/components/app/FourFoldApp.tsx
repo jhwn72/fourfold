@@ -294,7 +294,7 @@ export default function FourFoldApp({ results, listings, groups, areas, city, ci
             <div className={a.seg} role="group" aria-label="City">
               {(["All", ...CITY_NAMES] as const).map((n) => <button key={n} type="button" aria-pressed={areaCity === n} onClick={() => setAreaCity(n)}>{n}</button>)}
             </div>
-            <h1 className={a.title}><Tick value={shownAreas.length} /> areas to build in<span className="second">Dense pockets of lots that pass the first screen, with what&apos;s for sale in each</span></h1>
+            <h1 className={a.title}><Tick value={shownAreas.length} /> areas to build in<span className="second">Dense pockets of buildable lots <Hint /></span></h1>
             <p className={a.lede}>Quarter-mile cells with at least {areas[0]?.threshold ?? ""} first-screen lots<Star />, merged where they touch. One area, one city desk, one crew.</p>
             {shownAreas.map((x) => (
               <button key={x.id} type="button" className={`card ${a.groupCard}`} onClick={() => setAreaSel(x.id)}>

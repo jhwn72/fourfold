@@ -6,6 +6,7 @@ import a from "../app/FourFoldApp.module.css";
 import s from "./GroupCard.module.css";
 import { Star } from "@/components/Assume";
 import Tick from "../app/Tick";
+import Hint from "@/components/Hint";
 import type { AppArea, OffTarget } from "../app/FourFoldApp";
 
 export type AreaWindow = "area-letters" | "area-checklist";
@@ -31,7 +32,7 @@ export default function AreaCard({ area, forSale, leads, targets, onBack, onSele
       <button type="button" className={a.back} onClick={onBack}>← Back to areas</button>
       <div className="eyebrow">{area.label} · {area.size}</div>
       <h1 className={a.siteTitle} style={{ fontSize: 22 }}>{fmt(area.lots)} lots that pass the first screen</h1>
-      <p className={a.reason}><span className={a.chip}>First screen</span> Not a verdict. Each lot still needs the full parcel check.</p>
+      <p className={a.reason}><span className={a.chip}>First screen</span> Public data, every lot still to check <Hint /></p>
 
       <div className={a.nums}>
         <div><div className="eyebrow">Lots</div><div className={`${a.big} accent`}><Tick value={area.lots} /></div></div>
@@ -61,7 +62,7 @@ export default function AreaCard({ area, forSale, leads, targets, onBack, onSele
           </ol>
         ) : <p className="muted" style={{ fontSize: 12.5, margin: "4px 8px 10px" }}>None listed in this area right now.</p>}
 
-        <div className={`${s.mhead} eyebrow`} style={{ gridTemplateColumns: "1fr auto" }}><span>Leads</span><span /></div>
+        <div className={`${s.mhead} eyebrow`} style={{ gridTemplateColumns: "1fr auto" }}><span>Leads <Hint tip="Unverified listings from web search. Confirm each on the listing page before any call." /></span><span /></div>
         {leads.length ? (
           <ol className={s.members}>
             {leads.map((m) => (
@@ -75,7 +76,7 @@ export default function AreaCard({ area, forSale, leads, targets, onBack, onSele
           </ol>
         ) : <p className="muted" style={{ fontSize: 12.5, margin: "4px 8px 10px" }}>No leads in this area.</p>}
 
-        <div className={`${s.mhead} eyebrow`} style={{ gridTemplateColumns: "1fr auto" }}><span>Off-market targets</span><span>Lot</span></div>
+        <div className={`${s.mhead} eyebrow`} style={{ gridTemplateColumns: "1fr auto" }}><span>Off-market targets <Hint tip="Not for sale. Owners not contacted." /></span><span>Lot</span></div>
         {targets.length ? (
           <ol className={s.members}>
             {targets.map((t) => (
