@@ -65,7 +65,7 @@ code, pre, .mono { font-family: var(--font-mono); }
   font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--faint); font-weight: 400;
 }
-.label { color: var(--possible); background: var(--possible-bg); padding: 1px 6px; border-radius: 4px; letter-spacing: 0.06em; }
+.label { color: var(--muted); border: 1px dashed var(--line-strong); padding: 0 5px; border-radius: 4px; letter-spacing: 0.06em; font-size: 10px; }
 
 .site-header {
   position: sticky; top: 0; z-index: 20;

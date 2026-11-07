@@ -1,0 +1,23 @@
+.head { margin: 8px 0 18px; }
+.lede { color: var(--muted); max-width: 760px; font-size: 15px; margin: 0; }
+.strip { margin: 18px 0 8px; }
+.unknownV { color: var(--unknown); font-family: var(--font-mono); font-size: 18px !important; letter-spacing: 0.04em; padding-top: 4px; }
+.sub { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin-top: 2px; }
+.section { margin-top: 36px; }
+.section h2 { margin: 0 0 10px; font-size: 22px; }
+.mono { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.right { text-align: right; }
+.total td { color: var(--text); }
+.unknown { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--unknown); }
+.details > summary { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 8px 0; }
+.details > summary:hover { color: var(--text); }
+.details[open] > summary { margin-bottom: 8px; }
+.notes { padding-left: 18px; color: var(--muted); font-size: 13.5px; }
+.notes li { margin: 5px 0; }
+.source { font-size: 12.5px; color: var(--faint); }
+.source a { color: var(--muted); }
+@media (max-width: 720px) {
+  .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .strip > div:nth-child(2n) { border-right: 0; }
+  .strip > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+}

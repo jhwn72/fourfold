@@ -6,7 +6,9 @@ import CallSheet from "./CallSheet";
 import CostCompare from "./CostCompare";
 import LotSvg from "./LotSvg";
 
-export default function LiveCheck() {
+const lbl: React.CSSProperties = { display: "flex", flexDirection: "column", gap: 6 };
+
+export default function LiveCheck({ heading = true }: { heading?: boolean }) {
   const [address, setAddress] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -40,16 +42,18 @@ export default function LiveCheck() {
   }
 
   return (
-    <div className="card" id="live">
-      <h2>Check a Santa Ana address live</h2>
-      <form onSubmit={run}>
-        <p><label>Address<br /><input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Street address in Santa Ana" required /></label></p>
-        <p><label>Asking price (optional)<br /><input type="text" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="e.g. 850000" /></label></p>
-        <p><label>Listing description (optional, read by Claude for tenant/vacant flags)<br />
-          <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={4} style={{ width: "100%", maxWidth: 640 }} /></label></p>
-        <button type="submit" disabled={busy}>{busy ? "Checking public data..." : "Check"}</button>
+    <div className="card" id="live" style={{ padding: 22 }}>
+      {heading && <h2 style={{ marginTop: 0 }}>Check a Santa Ana address live</h2>}
+      <form onSubmit={run} style={{ display: "grid", gap: 14, maxWidth: 640 }}>
+        <label style={lbl}><span className="eyebrow">Address</span>
+          <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Street address in Santa Ana" required style={{ maxWidth: "100%" }} /></label>
+        <label style={lbl}><span className="eyebrow">Asking price (optional)</span>
+          <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="e.g. 850000" style={{ maxWidth: 240 }} /></label>
+        <label style={lbl}><span className="eyebrow">Listing description (optional, read by Claude for tenant/vacant flags)</span>
+          <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={4} style={{ width: "100%" }} /></label>
+        <div><button type="submit" disabled={busy}>{busy ? "Checking public data..." : "Check"}</button></div>
       </form>
-      {error && <p className="FAIL" style={{ padding: 8 }}>Error: {error}</p>}
+      {error && <p className="FAIL" style={{ padding: "10px 12px", borderRadius: "var(--radius-control)", marginTop: 14 }}>Error: {error}</p>}
       {result && (
         <>
           <div style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "flex-start", marginTop: 12 }}>

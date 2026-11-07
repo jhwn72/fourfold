@@ -111,7 +111,8 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
       renderer.domElement.style.height = H + "px";
       camera.aspect = W / H;
       camera.updateProjectionMatrix();
-      const c = overlay.current!;
+      const c = overlay.current;
+      if (!c) return;
       c.width = W * renderer.getPixelRatio(); c.height = H * renderer.getPixelRatio();
       c.style.width = W + "px"; c.style.height = H + "px";
     };
@@ -157,8 +158,10 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
       return [((v.x + 1) / 2) * W, ((1 - v.y) / 2) * H];
     };
     const drawOverlay = (a: number) => {
-      const c = overlay.current!;
-      const ctx = c.getContext("2d")!;
+      const c = overlay.current;
+      if (!c) return;
+      const ctx = c.getContext("2d");
+      if (!ctx) return;
       const pr = renderer.getPixelRatio();
       ctx.setTransform(pr, 0, 0, pr, 0, 0);
       ctx.clearRect(0, 0, W, H);
@@ -193,7 +196,7 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
       cancelAnimationFrame(raf);
       ro.disconnect();
       geo.dispose(); mat.dispose(); renderer.dispose();
-      el.removeChild(renderer.domElement);
+      if (renderer.domElement.parentNode === el) el.removeChild(renderer.domElement);
     };
   }, [points, bbox]);
 

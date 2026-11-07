@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
+import NavBar from "@/components/NavBar";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -16,14 +16,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <header className="site-header">
-          <Link href="/" className="brand">FourFold</Link>
-          <Link href="/city">Whole city</Link>
-          <span className="tagline">One home into four, for nonprofits. Santa Ana prototype.</span>
-        </header>
+        <NavBar />
         <main className="container">{children}</main>
         <footer className="site-footer">
-          Prototype. Not legal or financial advice. Confirm with the city and a professional.
+          <div>Prototype. Not legal or financial advice. Confirm with the city and a professional.</div>
+          <div className="eyebrow" style={{ marginTop: 6 }}>
+            Data checked 2026-11-07 · <a href="https://github.com/jhwn72/fourfold" target="_blank" rel="noreferrer" style={{ color: "var(--muted)" }}>GitHub</a>
+          </div>
         </footer>
       </body>
     </html>

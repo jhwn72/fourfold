@@ -1,13 +1,14 @@
 import data from "../../../data/citywide.json";
-import CityMap from "@/components/CityMap";
+import CityHero from "@/components/viz/CityHero";
 import CandidateList from "@/components/CandidateList";
+import s from "./city.module.css";
 
+// The server reads counts, sources and candidates only. The parcel points are drawn by CityHero from
+// public/city-points.bin, so the 57,926-point array is not embedded in this page.
 type Citywide = {
   generated_at: string;
   sources: { name: string; url: string; checked: string }[];
   counts: { total: number; sf_zone: number; splittable: number; candidates: number; in_district: number; by_reason: Record<string, number> };
-  bbox: [number, number, number, number];
-  points: number[][];
   candidates: { apn: string; address: string; area_sqft: number; zone: string }[];
 };
 const CITY = data as unknown as Citywide;
@@ -27,42 +28,56 @@ const REASON_TEXT: Record<string, string> = {
 
 export default function CityPage() {
   const c = CITY.counts;
-  const [x0, y0, x1, y1] = CITY.bbox;
-  const w = Math.ceil((x1 - x0) / 10), h = Math.ceil((y1 - y0) / 10);
   const rows = CITY.candidates.map((r) => [r.address, r.apn, r.area_sqft, r.zone] as [string, string, number, string]);
+  const screened = CITY.generated_at.slice(0, 16).replace("T", " ");
   return (
     <section>
-      <h1>Every lot in Santa Ana</h1>
-      <p>
-        {n(c.sf_zone)} of {n(c.total)} Santa Ana parcels are zoned single-family; {n(c.splittable)} are big enough to split into two
-        lots of at least 1,200 sq ft. <strong>{n(c.candidates)}</strong> pass flood, fire and the city historic list on a first screen,
-        and {n(c.in_district)} more would pass but sit inside a historic district (possible fail).
-      </p>
-      <p className="muted">
-        Same rules as the per-address check, run once over the whole city from public GIS layers. Screened {CITY.generated_at.slice(0, 16).replace("T", " ")} UTC.
-        Any city with parcel, zoning and hazard layers can be screened the same way.
-      </p>
-      <div className="card">
-        <CityMap points={CITY.points} width={w} height={h} />
+      <header className={s.head}>
+        <span className="eyebrow">Santa Ana · citywide first screen · {screened} UTC</span>
+        <h1>Every lot in Santa Ana<span className="second">A first screen on parcel centers, not a verdict.</span></h1>
+        <p className={s.lede}>
+          Same rules as the per-address check, run once over the whole city from public GIS layers. Any city with parcel,
+          zoning and hazard layers can be screened the same way.
+        </p>
+      </header>
+
+      <div className={`stats ${s.funnel}`}>
+        <div><div className="k">Parcels</div><div className="v">{n(c.total)}</div></div>
+        <div><div className="k">Single-family</div><div className="v">{n(c.sf_zone)}</div></div>
+        <div><div className="k">Big enough to split</div><div className="v">{n(c.splittable)}</div></div>
+        <div><div className="k">Pass flood, fire, city historic list</div><div className="v accent">{n(c.candidates)}</div></div>
+        <div><div className="k">+ In historic district (possible fail)</div><div className={`v ${s.unknownV}`}>+{n(c.in_district)}</div></div>
       </div>
-      <div className="card">
+
+      <CityHero height={560} />
+
+      <div className={s.section}>
         <h2>Why parcels drop out</h2>
-        <ul>
+        <span className="eyebrow">Each parcel is counted once, under the first test it fails, in this order</span>
+        <ul className={s.reasons}>
           {Object.entries(c.by_reason).map(([k, v]) => (
-            <li key={k}>{n(v)} {REASON_TEXT[k] ?? k}{k === "fire" && v === 0 ? " (the county fire hazard layer has no zones inside the city)" : ""}</li>
+            <li key={k}>
+              <span className={s.n}>{n(v)}</span>
+              <span>{REASON_TEXT[k] ?? k}{k === "fire" && v === 0 ? " (the county fire hazard layer has no zones inside the city)" : ""}</span>
+            </li>
           ))}
-          <li>{n(c.in_district)} inside a city historic district: possible fail, excluded if the house is a contributing structure</li>
+          <li>
+            <span className={s.n}>{n(c.in_district)}</span>
+            <span>inside a city historic district: possible fail, excluded if the house is a contributing structure</span>
+          </li>
         </ul>
-        <p className="muted">Each parcel is counted once, under the first test it fails, in the order listed.</p>
       </div>
-      <div className="card">
+
+      <div className={s.section}>
         <h2>Candidate lots</h2>
-        <p className="muted">Not listings: most of these homes are not for sale. Listing prices are not included. Use &quot;Check live&quot; to run the full per-address check.</p>
+        <span className="eyebrow">Not listings · most of these homes are not for sale · no prices</span>
+        <p className="muted" style={{ marginTop: 0 }}>Use &quot;Check live&quot; to run the full per-address check on any lot.</p>
         <CandidateList rows={rows} />
       </div>
-      <div className="card">
+
+      <div className={s.section}>
         <h2>How this screen works</h2>
-        <ul>
+        <ul className={s.notes}>
           <li>A first screen, not a verdict. Zoning, flood, fire and historic district are tested at each parcel&apos;s centroid, not its full outline, so lots on a boundary can be misread. The live check tests the whole parcel.</li>
           <li>Lot size comes from the parcel polygon (State Plane feet). Pass = an equal straight split gives two lots of at least 1,200 sq ft, neither under 40% (40% is <span className="label">UNVERIFIED</span> against statute text).</li>
           <li>Single-family zones are R1 and RE. RE is treated as single-family: <span className="label">ASSUMPTION</span>, confirm in the zoning code.</li>
@@ -71,12 +86,17 @@ export default function CityPage() {
           <li>Still UNKNOWN for every lot: tenants in the last 3 years, rent restriction or Ellis Act, a prior SB 9 split, earthquake fault zones, wetlands and other environmental limits, and the State historic inventory.</li>
           <li>No owner or mailing information is downloaded or stored.</li>
         </ul>
-        <p className="muted">Sources:</p>
-        <ul className="muted">
-          {CITY.sources.map((s) => (
-            <li key={s.url}><a href={s.url} target="_blank" rel="noreferrer">{s.name}</a>, checked {s.checked}</li>
+        <span className="eyebrow" style={{ display: "block", marginTop: 16 }}>Sources</span>
+        <ul className={s.sources}>
+          {CITY.sources.map((src) => (
+            <li key={src.url}><a href={src.url} target="_blank" rel="noreferrer">{src.name}</a>, checked {src.checked}</li>
           ))}
         </ul>
+      </div>
+
+      <div className={s.links}>
+        <a href="/city.csv">Export citywide lots (CSV) ↓</a>
+        <a href="/comparables">Labeled SB 9 projects in Orange County →</a>
       </div>
     </section>
   );
