@@ -56,6 +56,9 @@ export type SiteResult = {
   listing_evidence: ListingEvidence;
   unknown_count: number;
   computed_at: string;
+  listed_lot_sqft?: number | null;
+  description?: string;
+  description_type?: string | null;
 };
 
 export type SplitPlan = {
