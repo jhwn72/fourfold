@@ -3,25 +3,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import s from "./NavBar.module.css";
+import FontSwitcher, { FontPanel } from "./FontSwitcher";
 import ThemeToggle from "./ThemeToggle";
-
-const ITEMS = [
-  { href: "/", label: "Sites" },
-  { href: "/clusters", label: "Site groups" },
-  { href: "/city", label: "Whole city" },
-  { href: "/comparables", label: "SB 9 projects" },
-  { href: "/method", label: "How it works" },
-  { href: "/learn", label: "Outcomes" },
-  { href: "/org", label: "Your org" },
-];
-
-function isActive(path: string, href: string) {
-  if (href === "/") return path === "/" || path.startsWith("/site") || path === "/brief";
-  return path === href || path.startsWith(href + "/");
-}
 
 export default function NavBar() {
   const path = usePathname() ?? "/";
+  const home = path === "/";
   const [open, setOpen] = useState(false);
 
   useEffect(() => setOpen(false), [path]);
@@ -36,33 +23,25 @@ export default function NavBar() {
     <>
       <header className={s.header}>
         <Link href="/" className={s.brand}>FourFold</Link>
-        <nav className={s.nav} aria-label="Main">
-          {ITEMS.map((i) => (
-            <Link key={i.href} href={i.href} className={`${s.link} ${isActive(path, i.href) ? s.active : ""}`} aria-current={isActive(path, i.href) ? "page" : undefined}>
-              {i.label}
-            </Link>
-          ))}
-        </nav>
+        {!home && <Link href="/" className={s.back}>← Back to app</Link>}
         <div className={s.right}>
-          <span className="theme-toggle-wide"><ThemeToggle /></span>
-          <Link href="/check" className={`btn-primary ${s.cta}`}>
-            <span className={s.ctaLong}>Check an address →</span>
+          <span className={s.wide}><ThemeToggle variant="icon" /></span>
+          <span className={s.wide}><FontSwitcher /></span>
+          <Link href="/?window=check" className={`btn-primary ${s.cta}`}>
+            <span className={s.ctaLong}>Check an address</span>
             <span className={s.ctaShort}>Check</span>
           </Link>
-          <button type="button" className={s.menuBtn} aria-expanded={open} aria-controls="nav-sheet" onClick={() => setOpen((o) => !o)}>
-            {open ? "Close" : "Menu"}
+          <button type="button" className={`iconbtn ${s.menuBtn}`} aria-expanded={open} aria-controls="nav-sheet" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((o) => !o)}>
+            <span aria-hidden="true">{open ? "✕" : "☰"}</span>
           </button>
         </div>
       </header>
       {open && (
-        <nav id="nav-sheet" className={s.sheet} aria-label="Main">
-          {ITEMS.map((i) => (
-            <Link key={i.href} href={i.href} className={`${s.sheetLink} ${isActive(path, i.href) ? s.active : ""}`} onClick={() => setOpen(false)}>
-              {i.label}
-            </Link>
-          ))}
-          <div style={{ padding: "12px 0" }}><ThemeToggle /></div>
-        </nav>
+        <div id="nav-sheet" className={s.sheet}>
+          {!home && <Link href="/" className={s.sheetLink} onClick={() => setOpen(false)}>← Back to app</Link>}
+          <div className={s.sheetRow}><span className="eyebrow">Theme</span><ThemeToggle /></div>
+          <div style={{ paddingTop: 12 }}><FontPanel style={{ width: "100%", boxShadow: "none" }} /></div>
+        </div>
       )}
     </>
   );

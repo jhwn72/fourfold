@@ -6,6 +6,16 @@
 **Built at:** Claude Impact Lab: UCI × SoCal Affordable Housing, November 7, 2026
 **Live demo:** https://fourfold-splitter.vercel.app
 
+## The app in one screen
+
+The home page (`/`) is one screen.
+
+- **Left panel, three tabs:** **Sites** (the 10 listings, ranked), **Groups** (viable listings close together) and **City** (every Santa Ana lot on a first screen).
+- **Right stage, three views:** **3D** particles by default (the city's 57,926 parcels; select a site and its real lot assembles, splits and the homes rise), **Map** (dot-matrix map with № tags) and **Technical** (a blueprint with dimensions and the 4 ft line, the largest side and rear setback SB 9 lets a city require, HCD SB 9 Fact Sheet, Sept 2024, p.4).
+- **Site card:** verdict, homes, per home (counts down from the asking price), asking price, investor per home, the next call, and buttons that open windows: **Checklist**, **Call sheet**, **Fund the gap**, **Local support** and **Briefing PDF**.
+- **Bottom:** **Check an address** (the live check) and **More** (project outcomes, OC SB 9 projects, how it works, call list PDF, CSV, your organization).
+- **Deep links:** `/?site=sa-10`, `/?tab=groups`, `/?tab=city`, `/?site=sa-10&window=fund`.
+
 ## The pitch
 
 Investors can't split a lot under SB 9 unless they sign an affidavit to live there for 3 years. Nonprofits and community land trusts are exempt from that affidavit ([HCD SB 9 fact sheet, April 2026, p.2](https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf)). That gives a nonprofit an edge on ordinary single-family listings. FourFold finds the houses for sale where a nonprofit can turn one home into four.
@@ -32,6 +42,9 @@ A one-person acquisitions lead at a small housing nonprofit with no GIS team (sc
 - **Exports:** printable briefing per site (`/site/sa-04/brief`, save as PDF), a printable ten-site call list (`/brief`), and CSV downloads (`/results.csv`, `/city.csv`).
 - **Recent SB 9 projects** (`/comparables`, and a card on each site page): 68 projects in Orange County labelled SB 9, SB9 or lot split in cities' Housing Element Annual Progress Reports (HCD APR Tables A and A2 on data.ca.gov, checked 2026-11-07), 55 of them in Garden Grove. Santa Ana reports every year but never labels a project as SB 9, so its count is UNKNOWN, not zero. Of 15 projects with both permit and completion dates, the median gap was 9.3 months.
 - **Whole city** (`/city`): every one of Santa Ana's 57,926 parcels screened once. 30,590 are zoned single-family, 30,352 are big enough to split, and **25,246 pass flood, fire and the city historic list on a first screen** (347 more sit inside a historic district). Map plus a searchable list that opens the live check. Built by `npm run citywide` (66 requests to public GIS services, cached).
+- **Site groups** (Groups tab, `/clusters`): viable listings within 0.5 mi of each other (**ASSUMPTION**: a walkable one-crew radius, a team judgment, not a rule), so a small nonprofit can run one acquisitions push, one city process and one contractor. Group A today: 927 S Laurel St and 617 S Corwin Ct, 8 homes within 0.24 mi (617 S Corwin is UNKNOWN on zoning). At 1 mi, 1217 S Huron Dr joins for 12 homes. Code: `src/lib/clusters.ts`.
+- **Local support** (window on each site): public signals about the city from `data/support/santa-ana.json`, checked 2026-11-07. Housing element in compliance (HCD, POSITIVE). 6th cycle RHNA progress: very low income 359 of 606, moderate 260 of 545, ahead on low and above moderate (NEUTRAL, an ASSUMPTION). Pre-approved ADU plans page (a mild POSITIVE, an ASSUMPTION since it is about ADUs, not SB 9). UNKNOWN: SB 9 projects in the city's state reports, HCD letters to the city, and the city's own SB 9 rules (leads only, records portal would not open). These describe the city, not whether a given organization has local support.
+- **Continual learning from project outcomes** (`/learn`, `data/outcomes/`, `src/lib/learning.ts`): when an organization records a real project (what FourFold got right or wrong, stage dates, actual costs), the next rebuild uses it for per-check calibration, city-confirmed rule notes, timelines, real costs in place of the brief's assumptions in Fund the gap, and call-sheet questions. It never overturns a hard FAIL. As of 2026-11-07 there are **0 real records**; `data/outcomes/examples/` is made up and ignored unless a test or the labelled demo toggle asks for it.
 
 ## How Claude is used
 
@@ -98,6 +111,10 @@ A one-person acquisitions lead at a small housing nonprofit with no GIS team (sc
 | Whole-city screen | working; a first screen using parcel centroids, not a verdict. Parcels that share one outline (condo or mobile-home units) are excluded |
 | Listings | real public listings, collected by hand on 2026-11-07; prices can change |
 | Ranking and land cost per home | working; uses asking price, not sale price |
+| Site groups | working; the 0.5 mi radius is an ASSUMPTION |
+| Local support | working on public data for Santa Ana only; 3 of 6 signals UNKNOWN; statuses are FourFold's reading (ASSUMPTION where a judgment) |
+| Continual learning (outcomes) | code working and tested on made-up examples only; 0 real records, so nothing has been learned yet |
+| One-screen app (3D, Map, Technical views) | working; the 3D and blueprint drawings use the same sketched split, not a survey |
 | Other cities | not built; Santa Ana only |
 
 ## Where it gets things wrong

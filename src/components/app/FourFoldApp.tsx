@@ -56,7 +56,7 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
   const groupOf = (id: string) => groups.find((x) => x.ids.length > 1 && x.ids.includes(id));
 
   return (
-    <div className={a.app}>
+    <div className={`${a.app} ff-app`}>
       <aside className={a.panel}>
         <div className={a.tabs} role="tablist">
           {(["sites", "groups", "city"] as Tab[]).map((t) => (
@@ -101,10 +101,13 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
               <div><div className="eyebrow">Asking</div><div className={a.big}>{money(site.asking_price)}</div></div>
               {site.max_homes === 4 && <div><div className="eyebrow">Investor / home</div><div className={a.big}>{money(site.asking_price ? Math.round(site.asking_price / 2) : null)}</div></div>}
             </div>
-            <p className="faint" style={{ fontSize: 11.5, margin: "4px 0 10px" }}>Brief&apos;s example: $360k per home <span className="label">ASSUMPTION</span></p>
-            {groupOf(site.id) && <p className="muted" style={{ margin: "0 0 10px" }}>Part of {groupOf(site.id)!.label}: {groupOf(site.id)!.ids.length} sites, <span className="accent">{groupOf(site.id)!.homes} homes</span> within {groupOf(site.id)!.spread}.</p>}
-            <div style={{ marginBottom: 12 }}><RecommendGate verdict={site.verdict} city={site.city}><span className="status verdict-LIKELY_YES">Recommended: make the first call</span></RecommendGate></div>
-            <NextCallCard r={site} />
+            <p className="faint" style={{ fontSize: 11, margin: "6px 0 8px" }}>Brief&apos;s example: $360k per home <span className="label">ASSUMPTION</span></p>
+            {groupOf(site.id) && <p className="muted" style={{ margin: "0 0 8px", fontSize: 13 }}>Part of {groupOf(site.id)!.label}: {groupOf(site.id)!.ids.length} sites, <span className="accent">{groupOf(site.id)!.homes} homes</span> within {groupOf(site.id)!.spread}.</p>}
+            <div className={a.gate}><RecommendGate verdict={site.verdict} city={site.city}><span className="status verdict-LIKELY_YES">Recommended: make the first call</span></RecommendGate></div>
+            {/* NextCallCard links to #call-sheet; in the app that opens the Call sheet window instead. */}
+            <div className={a.next} onClickCapture={(e) => { const t = (e.target as HTMLElement).closest("a"); if (t && t.getAttribute("href") === "#call-sheet") { e.preventDefault(); setWin("calls"); } }}>
+              <NextCallCard r={site} />
+            </div>
             <div className={a.actions}>
               <button type="button" onClick={() => setWin("checklist")}>Checklist</button>
               <button type="button" onClick={() => setWin("calls")}>Call sheet</button>
@@ -167,9 +170,9 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
       {win === "support" && (
         <Window title="Local support" onClose={close}><SupportPanel city={site?.city ?? "Santa Ana"} /><h3 style={{ marginTop: 20 }}>Your organization</h3><OrgProfile /></Window>
       )}
-      {win === "check" && <Window title="Check any Santa Ana address" onClose={close}><LiveCheck heading={false} /></Window>}
+      {win === "check" && <Window title="Check any Santa Ana address" onClose={close} size="sm"><LiveCheck heading={false} /></Window>}
       {win === "more" && (
-        <Window title="More" onClose={close}>
+        <Window title="More" onClose={close} size="sm">
           <div className={a.moreGrid}>
             <Link href="/learn" className="card">Project outcomes<div className="muted">What FourFold learns from real projects</div></Link>
             <Link href="/comparables" className="card">OC SB 9 projects<div className="muted">{ocProjects} from state housing reports</div></Link>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import FontSwitcher from "@/components/FontSwitcher";
 import NavBar from "@/components/NavBar";
+import SiteFooter from "@/components/SiteFooter";
 import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
 
@@ -21,13 +21,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <NavBar />
         <main className="container">{children}</main>
-        <footer className="site-footer">
-          <div>Prototype. Not legal or financial advice. Confirm with the city and a professional.</div>
-          <div className="eyebrow" style={{ marginTop: 6 }}>
-            Data checked 2026-11-07 · <a href="https://github.com/jhwn72/fourfold" target="_blank" rel="noreferrer" style={{ color: "var(--muted)" }}>GitHub</a>
-          </div>
-        </footer>
-        <FontSwitcher />
+        <SiteFooter />
       </body>
     </html>
   );

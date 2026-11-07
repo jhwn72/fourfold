@@ -52,14 +52,17 @@ void main() {
   gl_FragColor = vec4(col, a * soft * (0.75 + 0.25 * vRand));
 }`;
 
-type Props = { points: number[][]; bbox: number[]; mode: ViewMode; height?: number };
+// ink/accent: explicit colors for a fixed dark stage (ignores the page theme). Without them, colors follow the theme.
+type Props = { points: number[][]; bbox: number[]; mode: ViewMode; height?: number; ink?: string; accent?: string };
 
-export default function ParticleCity({ points, bbox, mode, height = 520 }: Props) {
+export default function ParticleCity({ points, bbox, mode, height = 520, ink: inkProp, accent: accentProp }: Props) {
   const wrap = useRef<HTMLDivElement>(null);
   const overlay = useRef<HTMLCanvasElement>(null);
   const modeRef = useRef<ViewMode>(mode);
   const reduced = useReducedMotion();
-  const theme = useTheme();
+  const pageTheme = useTheme();
+  const fixed = Boolean(inkProp);
+  const theme = fixed ? "dark" : pageTheme;
   const reducedRef = useRef(reduced);
   reducedRef.current = reduced;
   modeRef.current = mode;
@@ -88,11 +91,11 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
     geo.setAttribute("aCode", new THREE.BufferAttribute(code, 1));
     geo.setAttribute("aRand", new THREE.BufferAttribute(rnd, 1));
     const css = getComputedStyle(document.documentElement);
-    const accent = new THREE.Color(css.getPropertyValue("--accent").trim() || "#ffb36b");
-    const ink = new THREE.Color(css.getPropertyValue("--text").trim() || "#f4f4f4");
+    const accent = new THREE.Color(accentProp || css.getPropertyValue("--accent").trim() || "#ffb36b");
+    const ink = new THREE.Color(inkProp || css.getPropertyValue("--text").trim() || "#f4f4f4");
     const mat = new THREE.ShaderMaterial({
       vertexShader: VERT, fragmentShader: FRAG, transparent: true, depthWrite: false, blending: theme === "light" ? THREE.NormalBlending : THREE.AdditiveBlending,
-      uniforms: { uT: { value: reducedRef.current ? 1 : 0 }, uSize: { value: 1 }, uTech: { value: 0 }, uLight: { value: theme === "light" ? 1 : 0 }, uRef: { value: 4000 }, uPR: { value: renderer.getPixelRatio() }, uAccent: { value: accent }, uInk: { value: ink } },
+      uniforms: { uT: { value: reducedRef.current ? 1 : 0 }, uSize: { value: 1 }, uTech: { value: 0 }, uLight: { value: theme === "light" || fixed ? 1 : 0 }, uRef: { value: 4000 }, uPR: { value: renderer.getPixelRatio() }, uAccent: { value: accent }, uInk: { value: ink } },
     });
     const cloud = new THREE.Points(geo, mat);
     const scene = new THREE.Scene();
@@ -172,11 +175,12 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
       if (a < 0.02) return;
       ctx.globalAlpha = a;
       const cssNow = getComputedStyle(document.documentElement);
-      ctx.strokeStyle = cssNow.getPropertyValue("--grid").trim() || "rgba(255,255,255,0.06)";
+      const v = (name: string, dark: string) => (fixed ? dark : cssNow.getPropertyValue(name).trim() || dark);
+      ctx.strokeStyle = v("--grid", "rgba(255,255,255,0.08)");
       ctx.lineWidth = 1;
       const mono = getComputedStyle(document.body).getPropertyValue("--font-mono") || "monospace";
       ctx.font = `10px ${mono}`;
-      ctx.fillStyle = cssNow.getPropertyValue("--faint").trim() || "rgba(244,244,244,0.45)";
+      ctx.fillStyle = v("--faint", "rgba(244,244,244,0.5)");
       for (let gx = -Math.ceil(w / 2 / MILE) * MILE; gx <= w / 2; gx += MILE) {
         const [x1, y1] = project(gx, -h / 2), [x2, y2] = project(gx, h / 2);
         ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
@@ -188,7 +192,7 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
       // Scale bar (1 mile) bottom left
       const [sx1] = project(0, 0), [sx2] = project(MILE, 0);
       const len = Math.abs(sx2 - sx1);
-      ctx.strokeStyle = cssNow.getPropertyValue("--muted").trim() || "rgba(244,244,244,0.7)";
+      ctx.strokeStyle = v("--muted", "rgba(244,244,244,0.7)");
       ctx.beginPath(); ctx.moveTo(16, H - 20); ctx.lineTo(16 + len, H - 20); ctx.moveTo(16, H - 24); ctx.lineTo(16, H - 16); ctx.moveTo(16 + len, H - 24); ctx.lineTo(16 + len, H - 16); ctx.stroke();
       ctx.fillText("1 MI  ·  GRID 1 MI  ·  STATE PLANE CA VI (FT)", 16, H - 30);
       // North arrow top right
@@ -203,7 +207,7 @@ export default function ParticleCity({ points, bbox, mode, height = 520 }: Props
       geo.dispose(); mat.dispose(); renderer.dispose();
       if (renderer.domElement.parentNode === el) el.removeChild(renderer.domElement);
     };
-  }, [points, bbox, theme]);
+  }, [points, bbox, theme, inkProp, accentProp, fixed]);
 
   return (
     <div style={{ position: "relative", height, width: "100%" }} aria-label="Map of every Santa Ana parcel; highlighted dots pass the first SB 9 screen" role="img">

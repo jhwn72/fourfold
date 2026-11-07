@@ -16,7 +16,7 @@ export default function Home() {
   const cl = clusterSites(rows.map(toClusterSite).filter((x): x is ClusterSite => x !== null), DEFAULT_RADIUS_FT, pts);
   const groups: AppGroup[] = cl.groups.map((g) => ({
     key: g.key, label: g.label, ids: g.members.map((m) => m.id), homes: g.homes, spread: fmtMiles(g.spreadFt),
-    avgPerHome: g.avgPerHome, nearby: g.nearbyCandidates,
+    avgPerHome: g.avgPerHome == null ? null : Math.round(g.avgPerHome), nearby: g.nearbyCandidates,
   }));
   const c = citywide.counts;
   const city = {

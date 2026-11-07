@@ -42,6 +42,7 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
 
   return (
     <section>
+      <Link href={`/?site=${r.id}`} className="chip" style={{ display: "inline-block", textDecoration: "none", marginBottom: 12 }}>Open in app →</Link>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
         <span className="eyebrow"><Link href="/" style={{ color: "inherit" }}>← All sites</Link> · Rank {rank} of {RESULTS.results.length}</span>
         <Link href={`/site/${r.id}/brief`} className="chip" style={{ textDecoration: "none" }}>Briefing PDF</Link>

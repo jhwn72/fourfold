@@ -48,6 +48,7 @@ void main() {
 }`;
 const FRAG = `
 uniform vec3 uInk;
+uniform float uGain;
 uniform vec3 uAccent;
 varying float vGroup;
 varying float vAlpha;
@@ -62,17 +63,18 @@ void main() {
   else if (vGroup == 3.0) a = 0.45;
   else if (vGroup == 4.0) { col = uAccent; a = 0.8; }
   else if (vGroup == 5.0) a = 0.8;
-  gl_FragColor = vec4(col, a * soft * vAlpha);
+  gl_FragColor = vec4(col, min(1.0, a * uGain) * soft * vAlpha);
 }`;
 
 export type LotView = "3d" | "flat";
 
-export default function LotParticles({ model, view, height = 420, replayKey = 0 }: { model: LotModel; view: LotView; height?: number; replayKey?: number }) {
+export default function LotParticles({ model, view, height = 420, replayKey = 0, ink: inkProp, accent: accentProp }: { model: LotModel; view: LotView; height?: number; replayKey?: number; ink?: string; accent?: string }) {
   const wrap = useRef<HTMLDivElement>(null);
   const viewRef = useRef(view);
   viewRef.current = view;
   const reduced = useReducedMotion();
-  const theme = useTheme();
+  const pageTheme = useTheme();
+  const theme = inkProp ? "dark" : pageTheme;
   const reducedRef = useRef(reduced);
   reducedRef.current = reduced;
 
@@ -159,9 +161,9 @@ export default function LotParticles({ model, view, height = 420, replayKey = 0 
       vertexShader: VERT, fragmentShader: FRAG, transparent: true, depthWrite: false, blending: theme === "light" ? THREE.NormalBlending : THREE.AdditiveBlending,
       uniforms: {
         uT: { value: 0 }, uSep: { value: new THREE.Vector2(model.sepDir[0] * sepAmt, -model.sepDir[1] * sepAmt) },
-        uRef: { value: 300 }, uPR: { value: renderer.getPixelRatio() }, uScale: { value: 1 },
-        uInk: { value: new THREE.Color(css.getPropertyValue("--text").trim() || "#f4f4f4") },
-        uAccent: { value: new THREE.Color(css.getPropertyValue("--accent").trim() || "#ffaa5f") },
+        uRef: { value: 300 }, uGain: { value: inkProp ? 1.6 : 1 }, uPR: { value: renderer.getPixelRatio() }, uScale: { value: 1 },
+        uInk: { value: new THREE.Color(inkProp || css.getPropertyValue("--text").trim() || "#f4f4f4") },
+        uAccent: { value: new THREE.Color(accentProp || css.getPropertyValue("--accent").trim() || "#ffaa5f") },
       },
     });
     const scene = new THREE.Scene();
@@ -204,7 +206,7 @@ export default function LotParticles({ model, view, height = 420, replayKey = 0 
     };
     raf = requestAnimationFrame(tick);
     return () => { cancelAnimationFrame(raf); ro.disconnect(); geo.dispose(); mat.dispose(); renderer.dispose(); if (renderer.domElement.parentNode === el) el.removeChild(renderer.domElement); };
-  }, [model, replayKey, theme]);
+  }, [model, replayKey, theme, inkProp, accentProp]);
 
   return <div ref={wrap} style={{ height, width: "100%" }} role="img" aria-label="Particle drawing of the real parcel, split into two lots with homes" />;
 }
