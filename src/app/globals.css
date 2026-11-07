@@ -298,3 +298,15 @@ pre { background: var(--surface-2); border: 1px solid var(--line); border-radius
 .ff-star { font-size: 0.72em; color: var(--muted); margin-left: 1px; line-height: 0; }
 .ff-footnote { font-size: 11px; color: var(--faint); margin: 12px 0 0; }
 .ff-footnote a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+/* Pill switches: the pressed state glides instead of snapping. */
+.ff-app button[aria-pressed] { transition: background var(--medium) var(--ease-out), color var(--medium) var(--ease-out), box-shadow var(--medium) var(--ease-out); }
+.statbar > i { transform-origin: left center; animation: barGrow 0.75s var(--ease-out) both; }
+@keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .statbar > i { animation: none; } }
+/* Hint: a quiet "i" with a caveat on hover or focus */
+.hint { position: relative; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle; cursor: help; outline: none; }
+.hint-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
+.hint-i { display: inline-grid; place-items: center; width: 14px; height: 14px; border-radius: 999px; border: 1px solid var(--line-strong); font: 600 9px/1 var(--font-mono); color: var(--faint); }
+.hint:hover .hint-i, .hint:focus .hint-i { color: var(--text); border-color: var(--text); }
+.hint-tip { position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%) translateY(4px); width: max-content; max-width: 240px; padding: 8px 10px; border-radius: 10px; background: var(--panel); border: 1px solid var(--line); box-shadow: 0 8px 24px rgba(0,0,0,0.18); font: 400 12px/1.4 var(--font-sans); letter-spacing: 0; text-transform: none; color: var(--text); opacity: 0; pointer-events: none; transition: opacity var(--fast) var(--ease-out), transform var(--fast) var(--ease-out); z-index: 30; white-space: normal; }
+.hint:hover .hint-tip, .hint:focus .hint-tip { opacity: 1; transform: translateX(-50%); }

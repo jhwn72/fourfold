@@ -16,6 +16,8 @@ import { LotNumbers } from "../site/AnimatedNumber";
 import NextCallCard from "../site/NextCallCard";
 import type { MapListing } from "../viz/DotMap";
 import MapStage from "./MapStage";
+import Hint from "../Hint";
+import Tick from "./Tick";
 import Window from "./Window";
 import PillNav from "../chrome/PillNav";
 import CornerControls, { ThemePill } from "../chrome/CornerControls";
@@ -25,10 +27,13 @@ import { shortReason } from "./shortReason";
 import { draftOfferLetter } from "@/lib/offerLetter";
 import { Star, AssumeNote } from "../Assume";
 import GroupCard, { type GroupWindow } from "../group/GroupCard";
+import AreaCard, { type AreaWindow } from "../group/AreaCard";
 import { GroupCallSheet, GroupChecklist, GroupFund } from "../group/GroupWindows";
 import NextSteps, { NextStepsCompact } from "../next/NextSteps";
 
-export type AppGroup = { key: string; label: string; ids: string[]; homes: number; spread: string; avgPerHome: number | null; nearby: number | null };
+export type AppGroup = { key: string; label: string; city: string; ids: string[]; homes: number; spread: string; avgPerHome: number | null; nearby: number | null; cx: number; cy: number; spanFt: number };
+// An area to build in: a dense pocket of first-screen lots (src/lib/areas.ts), with what's for sale in it.
+export type AppArea = { id: string; city: string; rank: number; label: string; lots: number; upToHomes: number; forSale: string[]; leads: string[]; targets: string[]; cx: number; cy: number; spanFt: number; size: string; cellCount: number; threshold: number };
 export type AppCity = { total: number; sf: number; splittable: number; candidates: number; inDistrict: number; reasons: [string, number][] };
 type Tab = "sites" | "groups" | "city";
 export type CityName = "Santa Ana" | "Anaheim" | "Fullerton";
@@ -39,16 +44,18 @@ export type OffCluster = { id: string; city: string; count: number; median: numb
 type SitesMode = "sale" | "leads" | "off";
 const topReason = (t: OffTarget) => t.reasons.find((x) => /transit/i.test(x)) ? "Near high-quality transit" : t.reasons.find((x) => /dense group/i.test(x)) ? "In a dense group of candidate lots" : t.reasons[0] ?? "";
 const titleCase = (s: string) => s.toLowerCase().replace(/\b([a-z])/g, (m) => m.toUpperCase());
-type Win = null | "checklist" | "calls" | "fund" | "support" | "check" | "more" | "next" | "letter" | GroupWindow;
+type Win = null | "checklist" | "calls" | "fund" | "support" | "check" | "more" | "next" | "letter" | GroupWindow | AreaWindow;
 
 const money = (n: number | null | undefined) => (n == null ? "UNKNOWN" : "$" + n.toLocaleString("en-US"));
 const vClass = (v: string) => `status verdict-${v.replace(" ", "_")}`;
 const fmt = (n: number) => n.toLocaleString("en-US");
 
-export default function FourFoldApp({ results, listings, groups, city, cities, leads, targets, clusters, ocProjects }: { results: SiteResult[]; listings: MapListing[]; groups: AppGroup[]; city: AppCity; cities: Record<CityName, AppCity>; leads: SiteResult[]; targets: OffTarget[]; clusters: OffCluster[]; ocProjects: number }) {
+export default function FourFoldApp({ results, listings, groups, areas, city, cities, leads, targets, clusters, ocProjects }: { results: SiteResult[]; listings: MapListing[]; groups: AppGroup[]; areas: AppArea[]; city: AppCity; cities: Record<CityName, AppCity>; leads: SiteResult[]; targets: OffTarget[]; clusters: OffCluster[]; ocProjects: number }) {
   const [mode, setMode] = useState<SitesMode>("sale");
   const [offSel, setOffSel] = useState<string | null>(null);
   const [cluster, setCluster] = useState<string | null>(null);
+  const [areaSel, setAreaSel] = useState<string | null>(null);
+  const [areaCity, setAreaCity] = useState<"All" | CityName>("All");
   const [cityKey, setCityKey] = useState<CityName>("Santa Ana");
   const [copied, setCopied] = useState(false);
   void city;
@@ -67,15 +74,17 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
     const t = q.get("tab"); if (t === "groups" || t === "city") setTab(t);
     const s = q.get("site"); if (s && (results.some((r) => r.id === s) || leads.some((r) => r.id === s))) { setSel(s); setLotStart(performance.now() + 450); }
     const w = q.get("window"); if (w) setWin(w as Win);
+    const aq = q.get("area"); if (aq && areas.some((x) => x.id === aq)) { setTab("groups"); setAreaSel(aq); }
     const gq = q.get("group"); if (gq && groups.some((x) => x.key === gq)) { setTab("groups"); setGroup(gq); }
-  }, [results, groups, leads]);
+  }, [results, groups, leads, areas]);
   useEffect(() => {
     const q = new URLSearchParams();
     if (tab !== "sites") q.set("tab", tab);
     if (sel) q.set("site", sel);
     if (group) q.set("group", group);
+    if (areaSel) q.set("area", areaSel);
     window.history.replaceState(null, "", q.toString() ? `/app?${q}` : "/app");
-  }, [tab, sel, group]);
+  }, [tab, sel, group, areaSel]);
 
   const site = results.find((r) => r.id === sel) ?? leads.find((r) => r.id === sel) ?? null;
   const isLead = Boolean(site && leads.some((r) => r.id === site.id));
@@ -84,18 +93,33 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
   const offCluster = clusters.find((c) => c.id === cluster) ?? null;
   const offTargetCluster = off?.cluster ? clusters.find((c) => c.id === off.cluster) ?? null : null;
   // Which city's particles are on the stage, and where the camera looks for off-market picks.
-  const stageCity: CityName = tab === "city" ? cityKey : off ? (off.city as CityName) : offCluster ? (offCluster.city as CityName) : "Santa Ana";
-  const pointFocus = off ? { cx: off.centroid[0], cy: off.centroid[1], span: 1400 } : offCluster ? { cx: offCluster.center[0], cy: offCluster.center[1], span: 4000 } : null;
+  const area = tab === "groups" ? areas.find((x) => x.id === areaSel) ?? null : null;
+  const g0 = tab === "groups" ? groups.find((x) => x.key === group) ?? null : null;
+  const stageCity: CityName = tab === "city" ? cityKey : off ? (off.city as CityName) : area ? (area.city as CityName) : g0 ? (g0.city as CityName) : offCluster ? (offCluster.city as CityName) : "Santa Ana";
+  const pointFocus = off ? { cx: off.centroid[0], cy: off.centroid[1], span: 1400 }
+    : area ? { cx: area.cx, cy: area.cy, span: Math.max(area.spanFt * 1.6, 4500) }
+    : g0 ? { cx: g0.cx, cy: g0.cy, span: g0.spanFt * 2 + 2500 }
+    : offCluster ? { cx: offCluster.center[0], cy: offCluster.center[1], span: 4000 } : null;
+  const byId = (id: string) => results.find((r) => r.id === id) ?? leads.find((r) => r.id === id);
+  const shownAreas = areas.filter((x) => areaCity === "All" || x.city === areaCity).sort((p, q) => q.lots - p.lots || q.forSale.length - p.forSale.length || q.leads.length - p.leads.length);
+  const areaSale = area ? area.forSale.map(byId).filter((r): r is SiteResult => !!r) : [];
+  const areaLeads = area ? area.leads.map(byId).filter((r): r is SiteResult => !!r) : [];
+  const areaTargets = area ? area.targets.map((apn) => targets.find((t) => t.apn === apn)).filter((t): t is OffTarget => !!t) : [];
   const cityData = cities[cityKey];
   const onSelect = useCallback((id: string) => { setSel((s) => (s === id ? null : id)); setLotStart(performance.now() + 450); setTab("sites"); }, []);
   const close = useCallback(() => setWin(null), []);
   const g = groups.find((x) => x.key === group) ?? null;
-  const gMembers = g ? g.ids.map((id) => results.find((r) => r.id === id)).filter((r): r is SiteResult => !!r) : [];
+  const gMembers = g ? g.ids.map((id) => results.find((r) => r.id === id) ?? leads.find((r) => r.id === id)).filter((r): r is SiteResult => !!r) : [];
   const groupOf = (id: string) => groups.find((x) => x.ids.length > 1 && x.ids.includes(id));
   // Panel content slides in from the side the tab sits on (Sites, Groups, City, left to right).
   const ORDER: Tab[] = ["sites", "groups", "city"];
   const [dir, setDir] = useState(1);
-  const pickTab = (t: Tab) => { if (t !== tab) setDir(ORDER.indexOf(t) > ORDER.indexOf(tab) ? 1 : -1); setTab(t); if (t !== "sites") { setSel(null); setOffSel(null); } if (t !== "groups") { setGroup(null); setCluster(null); } };
+  const MODES: SitesMode[] = ["sale", "leads", "off"];
+  const [modeDir, setModeDir] = useState(1);
+  const pickMode = (m: SitesMode) => { if (m !== mode) setModeDir(MODES.indexOf(m) > MODES.indexOf(mode) ? 1 : -1); setMode(m); };
+  const [cityDir, setCityDir] = useState(1);
+  const pickCity = (c: CityName) => { if (c !== cityKey) setCityDir(CITY_NAMES.indexOf(c) > CITY_NAMES.indexOf(cityKey) ? 1 : -1); setCityKey(c); };
+  const pickTab = (t: Tab) => { if (t !== tab) setDir(ORDER.indexOf(t) > ORDER.indexOf(tab) ? 1 : -1); setTab(t); if (t !== "sites") { setSel(null); setOffSel(null); } if (t !== "groups") { setGroup(null); setCluster(null); setAreaSel(null); } };
 
   // The stage fills the viewport; on desktop the floating panel covers its left side, so the 3D frame
   // centers in the space to the right of the panel.
@@ -126,15 +150,15 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
         {tab === "sites" && !site && !off && (
           <>
             <div className={a.seg} role="group" aria-label="Which sites">
-              <button type="button" aria-pressed={mode === "sale"} onClick={() => setMode("sale")}>For sale ({results.length})</button>
-              <button type="button" aria-pressed={mode === "leads"} onClick={() => setMode("leads")}>Leads ({leads.length})</button>
-              <button type="button" aria-pressed={mode === "off"} onClick={() => setMode("off")}>Off-market ({targets.length})</button>
+              <button type="button" aria-pressed={mode === "sale"} onClick={() => pickMode("sale")}>For sale ({results.length})</button>
+              <button type="button" aria-pressed={mode === "leads"} onClick={() => pickMode("leads")}>Leads ({leads.length})</button>
+              <button type="button" aria-pressed={mode === "off"} onClick={() => pickMode("off")}>Off-market ({targets.length})</button>
             </div>
           </>
         )}
         {tab === "sites" && !site && !off && mode === "leads" && (
-          <>
-            <h1 className={a.title}>{leads.length} leads in Anaheim and Fullerton<span className="second">Confirm each listing before you call</span></h1>
+          <div key="m-leads" className="ff-tabpane" style={{ "--dir": modeDir } as React.CSSProperties}>
+            <h1 className={a.title}><Tick value={leads.length} /> leads in Anaheim and Fullerton<span className="second">Confirm before you call</span></h1>
             <p className={a.lede}>Leads in Anaheim and Fullerton from web search. Confirm each on the listing page before any call.</p>
             <div className={`card ${a.section}`}>
               <div className={a.cardHead}><span className="eyebrow">Unverified leads</span></div>
@@ -150,12 +174,12 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
                 ))}
               </ol>
             </div>
-          </>
+          </div>
         )}
         {tab === "sites" && !site && !off && mode === "off" && (
-          <>
-            <h1 className={a.title}>{targets.length} lots to make offers on<span className="second">Not for sale. Owners not contacted.</span></h1>
-            <p className={a.lede}>Lots that pass the first screen, in dense groups, ranked by size. Owners not contacted. A first screen, not a verdict.</p>
+          <div key="m-off" className="ff-tabpane" style={{ "--dir": modeDir } as React.CSSProperties}>
+            <h1 className={a.title}><Tick value={targets.length} /> lots to make offers on<span className="second">Off-market, owners not contacted</span></h1>
+            <p className={a.lede}>Ranked by lot size, in dense pockets. <Hint tip="Not for sale. Owners not contacted. A first screen on public data, not a final answer." /></p>
             <div className={`card ${a.section}`}>
               <div className={a.cardHead}><span className="eyebrow">Off-market targets, 25 per city</span></div>
               <ol className={a.list}>
@@ -169,14 +193,14 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
                 ))}
               </ol>
             </div>
-          </>
+          </div>
         )}
         {tab === "sites" && off && (
           <div className={a.site}>
             <button type="button" className={a.back} onClick={() => setOffSel(null)}>← Off-market</button>
             <div className="eyebrow">{off.city} · Parcel {off.apn}</div>
             <h1 className={a.siteTitle}>{titleCase(off.address)}</h1>
-            <p className={a.reason}><span className={a.chip}>Off-market</span> Not for sale. Owner not contacted. A first screen, not a verdict.</p>
+            <p className={a.reason}><span className={a.chip}>Off-market</span> Not for sale. Owner not contacted. <Hint /></p>
             <div className={a.nums}>
               <div><div className="eyebrow">Lot</div><div className={a.big}>{fmt(off.lotSqft)} sq ft</div></div>
               <div><div className="eyebrow">Zone</div><div className={a.big}>{off.zone}</div></div>
@@ -193,8 +217,8 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
           </div>
         )}
         {tab === "sites" && !site && !off && mode === "sale" && (
-          <>
-            <h1 className={a.title}>{results.length} houses for sale<span className="second">{results.filter((r) => r.verdict === "LIKELY YES").length} can likely become 4 homes each</span></h1>
+          <div key="m-sale" className="ff-tabpane" style={{ "--dir": modeDir } as React.CSSProperties}>
+            <h1 className={a.title}><Tick value={results.length} /> houses for sale<span className="second"><Tick value={results.filter((r) => r.verdict === "LIKELY YES").length} /> can likely become 4 homes each</span></h1>
             <p className={a.lede}>Investors can&apos;t split a lot under SB 9 unless they live there 3 years. Nonprofits can.</p>
             <div className="card" style={{ marginTop: 18 }}>
               <div className={a.cardHead}><span className="eyebrow">Ranked: best per home first</span></div>
@@ -212,7 +236,7 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
               </ol>
               <p className="faint" style={{ fontSize: 11.5, margin: "8px 0 0" }}>Per home = asking ÷ homes, before construction.</p>
             </div>
-          </>
+          </div>
         )}
 
         {tab === "sites" && site && (
@@ -247,7 +271,16 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
           </div>
         )}
 
-        {tab === "groups" && g && (
+        {tab === "groups" && area && (
+          <AreaCard
+            area={area} forSale={areaSale} leads={areaLeads} targets={areaTargets}
+            onBack={() => setAreaSel(null)}
+            onSelectSite={(id) => { setSel(id); setLotStart(performance.now() + 450); setTab("sites"); setAreaSel(null); }}
+            onSelectTarget={(apn) => { setOffSel(apn); setMode("off"); setTab("sites"); setAreaSel(null); }}
+            onOpen={(w) => setWin(w)}
+          />
+        )}
+        {tab === "groups" && !area && g && (
           <GroupCard
             group={g}
             members={gMembers}
@@ -256,47 +289,56 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
             onOpen={(w) => setWin(w)}
           />
         )}
-        {tab === "groups" && !g && (
+        {tab === "groups" && !area && !g && (
           <>
-            <h1 className={a.title}>Sites close together<span className="second">2+ listings within 0.5 mi: one city desk, one crew</span></h1>
-            <p className={a.lede}>Viable listings within 0.5 mi<Star /> of each other.</p>
-            {groups.map((x) => (
-              <button key={x.key} type="button" className={`card ${a.groupCard} ${group === x.key ? a.groupOn : ""}`} onClick={() => setGroup(x.key)}>
-                <div className={a.cardHead}><span className="eyebrow">{x.label}</span><span className="accent" style={{ fontFamily: "var(--font-mono)" }}>{x.homes} homes</span></div>
-                <div style={{ fontSize: 14 }}>{x.ids.map((id) => results.find((r) => r.id === id)?.address).join(" · ")}</div>
-                <div className="muted" style={{ marginTop: 4 }}>{x.ids.length > 1 ? `Within ${x.spread}` : "Stands alone"}{x.avgPerHome ? ` · ${money(x.avgPerHome)} per home` : ""}{x.nearby != null ? ` · ${fmt(x.nearby)} candidate lots nearby` : ""}</div>
+            <div className={a.seg} role="group" aria-label="City">
+              {(["All", ...CITY_NAMES] as const).map((n) => <button key={n} type="button" aria-pressed={areaCity === n} onClick={() => setAreaCity(n)}>{n}</button>)}
+            </div>
+            <h1 className={a.title}><Tick value={shownAreas.length} /> areas to build in<span className="second">Dense pockets of lots that pass the first screen, with what&apos;s for sale in each</span></h1>
+            <p className={a.lede}>Quarter-mile cells with at least {areas[0]?.threshold ?? ""} first-screen lots<Star />, merged where they touch. One area, one city desk, one crew.</p>
+            {shownAreas.map((x) => (
+              <button key={x.id} type="button" className={`card ${a.groupCard}`} onClick={() => setAreaSel(x.id)}>
+                <div className={a.cardHead}><span className="eyebrow">{x.label}</span><span className="accent" style={{ fontFamily: "var(--font-mono)" }}><Tick value={x.lots} /> lots</span></div>
+                <div style={{ fontSize: 14 }}><Tick value={x.forSale.length} /> for sale · <Tick value={x.leads.length} /> lead{x.leads.length === 1 ? "" : "s"} · <Tick value={x.targets.length} /> off-market target{x.targets.length === 1 ? "" : "s"}</div>
+                <div className="muted" style={{ marginTop: 4 }}>Up to <Tick value={x.upToHomes} /> homes<Star /> · {x.size}</div>
               </button>
             ))}
-            <Link href="/clusters" className={a.more}>Group details, 0.25 / 0.5 / 1 mi →</Link>
-            <div className={a.section}>
-              <div className={a.cardHead}><span className="eyebrow">Off-market clusters</span><span className={a.chip}>Not for sale</span></div>
-              <p className="muted" style={{ fontSize: 12.5, margin: "0 0 12px" }}>Densest quarter-mile cells of first-screen lots, top 3 per city. Owners not contacted.</p>
-              {clusters.map((c) => (
-                <button key={c.id} type="button" className={`card ${a.groupCard} ${cluster === c.id ? a.groupOn : ""}`} onClick={() => setCluster(cluster === c.id ? null : c.id)}>
-                  <div className={a.cardHead}><span className="eyebrow">{c.city}</span><span className="accent" style={{ fontFamily: "var(--font-mono)" }}>{fmt(c.count)} lots</span></div>
-                  <div className="muted">{fmt(c.count)} candidate lots within 0.25 mi{c.median ? ` · median lot ${fmt(c.median)} sq ft` : ""}</div>
-                </button>
-              ))}
-            </div>
+            <p className="faint" style={{ fontSize: 11.5, margin: "0 0 14px" }}>Up to = lots × 4, an upper bound before any site is confirmed.</p>
+            {groups.filter((x) => areaCity === "All" || x.city === areaCity).length > 0 && (
+              <div className={a.section}>
+                <div className={a.cardHead}><span className="eyebrow">Listings close together</span></div>
+                <p className="muted" style={{ fontSize: 12.5, margin: "0 0 12px" }}>2+ viable listings or leads within 0.5 mi<Star /> of each other, outside the areas above.</p>
+                {groups.filter((x) => areaCity === "All" || x.city === areaCity).map((x) => (
+                  <button key={x.key} type="button" className={`card ${a.groupCard} ${group === x.key ? a.groupOn : ""}`} onClick={() => setGroup(x.key)}>
+                    <div className={a.cardHead}><span className="eyebrow">{x.label} · {x.city}</span><span className="accent" style={{ fontFamily: "var(--font-mono)" }}>{x.homes} homes</span></div>
+                    <div style={{ fontSize: 14 }}>{x.ids.map((id) => byId(id)?.address).join(" · ")}</div>
+                    <div className="muted" style={{ marginTop: 4 }}>Within {x.spread}{x.avgPerHome ? ` · ${money(x.avgPerHome)} per home` : ""}{x.nearby != null ? ` · ${fmt(x.nearby)} first-screen lots within 0.5 mi of its center` : ""}</div>
+                  </button>
+                ))}
+              </div>
+            )}
+            <Link href="/clusters" className={a.more}>Listing groups at 0.25 / 0.5 / 1 mi →</Link>
           </>
         )}
 
         {tab === "city" && (
           <>
             <div className={a.seg} role="group" aria-label="City">
-              {CITY_NAMES.map((n) => <button key={n} type="button" aria-pressed={cityKey === n} onClick={() => setCityKey(n)}>{n}</button>)}
+              {CITY_NAMES.map((n) => <button key={n} type="button" aria-pressed={cityKey === n} onClick={() => pickCity(n)}>{n}</button>)}
             </div>
-            <h1 className={a.title}>{fmt(cityData.candidates)} lots could split<span className="second">of {fmt(cityData.total)} in {cityKey}, on public data. Not a verdict.</span></h1>
+            <div key={"c-" + cityKey} className="ff-tabpane" style={{ "--dir": cityDir } as React.CSSProperties}>
+            <h1 className={a.title}><Tick value={cityData.candidates} /> lots could split<span className="second">of <Tick value={cityData.total} /> in {cityKey} <Hint /></span></h1>
             <div className="card">
               {[["Parcels", cityData.total], ["Single-family zone", cityData.sf], ["Big enough to split", cityData.splittable], [cityKey === "Santa Ana" ? "Pass flood, fire, historic" : "Pass flood and fire", cityData.candidates]].map(([k, v], i) => (
                 <div key={k as string} style={{ marginBottom: 10 }}>
-                  <div className={a.cardHead} style={{ marginBottom: 2 }}><span className="eyebrow">{k}</span><span className={i === 3 ? "accent" : ""} style={{ fontFamily: "var(--font-mono)" }}>{fmt(v as number)}</span></div>
+                  <div className={a.cardHead} style={{ marginBottom: 2 }}><span className="eyebrow">{k}</span><span className={i === 3 ? "accent" : ""} style={{ fontFamily: "var(--font-mono)" }}><Tick value={v as number} /></span></div>
                   <div className="statbar"><i style={{ width: `${((v as number) / cityData.total) * 100}%`, background: i === 3 ? "var(--accent)" : undefined }} /></div>
                 </div>
               ))}
               <p className="faint" style={{ fontSize: 11.5, margin: "6px 0 0" }}>{cityKey === "Santa Ana" ? `+${fmt(cityData.inDistrict)} in a historic district (possible fail). ` : "Historic status UNKNOWN: no city historic layer checked. "}Tenants, rent rules and prior splits not checked here.</p>
             </div>
             <div className={a.footLinks}>{cityKey === "Santa Ana" && <Link href="/city">Search all {fmt(cityData.candidates)} lots →</Link>}<Link href="/comparables">{ocProjects} OC SB 9 projects →</Link></div>
+          </div>
           </>
         )}
 
@@ -324,6 +366,23 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
       )}
       {win === "group-fund" && g && (
         <Window title={`Fund the gap · ${g.label}`} onClose={close} note><GroupFund members={gMembers} /></Window>
+      )}
+      {win === "area-letters" && area && (
+        <Window title={`Offer letters · ${area.label}`} onClose={close}>
+          <p className="muted" style={{ margin: 0, fontSize: 13 }}>{areaTargets.length} drafts, one per off-market target. Nothing is sent. Owners not contacted; no owner names are used. Run the full parcel check first.</p>
+          <div className={a.actions}>
+            <button type="button" onClick={() => { navigator.clipboard?.writeText(areaTargets.map((t) => draftOfferLetter({ site_address: titleCase(t.address), city: t.city })).join("\n\n----------\n\n")).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1600); }).catch(() => {}); }}>{copied ? "Copied" : `Copy all ${areaTargets.length} letters`}</button>
+          </div>
+          {areaTargets.map((t) => (
+            <div key={t.apn} style={{ marginTop: 18 }}>
+              <div className="eyebrow">{titleCase(t.address)} · Parcel {t.apn}</div>
+              <pre className={a.letter}>{draftOfferLetter({ site_address: titleCase(t.address), city: t.city })}</pre>
+            </div>
+          ))}
+        </Window>
+      )}
+      {win === "area-checklist" && area && (
+        <Window title={`SB 9 checklist · ${area.label}`} onClose={close}><GroupChecklist members={[...areaSale, ...areaLeads]} /></Window>
       )}
       {win === "letter" && off && (
         <Window title={`Offer letter · ${titleCase(off.address)}`} onClose={close} size="sm">

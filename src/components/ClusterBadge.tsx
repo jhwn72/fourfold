@@ -15,8 +15,8 @@ export default function ClusterBadge({ id }: { id: string }) {
     const near = RESULT.nearest[id];
     return (
       <p className="muted">
-        No other viable listing within {radius}
-        {near ? `; the nearest is ${fmtMiles(near.distFt)} away` : ""}. <Link href="/clusters">Site groups</Link>
+        Not in a group: not within {radius} of every member of any group
+        {near ? `; the nearest viable listing is ${fmtMiles(near.distFt)} away` : ""}. <Link href="/clusters">Site groups</Link>
       </p>
     );
   }

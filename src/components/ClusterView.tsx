@@ -120,7 +120,7 @@ export default function ClusterView({ results }: { results: ClusterResult[] }) {
 
       {singles.length > 0 && (
         <>
-          <h2>On their own<span className="second">No other viable listing within {fmtMiles(r.radiusFt)}.</span></h2>
+          <h2>On their own<span className="second">Not within {fmtMiles(r.radiusFt)} of every member of any group. Nearest distance shown on each.</span></h2>
           {singles.map((g) => <GroupCard key={g.key} g={g} radiusFt={r.radiusFt} nearest={r.nearest} />)}
         </>
       )}

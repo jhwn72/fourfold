@@ -41,15 +41,14 @@ export default function GroupCard({ group, members, onBack, onSelectSite, onOpen
         <div><div className="eyebrow">Homes</div><div className={`${a.big} accent`}>{sum.homesUnknown ? (sum.homes ? `${sum.homes}+` : "UNKNOWN") : sum.homes}</div></div>
         <div><div className="eyebrow">Per home</div><div className={`${a.big} accent`}>{money(sum.perHome)}</div></div>
         <div><div className="eyebrow">Asking</div><div className={a.big}>{sum.priceUnknown ? (sum.totalAsking ? `${money(sum.totalAsking)}+` : "UNKNOWN") : money(sum.totalAsking)}</div></div>
-        {sum.investorPerHome != null && <div><div className="eyebrow">Investor / home</div><div className={a.big}>{money(sum.investorPerHome)}</div></div>}
       </div>
       <p className="faint" style={{ fontSize: 11, margin: "6px 0 0" }}>Per home = combined asking ÷ combined homes, before construction. Asking price is not the sale price.</p>
 
       <p className={s.why}>
-        Why grouped: {members.length > 1 ? `every pair within ${group.spread}` : "no other viable listing nearby"}
+        Why grouped: {members.length > 1 ? `every pair within ${group.spread}` : "not within 0.5 mi of another viable listing"}
         {sum.cities.length === 1 ? `, one city (${sum.cities[0]}), one planning desk` : sum.cities.length > 1 ? `, ${sum.cities.length} cities` : ""}
         {sum.zone ? `, same zone (${sum.zone})` : ""}
-        {group.nearby != null ? `, ${group.nearby.toLocaleString("en-US")} first-screen candidate lots nearby` : ""}.
+        {group.nearby != null ? `, ${group.nearby.toLocaleString("en-US")} first-screen lots within 0.5 mi of its center` : ""}.
          0.5 mi radius<Star /> is a team judgment.
       </p>
 

@@ -155,7 +155,7 @@ export function clusterSites(all: ClusterSite[], radiusFt = DEFAULT_RADIUS_FT, p
   const groups = groupSites(viable, radiusFt)
     .map((g) => summarize(g, radiusFt, points))
     .sort(compareClusters)
-    .map((c, i) => ({ ...c, key: letter(i).toLowerCase(), label: `Group ${letter(i)}` }));
+    .map((c, i) => ({ ...c, key: letter(i).toLowerCase(), label: c.members.length > 1 ? `Group ${letter(i)}` : "On its own" }));
   const nearest: ClusterResult["nearest"] = {};
   for (const s of viable) {
     let best: { id: string; distFt: number } | null = null;
