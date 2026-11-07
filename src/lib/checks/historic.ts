@@ -9,7 +9,7 @@ import type { CheckResult, Parcel } from "../types";
 import { now, polyGeom, unknownFromError } from "./util";
 import type { City } from "../cities";
 
-export async function historicCheck(parcel: Parcel, city: City = "Santa Ana"): Promise<CheckResult> {
+export async function historicCheck(parcel: Parcel, city: City | string = "Santa Ana"): Promise<CheckResult> {
   if (city !== "Santa Ana") {
     // Fullerton R-1-7.2P is a "Preservation" zone (ASSUMPTION: it may be a local historic district).
     if (city === "Fullerton") {

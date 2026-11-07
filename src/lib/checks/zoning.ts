@@ -115,3 +115,65 @@ async function otherCityZoning(parcel: Parcel, city: "Anaheim" | "Fullerton"): P
     return unknownFromError(base, e, `Retry, or ask the ${city} planning desk to confirm the zone.`);
   }
 }
+
+// Other Orange County cities: SCAG 2024 regional zoning (preliminary, Oct 2025), parcel-level, fields
+// ZN24_CITY (the city's own code) and ZN24_SCAG (SCAG regional category). Code meanings are from the SCAG
+// layer's published legend (layer description, read 2026-11-07): 1110 Single Family Residential, 1111 High
+// Density SFR (9+ DU/ac), 1112 Medium Density SFR (3-8 DU/ac), 1113 Low Density SFR (2 or less DU/ac).
+// ASSUMPTION: a parcel SCAG codes 1110-1113 sits in a single-family residential zone for SB 9. SCAG says the
+// data is for planning only and the city's zoning is official. 1100 Residential, 1140 Mixed Residential and
+// 1150 Rural Residential do not say single-family, so they stay UNKNOWN. Other documented categories
+// (multi-family 1120-1125, mobile homes 113x, commercial 12xx, industrial 13xx, etc.) are not single-family.
+const SCAG_SF = new Set(["1110", "1111", "1112", "1113"]);
+const SCAG_LABEL: Record<string, string> = {
+  "1100": "Residential", "1110": "Single Family Residential", "1111": "High Density Single Family Residential",
+  "1112": "Medium Density Single Family Residential", "1113": "Low Density Single Family Residential",
+  "1120": "Multi-Family Residential", "1121": "Mixed Multi-Family Residential", "1122": "Duplexes, Triplexes and 2- or 3-Unit Condominiums and Townhouses",
+  "1123": "Low-Rise Apartments, Condominiums, and Townhouses", "1124": "Medium-Rise Apartments and Condominiums", "1125": "High-Rise Apartments and Condominiums",
+  "1130": "Mobile Homes and Trailer Parks", "1131": "Trailer Parks and Mobile Home Courts, High-Density", "1132": "Mobile Home Courts and Subdivisions, Low-Density",
+  "1140": "Mixed Residential", "1150": "Rural Residential", "1200": "Commercial and Services", "1210": "General Office Use", "1220": "Retail Stores and Commercial Services",
+  "1230": "Other Commercial", "1240": "Public Facilities", "1260": "Educational Institutions", "1300": "Industrial", "1310": "Light Industrial", "1320": "Heavy Industrial",
+  "1340": "Wholesaling and Warehousing", "1400": "Transportation, Communications, and Utilities",
+};
+const NOT_SF = (c: string) => /^11(2\d|3\d)$/.test(c) || /^1[2-4]\d\d$/.test(c);
+
+export async function scagZoningCheck(parcel: Parcel, city: string, geo?: { lon: number; lat: number }): Promise<CheckResult> {
+  const desk = `Ask the ${city} planning desk whether this zone is single-family.`;
+  const base = {
+    id: "zoning",
+    test: "Single-family zone",
+    source_name: SRC.scagZoning.name,
+    source_url: SRC.scagZoning.url,
+    rule: "HCD SB 9 Fact Sheet (Sept 2024) p.2: single-family residential zones only. Gov. Code 65852.21(a), 66411.7(a)(3)(A).",
+    affects_verdict: true,
+  };
+  try {
+    const res = await arcgisQuery(SRC.scagZoning.url, {
+      ...(geo
+        ? { geometry: JSON.stringify({ x: geo.lon, y: geo.lat, spatialReference: { wkid: 4326 } }), geometryType: "esriGeometryPoint", inSR: 4326, spatialRel: "esriSpatialRelIntersects", returnGeometry: false }
+        : polyGeom(shrinkRing(largestRing(parcel.rings), 5))),
+      outFields: "APN24,ZN24_CITY,ZN24_SCAG,ZN24_SCAG_2ND",
+    });
+    // Prefer the record with this parcel's APN when SCAG returns neighbors.
+    const apnDigits = parcel.apn.replace(/\D/g, "");
+    let feats = res.features;
+    const same = feats.filter((f) => String(f.attributes.APN24 ?? "") === apnDigits);
+    if (same.length) feats = same;
+    const seen = new Set<string>();
+    const zones = feats
+      .map((f) => ({ local: String(f.attributes.ZN24_CITY ?? "").trim(), code: String(f.attributes.ZN24_SCAG ?? "").trim(), second: String(f.attributes.ZN24_SCAG_2ND ?? "").trim() }))
+      .filter((z) => (seen.has(z.local + z.code) ? false : (seen.add(z.local + z.code), true)));
+    const value = zones.length
+      ? zones.map((z) => `${z.local || "no local code"} (SCAG ${z.code || "?"}${SCAG_LABEL[z.code] ? ` ${SCAG_LABEL[z.code]}` : ""})${z.second ? `, secondary ${z.second}` : ""}`).join("; ")
+      : "No zoning record found";
+    const caveat = " Regional SCAG data (preliminary 2024), not the city's official map; code meaning from SCAG's legend (ASSUMPTION*).";
+    if (!zones.length) return { ...base, status: "UNKNOWN", value, checked_at: now(), note: "SCAG returned no zoning for this parcel.", next_step: desk };
+    const allSf = zones.every((z) => SCAG_SF.has(z.code) && (!z.second || SCAG_SF.has(z.second)));
+    const allNot = zones.every((z) => NOT_SF(z.code));
+    if (allSf) return { ...base, status: "PASS", value, checked_at: now(), note: "Zoned single-family." + caveat, next_step: `Confirm the zone with the ${city} planning desk.` };
+    if (allNot) return { ...base, status: "FAIL", value, checked_at: now(), note: "Not a single-family zone, so SB 9 does not apply." + caveat };
+    return { ...base, status: "UNKNOWN", value, checked_at: now(), note: (zones.length > 1 ? "Parcel has more than one zoning record." : "SCAG's category does not say whether this zone is single-family.") + caveat, next_step: desk };
+  } catch (e) {
+    return unknownFromError(base, e, `Retry, or ${desk.charAt(0).toLowerCase()}${desk.slice(1)}`);
+  }
+}

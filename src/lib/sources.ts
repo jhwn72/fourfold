@@ -2,6 +2,18 @@
 export const CHECKED = "2026-11-07";
 
 export const SRC = {
+  censusGeocoder: {
+    name: "U.S. Census Bureau Geocoder (Public_AR_Current, Current_Current)",
+    url: "https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress",
+  },
+  ocParcels: {
+    name: "OC Public Works / OC Survey, Parcels (countywide, ArcGIS REST)",
+    url: "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Parcels/FeatureServer/0",
+  },
+  scagZoning: {
+    name: "SCAG Regional Zoning 2024, Zoning_poly_OR (preliminary, Oct 2025; ArcGIS REST)",
+    url: "https://maps.scag.ca.gov/scaggis/rest/services/LDX/Zoning_poly_OR/MapServer/0",
+  },
   saParcels: {
     name: "City of Santa Ana, Assessor Parcels (ArcGIS REST)",
     url: "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",

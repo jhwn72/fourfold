@@ -135,3 +135,77 @@ async function findFullerton(address: string): Promise<{ parcel: Parcel | null; 
   };
   return { parcel, note: multiNote(hits.length, apn) };
 }
+
+// Any other Orange County city: OC countywide Parcels layer (point-in-polygon at the Census geocoder point,
+// then a site address text match). Owner and mailing fields are never requested. If the county server is
+// down, fall back to SCAG's 2024 regional parcel polygons (assessor APN, no site address).
+export async function findCountyParcel(geo: { lon: number; lat: number; street: string; city: string }): Promise<{ parcel: Parcel | null; note: string; source: { name: string; url: string }; approximate: boolean }> {
+  const pt = JSON.stringify({ x: geo.lon, y: geo.lat, spatialReference: { wkid: 4326 } });
+  const spatial = { geometry: pt, geometryType: "esriGeometryPoint", inSR: 4326, spatialRel: "esriSpatialRelIntersects", outSR: 2230, returnGeometry: true };
+  const norm = normalizeAddress(geo.street);
+  const num = norm.split(" ")[0];
+  let ocError: string | null = null;
+  try {
+    const fields = { outFields: "ASSESSMENT_NO,SITE_ADDRESS" };
+    let res = await arcgisQuery(SRC.ocParcels.url, { ...spatial, ...fields });
+    // The geocoder point is interpolated along the street, so it can land just off the lot. Widen to 30 m and
+    // keep only parcels whose site address has the same house number.
+    if (!res.features.length) {
+      res = await arcgisQuery(SRC.ocParcels.url, { ...spatial, ...fields, distance: 30, units: "esriSRUnit_Meter" });
+      res.features = res.features.filter((f) => String(f.attributes.SITE_ADDRESS ?? "").trim().split(" ")[0] === num);
+    }
+    if (!res.features.length && /^\d+$/.test(num)) {
+      const name = norm.split(" ").slice(1).filter((w) => !KNOWN_SFX.has(w)).slice(0, 2).join(" ");
+      if (name) res = await arcgisQuery(SRC.ocParcels.url, { where: `SITE_ADDRESS LIKE '${esc(num)} %${esc(name)}%${esc(geo.city.toUpperCase())}%'`, ...fields, outSR: 2230, returnGeometry: true });
+    }
+    const hits = pickLargest(res.features);
+    if (hits.length) {
+      const f = hits[0];
+      const rings = f.geometry!.rings!;
+      const apn = String(f.attributes.ASSESSMENT_NO ?? "UNKNOWN");
+      return {
+        parcel: { apn, site_address: String(f.attributes.SITE_ADDRESS ?? norm).trim(), rings, area_sqft: polygonArea(rings), assessor_area_sqft: null, source_url: SRC.ocParcels.url },
+        note: multiNote(hits.length, apn), source: SRC.ocParcels, approximate: false,
+      };
+    }
+  } catch (e) {
+    ocError = e instanceof Error ? e.message : String(e);
+  }
+  // Fallback: SCAG regional parcel polygons. Exact point first; otherwise the nearest parcel within 30 m.
+  const scagFields = { outFields: "APN24,CITY" };
+  let res = await arcgisQuery(SRC.scagZoning.url, { ...spatial, ...scagFields });
+  let approximate = false;
+  if (!res.features.length) {
+    res = await arcgisQuery(SRC.scagZoning.url, { ...spatial, ...scagFields, distance: 30, units: "esriSRUnit_Meter" });
+    approximate = true;
+  }
+  const withGeom = res.features.filter((f) => f.geometry?.rings?.length);
+  const why = ocError ? `County parcel layer failed (${ocError}); used SCAG 2024 regional parcels instead.` : "No county parcel matched; used SCAG 2024 regional parcels instead.";
+  if (!withGeom.length) return { parcel: null, note: `${why} No parcel found at the geocoded point.`, source: SRC.scagZoning, approximate };
+  let f = withGeom[0];
+  if (approximate && withGeom.length > 1) {
+    // Nearest parcel edge to the geocoded point. Re-query the candidates in lon/lat to measure distance.
+    const ll = await arcgisQuery(SRC.scagZoning.url, { ...spatial, ...scagFields, outSR: 4326, distance: 30, units: "esriSRUnit_Meter" });
+    const k = Math.cos((geo.lat * Math.PI) / 180);
+    const dist = (rings: number[][][]) => {
+      let best = Infinity;
+      for (const r of rings) for (let i = 0; i + 1 < r.length; i++) {
+        const [x1, y1] = [(r[i][0] - geo.lon) * k, r[i][1] - geo.lat];
+        const [x2, y2] = [(r[i + 1][0] - geo.lon) * k, r[i + 1][1] - geo.lat];
+        const dx = x2 - x1, dy = y2 - y1, len = dx * dx + dy * dy;
+        const t = len ? Math.max(0, Math.min(1, -(x1 * dx + y1 * dy) / len)) : 0;
+        best = Math.min(best, Math.hypot(x1 + t * dx, y1 + t * dy));
+      }
+      return best;
+    };
+    const nearest = ll.features.filter((g) => g.geometry?.rings?.length).sort((a, b) => dist(a.geometry!.rings!) - dist(b.geometry!.rings!))[0];
+    const match = nearest && withGeom.find((g) => g.attributes.APN24 === nearest.attributes.APN24);
+    if (match) f = match;
+  }
+  const rings = f.geometry!.rings!;
+  const apn = f.attributes.APN24 ? dashApn(String(f.attributes.APN24)) : "UNKNOWN";
+  const note = approximate
+    ? `${why} The geocoded point fell outside any lot; APN ${apn} is a guess from ${withGeom.length} nearby parcels (ASSUMPTION). Confirm the APN on the county parcel map.`
+    : `${why} Matched APN ${apn} at the geocoded point.`;
+  return { parcel: { apn, site_address: geo.street, rings, area_sqft: polygonArea(rings), assessor_area_sqft: null, source_url: SRC.scagZoning.url }, note, source: SRC.scagZoning, approximate };
+}

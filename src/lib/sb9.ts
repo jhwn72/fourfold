@@ -18,10 +18,11 @@ import { historicCheck } from "./checks/historic";
 import { landslideCheck } from "./checks/landslide";
 import { lotSplitCheck } from "./checks/lot-split";
 import { manualChecks } from "./checks/manual";
-import { findParcel } from "./checks/parcel";
-import { zoningCheck } from "./checks/zoning";
+import { findCountyParcel, findParcel } from "./checks/parcel";
+import { scagZoningCheck, zoningCheck } from "./checks/zoning";
 import { now, unknownFromError } from "./checks/util";
 import { cityOf, citySources, type City } from "./cities";
+import { SRC } from "./sources";
 import type { CheckResult, ListingEvidence, SiteResult, Verdict } from "./types";
 
 export { BRIEF_LAND_PER_HOME } from "./constants";
@@ -36,6 +37,8 @@ export type ListingInput = {
   description?: string;
   source_url?: string;
   date_collected?: string;
+  /** From the Census geocoder (live check). Set for any Orange County city outside the three city pipelines. */
+  geo?: { lon: number; lat: number; street: string; city: string; matched_address: string };
 };
 
 const LIVE_IDS = ["zoning", "lot_split", "flood", "fire"];
@@ -52,7 +55,7 @@ const FAIL_LABEL: Record<string, string> = {
 };
 const label = (c: CheckResult) => FAIL_LABEL[c.id] ?? c.test.toLowerCase();
 
-export function decide(checks: CheckResult[], hasParcel: boolean, price: number | null, city: City = "Santa Ana") {
+export function decide(checks: CheckResult[], hasParcel: boolean, price: number | null, city: City | string = "Santa Ana") {
   let verdict: Verdict;
   let reason: string;
   const counted = checks.filter((c) => c.affects_verdict);
@@ -93,16 +96,32 @@ export function decide(checks: CheckResult[], hasParcel: boolean, price: number 
 export async function checkSite(input: ListingInput, evidence: ListingEvidence = NO_EVIDENCE): Promise<SiteResult> {
   let parcelCheck: CheckResult;
   let found: Awaited<ReturnType<typeof findParcel>> = { parcel: null, note: "" };
+  // County path: a geocoded address in an Orange County city other than Santa Ana, Anaheim or Fullerton.
+  const county = Boolean(input.geo) && !/^(santa ana|anaheim|fullerton)$/i.test(input.geo!.city.trim());
   const city = cityOf(input.city);
-  const psrc = citySources(city).parcels;
+  const cityName = county ? input.geo!.city : city;
+  const psrc = county ? SRC.ocParcels : citySources(city).parcels;
   const pBase = {
-    id: "parcel", test: `Address matches a ${city} parcel`, source_name: psrc.name, source_url: psrc.url,
+    id: "parcel", test: `Address matches a ${cityName} parcel`, source_name: psrc.name as string, source_url: psrc.url as string,
     rule: "Needed to run every other test.", affects_verdict: true,
   };
   try {
-    found = await findParcel(input.address, city);
+    let approximate = false;
+    if (county) {
+      const c = await findCountyParcel(input.geo!);
+      found = { parcel: c.parcel, note: c.note };
+      approximate = c.approximate;
+      pBase.source_name = c.source.name;
+      pBase.source_url = c.source.url;
+    } else {
+      // City layers: try the geocoder's standardized street first, then what the user typed.
+      found = input.geo ? await findParcel(input.geo.street, city) : { parcel: null, note: "" };
+      if (!found.parcel) found = await findParcel(input.address, city);
+    }
     parcelCheck = found.parcel
-      ? { ...pBase, status: "PASS", value: `APN ${found.parcel.apn}, ${found.parcel.site_address}`, checked_at: now(), note: found.note }
+      ? approximate
+        ? { ...pBase, status: "UNKNOWN", value: `APN ${found.parcel.apn} (nearest parcel, not an address match)`, checked_at: now(), note: found.note, next_step: "Confirm the APN on the county parcel map." }
+        : { ...pBase, status: "PASS", value: `APN ${found.parcel.apn}, ${found.parcel.site_address}`, checked_at: now(), note: found.note }
       : { ...pBase, status: "UNKNOWN", value: "No match", checked_at: now(), note: found.note, next_step: "Check the address spelling, or look up the APN on the county parcel map." };
   } catch (e) {
     parcelCheck = unknownFromError(pBase, e, "Retry in a minute.");
@@ -117,7 +136,7 @@ export async function checkSite(input: ListingInput, evidence: ListingEvidence =
     const ls = lotSplitCheck(p);
     split = ls.split;
     const [zoning, flood, fire, historic, landslide, parking, fp] = await Promise.all([
-      zoningCheck(p, city), floodCheck(p), fireCheck(p), historicCheck(p, city), landslideCheck(p), transitCheck(p), footprintCheck(p, ls.split),
+      county ? scagZoningCheck(p, cityName) : zoningCheck(p, city), floodCheck(p), fireCheck(p), historicCheck(p, cityName), landslideCheck(p), transitCheck(p), footprintCheck(p, ls.split),
     ]);
     buildings = fp.buildings;
     if (ls.check.status === "PASS") split = fp.split;
@@ -129,11 +148,11 @@ export async function checkSite(input: ListingInput, evidence: ListingEvidence =
     checks.push(...manualChecks(evidence));
   }
 
-  const d = decide(checks, Boolean(found.parcel), input.asking_price, city);
+  const d = decide(checks, Boolean(found.parcel), input.asking_price, cityName);
   return {
     id: input.id,
-    address: input.address,
-    city: input.city,
+    address: input.geo?.matched_address ?? input.address,
+    city: input.geo ? cityName : input.city,
     asking_price: input.asking_price,
     listing_source_url: input.source_url ?? "",
     date_collected: input.date_collected ?? "",
