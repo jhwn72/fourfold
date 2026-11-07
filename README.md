@@ -1,10 +1,13 @@
 # FourFold
 
-> For a one-person acquisitions lead at a small housing nonprofit: FourFold finds Santa Ana houses for sale where a nonprofit could use SB 9 to turn one home into four, and shows why, with sources.
+> For a one-person acquisitions lead at a small housing nonprofit: FourFold finds Orange County houses, for sale or off-market, where a nonprofit could use SB 9 to turn one home into four, and shows why, with sources and the next call to make.
 
+**Team:** FourFold
+**Members:** John Wang, Jerry
 **Lane:** 1 Find it
 **Built at:** Claude Impact Lab: UCI × SoCal Affordable Housing, November 7, 2026
 **Live demo:** https://fourfold-splitter.vercel.app
+**Demo video:** uploaded on the hub (submission form)
 
 ## The app in one screen
 
@@ -28,13 +31,13 @@ Investors can't split a lot under SB 9 unless they sign an affidavit to live the
 A one-person acquisitions lead at a small housing nonprofit with no GIS team (scenario F02: "Give me ten sites in one city I should call about this month, and why each one"). Today, checking one listing for SB 9 means opening the zoning map, the FEMA flood map, the fire map and the parcel map, then reading the law.
 
 **Before:** an afternoon per listing, by hand, and most listings fail one test you only find at the end.
-**After:** a ranked list of the listings in one city, each with a yes / no / unknown verdict, every test with its source and date, the real lot drawn with a sketched split, the asking price divided by four homes, and the next call to make for each open question.
+**After:** one screen with a ranked list of the listings in a city (plus unverified leads and off-market lots to send offers to), each with a yes / no / unknown verdict, every test with its source and date, the real lot drawn with a sketched split, the asking price divided by four homes, and the next call to make for each open question.
 
 ## What we built
 
 - **Ranked list** of 10 real Santa Ana listings: LIKELY YES first, then lowest land cost per home, then fewest unknowns.
 - **Site page** per listing: verdict and reason, checklist (PASS / FAIL / UNKNOWN with value, source link and date checked), max homes, land and building purchase per home compared with the brief's $360k example (ASSUMPTION), a 2D drawing of the real parcel polygon with a split line and house icons, and Claude's listing evidence with the exact quoted phrase.
-- **Live check** at the bottom of the home page: type any Santa Ana address and run every check against government servers in about a second.
+- **Live check** ("Check an address"): type any Orange County address. The U.S. Census Geocoder finds it; Santa Ana, Anaheim and Fullerton use their city parcel and zoning maps; the other OC cities use the OC countywide parcel map and SCAG regional zoning (only codes SCAG's own legend calls single-family pass; others say UNKNOWN, an ASSUMPTION). Addresses outside Orange County get "FourFold covers Orange County for now".
 - **Keep the house:** the county's building footprints are drawn on the lot. Code tries to slide the split line so the existing house sits wholly on one lot (both lots still at least 1,200 sq ft and 40%). If it fits, the nonprofit can keep the house and build 3 instead of demolishing.
 - **No parking needed:** flags lots inside a Caltrans High Quality Transit Area. HCD says no parking can be required within 1/2 mile walking distance of high-quality transit (fact sheet April 2026 p.1). Caltrans areas are straight-line, so this is "likely".
 - **Why a nonprofit wins:** a card on each 4-home site comparing an investor (up to 2 homes, or a 3-year live-in promise to split) with a nonprofit (up to 4).
@@ -51,7 +54,7 @@ A one-person acquisitions lead at a small housing nonprofit with no GIS team (sc
 
 ## How Claude is used
 
-- **Built with Claude Code:** the whole app, the data probe, and the rule encoding from the HCD fact sheets. A Claude subagent checked every listing Jerry collected against the city parcel layer (see `data/listings-check.md`).
+- **Built with Claude Code:** the whole app, the data probe and the rule encoding from the HCD fact sheets, with Claude subagents working in parallel on separate pieces (UX plan, copy audit, motion plan, multi-city data, groups, QA). Design direction came from John's references; Claude also wrote the demo script in `pitch/PITCH-KIT.md`. A Claude subagent checked every listing Jerry collected against the city parcel layer (see `data/listings-check.md`).
 - **Inside the tool: code decides, Claude reads.** Eligibility is decided only by code using government data. Claude (`claude-sonnet-5-5`, structured JSON output) reads only the free-text listing description and returns tenant-occupied / vacant / owner-occupied flags with a quoted phrase. Code then checks each quote really appears in the text and drops any that do not. A Claude flag can turn the tenant test into "possible FAIL, confirm with agent". It can never make a test PASS.
 
 ## SB 9 tests and where each comes from
@@ -158,16 +161,25 @@ The same SB 9 checks now run for Anaheim and Fullerton (`city` on each site pick
 
 ## Try it
 
-Needs Node 20+.
+Needs **Node 20 or newer** and npm. No accounts or keys needed: the processed data is in the repo (`data/`, `public/city-points*.bin`).
 
 ```bash
-npm install
-cp .env.example .env.local   # add ANTHROPIC_API_KEY to turn on the listing reader
-npm run precompute           # data/listings.json -> data/results.json (raw API responses cached in .cache/)
-npm run dev                  # http://localhost:3000
+git clone https://github.com/jhwn72/fourfold.git
+cd fourfold
+npm ci                       # exact versions from package-lock.json
+npm run dev                  # http://localhost:3000 (landing), http://localhost:3000/app (the app)
 ```
 
-Other scripts: `npm run citywide` rebuilds the whole-city screen (`data/citywide.json`); `npm run probe` hits each endpoint once and prints the fields; `npx tsx scripts/one.ts "1209 S Townsend St"` checks one address in the terminal.
+Optional:
+
+```bash
+cp .env.example .env.local   # add ANTHROPIC_API_KEY to turn on the Claude listing reader
+npm run precompute           # rebuild data/results.json from data/listings.json (calls public GIS services, cached in .cache/)
+npm run citywide             # rebuild the whole-city screen
+npx tsx scripts/one.ts "1209 S Townsend St"   # check one address in the terminal
+```
+
+Without a key, everything works except reading new listing text; the 10 listings were already read and their results are in `data/results.json`.
 
 ## Deploy
 

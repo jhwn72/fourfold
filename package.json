@@ -30,5 +30,8 @@
     "eslint-config-next": "15.5.29",
     "tsx": "^4.23.15",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
