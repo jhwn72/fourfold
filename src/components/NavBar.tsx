@@ -1,50 +1,27 @@
 "use client";
-import Link from "next/link";
+// Header for the inner pages: the landing's floating glass pill, with links back to the app tabs.
+// "/" has its own nav and "/app" renders the pill itself (its tabs drive the app state).
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import s from "./NavBar.module.css";
-import FontSwitcher, { FontPanel } from "./FontSwitcher";
+import FontSwitcher from "./FontSwitcher";
 import ThemeToggle from "./ThemeToggle";
+import PillNav from "./chrome/PillNav";
 
 export default function NavBar() {
   const path = usePathname() ?? "/";
-  const home = path === "/app";
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => setOpen(false), [path]);
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
-
-  // The landing page at "/" has its own floating nav.
-  if (path === "/") return null;
+  if (path === "/" || path === "/app") return null;
   return (
-    <>
-      <header className={s.header}>
-        <Link href="/app" className={s.brand}>FourFold</Link>
-        {!home && <Link href="/app" className={s.back}>← Back to app</Link>}
-        <div className={s.right}>
-          <span className={s.wide}><ThemeToggle variant="icon" /></span>
-          <span className={s.wide}><FontSwitcher /></span>
-          <Link href="/app?window=check" className={`btn-primary ${s.cta}`}>
-            <span className={s.ctaLong}>Check an address</span>
-            <span className={s.ctaShort}>Check</span>
-          </Link>
-          <button type="button" className={`iconbtn ${s.menuBtn}`} aria-expanded={open} aria-controls="nav-sheet" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((o) => !o)}>
-            <span aria-hidden="true">{open ? "✕" : "☰"}</span>
-          </button>
-        </div>
-      </header>
-      {open && (
-        <div id="nav-sheet" className={s.sheet}>
-          {!home && <Link href="/app" className={s.sheetLink} onClick={() => setOpen(false)}>← Back to app</Link>}
-          <div className={s.sheetRow}><span className="eyebrow">Theme</span><ThemeToggle /></div>
-          <div style={{ paddingTop: 12 }}><FontPanel style={{ width: "100%", boxShadow: "none" }} /></div>
-        </div>
-      )}
-    </>
+    <header className={s.header}>
+      <PillNav
+        items={[
+          { label: "Sites", href: "/app", active: path.startsWith("/site") },
+          { label: "Groups", href: "/app?tab=groups", active: path.startsWith("/clusters") },
+          { label: "City", href: "/app?tab=city", active: path.startsWith("/city") },
+        ]}
+        ghost={{ label: "Check an address", short: "Check", href: "/app?window=check" }}
+        solid={{ label: "Open FourFold", short: "App", href: "/app" }}
+        extra={<span className={s.tools}><ThemeToggle variant="icon" /><FontSwitcher /></span>}
+      />
+    </header>
   );
 }

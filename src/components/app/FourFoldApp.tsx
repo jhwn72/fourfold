@@ -2,7 +2,7 @@
 // One screen for the demo: three tabs on the left (Sites, Groups, City), the particle stage on the right,
 // and every deeper feature in an expandable window.
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { SiteResult } from "@/lib/types";
 import CallSheet from "../CallSheet";
 import Checklist from "../Checklist";
@@ -17,6 +17,9 @@ import NextCallCard from "../site/NextCallCard";
 import type { MapListing } from "../viz/DotMap";
 import MapStage from "./MapStage";
 import Window from "./Window";
+import PillNav from "../chrome/PillNav";
+import CornerControls, { ThemePill } from "../chrome/CornerControls";
+import { FontPanel } from "../FontSwitcher";
 import a from "./FourFoldApp.module.css";
 
 export type AppGroup = { key: string; label: string; ids: string[]; homes: number; spread: string; avgPerHome: number | null; nearby: number | null };
@@ -54,18 +57,33 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
   const close = useCallback(() => setWin(null), []);
   const g = groups.find((x) => x.key === group) ?? null;
   const groupOf = (id: string) => groups.find((x) => x.ids.length > 1 && x.ids.includes(id));
+  const pickTab = (t: Tab) => { setTab(t); if (t !== "sites") setSel(null); if (t !== "groups") setGroup(null); };
+
+  // The stage fills the viewport; on desktop the floating panel covers its left side, so the 3D frame
+  // centers in the space to the right of the panel.
+  const panelRef = useRef<HTMLElement>(null);
+  const [inset, setInset] = useState(0);
+  useEffect(() => {
+    const el = panelRef.current;
+    if (!el) return;
+    const read = () => setInset(window.innerWidth > 860 ? Math.round(el.offsetLeft + el.offsetWidth + 16) : 0);
+    read();
+    const ro = new ResizeObserver(read);
+    ro.observe(el);
+    window.addEventListener("resize", read);
+    return () => { ro.disconnect(); window.removeEventListener("resize", read); };
+  }, []);
 
   return (
     <div className={`${a.app} ff-app`}>
-      <aside className={a.panel}>
-        <div className={a.tabs} role="tablist">
-          {(["sites", "groups", "city"] as Tab[]).map((t) => (
-            <button key={t} role="tab" aria-selected={tab === t} className={`${a.tab} ${tab === t ? a.tabOn : ""}`} onClick={() => { setTab(t); if (t !== "sites") setSel(null); if (t !== "groups") setGroup(null); }}>
-              {t === "sites" ? "Sites" : t === "groups" ? "Groups" : "City"}
-            </button>
-          ))}
-        </div>
-
+      <PillNav
+        tabs
+        items={(["sites", "groups", "city"] as Tab[]).map((t) => ({ label: t === "sites" ? "Sites" : t === "groups" ? "Groups" : "City", active: tab === t, onClick: () => pickTab(t) }))}
+        ghost={{ label: "Check an address", short: "Check", onClick: () => setWin("check") }}
+        solid={{ label: "More", onClick: () => setWin("more") }}
+      />
+      <CornerControls />
+      <aside className={a.panel} ref={panelRef}>
         {tab === "sites" && !site && (
           <>
             <h1 className={a.title}>One house.<span className="second">Four homes.</span></h1>
@@ -149,15 +167,11 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
           </>
         )}
 
-        <div className={a.bottom}>
-          <button type="button" onClick={() => setWin("check")}>Check an address</button>
-          <button type="button" onClick={() => setWin("more")}>More</button>
-        </div>
         <p className={a.disclaimer}>Prototype. Not legal or financial advice. Confirm with the city and a professional.</p>
       </aside>
 
       <section className={a.stage}>
-        <MapStage site={site} listings={listings} onSelect={onSelect} focus={g ? g.ids : null} cityView={tab === "city"} />
+        <MapStage site={site} listings={listings} onSelect={onSelect} focus={g ? g.ids : null} cityView={tab === "city"} inset={inset} />
       </section>
 
       {win === "checklist" && site && (
@@ -180,6 +194,10 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
             <Link href="/brief" className="card">Call list (PDF)<div className="muted">All 10 sites, printable</div></Link>
             <a href="/results.csv" download className="card">Results (CSV)<div className="muted">Every check and number</div></a>
             <Link href="/org" className="card">Your organization<div className="muted">Profile for the local support check</div></Link>
+          </div>
+          <div className={a.prefs}>
+            <div><div className="eyebrow" style={{ marginBottom: 6 }}>Theme</div><ThemePill /></div>
+            <FontPanel style={{ width: 250, boxShadow: "none", margin: 0 }} />
           </div>
         </Window>
       )}

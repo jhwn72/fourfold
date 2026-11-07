@@ -37,9 +37,16 @@
   --primary-bg: rgba(255, 255, 255, 0.92);
   --primary-bg-hover: #ffffff;
   --primary-fg: #111111;
-  --radius-card: 2px;
-  --radius-row: 3px;
-  --radius-control: 3px;
+  --radius-card: 14px;
+  --radius-row: 999px;
+  --radius-control: 10px;
+  /* Glass surfaces shared with the landing page (pill nav, floating panel, windows). */
+  --glass: rgba(22, 22, 22, 0.72);
+  --glass-strong: rgba(16, 16, 16, 0.84);
+  --glass-line: rgba(255, 255, 255, 0.09);
+  --glass-btn: rgba(255, 255, 255, 0.06);
+  --solid: #f2f2f2;
+  --solid-fg: #111;
   --ease: cubic-bezier(0.6, 0, 0.2, 1);
   --ease-out: cubic-bezier(0.2, 0.6, 0.2, 1);
   --fast: 0.2s;
@@ -84,6 +91,12 @@
   --primary-bg: #111111;
   --primary-bg-hover: #000000;
   --primary-fg: #ffffff;
+  --glass: rgba(255, 255, 255, 0.78);
+  --glass-strong: rgba(255, 255, 255, 0.9);
+  --glass-line: rgba(0, 0, 0, 0.08);
+  --glass-btn: rgba(0, 0, 0, 0.04);
+  --solid: #151515;
+  --solid-fg: #fff;
   color-scheme: light;
 }
 
@@ -136,28 +149,15 @@ code, pre, .mono { font-family: var(--font-mono); }
   border: 1px solid var(--line); border-radius: var(--radius-card);
   background: var(--panel); padding: 18px; margin: 14px 0;
 }
-/* Corner "+" ticks (reference: dashboard cards) */
-.card::before, .tick::before {
-  content: ""; position: absolute; inset: -5px; pointer-events: none;
-  background:
-    linear-gradient(var(--tick), var(--tick)) 0 4px / 9px 1px no-repeat,
-    linear-gradient(var(--tick), var(--tick)) 4px 0 / 1px 9px no-repeat,
-    linear-gradient(var(--tick), var(--tick)) 100% 4px / 9px 1px no-repeat,
-    linear-gradient(var(--tick), var(--tick)) calc(100% - 4px) 0 / 1px 9px no-repeat,
-    linear-gradient(var(--tick), var(--tick)) 0 calc(100% - 4px) / 9px 1px no-repeat,
-    linear-gradient(var(--tick), var(--tick)) 4px 100% / 1px 9px no-repeat,
-    linear-gradient(var(--tick), var(--tick)) 100% calc(100% - 4px) / 9px 1px no-repeat,
-    linear-gradient(var(--tick), var(--tick)) calc(100% - 4px) 100% / 1px 9px no-repeat;
-}
 .tick { position: relative; }
 .iconbtn {
   width: 36px; height: 36px; padding: 0; display: inline-grid; place-items: center;
-  background: var(--panel); border: 1px solid var(--line); border-radius: 3px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
   font-family: var(--font-mono); font-size: 12px; color: var(--text);
 }
-.chiptag { display: inline-block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--line-strong); padding: 2px 6px; border-radius: 2px; color: var(--muted); }
-.statbar { height: 3px; background: var(--line); margin-top: 6px; }
-.statbar > i { display: block; height: 100%; background: var(--text); }
+.chiptag { display: inline-block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--line-strong); padding: 2px 8px; border-radius: 999px; color: var(--muted); }
+.statbar { height: 4px; background: var(--line); margin-top: 6px; border-radius: 999px; overflow: hidden; }
+.statbar > i { display: block; height: 100%; background: var(--text); border-radius: 999px; }
 
 table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
 th, td { border-bottom: 1px solid var(--line); padding: 9px 10px; text-align: left; vertical-align: top; }
@@ -167,7 +167,7 @@ tbody tr:hover { background: var(--surface); }
 
 .status {
   font-family: var(--font-mono); font-weight: 500; font-size: 11px; letter-spacing: 0.06em;
-  padding: 3px 8px; border-radius: 2px; white-space: nowrap; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 999px; white-space: nowrap; text-transform: uppercase;
 }
 .PASS { background: var(--pass-bg); color: var(--pass); }
 .FAIL { background: var(--fail-bg); color: var(--fail); }
@@ -197,8 +197,8 @@ details summary { cursor: pointer; color: var(--muted); }
 pre { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-control); }
 
 /* Segmented control (Tango .tg-seg) */
-.seg { display: inline-flex; padding: 2px; border-radius: var(--radius-control); background: var(--surface-2); gap: 2px; }
-.seg > button { border: 0; padding: 4px 12px; border-radius: 6px; font-size: 12px; color: var(--muted); background: transparent; }
+.seg { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--surface-2); gap: 2px; }
+.seg > button { border: 0; padding: 5px 12px; border-radius: 999px; font-size: 12px; color: var(--muted); background: transparent; }
 .seg > button.on { background: var(--fill-active); color: var(--text); }
 
 /* Chip (Tango .tg-chip) */
@@ -253,4 +253,13 @@ pre { background: var(--surface-2); border: 1px solid var(--line); border-radius
 .ff-app :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 /* A component that brings its own card inside a window: drop the second frame. */
 .ff-win-body > .card:only-child, .ff-win-body > section > .card:only-child { border: 0; padding: 0; background: none; box-shadow: none; margin: 0; }
-.ff-win-body > .card:only-child::before, .ff-win-body > .card:only-child::after { display: none; }
+
+/* Floating glass pill (same look as the landing nav) for the view switch on the black stage. */
+.stage-dark .seg.glass, .glass-pill { background: rgba(22, 22, 22, 0.72); border: 1px solid rgba(255, 255, 255, 0.09); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.stage-dark .mapbtn { border-radius: 999px; background: rgba(22, 22, 22, 0.72); border-color: rgba(255, 255, 255, 0.12); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding: 6px 14px; }
+.ff-viewswitch { top: 20px; right: 20px; }
+.ff-viewswitch .seg { background: rgba(22, 22, 22, 0.72); border: 1px solid rgba(255, 255, 255, 0.09); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+@media (max-width: 860px) { .ff-viewswitch { top: auto; bottom: 40px; right: 12px; } }
+/* Windows: rounded glass sheets */
+.ff-win { border-radius: 22px !important; background: var(--glass-strong) !important; border-color: var(--glass-line) !important; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4); animation: winIn 0.35s var(--ease-out) both; }
+@keyframes winIn { from { opacity: 0; transform: translateY(10px) scale(0.99); } to { opacity: 1; transform: none; } }

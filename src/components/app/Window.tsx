@@ -22,7 +22,7 @@ export default function Window({ title, onClose, children, size = "lg" }: { titl
       style={{ position: "fixed", inset: 0, zIndex: 80, background: "rgba(0,0,0,0.45)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", display: "grid", placeItems: "center", padding: 16 }}>
       <div className="card ff-win" onClick={(e) => e.stopPropagation()}
         style={{ margin: 0, width: size === "sm" ? "min(720px, 100%)" : "min(1040px, 100%)", maxHeight: "min(86vh, 900px)", overflow: "auto", padding: "18px 22px 22px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", position: "sticky", top: -18, background: "var(--panel)", padding: "6px 0 10px", zIndex: 1, borderBottom: "1px solid var(--line)", marginBottom: 12 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", position: "sticky", top: -18, background: "var(--glass-strong)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", padding: "6px 0 10px", zIndex: 1, borderBottom: "1px solid var(--line)", marginBottom: 12 }}>
           <span className="eyebrow">{title}</span>
           <button ref={closeRef} type="button" onClick={onClose} className="iconbtn" aria-label="Close window">×</button>
         </div>

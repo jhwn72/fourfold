@@ -16,9 +16,9 @@ import ViewSwitch, { type ViewMode } from "../viz/ViewSwitch";
 const INK = "#f4f4f4";
 const ACCENT = "#ffaa5f";
 
-type Props = { site: SiteResult | null; listings: MapListing[]; onSelect: (id: string) => void; focus: string[] | null; cityView: boolean };
+type Props = { site: SiteResult | null; listings: MapListing[]; onSelect: (id: string) => void; focus: string[] | null; cityView: boolean; inset?: number };
 
-export default function MapStage({ site, listings, onSelect, focus, cityView }: Props) {
+export default function MapStage({ site, listings, onSelect, focus, cityView, inset = 0 }: Props) {
   const [mode, setMode] = useState<ViewMode>("3d");
   const [replay, setReplay] = useState(0);
   const [city, setCity] = useState<{ points: number[][]; bbox: number[] } | null>(null);
@@ -50,35 +50,33 @@ export default function MapStage({ site, listings, onSelect, focus, cityView }: 
 
   let stage: React.ReactNode;
   if (mode === "map" && site && model) {
-    stage = <LotParticles key={site.id} model={model} view="flat" height={"100%" as unknown as number} replayKey={replay} ink={INK} accent={ACCENT} />;
+    stage = <LotParticles key={site.id} model={model} view="flat" height={"100%" as unknown as number} replayKey={replay} ink={INK} accent={ACCENT} inset={inset} />;
   } else if (mode === "map") {
-    stage = city ? <ParticleCity points={city.points} bbox={city.bbox} mode="map" height={"100%" as unknown as number} ink={INK} accent={ACCENT} markers={markers} onMarker={onSelect} focus={groupFocus} /> : null;
+    stage = city ? <ParticleCity points={city.points} bbox={city.bbox} mode="map" height={"100%" as unknown as number} ink={INK} accent={ACCENT} markers={markers} onMarker={onSelect} focus={groupFocus} inset={inset} /> : null;
   } else if (site && model) {
-    stage = mode === "tech" ? <LotBlueprint model={model} height={"100%" as unknown as number} /> : <LotParticles key={site.id} model={model} view="3d" height={"100%" as unknown as number} replayKey={replay} ink={INK} accent={ACCENT} />;
+    stage = mode === "tech" ? <div style={{ position: "absolute", inset: 0, left: inset, top: 70, bottom: 40 }}><LotBlueprint model={model} height={"100%" as unknown as number} /></div> : <LotParticles key={site.id} model={model} view="3d" height={"100%" as unknown as number} replayKey={replay} ink={INK} accent={ACCENT} inset={inset} />;
   } else {
-    stage = city ? <ParticleCity points={city.points} bbox={city.bbox} mode={mode === "tech" ? "tech" : "3d"} height={"100%" as unknown as number} ink={INK} accent={ACCENT} focus={groupFocus} /> : null;
+    stage = city ? <ParticleCity points={city.points} bbox={city.bbox} mode={mode === "tech" ? "tech" : "3d"} height={"100%" as unknown as number} ink={INK} accent={ACCENT} focus={groupFocus} inset={inset} /> : null;
   }
 
   const labelColor = "var(--muted)";
   return (
     <div className="stage-dark" style={{ position: "relative", height: "100%", background: "#000", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0 }}>{stage}</div>
-      <div style={{ position: "absolute", top: 12, left: 14, right: 14, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap", zIndex: 2, pointerEvents: "none" }}>
-        <span className="eyebrow" style={{ color: labelColor, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", flex: "1 1 160px" }}>
-          {site ? `${site.address}${site.parcel ? " · " + Math.round(site.parcel.area_sqft).toLocaleString() + " sq ft" : ""}` : "Santa Ana · every parcel"}
-        </span>
-        <span style={{ display: "flex", gap: 8, pointerEvents: "auto" }} data-theme-scope="dark">
-          {site && (mode === "3d" || mode === "map") && <button type="button" onClick={() => setReplay((r) => r + 1)} className="mapbtn" aria-label="Replay the lot split">Replay</button>}
-          <span className="mapseg"><ViewSwitch mode={mode} onChange={setMode} modes={["3d", "map", "tech"]} /></span>
-        </span>
-      </div>
+      <span className="eyebrow" style={{ position: "absolute", top: inset ? 82 : 64, left: inset + 16, right: 16, color: labelColor, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", zIndex: 2, pointerEvents: "none" }}>
+        {site ? `${site.address}${site.parcel ? " · " + Math.round(site.parcel.area_sqft).toLocaleString() + " sq ft" : ""}` : "Santa Ana · every parcel"}
+      </span>
+      <span className="ff-viewswitch" style={{ position: "absolute", display: "flex", gap: 8, zIndex: 3 }} data-theme-scope="dark">
+        {site && (mode === "3d" || mode === "map") && <button type="button" onClick={() => setReplay((r) => r + 1)} className="mapbtn" aria-label="Replay the lot split">Replay</button>}
+        <span className="mapseg"><ViewSwitch mode={mode} onChange={setMode} modes={["3d", "map", "tech"]} /></span>
+      </span>
       {mode === "map" && (
-        <div style={{ position: "absolute", bottom: 12, right: 14, maxWidth: "calc(100% - 120px)", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", zIndex: 2, pointerEvents: "none" }} className="eyebrow">
+        <div style={{ position: "absolute", bottom: inset ? 64 : 12, right: inset ? 20 : 14, maxWidth: "calc(100% - 120px)", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", zIndex: 2, pointerEvents: "none" }} className="eyebrow">
           <span style={{ color: "#ffaa5f" }}>●</span> <span style={{ color: "rgba(255,255,255,0.6)" }}>passes first SB 9 screen · click a № tag</span>
         </div>
       )}
       {!site && mode === "3d" && (
-        <div style={{ position: "absolute", bottom: 14, left: 14, zIndex: 2, pointerEvents: "none" }} className="eyebrow">
+        <div style={{ position: "absolute", bottom: inset ? 26 : 14, left: inset ? inset + 16 : 14, zIndex: 2, pointerEvents: "none" }} className="eyebrow">
           <span style={{ color: "var(--accent)" }}>●</span> <span style={{ color: labelColor }}>passes first SB 9 screen</span>
         </div>
       )}

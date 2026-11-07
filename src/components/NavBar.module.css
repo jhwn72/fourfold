@@ -1,27 +1,9 @@
-.header {
-  position: sticky; top: 0; z-index: 30;
-  height: 56px; display: flex; align-items: center; gap: 20px;
-  padding: 0 24px; border-bottom: 1px solid var(--line);
-  background: var(--header-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-}
-.brand { font-family: var(--font-mono); font-weight: 500; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--text); }
-.back { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color var(--fast); }
-.back:hover { color: var(--text); }
-.right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
-.wide { display: inline-flex; }
-.cta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; height: 36px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: var(--radius-control); }
-.menuBtn { display: none !important; }
-.sheet { position: fixed; top: 56px; left: 0; right: 0; bottom: 0; z-index: 29; background: var(--bg); border-top: 1px solid var(--line); padding: 8px 16px; display: flex; flex-direction: column; overflow-y: auto; }
-.sheetLink { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 18px 4px; border-bottom: 1px solid var(--line); }
-.sheetRow { display: flex; align-items: center; justify-content: space-between; padding: 14px 4px; border-bottom: 1px solid var(--line); }
-.ctaShort { display: none; }
-
+/* Reserves room for the fixed pill so page content starts below it. */
+.header { height: 76px; }
+.tools { display: inline-flex; gap: 4px; margin-left: 4px; }
+.tools :global(.iconbtn) { width: 32px; height: 32px; background: var(--glass-btn); border-color: var(--glass-line); }
 @media (max-width: 720px) {
-  .header { padding: 0 16px; gap: 12px; }
-  .back { display: none; }
-  .wide { display: none; }
-  .menuBtn { display: inline-grid !important; }
-  .ctaLong { display: none; }
-  .ctaShort { display: inline; }
+  .header { height: 64px; }
+  .tools { display: none; }
 }
 @media print { .header { display: none; } }

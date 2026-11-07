@@ -68,7 +68,9 @@ void main() {
 
 export type LotView = "3d" | "flat";
 
-export default function LotParticles({ model, view, height = 420, replayKey = 0, ink: inkProp, accent: accentProp }: { model: LotModel; view: LotView; height?: number; replayKey?: number; ink?: string; accent?: string }) {
+export default function LotParticles({ model, view, height = 420, replayKey = 0, ink: inkProp, accent: accentProp, inset = 0 }: { model: LotModel; view: LotView; height?: number; replayKey?: number; ink?: string; accent?: string; inset?: number }) {
+  const insetRef = useRef(inset);
+  insetRef.current = inset;
   const wrap = useRef<HTMLDivElement>(null);
   const viewRef = useRef(view);
   viewRef.current = view;
@@ -174,7 +176,10 @@ export default function LotParticles({ model, view, height = 420, replayKey = 0,
       W = el.clientWidth; H = el.clientHeight;
       renderer.setSize(W, H, false);
       renderer.domElement.style.width = W + "px"; renderer.domElement.style.height = H + "px";
-      camera.aspect = W / H; camera.updateProjectionMatrix();
+      const L = Math.max(0, Math.min(insetRef.current, W * 0.5));
+      camera.aspect = (W - L) / H;
+      if (L) camera.setViewOffset(W - L, H, -L, 0, W, H); else camera.clearViewOffset();
+      camera.updateProjectionMatrix();
     };
     resize();
     const ro = new ResizeObserver(resize);

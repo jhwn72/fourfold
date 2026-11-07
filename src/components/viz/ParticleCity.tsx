@@ -59,9 +59,13 @@ export type CityFocus = { cx: number; cy: number; span: number } | null; // feet
 type Props = {
   points: number[][]; bbox: number[]; mode: ViewMode; height?: number; ink?: string; accent?: string;
   markers?: CityMarker[]; onMarker?: (id: string) => void; focus?: CityFocus;
+  /** Pixels on the left covered by a floating panel: the frame centers in the space to its right. */
+  inset?: number;
 };
 
-export default function ParticleCity({ points, bbox, mode, height = 520, ink: inkProp, accent: accentProp, markers, onMarker, focus = null }: Props) {
+export default function ParticleCity({ points, bbox, mode, height = 520, ink: inkProp, accent: accentProp, markers, onMarker, focus = null, inset = 0 }: Props) {
+  const insetRef = useRef(inset);
+  insetRef.current = inset;
   const markersRef = useRef(markers);
   markersRef.current = markers;
   const focusRef = useRef(focus);
@@ -117,8 +121,9 @@ export default function ParticleCity({ points, bbox, mode, height = 520, ink: in
     const camera = new THREE.PerspectiveCamera(32, 1, 10, 40000);
     const extent = Math.max(w, h);
     let W = 1, H = 1;
+    const insetPx = () => Math.max(0, Math.min(insetRef.current, W * 0.5));
     const fitDist = () => {
-      const a = W / H;
+      const a = (W - insetPx()) / H;
       const half = THREE.MathUtils.degToRad(camera.fov / 2);
       const needH = (h * 1.08) / 2 / Math.tan(half);
       const needW = (w * 1.08) / 2 / Math.tan(half) / a;
@@ -129,7 +134,9 @@ export default function ParticleCity({ points, bbox, mode, height = 520, ink: in
       renderer.setSize(W, H, false);
       renderer.domElement.style.width = W + "px";
       renderer.domElement.style.height = H + "px";
-      camera.aspect = W / H;
+      const L = insetPx();
+      camera.aspect = (W - L) / H;
+      if (L) camera.setViewOffset(W - L, H, -L, 0, W, H); else camera.clearViewOffset();
       camera.updateProjectionMatrix();
       const c = overlay.current;
       if (!c) return;
