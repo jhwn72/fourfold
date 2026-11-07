@@ -9,7 +9,8 @@
     "lint": "eslint",
     "probe": "tsx scripts/probe.ts",
     "precompute": "tsx scripts/precompute.ts",
-    "citywide": "tsx scripts/citywide.ts"
+    "citywide": "tsx scripts/citywide.ts",
+    "comparables": "tsx scripts/comparables.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.6.0",

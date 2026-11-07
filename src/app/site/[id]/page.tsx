@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Checklist from "@/components/Checklist";
 import CallSheet from "@/components/CallSheet";
+import Comparables from "@/components/Comparables";
 import CostCompare from "@/components/CostCompare";
+import FundGap from "@/components/FundGap";
 import InvestorCard from "@/components/InvestorCard";
 import LotSvg from "@/components/LotSvg";
 import { RESULTS, getSite } from "@/lib/results";
@@ -18,7 +20,7 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
   const ev = r.listing_evidence;
   return (
     <section>
-      <p><Link href="/">← All sites</Link></p>
+      <p><Link href="/">← All sites</Link> · <Link href={`/site/${r.id}/brief`}>Printable briefing (PDF)</Link></p>
       <h1 style={{ marginBottom: 4 }}>{r.address}, {r.city}</h1>
       <p className="muted" style={{ marginTop: 0 }}>
         {r.parcel ? `APN ${r.parcel.apn} · lot ${Math.round(r.parcel.area_sqft).toLocaleString()} sq ft from the city parcel polygon` : "No parcel match"}
@@ -36,6 +38,7 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
         </div>
         <div style={{ flex: "1 1 340px" }}>
           <CostCompare price={r.asking_price} homes={r.max_homes} perHome={r.land_cost_per_home} />
+          <FundGap r={r} />
           <div className="card">
             <h3 style={{ marginTop: 0 }}>Listing evidence (read by Claude)</h3>
             <p className="muted">{ev.note}{ev.model ? ` Model: ${ev.model}.` : ""} Claude can flag a possible problem; it cannot make a test pass.</p>
@@ -53,6 +56,7 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
       <h2>SB 9 checklist</h2>
       <Checklist result={r} />
       <CallSheet result={r} />
+      <Comparables address={r.address} />
       <p className="muted">
         Rules from the <a href="https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf" target="_blank" rel="noreferrer">HCD SB 9 fact sheet (April 2026)</a> and the{" "}
         <a href="https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/sb-9-fact-sheet.pdf" target="_blank" rel="noreferrer">HCD SB 9 Fact Sheet (Sept 2024)</a>, read 2026-11-07. Results computed {r.computed_at.slice(0, 16).replace("T", " ")} UTC.

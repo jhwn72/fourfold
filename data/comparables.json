@@ -1,0 +1,2076 @@
+{
+  "generated_at": "2026-11-07T19:28:31.263Z",
+  "source": {
+    "name": "HCD Housing Element Annual Progress Report (APR) data, Tables A and A2 (data.ca.gov)",
+    "url": "https://data.ca.gov/@california-department-of-housing-and-community-development/housing-element-annual-progress-report-apr-data-by-jurisdiction-and-year",
+    "resource_id": {
+      "table_a2": "fe505d9b-8c36-42ba-ba30-08bc4f34e022",
+      "table_a": "c78b769d-cc02-4050-91ef-79ded665b5a8"
+    },
+    "checked": "2026-11-07"
+  },
+  "context": {
+    "name": "Terner Center, California's HOME Act Turns One: Data and Insights from the First Year of Senate Bill 9 (published 2023-01-18)",
+    "url": "https://ternercenter.berkeley.edu/research-and-policy/sb-9-turns-one-applications/",
+    "checked": "2026-11-07",
+    "finding": "Surveyed 13 California jurisdictions on 2022 SB 9 activity; San Diego reported 7 applications for new SB 9 units and Los Angeles 211."
+  },
+  "field_notes": [
+    "APR Tables A and A2 have no SB 9 field (field lists checked 2026-11-07). Projects were found by text search of NOTES, PROJECT_NAME and JURS_TRACKING_ID for SB 9 / SB9 / lot split / Senate Bill 9.",
+    "Cities that do not label SB 9 projects in these fields show zero here. Santa Ana reports APR building activity every year (2022 to 2025) but no row is labeled SB 9, so Santa Ana's SB 9 count is UNKNOWN, not zero.",
+    "The data does not reliably separate SB 9 lot splits from SB 9 second units or duplexes. lot_split is true only when the row says so; otherwise null (unknown).",
+    "Rows with unit category ADU that only mention SB 9 were excluded. Owner, applicant and project names are not included.",
+    "Table A = applications received; Table A2 = entitlements, building permits and certificates of occupancy. One project can appear in both and across years; rows are merged by jurisdiction and APN.",
+    "units is the count the city reported for this record (usually the 1 new SB 9 unit), not the total homes on the lot after the project.",
+    "'year' is the latest APR reporting year the project appears in. Dates are as reported by the city.",
+    "ORANGE COUNTY means unincorporated Orange County (some have Santa Ana or Midway City mailing addresses)."
+  ],
+  "excluded_rows": {
+    "unit category is ADU (row mentions SB 9 but reports an ADU)": 7
+  },
+  "counts_by_city_year": {
+    "ANAHEIM": {
+      "2025": 2
+    },
+    "GARDEN GROVE": {
+      "2024": 24,
+      "2025": 31
+    },
+    "ORANGE": {
+      "2025": 1
+    },
+    "BREA": {
+      "2024": 3,
+      "2025": 2
+    },
+    "ORANGE COUNTY": {
+      "2025": 2
+    },
+    "SAN CLEMENTE": {
+      "2025": 2
+    },
+    "STANTON": {
+      "2023": 1
+    }
+  },
+  "projects": [
+    {
+      "jurisdiction": "ANAHEIM",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "2935 W SKYWOOD CIR, C, Anaheim, CA 92804",
+      "apn": "12610209",
+      "tracking_id": "BLD2025-01461",
+      "units": 1,
+      "unit_type": "SFA",
+      "tenure": "Owner",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "entitled": "2025-06-27",
+        "permitted": "2025-06-27",
+        "completed": "2025-12-22",
+        "application_submitted": "2025-06-27"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "project name mentions SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "ANAHEIM",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "3107 W COOLIDGE AVE, C, Anaheim, CA 92801",
+      "apn": "13523119",
+      "tracking_id": "BLD2025-00044",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Owner",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "entitled": "2025-10-20",
+        "permitted": "2025-10-20",
+        "application_submitted": "2025-10-20"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "project name mentions SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2024,
+        2025
+      ],
+      "address": "11171 Palmwood Dr",
+      "apn": "08962104",
+      "tracking_id": "2024-03809 A-311968",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "completed": "2025-12-19",
+        "permitted": "2024-08-06",
+        "application_submitted": "2024-08-06"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "11605 Gilbert St",
+      "apn": "13232206",
+      "tracking_id": "2025-05903",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-12-10",
+        "application_submitted": "2025-04-21"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2024,
+        2025
+      ],
+      "address": "13235 Siemon Ave",
+      "apn": "10148312",
+      "tracking_id": "2024-05116",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-10-16",
+        "completed": "2025-10-23",
+        "application_submitted": "2024-10-14"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "12613 Sungrove Cir # B",
+      "apn": "23160118",
+      "tracking_id": "2025-03268",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-07-08",
+        "completed": "2025-10-22"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2"
+      ]
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "12685 Aristocrat Ave",
+      "apn": "21513211",
+      "tracking_id": "2025-02059",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-04-29",
+        "completed": "2025-10-01",
+        "application_submitted": "2025-04-25"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2024,
+        2025
+      ],
+      "address": "12236 Movius Dr",
+      "apn": "08928226",
+      "tracking_id": "2024-05471",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-11-05",
+        "completed": "2025-10-01",
+        "application_submitted": "2024-11-04"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2024,
+        2025
+      ],
+      "address": "12687 Groveview St",
+      "apn": "08923215",
+      "tracking_id": "2024-00784",
+      "units": 1,
+      "unit_type": "SFA",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-02-16",
+        "completed": "2025-09-29",
+        "application_submitted": "2024-02-16"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "12347 Granite Pl",
+      "apn": "10134354",
+      "tracking_id": "2025-04189",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-09-02",
+        "application_submitted": "2025-03-15"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "11445 Biscayne Blvd",
+      "apn": "13214212",
+      "tracking_id": "2025-04082",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-08-26",
+        "application_submitted": "2025-08-25"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2024,
+        2025
+      ],
+      "address": "13526 Purdy St",
+      "apn": "09727102",
+      "tracking_id": "2024-01352",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-03-21",
+        "completed": "2025-08-21"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2"
+      ]
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2024,
+        2025
+      ],
+      "address": "12861 Gloria St",
+      "apn": "10132310",
+      "tracking_id": "2025-03662",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-08-01",
+        "application_submitted": "2024-12-18"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Pending"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "13387 Mitchell Ave",
+      "apn": "09927126",
+      "tracking_id": "2025-03439",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-07-16",
+        "application_submitted": "2025-03-17"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "10420 Orchid Cir",
+      "apn": "08935223",
+      "tracking_id": "2025-03116",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-06-30",
+        "application_submitted": "2025-03-21"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "11886 Seacrest Dr",
+      "apn": "08934323",
+      "tracking_id": "2025-02940",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-06-19",
+        "application_submitted": "2025-03-04"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "8602 Mac Kay Rd",
+      "apn": "13248201",
+      "tracking_id": "2025-02910",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-06-18",
+        "application_submitted": "2025-06-17"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "8675 Salish Ave",
+      "apn": "13227113",
+      "tracking_id": "2025-01129",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "low": 1
+      },
+      "dates": {
+        "permitted": "2025-03-10",
+        "completed": "2025-06-12",
+        "application_submitted": "2025-03-10"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "11522 June St",
+      "apn": "23315209",
+      "tracking_id": "2025-02454",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-05-21",
+        "application_submitted": "2025-05-15"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "13465 Ranchero Pl",
+      "apn": "10130337",
+      "tracking_id": "2025-02191",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-05-07",
+        "application_submitted": "2025-04-30"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2024,
+        2025
+      ],
+      "address": "9715 Blake Ave",
+      "apn": "09852109",
+      "tracking_id": "2024-00706 A-307961",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "completed": "2025-05-01",
+        "permitted": "2024-02-13",
+        "application_submitted": "2024-02-08"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "12007 Lampson Ave",
+      "apn": "23136108",
+      "tracking_id": "2025-01973",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-04-24",
+        "application_submitted": "2025-03-14"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "12628 Fletcher Dr",
+      "apn": "08922310",
+      "tracking_id": "2023-14056 A-305971",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "completed": "2025-04-10"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2"
+      ]
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "12668 Groveview St",
+      "apn": "08923130",
+      "tracking_id": "2025-01689",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-04-09",
+        "application_submitted": "2025-04-02"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2024,
+        2025
+      ],
+      "address": "13705 Mills Rd",
+      "apn": "09926108",
+      "tracking_id": "2024-03547",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-07-23",
+        "completed": "2025-03-27",
+        "application_submitted": "2024-07-23"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2024,
+        2025
+      ],
+      "address": "14117 Pleasant St",
+      "apn": "09949222",
+      "tracking_id": "2025-01232",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-03-13",
+        "application_submitted": "2024-10-11"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Pending"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "13365 Fairview St",
+      "apn": "10132221",
+      "tracking_id": "2025-01253",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-03-13",
+        "application_submitted": "2025-03-12"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "12121 Lorna St",
+      "apn": "21505118",
+      "tracking_id": "2025-00951",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-02-27",
+        "application_submitted": "2025-01-30"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "8816 Enloe Ave",
+      "apn": "09728125",
+      "tracking_id": "2025-00748",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-02-14",
+        "application_submitted": "2025-02-12"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "10946 Holly Dr",
+      "apn": "08926433",
+      "tracking_id": "2023-14797 A-307060",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "completed": "2025-02-11"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2"
+      ]
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "9808 Oasis Ave",
+      "apn": "09835303",
+      "tracking_id": "2025-00570",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-02-04"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2"
+      ]
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "9555 Sutherland Way",
+      "apn": "09811214",
+      "tracking_id": "2025-00375",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-01-23",
+        "application_submitted": "2025-01-15"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2024,
+        2025
+      ],
+      "address": "12657 Susan Cir",
+      "apn": "13335307",
+      "tracking_id": "2024-03935",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-08-13",
+        "completed": "2025-01-22",
+        "application_submitted": "2024-05-26"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "11944 Della Ln",
+      "apn": "09049112",
+      "tracking_id": "2024-01029",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-03-04",
+        "completed": "2024-12-19"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2"
+      ]
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "10607 Perrin Dr",
+      "apn": "08957605",
+      "tracking_id": "2024-06187",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-12-18",
+        "application_submitted": "2024-12-17"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "14096 Kerry St",
+      "apn": "09836106",
+      "tracking_id": "2024-06112",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-12-12",
+        "application_submitted": "2024-12-11"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "10398 Ballard Dr",
+      "apn": "08948407",
+      "tracking_id": "2024-00787",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-02-16",
+        "completed": "2024-11-26",
+        "application_submitted": "2024-02-16"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "9866 Dewey Dr",
+      "apn": "13212709",
+      "tracking_id": "2024-05798",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-11-22",
+        "application_submitted": "2024-11-19"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "11441 Homeway Dr",
+      "apn": "13219336",
+      "tracking_id": "A-313925",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "application_submitted": "2024-10-30"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A"
+      ],
+      "application_status": "Pending"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "12602 George St",
+      "apn": "09030301",
+      "tracking_id": "A-313889",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "application_submitted": "2024-10-29"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A"
+      ],
+      "application_status": "Pending"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "9068 Bestel Ave",
+      "apn": "09802324",
+      "tracking_id": "2024-04772",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-09-26",
+        "application_submitted": "2024-09-26"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "10927 Chapman Ave",
+      "apn": "08917019",
+      "tracking_id": "2024-04646",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-09-19",
+        "application_submitted": "2024-09-09"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "12108 9th St",
+      "apn": "09021220",
+      "tracking_id": "2024-04519",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-09-13",
+        "application_submitted": "2024-09-11"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "9712 Oasis Ave",
+      "apn": "09837308",
+      "tracking_id": "A-312737",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "application_submitted": "2024-09-10"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A"
+      ],
+      "application_status": "Pending"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "11637 Mac Duff St",
+      "apn": "13227407",
+      "tracking_id": "2024-04334",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-09-04",
+        "application_submitted": "2024-09-03"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "11440 Rainier Ct",
+      "apn": "13214225",
+      "tracking_id": "2024-03975",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-08-14",
+        "application_submitted": "2024-08-14"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "12206 Brookhaven Park",
+      "apn": "08945115",
+      "tracking_id": "2024-03854",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-08-07",
+        "application_submitted": "2024-08-06"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "12398 West St",
+      "apn": "23136103",
+      "tracking_id": "2024-03682",
+      "units": 1,
+      "unit_type": "SFA",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-07-31",
+        "application_submitted": "2024-05-30"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "11689 Daryl Ln",
+      "apn": "23314208",
+      "tracking_id": "2024-02986",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-06-24",
+        "application_submitted": "2024-04-17"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "9076 Ingram Ave",
+      "apn": "09840105",
+      "tracking_id": "2024-02722",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-06-11",
+        "application_submitted": "2024-06-10"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "13111 Safford St # B",
+      "apn": "10004228",
+      "tracking_id": "A-308968",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "application_submitted": "2024-03-28"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "11107 Bettes Pl",
+      "apn": "08946206",
+      "tracking_id": "2024-01287",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-03-19",
+        "application_submitted": "2024-03-19"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "8766 Elmer Ln",
+      "apn": "13203306",
+      "tracking_id": "2024-01141",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-03-12"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2"
+      ]
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "12696 Fletcher Dr",
+      "apn": "08922314",
+      "tracking_id": "2024-01048",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-03-05",
+        "application_submitted": "2024-02-28"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "10030 Roselee Dr",
+      "apn": "08944316",
+      "tracking_id": "2024-00889",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-02-22",
+        "application_submitted": "2024-02-20"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "10198 Emerson Ave",
+      "apn": "09901605",
+      "tracking_id": "2024-00587",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-02-05",
+        "application_submitted": "2024-02-02"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "GARDEN GROVE",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "13407 Balos Dr",
+      "apn": "09738520",
+      "tracking_id": "2024-00193",
+      "units": 1,
+      "unit_type": "SFA",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2024-01-17",
+        "application_submitted": "2024-01-17"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "ORANGE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "664 N Ranch Wood Trl",
+      "apn": "379-181-10",
+      "tracking_id": "SB925-0002",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "moderate": 1
+      },
+      "dates": {
+        "entitled": "2025-07-11",
+        "application_submitted": "2025-07-11"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "tracking ID labeled SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "BREA",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "138 Locust St",
+      "apn": "284-311-05",
+      "tracking_id": "BLD-2025-01670",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "application_submitted": "2025-12-22"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A"
+      ],
+      "application_status": "Pending"
+    },
+    {
+      "jurisdiction": "ORANGE COUNTY",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "17476 FAIRHAVEN AVE, SANTA ANA, CA 92705",
+      "apn": "395-191-68",
+      "tracking_id": "BLD25-0565",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Owner",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "completed": "2025-12-16",
+        "permitted": "2025-07-01"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2"
+      ]
+    },
+    {
+      "jurisdiction": "SAN CLEMENTE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "2943 BONANZA",
+      "apn": "680-431-11",
+      "tracking_id": "SB925-377",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Owner",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "entitled": "2025-11-14",
+        "application_submitted": "2025-09-03"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "tracking ID labeled SB 9"
+      ],
+      "tables": [
+        "A2",
+        "A"
+      ],
+      "application_status": "Approved"
+    },
+    {
+      "jurisdiction": "BREA",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "405 Pine Ave",
+      "apn": "284-202-01",
+      "tracking_id": "BLD-2025-01384",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "application_submitted": "2025-10-07"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A"
+      ],
+      "application_status": "Pending"
+    },
+    {
+      "jurisdiction": "ORANGE COUNTY",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "15307 CEDARWOOD AVE, MIDWAY CITY, CA 92655",
+      "apn": "142-054-06",
+      "tracking_id": "BLD24-1441",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Owner",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "permitted": "2025-04-14"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A2"
+      ]
+    },
+    {
+      "jurisdiction": "SAN CLEMENTE",
+      "county": "Orange",
+      "year": 2025,
+      "years_reported": [
+        2025
+      ],
+      "address": "111 AVENIDA PATERO DE ORO",
+      "apn": "057-081-25",
+      "tracking_id": "SB925-089",
+      "units": 1,
+      "unit_type": "SFD",
+      "tenure": "Owner",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "application_submitted": "2025-02-26"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "tracking ID labeled SB 9"
+      ],
+      "tables": [
+        "A"
+      ],
+      "application_status": "Pending"
+    },
+    {
+      "jurisdiction": "BREA",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "517 Laurel Ave #C",
+      "apn": "284-341-37",
+      "tracking_id": "BLD-2024-00967",
+      "units": 1,
+      "unit_type": "2 to 4",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "application_submitted": "2024-09-09"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A"
+      ],
+      "application_status": "Pending"
+    },
+    {
+      "jurisdiction": "BREA",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "629 Laurel Ave #C",
+      "apn": "284-354-16",
+      "tracking_id": "BLD-2024-00608",
+      "units": 1,
+      "unit_type": "2 to 4",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "application_submitted": "2024-06-18"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A"
+      ],
+      "application_status": "Pending"
+    },
+    {
+      "jurisdiction": "BREA",
+      "county": "Orange",
+      "year": 2024,
+      "years_reported": [
+        2024
+      ],
+      "address": "958 Oakcrest Ave",
+      "apn": "304-165-11",
+      "tracking_id": "BLD-2024-00171",
+      "units": 1,
+      "unit_type": "2 to 4",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 1
+      },
+      "dates": {
+        "application_submitted": "2024-02-14"
+      },
+      "lot_split": null,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A"
+      ],
+      "application_status": "Pending"
+    },
+    {
+      "jurisdiction": "STANTON",
+      "county": "Orange",
+      "year": 2023,
+      "years_reported": [
+        2023
+      ],
+      "address": "10861 Oak St",
+      "apn": "079-362-01",
+      "tracking_id": "ULS 23-01",
+      "units": 4,
+      "unit_type": "2 to 4",
+      "tenure": "Renter",
+      "income": {
+        "above_moderate": 4
+      },
+      "dates": {
+        "application_submitted": "2022-12-15"
+      },
+      "lot_split": true,
+      "sb9_evidence": [
+        "notes mention SB 9"
+      ],
+      "tables": [
+        "A"
+      ],
+      "application_status": "Pending"
+    }
+  ]
+}
