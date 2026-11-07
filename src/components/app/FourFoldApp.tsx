@@ -65,10 +65,10 @@ export default function FourFoldApp({ results, listings, groups, city, cities, l
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     const t = q.get("tab"); if (t === "groups" || t === "city") setTab(t);
-    const s = q.get("site"); if (s && results.some((r) => r.id === s)) { setSel(s); setLotStart(performance.now() + 450); }
+    const s = q.get("site"); if (s && (results.some((r) => r.id === s) || leads.some((r) => r.id === s))) { setSel(s); setLotStart(performance.now() + 450); }
     const w = q.get("window"); if (w) setWin(w as Win);
     const gq = q.get("group"); if (gq && groups.some((x) => x.key === gq)) { setTab("groups"); setGroup(gq); }
-  }, [results, groups]);
+  }, [results, groups, leads]);
   useEffect(() => {
     const q = new URLSearchParams();
     if (tab !== "sites") q.set("tab", tab);
