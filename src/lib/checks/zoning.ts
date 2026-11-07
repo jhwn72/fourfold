@@ -16,7 +16,7 @@ const SINGLE_FAMILY = new Set(["R1", "RE"]);
 export async function zoningCheck(parcel: Parcel): Promise<CheckResult> {
   const base = {
     id: "zoning",
-    test: "Single-family residential zone",
+    test: "Single-family zone",
     source_name: SRC.saZoning.name,
     source_url: SRC.saZoning.url,
     rule: "HCD SB 9 Fact Sheet (Sept 2024) p.2: single-family residential zones only. Gov. Code 65852.21(a), 66411.7(a)(3)(A).",
@@ -46,7 +46,7 @@ export async function zoningCheck(parcel: Parcel): Promise<CheckResult> {
     // zones are not SB 9 zones, but the test is the zone's primary purpose, so we do not call it a clear FAIL.
     const agri = zones.some((z) => z.cls === "A1");
     if (agri && !anySf) {
-      return { ...base, status: "UNKNOWN", possible_fail: true, value, checked_at: now(), note: "Possible FAIL: zoned General Agricultural. HCD says agricultural zones are not SB 9 zones, but this one holds a house; the city decides whether its primary purpose is single-family.", next_step: "Ask the Santa Ana planning desk whether SB 9 applies in the A1 zone." };
+      return { ...base, status: "UNKNOWN", possible_fail: true, value, checked_at: now(), note: "Possible fail: zoned General Agricultural (A1). HCD says farm zones are not SB 9 zones, but this one has a house. The city decides.", next_step: "Ask the Santa Ana planning desk whether SB 9 applies in the A1 zone." };
     }
     if (allSf) {
       return { ...base, status: "PASS", value, checked_at: now(), note: "Zoned single-family." + overlayNote + (zones.some((z) => z.cls === "RE") ? " RE treated as single-family (ASSUMPTION, confirm in the zoning code)." : "") };

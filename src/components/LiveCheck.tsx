@@ -49,7 +49,7 @@ export default function LiveCheck({ heading = true }: { heading?: boolean }) {
           <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Street address in Santa Ana" required style={{ maxWidth: "100%" }} /></label>
         <label style={lbl}><span className="eyebrow">Asking price (optional)</span>
           <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="e.g. 850000" style={{ maxWidth: 240 }} /></label>
-        <label style={lbl}><span className="eyebrow">Listing description (optional, read by Claude for tenant/vacant flags)</span>
+        <label style={lbl}><span className="eyebrow">Listing text (optional; Claude looks for tenant or vacancy clues)</span>
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={4} style={{ width: "100%" }} /></label>
         <div><button type="submit" disabled={busy}>{busy ? "Checking public data..." : "Check"}</button></div>
       </form>

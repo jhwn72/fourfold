@@ -10,9 +10,9 @@ export default function InvestorCard({ r }: { r: SiteResult }) {
     <div className="card" style={{ background: "var(--surface)" }}>
       <h3 style={{ marginTop: 0 }}>Why a nonprofit wins this house</h3>
       <table>
-        <thead><tr><th></th><th>Investor who won&apos;t live there</th><th>Nonprofit or land trust</th></tr></thead>
+        <thead><tr><th></th><th>Investor (won&apos;t live there)</th><th>Nonprofit or land trust</th></tr></thead>
         <tbody>
-          <tr><td>Can split the lot under SB 9?</td><td>Only with a 3-year live-in promise</td><td>Yes, exempt from the promise</td></tr>
+          <tr><td>Can split the lot under SB 9?</td><td>Only with a 3-year live-in promise</td><td>Yes, exempt</td></tr>
           <tr><td>Homes on this lot</td><td>Up to 2, no split</td><td><strong>Up to 4</strong>{keep ? " (keep the house, build 3)" : ""}</td></tr>
           <tr>
             <td>Purchase cost per home</td>
@@ -21,7 +21,7 @@ export default function InvestorCard({ r }: { r: SiteResult }) {
           </tr>
         </tbody>
       </table>
-      <p className="muted">Source: <a href="https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf" target="_blank" rel="noreferrer">HCD SB 9 fact sheet, April 2026, p.2</a>. Purchase cost is the listing asking price, not the sale price, before construction. ADUs under ADU law are a separate path not counted here.</p>
+      <p className="muted">Source: <a href="https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf" target="_blank" rel="noreferrer">HCD SB 9 fact sheet, April 2026, p.2</a>. Purchase cost is the asking price, not the sale price, before construction. Backyard units (ADUs) are a separate path, not counted.</p>
     </div>
   );
 }

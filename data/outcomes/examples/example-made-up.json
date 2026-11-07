@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "is_example": true,
+  "warning": "MADE UP for testing. Not a real project.",
+  "project_id": "example-made-up-1",
+  "site": {
+    "site_id": "example",
+    "apn": "000-000-00 (MADE UP)",
+    "address": "0 Example Street (MADE UP)",
+    "city": "Santa Ana"
+  },
+  "org": "Example Nonprofit (MADE UP)",
+  "recorded_at": "2026-11-07",
+  "stages": {
+    "offer": "2026-01-05",
+    "under_contract": "2026-01-20",
+    "closed": "2026-03-01",
+    "application_submitted": "2026-04-01",
+    "deemed_complete": "2026-05-01",
+    "decision": "2026-06-15",
+    "permits_issued": "2026-09-01",
+    "construction_start": "2026-10-01"
+  },
+  "decision": "approved",
+  "outcome": "in_progress",
+  "checks_confirmed": ["parcel", "lot_split", "flood", "fire"],
+  "corrections": [
+    {
+      "check_id": "zoning",
+      "fourfold_said": "possible FAIL",
+      "reality": "MADE UP: the city confirmed that zone A1 counts as single-family for SB 9",
+      "reality_status": "PASS",
+      "scope": "city",
+      "objective": true,
+      "city_confirmed_in_writing": true,
+      "applies_when_value_contains": "A1",
+      "question_that_caught_it": "MADE UP: Can you confirm in writing whether SB 9 applies in the A1 zone?",
+      "evidence_source": "MADE UP: example planning email",
+      "date": "2026-02-10"
+    },
+    {
+      "check_id": "tenant",
+      "fourfold_said": "UNKNOWN",
+      "reality": "MADE UP: the listing said vacant, but a tenant had lived there in 2025",
+      "reality_status": "FAIL",
+      "scope": "site",
+      "objective": true,
+      "city_confirmed_in_writing": false,
+      "listing_phrase": "recently vacated",
+      "question_that_caught_it": "MADE UP: When did the last occupant move out, and were they renting?",
+      "date": "2026-01-15"
+    }
+  ],
+  "went_right": ["MADE UP: the flood and fire checks matched what the surveyor found"],
+  "went_wrong": [
+    {
+      "text": "MADE UP: we learned about a 2025 tenant only after the offer",
+      "check_id": "tenant",
+      "question_that_would_have_caught_it": "MADE UP: Ask for the last 3 years of occupancy before making an offer."
+    }
+  ],
+  "actual_costs": { "purchase": 1000000, "construction": 1600000, "time": 200000, "fees": 120000 },
+  "homes_delivered": 4,
+  "source": "MADE UP for testing. Not a real project.",
+  "notes": "Every value in this file is MADE UP to test the learning code."
+}

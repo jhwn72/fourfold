@@ -35,14 +35,16 @@ function norm(s: string) {
   return s.toLowerCase().replace(/\s+/g, " ").trim();
 }
 
-export async function readListing(description: string): Promise<ListingEvidence> {
+export async function readListing(description: string, lessons: string[] = []): Promise<ListingEvidence> {
+  // Lessons learned from real past projects (data/outcomes) are clues only; the quote check below still applies.
+  const system = lessons.length ? SYSTEM + "\nLessons from past projects (clues only; quote rules still apply):\n- " + lessons.slice(0, 10).join("\n- ") : SYSTEM;
   const text = (description ?? "").trim();
   if (!text) return { status: "skipped", note: "No listing description to read.", flags: [] };
   if (!process.env.ANTHROPIC_API_KEY) {
     return { status: "skipped", note: "Listing reader off: no ANTHROPIC_API_KEY set.", flags: [] };
   }
 
-  const key = createHash("sha1").update(LISTING_MODEL + SYSTEM + text).digest("hex");
+  const key = createHash("sha1").update(LISTING_MODEL + system + text).digest("hex");
   const useCache = process.env.FOURFOLD_CACHE === "1";
   if (useCache) {
     try {
@@ -55,7 +57,7 @@ export async function readListing(description: string): Promise<ListingEvidence>
     const response = await client.messages.parse({
       model: LISTING_MODEL,
       max_tokens: 2000,
-      system: SYSTEM,
+      system,
       messages: [{ role: "user", content: `Listing text:\n<listing>\n${text}\n</listing>` }],
       output_config: { effort: "low", format: zodOutputFormat(ReadSchema) },
     });

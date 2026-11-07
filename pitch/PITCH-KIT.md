@@ -19,12 +19,12 @@ Source for the exemption: HCD SB 9 fact sheet, April 2026, p.2 (cited on the hom
 > For a one-person acquisitions lead at a small housing nonprofit: FourFold finds Santa Ana houses for sale where a nonprofit could use SB 9 to turn one home into four, and shows why, with sources.
 
 **Number 1: 10 real listings checked, 5 likely yes.**
-10 public Santa Ana listings Jerry collected on 2026-11-07. Results today: 5 LIKELY YES, 1 UNKNOWN, 4 NO. (`data/results.json`, `verdict` field.)
-Heads up: 1213 S Corta Dr (sa-06) is LIKELY YES only because the Claude listing reader is off. Its listing says "DO NOT DISTURB TENANTS." Once the key is in, it should drop, which makes it **4 likely yes**. Check the home page before you say the number out loud.
+10 public Santa Ana listings Jerry collected on 2026-11-07. Results today: 4 LIKELY YES, 2 UNKNOWN, 4 NO. (`data/results.json`, `verdict` field.)
+1213 S Corta Dr (sa-06) is UNKNOWN because Claude read "DO NOT DISTURB TENANTS." in its listing and flagged a possible tenant. Good demo moment: Claude can flag a problem, never pass a test.
 
 **Number 2: $216,250 per home vs $360k.**
 1209 S Townsend St (sa-04): $865,000 asking / 4 homes = $216,250 land and building purchase per home, before construction. That is $143,750 below the brief's $360k worked example. The $360k is an **ASSUMPTION**: mock numbers from `docs/background.md`, not a real deal. Asking price is not sale price. Construction, fees and time costs are not included.
-All five LIKELY YES sites land between $216,250 and $237,250 per home.
+All four LIKELY YES sites land between $216,250 and $237,250 per home.
 
 **Number 3: 12 tests per listing, each with a source and a date. About 1 second for a live check.**
 Each site gets 12 tests (parcel, zoning, lot split, flood, fire, historic, tenant, rent restriction, prior split, fault, environment, landslide). 6 of them are honestly UNKNOWN on every site, with a next step for each. The live check returned in 0.4 to 1.1 seconds in our tests at about 11:05 AM (5 calls). That speed is not guaranteed; FEMA can be slow and each external call has an 8 second timeout.
@@ -69,14 +69,13 @@ Animation slot (if the polish lands): 0:12 when the split line draws across the 
 | 0:30-0:45 | Click 1209 S Townsend St. Drawing + per-home box | "Here's the top one. That's the real parcel from the city, with a sketched split. Four homes. Eight sixty-five thousand asking, so about two sixteen per home before construction, against the brief's three sixty example." |
 | 0:45-0:55 | Scroll to checklist | "Code decides every test from government data: zoning, lot size, FEMA flood, fire, historic. Each one has its source and the date we checked. What isn't public, like tenant history, says unknown and tells you who to ask." |
 | 0:55-1:05 | Back, click 4202 W Fay Cir, scroll to the flood FAIL row | "And it says no. This one is partly in a FEMA flood zone, so it's out." |
-| 1:05-1:15 | **Version A (reader on):** 1213 S Corta Dr listing evidence box with the quote. **Version B (reader off):** skip to next row. | A: "Claude reads the listing text. Here it found 'do not disturb tenants', so the tenant test is a possible fail. Claude can flag a problem. It can never make a test pass." |
+| 1:05-1:15 | 1213 S Corta Dr: the verdict line shows the quote; open "What Claude read in the listing" below the checklist. | A: "Claude reads the listing text. Here it found 'do not disturb tenants', so the tenant test is a possible fail. Claude can flag a problem. It can never make a test pass." |
 | 1:15-1:25 | Home page bottom, type an address in the live check, click Check | "And any Santa Ana address runs live against the same servers in about a second. FourFold. One home into four." |
 
 ### Shots to re-record after the API key is added
 
 - The **home page table** shots (1213 S Corta Dr should move out of LIKELY YES).
 - Any shot of **1213 S Corta Dr** (listing evidence box should show the quote).
-- Any shot of a site page's **"Listing evidence (read by Claude)"** box. Right now it says "Listing reader off: no ANTHROPIC_API_KEY set." Do not put that line in the final video.
 - Do not say "5 likely yes" in voiceover. The 30-second script avoids the count on purpose.
 
 ---
@@ -262,7 +261,7 @@ Checked at about 11:05 AM on the live site. No code was changed.
 3. **"UNKNOWN: SB 9 does not appear to apply"** in the per-home box on NO sites (sa-01) is confusing. It's a NO, not an unknown. On the home table, per home shows "UNKNOWN" for NO rows; "n/a" or a dash would read better.
 4. **No drawing for NO sites.** sa-01 shows the outline without a split. Fine, but the flood zone isn't drawn, so the visual doesn't explain the NO.
 5. **Live check result has no parcel drawing.** It shows the verdict and checklist only. Okay for the demo, just don't promise a drawing there.
-6. **Listing reader off message** shows on every site page ("no ANTHROPIC_API_KEY set"). Should disappear once the key is set; recheck.
+6. Fixed: the listing reader is on for all 10 listings and the live check.
 7. **1213 S Corta Dr** shows LIKELY YES with "DO NOT DISTURB TENANTS" in its own listing text on the same page. A sharp judge will spot it. Fix with the key, or be ready to explain it.
 8. Live check speed: 0.4 to 1.1 seconds across 5 calls (1209 S Townsend, 1213 S Corta, 4202 W Fay, 1221 S Townsend, and a fake address, which correctly returned UNKNOWN "Could not find this address").
 9. Layout at iPad width (768 px) looks fine, no sideways scroll.

@@ -22,13 +22,13 @@ export default function CityHero({ height = 520 }: { height?: number }) {
   return (
     <div style={{ position: "relative", border: "1px solid var(--line)", borderRadius: "var(--radius-card)", overflow: "hidden", background: "var(--viz-bg)" }}>
       <div style={{ position: "absolute", top: 12, left: 14, right: 14, zIndex: 2, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, flexWrap: "wrap", pointerEvents: "none" }}>
-        <span className="eyebrow">Santa Ana · every parcel · one dot each</span>
+        <span className="eyebrow">Every Santa Ana parcel</span>
         <span style={{ pointerEvents: "auto" }}><ViewSwitch mode={mode} onChange={setMode} /></span>
       </div>
       {data ? <ParticleCity points={data.points} bbox={data.bbox} mode={mode} height={height} /> : <div style={{ height }} />}
       <div style={{ position: "absolute", bottom: 12, right: 14, zIndex: 2, display: "flex", gap: 14, pointerEvents: "none" }} className="eyebrow">
-        <span><span style={{ color: "var(--accent)" }}>●</span> passes first SB 9 screen</span>
-        <span><span style={{ color: "var(--muted)" }}>●</span> other parcel</span>
+        <span><span style={{ color: "var(--accent)" }}>●</span> passes first screen</span>
+        <span><span style={{ color: "var(--muted)" }}>●</span> other</span>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ import { now, polyGeom, unknownFromError } from "./util";
 export async function transitCheck(parcel: Parcel): Promise<CheckResult> {
   const base = {
     id: "parking",
-    test: "No parking can be required: near high-quality transit (bonus, does not change the verdict)",
+    test: "No parking required: near frequent transit (bonus, does not change the verdict)",
     source_name: SRC.hqta.name,
     source_url: SRC.hqta.url,
     rule: "HCD SB 9 fact sheet (April 2026) p.1: no parking within 1/2 mile walking distance of a high-quality transit corridor or major transit stop.",
@@ -25,7 +25,7 @@ export async function transitCheck(parcel: Parcel): Promise<CheckResult> {
       return {
         ...base, status: "PASS", checked_at: now(),
         value: `In a high-quality transit area (${a.agency_primary}${a.route_id ? `, route ${a.route_id}` : ""}; ${String(a.hqta_type).replace(/_/g, " ")})`,
-        note: "Likely no parking can be required, which frees lot space for homes. Caltrans areas are straight-line, not walking distance, so confirm with the city.",
+        note: "Likely no parking required, which frees space for homes. Caltrans measures straight-line, not walking distance: confirm with the city.",
       };
     }
     return {

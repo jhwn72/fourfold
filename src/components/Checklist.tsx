@@ -2,7 +2,7 @@ import type { CheckResult, SiteResult } from "@/lib/types";
 
 export const money = (n: number | null) => (n == null ? "UNKNOWN" : "$" + n.toLocaleString("en-US"));
 /** Per-home cost: "n/a" when SB 9 does not apply (0 homes), UNKNOWN when the price is missing. */
-export const perHomeText = (perHome: number | null, homes: number | null) => (homes === 0 ? "n/a, SB 9 does not apply" : money(perHome));
+export const perHomeText = (perHome: number | null, homes: number | null) => (homes === 0 ? "n/a" : money(perHome));
 
 function chip(c: CheckResult): [string, string] {
   if (c.possible_fail) return ["POSSIBLE", "Possible fail"];
@@ -15,7 +15,7 @@ function Rows({ checks }: { checks: CheckResult[] }) {
   return (
     <div className="table-wrap">
       <table>
-        <thead><tr><th>Test</th><th>Result</th><th>Value and next step</th><th>Source, date checked</th></tr></thead>
+        <thead><tr><th>Test</th><th>Result</th><th>Found, next step</th><th>Source, date</th></tr></thead>
         <tbody>
           {checks.map((c) => {
             const [cls, word] = chip(c);

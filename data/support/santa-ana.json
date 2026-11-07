@@ -1,0 +1,81 @@
+{
+  "city": "Santa Ana",
+  "checked": "2026-11-07",
+  "cache": ".cache/support/ (raw API responses and pages fetched 2026-11-07)",
+  "note": "Public signals only. They describe the city, not whether a given organization has local support. Statuses (POSITIVE / NEUTRAL / NEGATIVE / UNKNOWN) are FourFold's reading of each source, labelled ASSUMPTION where they are a judgment.",
+  "signals": [
+    {
+      "id": "housing_element",
+      "label": "Housing element compliance (6th cycle)",
+      "value": "In compliance. HCD received the adopted element 2022-07-26 and reviewed it 2022-09-16 (status: In).",
+      "status": "POSITIVE",
+      "meaning": "The city has a housing element HCD finds in compliance, so its housing plan is in place and a nonprofit can point to the city's own housing goals when it asks for support.",
+      "source": {
+        "name": "HCD Housing Element Compliance Report (data.ca.gov), resource 2dcd1cd4-1348-4fc5-9c9c-219f82daac00, dataset updated 2026-11-06",
+        "url": "https://data.ca.gov/dataset/housing-element-compliance-report"
+      },
+      "checked": "2026-11-07"
+    },
+    {
+      "id": "rhna_progress",
+      "label": "6th cycle RHNA progress (2021-10-15 to 2029-10-15)",
+      "value": "Very low income 359 of 606 (59%). Low income 426 of 362 (118%). Moderate 260 of 545 (48%). Above moderate 2,978 of 1,624 (183%).",
+      "status": "NEUTRAL",
+      "meaning": "The city is ahead on market-rate and low-income homes but behind on very low and moderate income homes. Affordable ownership homes from a nonprofit would count toward the categories where the city is behind, which is a reason to bring the project to the housing division early. ASSUMPTION: FourFold treats this as neutral, not as support.",
+      "source": {
+        "name": "HCD RHNA Progress Report, 6th Cycle (data.ca.gov), resource 1e80a9cf-724c-432d-8374-e9708a6a92dc. HCD's data dictionary describes the unit fields as units completed during the planning period, summed from APR Table A2.",
+        "url": "https://data.ca.gov/dataset/rhna-progress-report"
+      },
+      "checked": "2026-11-07"
+    },
+    {
+      "id": "sb9_apr_activity",
+      "label": "SB 9 projects the city reports to HCD",
+      "value": "UNKNOWN. Santa Ana files APR building activity every year 2022 to 2025, but no row is labelled SB 9.",
+      "status": "UNKNOWN",
+      "meaning": "We cannot tell from state data whether the city has approved SB 9 lot splits. Ask the housing division or planning how many it has processed.",
+      "source": {
+        "name": "HCD APR Tables A and A2 (data.ca.gov), as summarized in FourFold data/comparables.json",
+        "url": "https://data.ca.gov/@california-department-of-housing-and-community-development/housing-element-annual-progress-report-apr-data-by-jurisdiction-and-year"
+      },
+      "checked": "2026-11-07"
+    },
+    {
+      "id": "hcd_letters",
+      "label": "HCD Housing Accountability Unit letters to the city",
+      "value": "UNKNOWN. The HCD letters dashboard is an embedded app we could not read without browser automation. A web search points to a 2023 HCD technical assistance letter in city records about proposed AB 2011 parcel exemptions, but the city records portal would not open for us, so it is a lead, not a confirmed fact.",
+      "status": "UNKNOWN",
+      "meaning": "An enforcement letter about SB 9 or ADUs would warn that the city has pushed back on small-lot housing. We did not confirm any. Check the dashboard by jurisdiction before making an offer.",
+      "source": {
+        "name": "HCD Technical Assistance and Enforcement Letters Dashboard",
+        "url": "https://www.hcd.ca.gov/hau/enforcement-letters"
+      },
+      "lead_url": "https://cc-publicdocs.santa-ana.org/WebLink/1/doc/136787/Page1.aspx",
+      "checked": "2026-11-07"
+    },
+    {
+      "id": "city_sb9_rules",
+      "label": "City SB 9 ordinance or handout",
+      "value": "UNKNOWN. A web search points to a Santa Ana urgency ordinance (NS-3013) on urban lot splits and two-unit projects in city records, but the records portal would not open for us. We did not find an SB 9 page on santa-ana.gov.",
+      "status": "UNKNOWN",
+      "meaning": "Local SB 9 rules decide how easy a lot split will be. Ask planning for the current SB 9 rules and any handout before an offer.",
+      "source": {
+        "name": "Santa Ana city council records (Laserfiche WebLink), lead only",
+        "url": "https://cc-publicdocs.santa-ana.org/WebLink/1/doc/130343/Page1.aspx"
+      },
+      "checked": "2026-11-07"
+    },
+    {
+      "id": "preapproved_adu",
+      "label": "City pre-approved ADU plans program",
+      "value": "Yes. The city publishes a Pre-Approved ADU Plans page with plan downloads.",
+      "status": "POSITIVE",
+      "meaning": "The city already runs a program to speed up small-scale homes. This is about ADUs, not SB 9, so it is a weak signal about lot splits. ASSUMPTION: FourFold counts it as a mild positive.",
+      "source": {
+        "name": "City of Santa Ana, Pre-Approved ADU Plans",
+        "url": "https://santa-ana.gov/pre-approved-adu-plans/"
+      },
+      "checked": "2026-11-07"
+    }
+  ]
+}

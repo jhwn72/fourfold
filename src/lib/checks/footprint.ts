@@ -12,7 +12,7 @@ import { now, polyGeom, unknownFromError } from "./util";
 export async function footprintCheck(parcel: Parcel, split: SplitPlan | null): Promise<{ check: CheckResult; buildings: number[][][]; keep: KeepHouse; split: SplitPlan | null }> {
   const base = {
     id: "existing_house",
-    test: "Existing house fits on one half, so it can stay (bonus, does not change the verdict)",
+    test: "Existing house can stay (bonus, does not change the verdict)",
     source_name: SRC.ocFootprints.name,
     source_url: SRC.ocFootprints.url,
     rule: "Site layout, not an SB 9 test. Existing structures need no new setback: HCD SB 9 Fact Sheet (Sept 2024) p.4.",

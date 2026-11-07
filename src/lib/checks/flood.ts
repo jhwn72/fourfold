@@ -22,7 +22,7 @@ export async function floodCheck(parcel: Parcel): Promise<CheckResult> {
   const [fema, oc] = await Promise.allSettled([query(SRC.fema.url, ring, 1), query(SRC.ocFlood.url, ring, 0)]);
   const base = {
     id: "flood",
-    test: "Not in a FEMA special flood hazard area",
+    test: "Not in a FEMA high-risk flood zone",
     rule: "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
     affects_verdict: true,
   };
@@ -43,7 +43,7 @@ export async function floodCheck(parcel: Parcel): Promise<CheckResult> {
       ...base, status: verdictOf(fema.value), checked_at: now(),
       value: `FEMA: ${describe(fema.value)}`,
       source_name: SRC.fema.name, source_url: SRC.fema.url,
-      note: (fema.value.sfha ? "Part of the parcel is in a special flood hazard area. Excluded unless a statutory exception applies." : "Not in a special flood hazard area.") + " County copy agrees.",
+      note: (fema.value.sfha ? "Part of the parcel is in a high-risk flood zone. Out unless a statutory exception applies." : "Not in a high-risk flood zone.") + " County copy agrees.",
       next_step: fema.value.sfha ? "Ask a civil engineer whether the site can meet FEMA floodplain requirements." : undefined,
     };
   }

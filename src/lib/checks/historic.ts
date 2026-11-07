@@ -11,7 +11,7 @@ import { now, polyGeom, unknownFromError } from "./util";
 export async function historicCheck(parcel: Parcel): Promise<CheckResult> {
   const base = {
     id: "historic",
-    test: "Not a historic property, landmark, or contributing structure in a historic district",
+    test: "Not historic (landmark, listed, or district contributor)",
     source_name: `${SRC.saHistoricProps.name}; ${SRC.saHistoricDistricts.name}`,
     source_url: SRC.saHistoricProps.url,
     rule: "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
@@ -50,8 +50,8 @@ export async function historicCheck(parcel: Parcel): Promise<CheckResult> {
     }
     return {
       ...base, status: "UNKNOWN", checked_at: now(),
-      value: "Not on Santa Ana's historic list or in a city historic district",
-      note: "City data is clean. The State Historic Resources Inventory was not checked.",
+      value: "Not on the city historic list or in a city district",
+      note: "State inventory not checked.",
       next_step: "Ask the city planning desk to confirm no state or local historic listing.",
     };
   } catch (e) {

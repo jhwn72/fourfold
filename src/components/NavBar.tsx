@@ -7,9 +7,12 @@ import ThemeToggle from "./ThemeToggle";
 
 const ITEMS = [
   { href: "/", label: "Sites" },
+  { href: "/clusters", label: "Site groups" },
   { href: "/city", label: "Whole city" },
   { href: "/comparables", label: "SB 9 projects" },
   { href: "/method", label: "How it works" },
+  { href: "/learn", label: "Outcomes" },
+  { href: "/org", label: "Your org" },
 ];
 
 function isActive(path: string, href: string) {
@@ -41,7 +44,7 @@ export default function NavBar() {
           ))}
         </nav>
         <div className={s.right}>
-          <ThemeToggle />
+          <span className="theme-toggle-wide"><ThemeToggle /></span>
           <Link href="/check" className={`btn-primary ${s.cta}`}>
             <span className={s.ctaLong}>Check an address →</span>
             <span className={s.ctaShort}>Check</span>
@@ -58,6 +61,7 @@ export default function NavBar() {
               {i.label}
             </Link>
           ))}
+          <div style={{ padding: "12px 0" }}><ThemeToggle /></div>
         </nav>
       )}
     </>

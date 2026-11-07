@@ -27,18 +27,18 @@ export function lotSplitCheck(parcel: Parcel): { check: CheckResult; split: Spli
     split: { ...s, lot_a: s.lot_a, lot_b: s.lot_b },
     check: {
       id: "lot_split",
-      test: "Lot can split into two lots of at least 1,200 sq ft, neither under 40%",
+      test: "Splits into two lots of 1,200+ sq ft, neither under 40%",
       status: pass ? "PASS" : "FAIL",
       value: `Lot ${Math.round(total).toLocaleString()} sq ft; equal split = ${Math.round(s.lot_a_sqft).toLocaleString()} + ${Math.round(s.lot_b_sqft).toLocaleString()} sq ft`,
-      source_name: SRC.saParcels.name + " (area computed from the polygon, State Plane feet)",
+      source_name: SRC.saParcels.name + " (area measured from the parcel map)",
       source_url: SRC.saParcels.url,
       checked_at: now(),
       note:
         (pass
-          ? "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply."
+          ? "Big enough on paper. Street access, frontage and the city's written standards still apply."
           : "Too small for two 1,200 sq ft lots. SB 9 may still allow up to 2 homes without a split.") + crossCheck,
       rule: `HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on ${CHECKED}.`,
-      next_step: pass ? "Confirm access to the street for the rear lot with the city planning desk." : undefined,
+      next_step: pass ? "Ask the city planning desk about street access for the rear lot." : undefined,
       affects_verdict: true,
     },
   };

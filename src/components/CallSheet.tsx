@@ -9,8 +9,8 @@ export default function CallSheet({ result }: { result: SiteResult }) {
   if (!groups.length) return null;
   return (
     <div className="card">
-      <h3 style={{ marginTop: 0 }}>Call sheet: what to ask, and who</h3>
-      <p className="muted">Every open question above, turned into a call. FourFold drafts these; it never sends anything.</p>
+      <h3 style={{ marginTop: 0 }}>Call sheet</h3>
+      <p className="muted">Each open question, as a call. Drafts only; nothing is sent.</p>
       {groups.map(([who, items]) => (
         <div key={who}>
           <strong>{who}</strong>

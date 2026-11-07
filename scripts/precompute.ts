@@ -4,7 +4,9 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { readListing } from "../src/lib/listing-reader";
-import { checkSite, rank, type ListingInput } from "../src/lib/sb9";
+import { checkSite, decide, rank, type ListingInput } from "../src/lib/sb9";
+import { loadOutcomes } from "../src/app/learn/load";
+import { applyLearned, learn } from "../src/lib/learning";
 
 process.env.FOURFOLD_CACHE = "1";
 
@@ -23,10 +25,14 @@ async function main() {
   const listings: (ListingInput & { listed_lot_sqft?: number | null; description_type?: string })[] = JSON.parse(
     await fs.readFile("data/listings.json", "utf8")
   );
+  // Continual learning: real project outcomes in data/outcomes/ (examples are ignored) adjust notes and rules.
+  const outcomes = await loadOutcomes();
+  const learned = learn(outcomes.records);
+  console.log(`Learning from ${outcomes.records.length} real project outcome(s).`);
   const results = [];
   for (const l of listings) {
-    const evidence = await readListing(l.description ?? "");
-    const r = await checkSite(l, evidence);
+    const evidence = await readListing(l.description ?? "", learned.listing_lessons);
+    const r = applyLearned(await checkSite(l, evidence), learned, decide);
     results.push({ ...r, listed_lot_sqft: l.listed_lot_sqft ?? null, description: l.description ?? "", description_type: l.description_type ?? null });
     console.log(`${l.id.padEnd(6)} ${r.verdict.padEnd(10)} homes=${r.max_homes} perHome=${r.land_cost_per_home} unknowns=${r.unknown_count} reader=${evidence.status} | ${r.verdict_reason}`);
     await new Promise((res) => setTimeout(res, 300)); // be gentle with public servers

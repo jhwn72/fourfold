@@ -19,10 +19,10 @@ const n = (x: number) => x.toLocaleString("en-US");
 
 const REASON_TEXT: Record<string, string> = {
   not_sf_zone: "not in a single-family zone (R1 or RE)",
-  shared_polygon: "share one lot outline with other APNs (typically condo or mobile-home units on a common lot)",
+  shared_polygon: "share one lot with other parcels (usually condos or mobile homes)",
   too_small: "too small to split into two 1,200 sq ft lots",
-  flood: "centroid in a FEMA special flood hazard area",
-  fire: "centroid in a very high fire hazard severity zone",
+  flood: "center point in a FEMA high-risk flood zone",
+  fire: "center point in a very high fire hazard zone",
   historic: "on the Santa Ana historic properties list",
 };
 
@@ -36,7 +36,7 @@ export default function CityPage() {
         <span className="eyebrow">Santa Ana · citywide first screen · {screened} UTC</span>
         <h1>Every lot in Santa Ana<span className="second">A first screen on parcel centers, not a verdict.</span></h1>
         <p className={s.lede}>
-          Same rules as the per-address check, run once over the whole city from public GIS layers. Any city with parcel,
+          Same rules as the address check, run once over the whole city from public map layers. Any city with parcel,
           zoning and hazard layers can be screened the same way.
         </p>
       </header>

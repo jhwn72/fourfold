@@ -17,7 +17,7 @@ export default function LotViewer({ parcel, split, buildings = [], homes, keep, 
   return (
     <div style={{ border: "1px solid var(--line)", borderRadius: "var(--radius-card)", background: "var(--viz-bg)", overflow: "hidden" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, padding: "10px 12px", borderBottom: "1px solid var(--line)", flexWrap: "wrap" }}>
-        <span className="eyebrow">APN {parcel.apn} · {Math.round(parcel.area_sqft).toLocaleString()} sq ft</span>
+        <span className="eyebrow">Lot sketch</span>
         <span style={{ display: "flex", gap: 8, alignItems: "center" }}>
           {mode !== "tech" && <button type="button" onClick={() => setReplay((r) => r + 1)} style={{ padding: "3px 10px", fontSize: 12 }}>Replay</button>}
           <ViewSwitch mode={mode} onChange={setMode} />
@@ -25,9 +25,9 @@ export default function LotViewer({ parcel, split, buildings = [], homes, keep, 
       </div>
       {mode === "tech" ? <LotBlueprint model={model} height={height} /> : <LotParticles model={model} view={mode === "flat" ? "flat" : "3d"} height={height} replayKey={replay} />}
       <div className="muted" style={{ padding: "8px 12px", borderTop: "1px solid var(--line)", fontSize: 12 }}>
-        Real parcel outline from the city parcel layer.{showSplit ? " The split line is a sketch of one possible split, not a survey." : " SB 9 split not shown: the site does not pass."}
-        {model.buildings.length ? ` Existing house footprint from OC Public Works${kept ? "; it fits on one lot, so it can stay." : "."}` : ""}
-        {showSplit ? <> <span style={{ color: "var(--accent)" }}>Amber</span>: split line and new homes.</> : null}
+        Outline: city parcel map.{showSplit ? " Split line: a sketch, not a survey." : " No split shown: the site does not pass."}
+        {model.buildings.length ? ` House: OC Public Works${kept ? ", fits on one lot, can stay." : "."}` : ""}
+        {showSplit ? <> <span style={{ color: "var(--accent)" }}>Amber</span>: split and new homes.</> : null}
       </div>
     </div>
   );

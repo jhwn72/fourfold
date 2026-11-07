@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "../viz/useReducedMotion";
 
-export default function AnimatedNumber({ from, to, delayMs = 2600, durationMs = 1100 }: { from: number; to: number; delayMs?: number; durationMs?: number }) {
+export default function AnimatedNumber({ from, to, delayMs = 300, durationMs = 1400 }: { from: number; to: number; delayMs?: number; durationMs?: number }) {
   const reduced = useReducedMotion();
   const [v, setV] = useState(from);
   useEffect(() => {

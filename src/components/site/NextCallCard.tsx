@@ -20,16 +20,16 @@ export default function NextCallCard({ r }: { r: SiteResult }) {
       <ol style={{ paddingLeft: 18, margin: "0 0 12px" }}>
         {items.slice(0, 2).map((it) => <li key={it.question} style={{ marginBottom: 6 }}>{it.question}</li>)}
       </ol>
-      {more > 0 && <p className="muted" style={{ margin: "0 0 14px" }}>{more} more questions in the <a href="#call-sheet">call sheet</a>.</p>}
+      {more > 0 && <p className="muted" style={{ margin: "0 0 14px" }}>{more} more in the <a href="#call-sheet">call sheet</a>.</p>}
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
         {email && (
           <button type="button" className="btn-primary" onClick={async () => { try { await navigator.clipboard.writeText(email); setCopied(true); } catch {} }}>
-            {copied ? "Copied" : "Copy draft email to agent"}
+            {copied ? "Copied" : "Copy email to agent"}
           </button>
         )}
         <a href="#call-sheet" className="chip" style={{ textDecoration: "none" }}>See call sheet</a>
       </div>
-      <p className="muted" style={{ marginTop: 12, marginBottom: 0, fontSize: 12 }}>Drafts only. FourFold never sends anything.</p>
+      <p className="muted" style={{ marginTop: 12, marginBottom: 0, fontSize: 12 }}>Drafts only. Nothing is sent.</p>
     </div>
   );
 }

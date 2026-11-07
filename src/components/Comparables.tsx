@@ -95,8 +95,8 @@ export default function Comparables({ address }: { address?: string }) {
         </div>
       </details>
       <p className={s.note}>
-        Found by searching city notes and tracking IDs for &quot;SB 9&quot;; the APR has no SB 9 field, so cities that do not
-        label SB 9 work are missing. The data mostly cannot tell lot splits from second units or duplexes. Units are as the city
+        Found by searching city notes for &quot;SB 9&quot;. The state report has no SB 9 field, so cities that do not
+        label SB 9 work are missing, and it mostly can&apos;t tell splits from duplexes or second units. Units are as the city
         reported for that record (usually the one new unit). For context: {context.finding}{" "}
         <a href="/comparables">Counts by city and year</a>. Source:{" "}
         <a href={source.url} target="_blank" rel="noreferrer">{source.name}</a>, checked {source.checked};{" "}

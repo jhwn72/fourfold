@@ -1,0 +1,18 @@
+.form { display: flex; flex-direction: column; gap: 14px; margin-top: 12px; }
+.group { border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); padding: 14px 16px; margin: 0; min-width: 0; }
+.group legend { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); padding: 0 6px; }
+.group label { display: flex; flex-direction: column; gap: 4px; font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+.group input, .group select, .group textarea { width: 100%; max-width: none; box-sizing: border-box; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 4px 14px; }
+.wide { grid-column: span 2; }
+.checks { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.group .check { flex-direction: row; align-items: center; gap: 6px; margin: 0; }
+.group .check input { width: auto; }
+.row { border-bottom: 1px dashed var(--line); padding-bottom: 10px; margin-bottom: 10px; }
+.inline { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.result { border-top: 1px solid var(--line); padding-top: 12px; }
+.ok { color: var(--pass); margin: 0 0 10px; }
+.errors { color: var(--fail); font-size: 13px; margin-bottom: 10px; }
+.errors ul { margin: 4px 0 0; padding-left: 18px; }
+.pre { padding: 10px; font-size: 12px; overflow-x: auto; max-height: 360px; }
+@media (max-width: 520px) { .wide { grid-column: auto; } }

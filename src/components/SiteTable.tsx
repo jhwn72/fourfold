@@ -129,16 +129,16 @@ export default function SiteTable({ results }: { results: SiteResult[] }) {
   return (
     <div>
       <div className={st.toolbar}>
-        <span className={`eyebrow ${st.count}`}>Showing {shown.length} of {results.length} · rank is the original ranking</span>
+        <span className={`eyebrow ${st.count}`}>Showing {shown.length} of {results.length}</span>
         <button type="button" className={st.tbtn} aria-expanded={open} aria-controls="site-filters" onClick={() => setOpen((o) => !o)}>
           Filter{activeCount > 0 && <span className={st.badge}>{activeCount}</span>}
         </button>
         <details className={st.export} ref={exportRef}>
           <summary className={st.tbtn}>Export ▾</summary>
           <div className={st.menu}>
-            <Link href="/brief">Printable call list (PDF)<span>/brief · print or save as PDF</span></Link>
-            <a href="/results.csv" download>Download CSV<span>ranked list · /results.csv</span></a>
-            <a href="/city.csv" download>Citywide lots CSV<span>every candidate lot · /city.csv</span></a>
+            <Link href="/brief">Call list (PDF)<span>print or save as PDF</span></Link>
+            <a href="/results.csv" download>Ranked list CSV<span>/results.csv</span></a>
+            <a href="/city.csv" download>Citywide lots CSV<span>/city.csv</span></a>
           </div>
         </details>
       </div>
@@ -156,7 +156,7 @@ export default function SiteTable({ results }: { results: SiteResult[] }) {
           <label className={st.field}><span className="eyebrow">Max asking price ($)</span>
             <input type="number" min={0} step={10000} value={f.maxPrice} onChange={(e) => update({ maxPrice: e.target.value })} placeholder="any" style={{ width: 140 }} />
           </label>
-          <label className={st.field}><span className="eyebrow">Max land cost per home ($)</span>
+          <label className={st.field}><span className="eyebrow">Max cost per home ($)</span>
             <input type="number" min={0} step={10000} value={f.maxPerHome} onChange={(e) => update({ maxPerHome: e.target.value })} placeholder="any" style={{ width: 140 }} />
           </label>
           <label className={st.field}><span className="eyebrow">Address</span>

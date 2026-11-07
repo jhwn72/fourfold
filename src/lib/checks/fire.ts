@@ -25,9 +25,9 @@ export async function fireCheck(parcel: Parcel): Promise<CheckResult> {
       const vh = classes.some((c) => /very high/i.test(c) || c === "3");
       return {
         ...base, status: vh ? "FAIL" : "PASS", checked_at: now(),
-        value: classes.length ? classes.join(", ") : "Not in a mapped LRA fire hazard zone",
+        value: classes.length ? classes.join(", ") : "Not in a mapped local fire hazard zone (LRA)",
         source_name: src.name, source_url: src.url,
-        note: (vh ? "In a very high fire hazard severity zone. Statute has narrow exceptions." : "Not in a very high fire hazard severity zone.") + caveat,
+        note: (vh ? "In a very high fire hazard zone. Statute has narrow exceptions." : "Not in a very high fire hazard zone.") + caveat,
         next_step: vh ? "Confirm with the city fire marshal; check CAL FIRE's 2025 LRA map." : undefined,
       };
     } catch (e) {

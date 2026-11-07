@@ -45,8 +45,8 @@ const FAIL_LABEL: Record<string, string> = {
   parcel: "address not found",
   zoning: "not a single-family zone",
   lot_split: "lot too small to split",
-  flood: "in a FEMA special flood hazard area",
-  fire: "in a very high fire hazard zone",
+  flood: "in a FEMA high-risk flood zone",
+  fire: "in a very high fire risk zone",
   historic: "listed historic resource",
   tenant: "listing suggests a tenant",
 };
@@ -66,16 +66,16 @@ export function decide(checks: CheckResult[], hasParcel: boolean, price: number 
     reason = "Could not find this address in the Santa Ana parcel data.";
   } else if (fails.length) {
     verdict = "NO";
-    reason = "Fails: " + fails.map((c) => `${label(c)} (${c.value})`).join("; ") + ".";
+    reason = "Fails: " + fails.map((c) => `${label(c)}, ${c.value}`).join("; ") + ".";
   } else if (possible.length) {
     verdict = "UNKNOWN";
-    reason = "Possible FAIL to confirm: " + possible.map(label).join("; ") + ".";
+    reason = "Possible fail, confirm: " + possible.map(label).join("; ") + ".";
   } else if (liveUnknown.length) {
     verdict = "UNKNOWN";
     reason = "Could not check: " + liveUnknown.map((c) => c.test.toLowerCase()).join("; ") + ".";
   } else {
     verdict = "LIKELY YES";
-    reason = `Passes zoning, lot size, flood and fire checks on public data. ${confirmLater.length} items still need confirming with the agent or city.`;
+    reason = `Passes zoning, lot size, flood and fire on public data. ${confirmLater.length} open questions.`;
   }
 
   // Max homes: SB 9 lot split gives 2 lots with up to 2 units each (fact sheet April 2026 p.2).

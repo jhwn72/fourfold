@@ -6,19 +6,19 @@ type Who = "Listing agent" | "Santa Ana planning desk" | "Santa Ana housing divi
 type Item = { who: Who; question: string; why: string };
 
 const TEMPLATES: Record<string, Item[]> = {
-  tenant: [{ who: "Listing agent", question: "Has anyone rented this home, or any unit on the lot, in the last 3 years? If so, until when?", why: "SB 9 does not apply if a tenant lived there in the last 3 years." }],
+  tenant: [{ who: "Listing agent", question: "Has anyone rented the house, or any unit on the lot, in the last 3 years? Until when?", why: "SB 9 does not apply if a tenant lived there in the last 3 years." }],
   rent_restricted: [
-    { who: "Listing agent", question: "Is there any recorded affordability covenant or rent restriction on the property?", why: "SB 9 excludes rent-restricted housing." },
-    { who: "Santa Ana housing division", question: "Is this address covered by the city's rent control or rent stabilization rules, or was it withdrawn from rental under the Ellis Act in the last 15 years?", why: "SB 9 excludes rent-controlled housing and Ellis Act withdrawals in the last 15 years." },
+    { who: "Listing agent", question: "Any recorded affordability covenant or rent restriction?", why: "SB 9 excludes rent-restricted housing." },
+    { who: "Santa Ana housing division", question: "Is this address under city rent control or rent stabilization, or pulled off the rental market under the Ellis Act in the last 15 years?", why: "SB 9 excludes both." },
   ],
-  prior_split: [{ who: "Santa Ana planning desk", question: "Was this parcel created by an SB 9 lot split, and has the same owner split an adjacent lot under SB 9?", why: "A parcel can only be split once under SB 9." }],
-  fault: [{ who: "Santa Ana planning desk", question: "Is the parcel in an Alquist-Priolo earthquake fault zone?", why: "Fault zones are on SB 9's excluded site list." }],
+  prior_split: [{ who: "Santa Ana planning desk", question: "Was this parcel made by an SB 9 split, or has the same owner split a lot next door under SB 9?", why: "A parcel can only be split once under SB 9." }],
+  fault: [{ who: "Santa Ana planning desk", question: "Is the parcel in a state earthquake fault zone (Alquist-Priolo)?", why: "Fault zones are on SB 9's excluded site list." }],
   environment: [{ who: "Santa Ana planning desk", question: "Is the parcel on any hazardous waste list, or in a wetland, protected habitat, farmland or conservation easement area?", why: "These sites are on SB 9's excluded site list." }],
-  historic: [{ who: "Santa Ana planning desk", question: "Is the house a historic resource, a landmark, or a contributing structure in a historic district, locally or on the State Historic Resources Inventory?", why: "SB 9 excludes historic resources." }],
+  historic: [{ who: "Santa Ana planning desk", question: "Is the house historic: a landmark, on the State Historic Resources Inventory, or a contributing building in a historic district?", why: "SB 9 excludes historic resources." }],
   zoning: [{ who: "Santa Ana planning desk", question: "Does SB 9 apply in this parcel's zone?", why: "SB 9 applies only in single-family residential zones." }],
   lot_split: [{ who: "Surveyor or civil engineer", question: "Can the lot be split into two lots of at least 1,200 sq ft, with access to the street for the rear lot?", why: "A split needs two workable lots." }],
   existing_house: [{ who: "Surveyor or civil engineer", question: "Is there a split line that keeps the existing house on one lot?", why: "Keeping the house avoids demolition and can earn rent during construction." }],
-  parking: [{ who: "Santa Ana planning desk", question: "Can the city require parking for SB 9 units at this address, given nearby transit?", why: "No parking may be required within 1/2 mile walking distance of high-quality transit." }],
+  parking: [{ who: "Santa Ana planning desk", question: "Can the city require parking here, given nearby transit?", why: "No parking may be required within 1/2 mile walking distance of high-quality transit." }],
   flood: [{ who: "Surveyor or civil engineer", question: "Can the site meet FEMA floodplain requirements?", why: "Flood zones are excluded unless a statutory exception applies." }],
 };
 

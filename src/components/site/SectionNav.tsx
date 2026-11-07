@@ -1,9 +1,10 @@
 const SECTIONS = [
   ["checklist", "Checklist"],
-  ["why-nonprofit", "Why a nonprofit wins"],
+  ["why-nonprofit", "Why nonprofits win"],
   ["call-sheet", "Call sheet"],
   ["fund", "Fund the gap"],
-  ["nearby", "Nearby SB 9 projects"],
+  ["support", "Local support"],
+  ["nearby", "Nearby projects"],
   ["sources", "Sources"],
 ] as const;
 

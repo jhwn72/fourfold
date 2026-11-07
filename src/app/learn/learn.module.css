@@ -1,0 +1,22 @@
+.head { margin: 8px 0 18px; }
+.lede { color: var(--muted); max-width: 760px; font-size: 15px; margin: 0; }
+.status { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 12px 0; }
+.zero { margin: 0; font-size: 15px; color: var(--text-soft); }
+.toggle { display: inline-flex; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); cursor: pointer; }
+.banner {
+  margin: 18px 0 0; padding: 14px 16px; border: 2px dashed var(--possible); border-radius: var(--radius-card);
+  background: var(--possible-bg); color: var(--possible); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em;
+}
+.demoWrap { border-left: 3px dashed var(--possible); padding-left: 14px; }
+.warn { color: var(--fail); font-size: 13px; }
+.section { margin-top: 32px; }
+.section h2 { margin: 0 0 8px; font-size: 22px; }
+.empty { color: var(--faint); font-size: 13.5px; border: 1px dashed var(--line-strong); border-radius: var(--radius-row); padding: 12px 14px; margin: 8px 0; }
+.list { padding-left: 18px; font-size: 13.5px; color: var(--text-soft); }
+.list li { margin: 8px 0; }
+.right { text-align: right; font-variant-numeric: tabular-nums; }
+.strip { margin: 8px 0 12px; }
+.sub { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin-top: 2px; }
+.source { font-size: 12.5px; color: var(--faint); }
+.source a { color: var(--muted); }
+.foot { margin-top: 40px; font-size: 12.5px; color: var(--faint); }
