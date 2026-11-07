@@ -16,12 +16,12 @@ import ViewSwitch, { type ViewMode } from "../viz/ViewSwitch";
 const INK = "#f4f4f4";
 const ACCENT = "#ffaa5f";
 
-type Props = { site: SiteResult | null; listings: MapListing[]; onSelect: (id: string) => void; focus: string[] | null; cityView: boolean; inset?: number; lotStart?: number | null; onReplay?: () => void };
+type Props = { stageCity?: string; pointFocus?: { cx: number; cy: number; span: number } | null; site: SiteResult | null; listings: MapListing[]; onSelect: (id: string) => void; focus: string[] | null; cityView: boolean; inset?: number; lotStart?: number | null; onReplay?: () => void };
 
 // City to lot handoff: the camera flies for FLY ms, then the lot layer crossfades in over STAGE ms.
 const FLY = 450, STAGE = 600;
 
-export default function MapStage({ site: selected, listings, onSelect, focus, cityView, inset = 0, lotStart = null, onReplay }: Props) {
+export default function MapStage({ stageCity = "Santa Ana", pointFocus = null, site: selected, listings, onSelect, focus, cityView, inset = 0, lotStart = null, onReplay }: Props) {
   const [mode, setMode] = useState<ViewMode>("3d");
   // Keep the last site drawn while the lot layer fades out on Back, so nothing blinks.
   const [held, setHeld] = useState<SiteResult | null>(selected);
@@ -33,15 +33,21 @@ export default function MapStage({ site: selected, listings, onSelect, focus, ci
     return () => clearTimeout(t);
   }, [selected]);
   const site = selected ?? held;
-  const [city, setCity] = useState<{ points: number[][]; bbox: number[] } | null>(null);
+  // Particle city per name: Santa Ana is /city-points.*, the others /city-points-<slug>.*. Cached after first load.
+  const [cache, setCache] = useState<Record<string, { points: number[][]; bbox: number[] }>>({});
+  const city = cache[stageCity] ?? null;
   useEffect(() => {
-    Promise.all([fetch("/city-points.json").then((r) => r.json()), fetch("/city-points.bin").then((r) => r.arrayBuffer())]).then(([m, b]) => {
+    if (cache[stageCity]) return;
+    const base = stageCity === "Santa Ana" ? "/city-points" : `/city-points-${stageCity.toLowerCase().replace(/\s+/g, "-")}`;
+    let live = true;
+    Promise.all([fetch(`${base}.json`).then((r) => r.json()), fetch(`${base}.bin`).then((r) => r.arrayBuffer())]).then(([m, b]) => {
       const a = new Int16Array(b);
       const points: number[][] = [];
       for (let i = 0; i < a.length; i += 3) points.push([a[i], a[i + 1], a[i + 2]]);
-      setCity({ points, bbox: m.bbox });
+      if (live) setCache((c) => ({ ...c, [stageCity]: { points, bbox: m.bbox } }));
     }).catch(() => {});
-  }, []);
+    return () => { live = false; };
+  }, [stageCity, cache]);
   const showSplit = Boolean(site?.split && site.max_homes && site.max_homes >= 4);
   const model = useMemo(() => (site?.parcel ? buildLotModel(site.parcel, showSplit ? site.split : null, site.buildings ?? [], site.max_homes, site.keep_house) : null), [site, showSplit]);
   void CityHero;
@@ -69,9 +75,10 @@ export default function MapStage({ site: selected, listings, onSelect, focus, ci
   // The city stays mounted under the lot (one continuous world: no remount, no replayed intro).
   const full = "100%" as unknown as number;
   const lotOn = Boolean(selected && model);
+  const isSA = stageCity === "Santa Ana";
   const cityLayer = city ? (
-    <ParticleCity points={city.points} bbox={city.bbox} mode={mode === "map" ? "map" : mode === "tech" ? "tech" : "3d"} height={full} ink={INK} accent={ACCENT}
-      markers={mode === "map" && !selected ? markers : undefined} onMarker={onSelect} focus={selected ? siteFocus : groupFocus} inset={inset} paused={covered && lotOn} />
+    <ParticleCity key={stageCity} points={city.points} bbox={city.bbox} mode={mode === "map" ? "map" : mode === "tech" ? "tech" : "3d"} height={full} ink={INK} accent={ACCENT}
+      markers={mode === "map" && !selected && isSA ? markers : undefined} onMarker={onSelect} focus={selected ? siteFocus : pointFocus ?? (isSA ? groupFocus : null)} inset={inset} paused={covered && lotOn} />
   ) : null;
   const lotLayer = site && model ? (
     mode === "tech"
@@ -90,7 +97,7 @@ export default function MapStage({ site: selected, listings, onSelect, focus, ci
     <div className="stage-dark" style={{ position: "relative", height: "100%", background: "#000", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0 }}>{stage}</div>
       <span className="eyebrow" style={{ position: "absolute", top: inset ? 96 : 72, left: inset + 24, right: 24, color: labelColor, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", zIndex: 2, pointerEvents: "none" }}>
-        {site ? `${site.address}${site.parcel ? " · " + Math.round(site.parcel.area_sqft).toLocaleString() + " sq ft" : ""}` : "Santa Ana · every parcel"}
+        {site ? `${site.address}${site.parcel ? " · " + Math.round(site.parcel.area_sqft).toLocaleString() + " sq ft" : ""}` : `${stageCity} · every parcel`}
       </span>
       <span className="ff-viewswitch" style={{ position: "absolute", display: "flex", gap: 8, zIndex: 3 }} data-theme-scope="dark">
         {site && (mode === "3d" || mode === "map") && <button type="button" onClick={() => onReplay?.()} className="mapbtn" aria-label="Replay the lot split">Replay</button>}
