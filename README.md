@@ -8,13 +8,16 @@
 
 ## The app in one screen
 
-The home page (`/`) is one screen.
+**Live:** https://fourfold-splitter.vercel.app. The landing page (`/`) introduces the product; **Enter FourFold** opens the app at `/app`, which is one screen.
 
-- **Left panel, three tabs:** **Sites** (the 10 listings, ranked), **Groups** (viable listings close together) and **City** (every Santa Ana lot on a first screen).
-- **Right stage, three views:** **3D** particles by default (the city's 57,926 parcels; select a site and its real lot assembles, splits and the homes rise), **Map** (dot-matrix map with № tags) and **Technical** (a blueprint with dimensions and the 4 ft line, the largest side and rear setback SB 9 lets a city require, HCD SB 9 Fact Sheet, Sept 2024, p.4).
-- **Site card:** verdict, homes, per home (counts down from the asking price), asking price, investor per home, the next call, and buttons that open windows: **Checklist**, **Call sheet**, **Fund the gap**, **Local support** and **Briefing PDF**.
-- **Bottom:** **Check an address** (the live check) and **More** (project outcomes, OC SB 9 projects, how it works, call list PDF, CSV, your organization).
+- **Pill nav = three tabs:** **Sites**, **Groups**, **City**. The logo goes back to the landing page.
+- **Sites:** **For sale** (10 verified Santa Ana listings, ranked), **Leads** (17 Anaheim and Fullerton listings found by web search, checked on public data, price and listing status unverified) and **Off-market** (the 25 best first-screen lots per city to send a proactive offer to, with a draft letter "To the current owner"; not for sale, owners not contacted).
+- **Site card:** verdict in one phrase, homes, per home (the price divides as the lot splits on the stage), the next call, a "What's next" stepper (confirm unknowns, offer, due diligence, close, SB 9 lot split filing with HCD's 30-day completeness and 60-day decision clocks, permits, build, sell), and windows: **Checklist**, **Call sheet**, **Fund the gap**, **Local support**, **What's next**, **Briefing PDF**.
+- **Groups:** viable listings close together (one city, one crew), each opening a full group card (members, combined per home, a checklist matrix, a merged call sheet, fund the gap), plus the densest off-market clusters per city.
+- **City:** Santa Ana, Anaheim or Fullerton: every parcel on a first screen, drawn as particles.
+- **Stage, three views:** **3D** particles by default, **Map** (top-down particles with № tags) and **Technical** (a blueprint with dimensions and the 4 ft line, the largest side and rear setback SB 9 lets a city require, HCD SB 9 Fact Sheet, Sept 2024, p.4). Selecting a site flies the camera from the city to the real lot.
 - **Deep links:** `/app?site=sa-10`, `/app?tab=groups`, `/app?tab=city`, `/app?site=sa-10&window=fund`.
+- Assumed numbers carry a small `*` in the UI with a footnote to How it works (`/method`), where every ASSUMPTION is listed.
 
 ## The pitch
 

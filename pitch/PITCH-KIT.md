@@ -118,7 +118,7 @@ Equal weight. Ties go to Impact, so lead with it.
 |---|---|---|
 | **Impact** | A nonprofit acquisitions lead gets a ranked list of houses for sale this month, why each one, and the next call to make. | Sites list, the next call on each site card, Call sheet window |
 | **Works** | Real listings, real city parcels, FEMA and county fire layers, every test with its source and date; unknowns say UNKNOWN. | Checklist window, Technical view, Check an address |
-| **Scale** | Every check is a public ArcGIS service; the same pipeline already screens all 57,926 parcels in the city. | City tab (25,246), Groups tab |
+| **Scale** | Three cities already: the same pipeline screens 162,193 parcels in Santa Ana, Anaheim and Fullerton; adding a city means plugging in its parcel and zoning map. Off-market targets and clusters turn it from "what's for sale" into "where to send offers". | City tab switcher, Off-market list, Groups |
 | **Innovation** | Start from ordinary houses for sale and a legal edge only nonprofits have; code decides, Claude only reads listing text and can only flag. | Lot splitting in 3D, 1213 S Corta tenant row |
 
 ---
@@ -143,6 +143,10 @@ Equal weight. Ties go to Impact, so lead with it.
 | 68 OC projects labelled SB 9 or lot split, 55 in Garden Grove; median 9.3 months permit to completion (15 projects with both dates); Santa Ana UNKNOWN, not zero | HCD APR Tables A and A2 | `data/comparables.json`, README |
 | Santa Ana support: housing element in compliance (POSITIVE); RHNA very low income 359 of 606, moderate 260 of 545 (NEUTRAL, ASSUMPTION); pre-approved ADU plans (POSITIVE, ASSUMPTION mild); SB 9 APR activity, HCD letters, city SB 9 rules all UNKNOWN | checked 2026-11-07 | `data/support/santa-ana.json` |
 | 0 real project outcomes | learning turns on as records are added | `data/outcomes/README.md` |
+| Anaheim 68,442 parcels, 36,051 pass the first screen; Fullerton 35,825, 18,509 pass (+230 possible historic) | first screen, not a verdict; Fullerton layers not confirmed official | `data/citywide-anaheim.json`, `data/citywide-fullerton.json` |
+| 162,193 parcels screened across 3 cities (57,926 + 68,442 + 35,825) | sum of the three files | same three citywide files |
+| 17 leads: 15 LIKELY YES, 1 UNKNOWN (529 W Whiting, preservation zone), 1 NO (2518 Greenwich Dr, very high fire) | prices and listing status unverified | `data/leads-results.json` |
+| 25 off-market targets per city; densest 0.25 mi clusters: Santa Ana 225, Anaheim 208, Fullerton 220 candidate lots | not for sale, owners not contacted | `data/proactive-targets.json`, `data/offmarket-groups.json` |
 
 Don't quote: "an afternoon per listing" as measured (it's the team's description of the manual process; say "today it means opening four maps and reading the law"). Don't quote a live check speed as guaranteed.
 
