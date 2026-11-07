@@ -2,8 +2,8 @@
 
 > For a one-person acquisitions lead at a small housing nonprofit: FourFold finds Orange County houses, for sale or off-market, where a nonprofit could use SB 9 to turn one home into four, and shows why, with sources and the next call to make.
 
-**Team:** FourFold
-**Members:** John Wang, Jerry
+**Team:** Meatsters
+**Members:** John Wang, Jerry Sun
 **Lane:** 1 Find it
 **Built at:** Claude Impact Lab: UCI × SoCal Affordable Housing, November 7, 2026
 **Live demo:** https://fourfold-splitter.vercel.app
