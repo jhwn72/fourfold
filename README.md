@@ -90,6 +90,26 @@ A one-person acquisitions lead at a small housing nonprofit with no GIS team (sc
 | Santa Ana is in an urbanized area (SB 9 applies to urbanized areas, fact sheet April 2026 p.1) | **ASSUMPTION**, not checked against Census data | 2026-11-07 |
 | Split line | **ASSUMPTION**: a straight equal-area cut across the lot's long side. A sketch, not a surveyed parcel map | n/a |
 
+## Anaheim and Fullerton (leads, unverified)
+
+The same SB 9 checks now run for Anaheim and Fullerton (`city` on each site picks the source; Santa Ana is unchanged, and `scripts/test-multicity.ts` asserts its verdicts and checks still match). Sources, all checked 2026-11-07:
+
+- **Anaheim**: parcels and addresses from City of Anaheim PropertyInfo Parcels (https://gis.anaheim.net/map/rest/services/PropertyInfo/MapServer/0); zoning from PropertyInfo Zoning (layer 2).
+- **Fullerton**: parcels and addresses from Fullerton Parcels and HIOZ Sites, Citywide Parcels (https://services6.arcgis.com/yMM0eCpNU0fzBaIm/arcgis/rest/services/Fullerton_Parcels_and_HIOZ_Sites/FeatureServer/0); zoning from layer 2 of the same service. This service is published under a Fullerton GIS account on ArcGIS Online and is not confirmed as the city's official record. Owner and mailing fields in it are never requested.
+- Flood, fire, landslide, transit and building footprints use the same countywide and statewide layers as Santa Ana.
+- **Historic: UNKNOWN** in both cities. No city historic layer was checked; the next step is to ask the city planning desk. (Anaheim publishes a Historic Districts layer, PropertyInfo layer 14, not used yet.)
+
+**Single-family zones** (HCD SB 9 Fact Sheet, Sept 2024, p.2: single-family residential zones only), chosen by each layer's own zone description:
+
+- Anaheim: RS-1, RS-2, RS-3 ("Single-Family Residential"), RS-4 ("Small Lot Single-Family Residential"), RH-1, RH-2, RH-3 ("Hillside Single-Family Residential"). ASSUMPTION: RS-4 and RH-* count because their description says single-family. Specific plans (SP 87-1 and others) are not counted.
+- Fullerton: R-1-6 through R-1-40 ("One-Family Residential") and R-1-7.2P ("One-Family Residential, Preservation"). ASSUMPTION: R-1-7.2P counts as single-family, but its "Preservation" label may mean a local historic district, so those lots are a possible historic fail. PRD (planned residential development) and SPD zones are UNKNOWN: the plan decides.
+
+**Leads are unverified.** `data/leads.json` lists 17 addresses (11 Fullerton, 6 Anaheim) from an AI web search on 2026-11-07. Prices came from search snippets and were not confirmed on a live listing page, so `asking_price` is null and no land cost per home is shown. Two (2624 W Cherry Ave, 2413 W Oak Ave) were reported sold in 2025 by other sources and are likely stale. Results: `data/leads-results.json` (`npx tsx scripts/leads.ts`).
+
+**Whole-city screens**: `data/citywide-anaheim.json`, `data/citywide-fullerton.json` (`npm run citywide anaheim|fullerton`), packed for the map as `public/city-points-anaheim.bin/.json` and `-fullerton`.
+
+**Off-market groups and proactive targets** (`npx tsx scripts/offmarket.ts`): `data/offmarket-groups.json` (densest 0.25 mile cells of first-screen lots, per city) and `data/proactive-targets.json` (top 25 lots per city by lot area, inside a dense group, with a bonus inside a Caltrans high-quality transit area). These lots are not for sale; owners not contacted; a first screen, not a verdict. No owner names or mailing addresses are used. `src/lib/offerLetter.ts` drafts a letter "To the current owner"; nothing is sent automatically.
+
 ## What is UNKNOWN and why
 
 - **Tenant history (3 years):** no public data. Claude reads the listing for clues, but a listing can't prove there was no tenant. Ask the listing agent.

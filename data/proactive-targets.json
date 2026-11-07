@@ -1,0 +1,2144 @@
+{
+ "label": "not for sale; owners not contacted; a first screen, not a verdict",
+ "note": "Not for sale; owners not contacted; a first screen, not a verdict. Lots grouped into 0.25 mile grid cells (EPSG 2230 feet, cell center lon/lat converted locally). No owner names or mailing addresses. Each lot still needs the full parcel check before any outreach.",
+ "sources": [
+  {
+   "name": "FourFold whole-city first screens (see each screen_file for its sources)",
+   "checked": "2026-11-07"
+  },
+  {
+   "name": "Caltrans, California High Quality Transit Areas",
+   "url": "https://caltrans-gis.dot.ca.gov/arcgis/rest/services/CHrailroad/CA_HQ_Transit_Areas/FeatureServer/0",
+   "checked": "2026-11-07"
+  }
+ ],
+ "ranking": "Lots in one of the 10 densest groups per city, at least 2,400 sq ft, ranked by lot area with a 1,000 sq ft bonus when inside a Caltrans high-quality transit area. Top 25 per city.",
+ "cities": {
+  "Santa Ana": {
+   "label": "not for sale; owners not contacted; a first screen, not a verdict",
+   "generated_at": "2026-11-07T20:50:27.374Z",
+   "screen_file": "data/citywide.json",
+   "screen_counts": {
+    "total": 57926,
+    "sf_zone": 30590,
+    "splittable": 30352,
+    "candidates": 25246,
+    "in_district": 347,
+    "by_reason": {
+     "not_sf_zone": 27336,
+     "shared_polygon": 2196,
+     "too_small": 221,
+     "flood": 2231,
+     "fire": 0,
+     "historic": 349
+    }
+   },
+   "screen_note": "First screen using parcel centroids, not a verdict. x,y in points are State Plane CA VI (EPSG 2230), in units of 10 US feet, relative to bbox min (bbox is in feet). Codes: 0 no, 1 candidate, 2 in historic district. splittable counts single-family parcels that pass the split test, including shared polygons. candidates[].x,y are the parcel centroid in EPSG 2230 feet.",
+   "transit_checked": true,
+   "hqta_polygons": 222,
+   "targets": [
+    {
+     "rank": 1,
+     "apn": "408-403-07",
+     "site_address": "2514 W MAYWOOD AVE",
+     "city": "Santa Ana",
+     "lot_sqft": 12844,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4590-1673",
+     "near_transit": true,
+     "reasons": [
+      "Lot 12,844 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6059060,
+      2208527
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.902874,
+      33.717067
+     ]
+    },
+    {
+     "rank": 2,
+     "apn": "408-393-21",
+     "site_address": "2421 W CAMDEN PL",
+     "city": "Santa Ana",
+     "lot_sqft": 12325,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4590-1673",
+     "near_transit": true,
+     "reasons": [
+      "Lot 12,325 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6059341,
+      2209432
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.901998,
+      33.719566
+     ]
+    },
+    {
+     "rank": 3,
+     "apn": "109-344-24",
+     "site_address": "801 GRAHAM LN",
+     "city": "Santa Ana",
+     "lot_sqft": 12193,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4593-1678",
+     "near_transit": true,
+     "reasons": [
+      "Lot 12,193 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6064060,
+      2215747
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.886807,
+      33.737122
+     ]
+    },
+    {
+     "rank": 4,
+     "apn": "408-393-22",
+     "site_address": "2417 W CAMDEN PL",
+     "city": "Santa Ana",
+     "lot_sqft": 12085,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4590-1673",
+     "near_transit": true,
+     "reasons": [
+      "Lot 12,085 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6059397,
+      2209479
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.901816,
+      33.719698
+     ]
+    },
+    {
+     "rank": 5,
+     "apn": "109-062-33",
+     "site_address": "1001 GRAHAM LN",
+     "city": "Santa Ana",
+     "lot_sqft": 11649,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4593-1678",
+     "near_transit": true,
+     "reasons": [
+      "Lot 11,649 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6064056,
+      2215334
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.886799,
+      33.735988
+     ]
+    },
+    {
+     "rank": 6,
+     "apn": "109-351-38",
+     "site_address": "701 FOREST CIR",
+     "city": "Santa Ana",
+     "lot_sqft": 11461,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4593-1678",
+     "near_transit": true,
+     "reasons": [
+      "Lot 11,461 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6063464,
+      2216068
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.888783,
+      33.737979
+     ]
+    },
+    {
+     "rank": 7,
+     "apn": "408-393-18",
+     "site_address": "2433 W CAMDEN PL",
+     "city": "Santa Ana",
+     "lot_sqft": 11449,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4590-1673",
+     "near_transit": true,
+     "reasons": [
+      "Lot 11,449 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6059276,
+      2209212
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.9022,
+      33.718959
+     ]
+    },
+    {
+     "rank": 8,
+     "apn": "013-084-23",
+     "site_address": "1346 S OLIVE ST",
+     "city": "Santa Ana",
+     "lot_sqft": 11279,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4596-1676",
+     "near_transit": true,
+     "reasons": [
+      "Lot 11,279 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 207 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6066722,
+      2212807
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.877901,
+      33.729159
+     ]
+    },
+    {
+     "rank": 9,
+     "apn": "013-102-24",
+     "site_address": "1244 S PARTON ST",
+     "city": "Santa Ana",
+     "lot_sqft": 10620,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4596-1676",
+     "near_transit": true,
+     "reasons": [
+      "Lot 10,620 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 207 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6067679,
+      2213507
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.87479,
+      33.731123
+     ]
+    },
+    {
+     "rank": 10,
+     "apn": "408-231-29",
+     "site_address": "2601 W SAINT GERTRUDE PL",
+     "city": "Santa Ana",
+     "lot_sqft": 10550,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4590-1673",
+     "near_transit": true,
+     "reasons": [
+      "Lot 10,550 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6058808,
+      2209255
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.903741,
+      33.719057
+     ]
+    },
+    {
+     "rank": 11,
+     "apn": "408-394-15",
+     "site_address": "2341 W SAINT ANNE PL",
+     "city": "Santa Ana",
+     "lot_sqft": 10522,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4590-1673",
+     "near_transit": true,
+     "reasons": [
+      "Lot 10,522 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6059694,
+      2209273
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.900829,
+      33.719145
+     ]
+    },
+    {
+     "rank": 12,
+     "apn": "412-324-44",
+     "site_address": "2533 S DIAMOND ST",
+     "city": "Santa Ana",
+     "lot_sqft": 10137,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4590-1671",
+     "near_transit": true,
+     "reasons": [
+      "Lot 10,137 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 212 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6059826,
+      2206907
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.900271,
+      33.712649
+     ]
+    },
+    {
+     "rank": 13,
+     "apn": "109-351-39",
+     "site_address": "705 FOREST CIR",
+     "city": "Santa Ana",
+     "lot_sqft": 9740,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4593-1678",
+     "near_transit": true,
+     "reasons": [
+      "Lot 9,740 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6063482,
+      2215999
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.888721,
+      33.73779
+     ]
+    },
+    {
+     "rank": 14,
+     "apn": "014-422-11",
+     "site_address": "1405 KILSON DR",
+     "city": "Santa Ana",
+     "lot_sqft": 9697,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4599-1676",
+     "near_transit": true,
+     "reasons": [
+      "Lot 9,697 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 206 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6071834,
+      2212920
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.861096,
+      33.729687
+     ]
+    },
+    {
+     "rank": 15,
+     "apn": "408-393-20",
+     "site_address": "2425 W CAMDEN PL",
+     "city": "Santa Ana",
+     "lot_sqft": 9681,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4590-1673",
+     "near_transit": true,
+     "reasons": [
+      "Lot 9,681 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6059312,
+      2209362
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.902089,
+      33.719373
+     ]
+    },
+    {
+     "rank": 16,
+     "apn": "408-231-28",
+     "site_address": "2101 S GLENARBOR ST",
+     "city": "Santa Ana",
+     "lot_sqft": 9564,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4590-1673",
+     "near_transit": true,
+     "reasons": [
+      "Lot 9,564 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6058867,
+      2209207
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.903544,
+      33.718927
+     ]
+    },
+    {
+     "rank": 17,
+     "apn": "014-401-12",
+     "site_address": "1502 S MINTER ST",
+     "city": "Santa Ana",
+     "lot_sqft": 9477,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4599-1676",
+     "near_transit": true,
+     "reasons": [
+      "Lot 9,477 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 206 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6071472,
+      2212561
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.862268,
+      33.728686
+     ]
+    },
+    {
+     "rank": 18,
+     "apn": "001-283-01",
+     "site_address": "2229 ALONA ST",
+     "city": "Santa Ana",
+     "lot_sqft": 9239,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4593-1686",
+     "near_transit": true,
+     "reasons": [
+      "Lot 9,239 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 198 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6062851,
+      2226444
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.891337,
+      33.766462
+     ]
+    },
+    {
+     "rank": 19,
+     "apn": "014-422-09",
+     "site_address": "1402 KILSON DR",
+     "city": "Santa Ana",
+     "lot_sqft": 9185,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4599-1676",
+     "near_transit": true,
+     "reasons": [
+      "Lot 9,185 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 206 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6071669,
+      2212913
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.861638,
+      33.729661
+     ]
+    },
+    {
+     "rank": 20,
+     "apn": "410-083-33",
+     "site_address": "3317 RAMONA DR",
+     "city": "Santa Ana",
+     "lot_sqft": 9001,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4595-1669",
+     "near_transit": true,
+     "reasons": [
+      "Lot 9,001 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 201 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6066549,
+      2203404
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.877987,
+      33.703314
+     ]
+    },
+    {
+     "rank": 21,
+     "apn": "408-393-09",
+     "site_address": "2422 W HARVARD ST",
+     "city": "Santa Ana",
+     "lot_sqft": 8948,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4590-1673",
+     "near_transit": true,
+     "reasons": [
+      "Lot 8,948 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 200 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6059351,
+      2209584
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.901973,
+      33.719984
+     ]
+    },
+    {
+     "rank": 22,
+     "apn": "011-054-10",
+     "site_address": "336 E WISTERIA PL",
+     "city": "Santa Ana",
+     "lot_sqft": 8932,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4599-1678",
+     "near_transit": true,
+     "reasons": [
+      "Lot 8,932 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 225 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6071090,
+      2215387
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.863668,
+      33.736434
+     ]
+    },
+    {
+     "rank": 23,
+     "apn": "011-043-19",
+     "site_address": "333 E GRANT ST",
+     "city": "Santa Ana",
+     "lot_sqft": 8914,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4599-1678",
+     "near_transit": true,
+     "reasons": [
+      "Lot 8,914 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 225 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6071124,
+      2216196
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.863597,
+      33.738659
+     ]
+    },
+    {
+     "rank": 24,
+     "apn": "001-283-13",
+     "site_address": "1641 W AVALON AVE",
+     "city": "Santa Ana",
+     "lot_sqft": 8882,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4593-1686",
+     "near_transit": true,
+     "reasons": [
+      "Lot 8,882 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 198 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6062794,
+      2226331
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.891518,
+      33.766149
+     ]
+    },
+    {
+     "rank": 25,
+     "apn": "410-071-37",
+     "site_address": "918 W SIERRA DR",
+     "city": "Santa Ana",
+     "lot_sqft": 8834,
+     "zone": "R1",
+     "cluster_id": "santa-ana-4595-1669",
+     "near_transit": true,
+     "reasons": [
+      "Lot 8,834 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R1",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 201 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Not on the Santa Ana historic list (state inventory not checked)"
+     ],
+     "centroid_ft": [
+      6066390,
+      2203521
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.878516,
+      33.703629
+     ]
+    }
+   ]
+  },
+  "Anaheim": {
+   "label": "not for sale; owners not contacted; a first screen, not a verdict",
+   "generated_at": "2026-11-07T20:50:30.056Z",
+   "screen_file": "data/citywide-anaheim.json",
+   "screen_counts": {
+    "total": 68442,
+    "sf_zone": 39722,
+    "splittable": 39430,
+    "candidates": 36051,
+    "in_district": 0,
+    "by_reason": {
+     "not_sf_zone": 28720,
+     "shared_polygon": 0,
+     "too_small": 292,
+     "flood": 134,
+     "fire": 3245
+    }
+   },
+   "screen_note": "First screen using parcel centroids, not a verdict. Historic status is UNKNOWN for every lot: no city historic layer checked for Anaheim. Single-family codes: RS-1, RS-2, RS-3, RS-4, RH-1, RH-2, RH-3 (ASSUMPTION where judged, see src/lib/cities.ts). x,y in points are State Plane CA VI (EPSG 2230), in units of 10 US feet, relative to bbox min (bbox is in feet). Codes: 0 no, 1 candidate, 2 possible historic.",
+   "transit_checked": true,
+   "hqta_polygons": 195,
+   "targets": [
+    {
+     "rank": 1,
+     "apn": "359-211-25",
+     "site_address": "4295 E SUMMER CREEK LN",
+     "city": "Anaheim",
+     "lot_sqft": 18429,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4608-1708",
+     "near_transit": false,
+     "reasons": [
+      "Lot 18,429 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 188 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6083514,
+      2254843
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.824768,
+      33.845369
+     ]
+    },
+    {
+     "rank": 2,
+     "apn": "359-142-04",
+     "site_address": "201 N BARRYKNOLL ST",
+     "city": "Anaheim",
+     "lot_sqft": 14035,
+     "zone": "RS-2",
+     "cluster_id": "anaheim-4608-1708",
+     "near_transit": false,
+     "reasons": [
+      "Lot 14,035 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-2",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 188 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6083870,
+      2255439
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.823625,
+      33.847021
+     ]
+    },
+    {
+     "rank": 3,
+     "apn": "343-023-20",
+     "site_address": "6392 N CORNET CIR",
+     "city": "Anaheim",
+     "lot_sqft": 13348,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4612-1714",
+     "near_transit": false,
+     "reasons": [
+      "Lot 13,348 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 208 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6088834,
+      2262654
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.807633,
+      33.86705
+     ]
+    },
+    {
+     "rank": 4,
+     "apn": "343-023-22",
+     "site_address": "6391 N CORNET CIR",
+     "city": "Anaheim",
+     "lot_sqft": 13293,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4612-1714",
+     "near_transit": false,
+     "reasons": [
+      "Lot 13,293 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 208 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6088639,
+      2262678
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.808277,
+      33.867108
+     ]
+    },
+    {
+     "rank": 5,
+     "apn": "358-143-28",
+     "site_address": "236 N PASEO MADERO",
+     "city": "Anaheim",
+     "lot_sqft": 12871,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4619-1711",
+     "near_transit": false,
+     "reasons": [
+      "Lot 12,871 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 185 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6098132,
+      2259319
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.776847,
+      33.858265
+     ]
+    },
+    {
+     "rank": 6,
+     "apn": "358-143-12",
+     "site_address": "255 N PASEO CAMPO",
+     "city": "Anaheim",
+     "lot_sqft": 12622,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4619-1711",
+     "near_transit": false,
+     "reasons": [
+      "Lot 12,622 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 185 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6097678,
+      2259152
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.778334,
+      33.857788
+     ]
+    },
+    {
+     "rank": 7,
+     "apn": "358-143-15",
+     "site_address": "244 N PASEO CAMPO",
+     "city": "Anaheim",
+     "lot_sqft": 12458,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4619-1711",
+     "near_transit": false,
+     "reasons": [
+      "Lot 12,458 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 185 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6097897,
+      2259231
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.777617,
+      33.858014
+     ]
+    },
+    {
+     "rank": 8,
+     "apn": "359-211-24",
+     "site_address": "4285 E SUMMER CREEK LN",
+     "city": "Anaheim",
+     "lot_sqft": 11932,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4608-1708",
+     "near_transit": false,
+     "reasons": [
+      "Lot 11,932 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 188 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6083409,
+      2254842
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.825113,
+      33.845362
+     ]
+    },
+    {
+     "rank": 9,
+     "apn": "036-133-11",
+     "site_address": "548 S INDIANA ST",
+     "city": "Anaheim",
+     "lot_sqft": 10836,
+     "zone": "RS-2",
+     "cluster_id": "anaheim-4586-1703",
+     "near_transit": true,
+     "reasons": [
+      "Lot 10,836 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-2",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 197 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6053612,
+      2248579
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.922901,
+      33.826878
+     ]
+    },
+    {
+     "rank": 10,
+     "apn": "343-033-14",
+     "site_address": "18561 TANGO AVE",
+     "city": "Anaheim",
+     "lot_sqft": 11602,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4612-1714",
+     "near_transit": false,
+     "reasons": [
+      "Lot 11,602 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 208 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6088511,
+      2262701
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.8087,
+      33.867166
+     ]
+    },
+    {
+     "rank": 11,
+     "apn": "071-394-33",
+     "site_address": "2412 W RAINBOW AVE",
+     "city": "Anaheim",
+     "lot_sqft": 11215,
+     "zone": "RS-2",
+     "cluster_id": "anaheim-4575-1708",
+     "near_transit": false,
+     "reasons": [
+      "Lot 11,215 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-2",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 198 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6039892,
+      2255515
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.968446,
+      33.845322
+     ]
+    },
+    {
+     "rank": 12,
+     "apn": "358-123-30",
+     "site_address": "137 N MOHLER DR",
+     "city": "Anaheim",
+     "lot_sqft": 11123,
+     "zone": "RS-2",
+     "cluster_id": "anaheim-4621-1712",
+     "near_transit": false,
+     "reasons": [
+      "Lot 11,123 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-2",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 180 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6100836,
+      2260393
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.767993,
+      33.861324
+     ]
+    },
+    {
+     "rank": 13,
+     "apn": "359-211-76",
+     "site_address": "4240 E SUMMER CREEK LN",
+     "city": "Anaheim",
+     "lot_sqft": 10897,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4608-1708",
+     "near_transit": false,
+     "reasons": [
+      "Lot 10,897 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 188 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6083117,
+      2254726
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.826069,
+      33.845031
+     ]
+    },
+    {
+     "rank": 14,
+     "apn": "071-251-22",
+     "site_address": "1144 N AETNA ST",
+     "city": "Anaheim",
+     "lot_sqft": 10826,
+     "zone": "RS-2",
+     "cluster_id": "anaheim-4576-1710",
+     "near_transit": false,
+     "reasons": [
+      "Lot 10,826 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-2",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 196 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6040430,
+      2257292
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.96677,
+      33.850229
+     ]
+    },
+    {
+     "rank": 15,
+     "apn": "071-141-48",
+     "site_address": "938 N GILBERT ST",
+     "city": "Anaheim",
+     "lot_sqft": 10698,
+     "zone": "RS-2",
+     "cluster_id": "anaheim-4575-1708",
+     "near_transit": false,
+     "reasons": [
+      "Lot 10,698 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-2",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 198 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6040169,
+      2255381
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.967526,
+      33.844967
+     ]
+    },
+    {
+     "rank": 16,
+     "apn": "071-385-16",
+     "site_address": "2283 W HUNTINGTON AVE",
+     "city": "Anaheim",
+     "lot_sqft": 10563,
+     "zone": "RS-2",
+     "cluster_id": "anaheim-4576-1710",
+     "near_transit": false,
+     "reasons": [
+      "Lot 10,563 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-2",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 196 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6041468,
+      2257663
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.963372,
+      33.851296
+     ]
+    },
+    {
+     "rank": 17,
+     "apn": "071-394-32",
+     "site_address": "2416 W RAINBOW AVE",
+     "city": "Anaheim",
+     "lot_sqft": 10548,
+     "zone": "RS-2",
+     "cluster_id": "anaheim-4575-1708",
+     "near_transit": false,
+     "reasons": [
+      "Lot 10,548 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-2",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 198 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6039827,
+      2255525
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.96866,
+      33.845347
+     ]
+    },
+    {
+     "rank": 18,
+     "apn": "343-033-16",
+     "site_address": "18562 TANGO AVE",
+     "city": "Anaheim",
+     "lot_sqft": 10494,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4612-1714",
+     "near_transit": false,
+     "reasons": [
+      "Lot 10,494 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 208 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6088508,
+      2262513
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.8087,
+      33.86665
+     ]
+    },
+    {
+     "rank": 19,
+     "apn": "343-071-04",
+     "site_address": "4812 E WOODWIND WAY",
+     "city": "Anaheim",
+     "lot_sqft": 10057,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4612-1714",
+     "near_transit": false,
+     "reasons": [
+      "Lot 10,057 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 208 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6087859,
+      2262642
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.810844,
+      33.866977
+     ]
+    },
+    {
+     "rank": 20,
+     "apn": "358-092-36",
+     "site_address": "6100 E CALLE PANTANO",
+     "city": "Anaheim",
+     "lot_sqft": 9909,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4619-1711",
+     "near_transit": false,
+     "reasons": [
+      "Lot 9,909 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 185 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6097415,
+      2258791
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.779183,
+      33.856785
+     ]
+    },
+    {
+     "rank": 21,
+     "apn": "071-251-23",
+     "site_address": "1147 N MINOT ST",
+     "city": "Anaheim",
+     "lot_sqft": 9884,
+     "zone": "RS-2",
+     "cluster_id": "anaheim-4576-1710",
+     "near_transit": false,
+     "reasons": [
+      "Lot 9,884 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-2",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 196 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6040519,
+      2257238
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.966474,
+      33.850085
+     ]
+    },
+    {
+     "rank": 22,
+     "apn": "343-202-09",
+     "site_address": "1801 N SYMPHONY ST",
+     "city": "Anaheim",
+     "lot_sqft": 9689,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4612-1714",
+     "near_transit": false,
+     "reasons": [
+      "Lot 9,689 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 208 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6088251,
+      2263106
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.809576,
+      33.868268
+     ]
+    },
+    {
+     "rank": 23,
+     "apn": "343-202-11",
+     "site_address": "1802 N SYMPHONY ST",
+     "city": "Anaheim",
+     "lot_sqft": 9630,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4612-1714",
+     "near_transit": false,
+     "reasons": [
+      "Lot 9,630 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 208 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6088406,
+      2263096
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.809065,
+      33.868247
+     ]
+    },
+    {
+     "rank": 24,
+     "apn": "035-073-11",
+     "site_address": "301 E NORTH ST",
+     "city": "Anaheim",
+     "lot_sqft": 8480,
+     "zone": "RS-2",
+     "cluster_id": "anaheim-4588-1708",
+     "near_transit": true,
+     "reasons": [
+      "Lot 8,480 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-2",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 187 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6056366,
+      2255193
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.914182,
+      33.845172
+     ]
+    },
+    {
+     "rank": 25,
+     "apn": "035-073-01",
+     "site_address": "300 E MILLS DR",
+     "city": "Anaheim",
+     "lot_sqft": 8447,
+     "zone": "RS-3",
+     "cluster_id": "anaheim-4588-1708",
+     "near_transit": true,
+     "reasons": [
+      "Lot 8,447 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone RS-3",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 187 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Inside a Caltrans high-quality transit area (SB 9 parking cannot be required)",
+      "Historic status unknown: no city historic layer checked for Anaheim"
+     ],
+     "centroid_ft": [
+      6056326,
+      2255347
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.914321,
+      33.845593
+     ]
+    }
+   ]
+  },
+  "Fullerton": {
+   "label": "not for sale; owners not contacted; a first screen, not a verdict",
+   "generated_at": "2026-11-07T20:50:30.800Z",
+   "screen_file": "data/citywide-fullerton.json",
+   "screen_counts": {
+    "total": 35825,
+    "sf_zone": 19607,
+    "splittable": 19547,
+    "candidates": 18509,
+    "in_district": 230,
+    "by_reason": {
+     "not_sf_zone": 16218,
+     "shared_polygon": 105,
+     "too_small": 60,
+     "flood": 196,
+     "fire": 507
+    }
+   },
+   "screen_note": "First screen using parcel centroids, not a verdict. Historic status is UNKNOWN for every lot: no city historic layer checked for Fullerton. Single-family codes: R1, R1P (ASSUMPTION where judged, see src/lib/cities.ts). Code 2 here means a Fullerton R-1-7.2P preservation-zone lot (possible historic), not a mapped historic district. x,y in points are State Plane CA VI (EPSG 2230), in units of 10 US feet, relative to bbox min (bbox is in feet). Codes: 0 no, 1 candidate, 2 possible historic.",
+   "transit_checked": true,
+   "hqta_polygons": 38,
+   "targets": [
+    {
+     "rank": 1,
+     "apn": "030-390-04",
+     "site_address": "901 S GILBERT ST",
+     "city": "Fullerton",
+     "lot_sqft": 23353,
+     "zone": "R16",
+     "cluster_id": "fullerton-4575-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 23,353 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 181 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6039994,
+      2261617
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.968441,
+      33.862093
+     ]
+    },
+    {
+     "rank": 2,
+     "apn": "071-313-30",
+     "site_address": "905 S GILBERT ST",
+     "city": "Fullerton",
+     "lot_sqft": 18219,
+     "zone": "R16",
+     "cluster_id": "fullerton-4575-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 18,219 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 181 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6039999,
+      2261499
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.968418,
+      33.861769
+     ]
+    },
+    {
+     "rank": 3,
+     "apn": "030-263-10",
+     "site_address": "433 KING PL",
+     "city": "Fullerton",
+     "lot_sqft": 16942,
+     "zone": "R172",
+     "cluster_id": "fullerton-4579-1716",
+     "near_transit": false,
+     "reasons": [
+      "Lot 16,942 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R172",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 169 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6045047,
+      2266371
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.952055,
+      33.875382
+     ]
+    },
+    {
+     "rank": 4,
+     "apn": "030-264-10",
+     "site_address": "300 KING PL",
+     "city": "Fullerton",
+     "lot_sqft": 14589,
+     "zone": "R172",
+     "cluster_id": "fullerton-4579-1716",
+     "near_transit": false,
+     "reasons": [
+      "Lot 14,589 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R172",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 169 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6045189,
+      2265151
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.951521,
+      33.872037
+     ]
+    },
+    {
+     "rank": 5,
+     "apn": "071-313-26",
+     "site_address": "1017 S GILBERT ST",
+     "city": "Fullerton",
+     "lot_sqft": 14478,
+     "zone": "R16",
+     "cluster_id": "fullerton-4575-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 14,478 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 181 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6040002,
+      2261175
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.968391,
+      33.860879
+     ]
+    },
+    {
+     "rank": 6,
+     "apn": "030-263-01",
+     "site_address": "432 KING PL",
+     "city": "Fullerton",
+     "lot_sqft": 14466,
+     "zone": "R172",
+     "cluster_id": "fullerton-4579-1716",
+     "near_transit": false,
+     "reasons": [
+      "Lot 14,466 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R172",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 169 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6045203,
+      2266361
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.95154,
+      33.875362
+     ]
+    },
+    {
+     "rank": 7,
+     "apn": "071-313-29",
+     "site_address": "911 S GILBERT ST",
+     "city": "Fullerton",
+     "lot_sqft": 14411,
+     "zone": "R16",
+     "cluster_id": "fullerton-4575-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 14,411 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 181 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6040003,
+      2261405
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.9684,
+      33.861511
+     ]
+    },
+    {
+     "rank": 8,
+     "apn": "030-314-09",
+     "site_address": "300 ELIZABETH WAY",
+     "city": "Fullerton",
+     "lot_sqft": 13781,
+     "zone": "R172",
+     "cluster_id": "fullerton-4579-1716",
+     "near_transit": false,
+     "reasons": [
+      "Lot 13,781 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R172",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 169 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6044899,
+      2265216
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.95248,
+      33.872202
+     ]
+    },
+    {
+     "rank": 9,
+     "apn": "030-315-17",
+     "site_address": "300 DIANA PL",
+     "city": "Fullerton",
+     "lot_sqft": 13611,
+     "zone": "R172",
+     "cluster_id": "fullerton-4579-1716",
+     "near_transit": false,
+     "reasons": [
+      "Lot 13,611 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R172",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 169 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6044604,
+      2265280
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.953455,
+      33.872365
+     ]
+    },
+    {
+     "rank": 10,
+     "apn": "071-313-27",
+     "site_address": "1011 S GILBERT ST",
+     "city": "Fullerton",
+     "lot_sqft": 13611,
+     "zone": "R16",
+     "cluster_id": "fullerton-4575-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 13,611 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 181 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6039997,
+      2261255
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.968411,
+      33.861098
+     ]
+    },
+    {
+     "rank": 11,
+     "apn": "030-273-41",
+     "site_address": "233 FLORENCE PL",
+     "city": "Fullerton",
+     "lot_sqft": 13194,
+     "zone": "R172",
+     "cluster_id": "fullerton-4579-1716",
+     "near_transit": false,
+     "reasons": [
+      "Lot 13,194 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R172",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 169 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6044538,
+      2265124
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.953664,
+      33.871933
+     ]
+    },
+    {
+     "rank": 12,
+     "apn": "030-311-09",
+     "site_address": "432 ELIZABETH WAY",
+     "city": "Fullerton",
+     "lot_sqft": 12909,
+     "zone": "R172",
+     "cluster_id": "fullerton-4579-1716",
+     "near_transit": false,
+     "reasons": [
+      "Lot 12,909 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R172",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 169 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6044937,
+      2266350
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.952416,
+      33.87532
+     ]
+    },
+    {
+     "rank": 13,
+     "apn": "030-353-35",
+     "site_address": "1945 W JACARANDA PL",
+     "city": "Fullerton",
+     "lot_sqft": 12740,
+     "zone": "R172",
+     "cluster_id": "fullerton-4578-1716",
+     "near_transit": false,
+     "reasons": [
+      "Lot 12,740 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R172",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 176 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6043036,
+      2266430
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.958682,
+      33.875454
+     ]
+    },
+    {
+     "rank": 14,
+     "apn": "071-313-28",
+     "site_address": "1001 S GILBERT ST",
+     "city": "Fullerton",
+     "lot_sqft": 12621,
+     "zone": "R16",
+     "cluster_id": "fullerton-4575-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 12,621 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 181 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6040003,
+      2261330
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.968396,
+      33.861305
+     ]
+    },
+    {
+     "rank": 15,
+     "apn": "071-023-03",
+     "site_address": "2612 W HILL AVE",
+     "city": "Fullerton",
+     "lot_sqft": 12147,
+     "zone": "R16",
+     "cluster_id": "fullerton-4574-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 12,147 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 193 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6038775,
+      2261202
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.972433,
+      33.860897
+     ]
+    },
+    {
+     "rank": 16,
+     "apn": "071-313-04",
+     "site_address": "1012 MARGARET PL",
+     "city": "Fullerton",
+     "lot_sqft": 12057,
+     "zone": "R16",
+     "cluster_id": "fullerton-4575-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 12,057 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 181 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6039547,
+      2261189
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.96989,
+      33.860897
+     ]
+    },
+    {
+     "rank": 17,
+     "apn": "071-313-03",
+     "site_address": "1013 MARGARET PL",
+     "city": "Fullerton",
+     "lot_sqft": 12046,
+     "zone": "R16",
+     "cluster_id": "fullerton-4575-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 12,046 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 181 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6039431,
+      2261190
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.970272,
+      33.860894
+     ]
+    },
+    {
+     "rank": 18,
+     "apn": "071-022-04",
+     "site_address": "1013 CRYSTAL PL",
+     "city": "Fullerton",
+     "lot_sqft": 12030,
+     "zone": "R16",
+     "cluster_id": "fullerton-4575-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 12,030 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 181 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6039172,
+      2261193
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.971125,
+      33.860891
+     ]
+    },
+    {
+     "rank": 19,
+     "apn": "071-022-03",
+     "site_address": "1012 CRYSTAL PL",
+     "city": "Fullerton",
+     "lot_sqft": 11998,
+     "zone": "R16",
+     "cluster_id": "fullerton-4575-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 11,998 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 181 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6039287,
+      2261191
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.970746,
+      33.86089
+     ]
+    },
+    {
+     "rank": 20,
+     "apn": "031-312-17",
+     "site_address": "1231 W ELM AVE",
+     "city": "Fullerton",
+     "lot_sqft": 11456,
+     "zone": "R16",
+     "cluster_id": "fullerton-4580-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 11,456 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 171 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6046483,
+      2262159
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.947098,
+      33.863874
+     ]
+    },
+    {
+     "rank": 21,
+     "apn": "030-471-28",
+     "site_address": "1913 ODELL PL",
+     "city": "Fullerton",
+     "lot_sqft": 11195,
+     "zone": "R172",
+     "cluster_id": "fullerton-4578-1716",
+     "near_transit": false,
+     "reasons": [
+      "Lot 11,195 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R172",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 176 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6043588,
+      2265164
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.956795,
+      33.872001
+     ]
+    },
+    {
+     "rank": 22,
+     "apn": "030-311-08",
+     "site_address": "1701 W JACARANDA PL",
+     "city": "Fullerton",
+     "lot_sqft": 11078,
+     "zone": "R172",
+     "cluster_id": "fullerton-4579-1716",
+     "near_transit": false,
+     "reasons": [
+      "Lot 11,078 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R172",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 169 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6044874,
+      2266405
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.952626,
+      33.875468
+     ]
+    },
+    {
+     "rank": 23,
+     "apn": "030-333-18",
+     "site_address": "428 ADLENA DR",
+     "city": "Fullerton",
+     "lot_sqft": 10777,
+     "zone": "R172",
+     "cluster_id": "fullerton-4578-1716",
+     "near_transit": false,
+     "reasons": [
+      "Lot 10,777 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R172",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 176 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6044056,
+      2266225
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.955311,
+      33.874937
+     ]
+    },
+    {
+     "rank": 24,
+     "apn": "071-011-21",
+     "site_address": "2737 W CHERRY AVE",
+     "city": "Fullerton",
+     "lot_sqft": 10633,
+     "zone": "R16",
+     "cluster_id": "fullerton-4574-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 10,633 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 193 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6037835,
+      2261512
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.975546,
+      33.861706
+     ]
+    },
+    {
+     "rank": 25,
+     "apn": "030-455-13",
+     "site_address": "1448 W ELM AVE",
+     "city": "Fullerton",
+     "lot_sqft": 10470,
+     "zone": "R16",
+     "cluster_id": "fullerton-4579-1713",
+     "near_transit": false,
+     "reasons": [
+      "Lot 10,470 sq ft, room for two lots of at least 1,200 sq ft",
+      "Single-family zone R16",
+      "Not in a FEMA high-risk flood zone",
+      "Not in a very high fire hazard zone",
+      "In a dense group of 183 first-screen lots within a quarter-mile cell, so offers can be grouped",
+      "Historic status unknown: no city historic layer checked for Fullerton"
+     ],
+     "centroid_ft": [
+      6045089,
+      2262003
+     ],
+     "label": "not for sale; owners not contacted; a first screen, not a verdict",
+     "centroid_lonlat": [
+      -117.951681,
+      33.863383
+     ]
+    }
+   ]
+  }
+ }
+}
