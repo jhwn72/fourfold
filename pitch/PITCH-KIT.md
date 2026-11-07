@@ -14,7 +14,7 @@ Every number here traces to a file in `data/` (see section 4). If the data is re
 - **Right stage, three views** (switch top right): **3D** particles by default (the city's 57,926 parcels; select a site and its lot assembles, splits, and homes rise; **Replay** reruns it), **Map** (dot-matrix with № tags), **Technical** (blueprint with dimensions and the 4 ft SB 9 side/rear setback line).
 - **Site card:** verdict next to the address, Homes, Per home (counts down from the asking price), Asking, Investor / home, the next call, and buttons that open windows: **Checklist**, **Call sheet**, **Fund the gap**, **Local support**, **Briefing PDF**.
 - **Bottom:** **Check an address** (live check) and **More** (Project outcomes, OC SB 9 projects, How it works, Call list PDF, CSV, Your organization).
-- **Deep links:** `/?site=sa-10` (2121 Valencia), `/?site=sa-04` (1209 S Townsend), `/?site=sa-06` (1213 S Corta), `/?tab=groups`, `/?tab=city`, `/?site=sa-10&window=fund` (Fund the gap open on Valencia), `/?site=sa-06&window=checklist`.
+- **Deep links:** `/app?site=sa-10` (2121 Valencia), `/app?site=sa-04` (1209 S Townsend), `/app?site=sa-06` (1213 S Corta), `/app?tab=groups`, `/app?tab=city`, `/app?site=sa-10&window=fund` (Fund the gap open on Valencia), `/app?site=sa-06&window=checklist`.
 
 **One-liner (John's):**
 > Investors can't split a lot under SB 9 unless they live there for 3 years. Nonprofits and community land trusts are exempt. FourFold finds the houses for sale where a nonprofit can turn one home into four.
@@ -56,11 +56,11 @@ If the stage animation lags on the recording machine, click **Replay** once befo
 ### Pre-open (in this order)
 
 1. https://fourfold-splitter.vercel.app (Sites tab, nothing selected, 3D view)
-2. https://fourfold-splitter.vercel.app/?site=sa-10 (2121 Valencia)
-3. https://fourfold-splitter.vercel.app/?site=sa-10&window=fund (Fund the gap open)
-4. https://fourfold-splitter.vercel.app/?site=sa-06&window=checklist (1213 S Corta, tenant row)
-5. https://fourfold-splitter.vercel.app/?tab=groups
-6. https://fourfold-splitter.vercel.app/?tab=city
+2. https://fourfold-splitter.vercel.app/app?site=sa-10 (2121 Valencia)
+3. https://fourfold-splitter.vercel.app/app?site=sa-10&window=fund (Fund the gap open)
+4. https://fourfold-splitter.vercel.app/app?site=sa-06&window=checklist (1213 S Corta, tenant row)
+5. https://fourfold-splitter.vercel.app/app?tab=groups
+6. https://fourfold-splitter.vercel.app/app?tab=city
 7. The demo video file, paused on frame 1
 
 Zoom 125 to 150%. Focus mode on. Charger in. Hotspot ready.

@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 /** Global footer. Hidden on "/" because the app panel shows the disclaimer itself. */
 export default function SiteFooter() {
   const path = usePathname() ?? "/";
-  if (path === "/") return null;
+  if (path === "/" || path === "/app") return null;
   return (
     <footer className="site-footer">
       <div>Prototype. Not legal or financial advice. Confirm with the city and a professional.</div>

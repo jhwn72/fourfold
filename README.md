@@ -14,7 +14,7 @@ The home page (`/`) is one screen.
 - **Right stage, three views:** **3D** particles by default (the city's 57,926 parcels; select a site and its real lot assembles, splits and the homes rise), **Map** (dot-matrix map with № tags) and **Technical** (a blueprint with dimensions and the 4 ft line, the largest side and rear setback SB 9 lets a city require, HCD SB 9 Fact Sheet, Sept 2024, p.4).
 - **Site card:** verdict, homes, per home (counts down from the asking price), asking price, investor per home, the next call, and buttons that open windows: **Checklist**, **Call sheet**, **Fund the gap**, **Local support** and **Briefing PDF**.
 - **Bottom:** **Check an address** (the live check) and **More** (project outcomes, OC SB 9 projects, how it works, call list PDF, CSV, your organization).
-- **Deep links:** `/?site=sa-10`, `/?tab=groups`, `/?tab=city`, `/?site=sa-10&window=fund`.
+- **Deep links:** `/app?site=sa-10`, `/app?tab=groups`, `/app?tab=city`, `/app?site=sa-10&window=fund`.
 
 ## The pitch
 

@@ -2,8 +2,8 @@ import FourFoldApp, { type AppGroup } from "@/components/app/FourFoldApp";
 import { candidatePointsFeet, clusterSites, DEFAULT_RADIUS_FT, fmtMiles, toClusterSite, type ClusterSite } from "@/lib/clusters";
 import { RESULTS } from "@/lib/results";
 // Server component: read at build time, not shipped whole to the browser.
-import citywide from "../../data/citywide.json";
-import comparables from "../../data/comparables.json";
+import citywide from "../../../data/citywide.json";
+import comparables from "../../../data/comparables.json";
 
 export default function Home() {
   const rows = RESULTS.results;

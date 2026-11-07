@@ -8,7 +8,7 @@ import ThemeToggle from "./ThemeToggle";
 
 export default function NavBar() {
   const path = usePathname() ?? "/";
-  const home = path === "/";
+  const home = path === "/app";
   const [open, setOpen] = useState(false);
 
   useEffect(() => setOpen(false), [path]);
@@ -19,15 +19,17 @@ export default function NavBar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // The landing page at "/" has its own floating nav.
+  if (path === "/") return null;
   return (
     <>
       <header className={s.header}>
-        <Link href="/" className={s.brand}>FourFold</Link>
-        {!home && <Link href="/" className={s.back}>← Back to app</Link>}
+        <Link href="/app" className={s.brand}>FourFold</Link>
+        {!home && <Link href="/app" className={s.back}>← Back to app</Link>}
         <div className={s.right}>
           <span className={s.wide}><ThemeToggle variant="icon" /></span>
           <span className={s.wide}><FontSwitcher /></span>
-          <Link href="/?window=check" className={`btn-primary ${s.cta}`}>
+          <Link href="/app?window=check" className={`btn-primary ${s.cta}`}>
             <span className={s.ctaLong}>Check an address</span>
             <span className={s.ctaShort}>Check</span>
           </Link>
@@ -38,7 +40,7 @@ export default function NavBar() {
       </header>
       {open && (
         <div id="nav-sheet" className={s.sheet}>
-          {!home && <Link href="/" className={s.sheetLink} onClick={() => setOpen(false)}>← Back to app</Link>}
+          {!home && <Link href="/app" className={s.sheetLink} onClick={() => setOpen(false)}>← Back to app</Link>}
           <div className={s.sheetRow}><span className="eyebrow">Theme</span><ThemeToggle /></div>
           <div style={{ paddingTop: 12 }}><FontPanel style={{ width: "100%", boxShadow: "none" }} /></div>
         </div>

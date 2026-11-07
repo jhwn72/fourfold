@@ -139,7 +139,7 @@ export default function MethodPage() {
       </section>
 
       <p className="muted" style={{ marginTop: 40 }}>
-        Full README and code: <A href="https://github.com/jhwn72/fourfold">github.com/jhwn72/fourfold</A> · <Link href="/">Back to the ranked list</Link>
+        Full README and code: <A href="https://github.com/jhwn72/fourfold">github.com/jhwn72/fourfold</A> · <Link href="/app">Back to the ranked list</Link>
       </p>
     </article>
   );

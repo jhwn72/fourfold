@@ -14,7 +14,7 @@ export default function BatchBrief() {
   const rows = RESULTS.results;
   return (
     <article className="brief-page">
-      <p className="no-print"><Link href="/">Back to all sites</Link> · <PrintButton /> · <a href="/results.csv">Download CSV</a></p>
+      <p className="no-print"><Link href="/app">Back to all sites</Link> · <PrintButton /> · <a href="/results.csv">Download CSV</a></p>
       <h1>FourFold: {rows.length} Santa Ana sites to call this month</h1>
       <p className="muted" style={{ marginTop: 0 }}>
         Listings collected by hand on 2026-11-07.{RESULTS.generated_at ? ` Checks run ${RESULTS.generated_at.slice(0, 16).replace("T", " ")} UTC.` : ""}{" "}

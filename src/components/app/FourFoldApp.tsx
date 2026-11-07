@@ -45,7 +45,7 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
     const q = new URLSearchParams();
     if (tab !== "sites") q.set("tab", tab);
     if (sel) q.set("site", sel);
-    window.history.replaceState(null, "", q.toString() ? `/?${q}` : "/");
+    window.history.replaceState(null, "", q.toString() ? `/app?${q}` : "/app");
   }, [tab, sel]);
 
   const site = results.find((r) => r.id === sel) ?? null;

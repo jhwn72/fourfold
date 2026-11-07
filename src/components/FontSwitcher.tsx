@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { FONT_KEY, LABEL_FONTS, TEXT_FONTS } from "./fontOptions";
 
 type Choice = { text: string; label: string };
-const DEFAULT: Choice = { text: "--font-geist-sans", label: "--font-geist-mono" };
+const DEFAULT: Choice = { text: "--font-dm-sans", label: "--font-dm-mono" };
 
 function apply(c: Choice) {
   const s = document.documentElement.style;

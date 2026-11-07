@@ -47,8 +47,8 @@
   --slow: 0.45s;
   color-scheme: dark;
   /* Fonts: next/font sets each --font-* variable on <html>; the font switcher picks which one is used. */
-  --font-sans: var(--font-choice-sans, var(--font-geist-sans)), -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  --font-mono: var(--font-choice-mono, var(--font-geist-mono)), ui-monospace, "SF Mono", Menlo, monospace;
+  --font-sans: var(--font-choice-sans, var(--font-dm-sans)), -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --font-mono: var(--font-choice-mono, var(--font-dm-mono)), ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 /* Light mode. Tango and Norrvik are dark only, so these values are the dark roles inverted: paper white,
