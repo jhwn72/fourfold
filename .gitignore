@@ -18,3 +18,10 @@ build/
 .next/
 .DS_Store
 *.zip
+
+# FourFold
+.env.local
+.cache/
+.vercel
+next-env.d.ts
+*.tsbuildinfo
