@@ -2,6 +2,7 @@
 import { useState } from "react";
 import type { SiteResult } from "@/lib/types";
 import Checklist from "./Checklist";
+import CallSheet from "./CallSheet";
 import CostCompare from "./CostCompare";
 import LotSvg from "./LotSvg";
 
@@ -46,10 +47,11 @@ export default function LiveCheck() {
       {result && (
         <>
           <div style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "flex-start", marginTop: 12 }}>
-            {result.parcel && <div style={{ flex: "1 1 280px" }}><LotSvg parcel={result.parcel} split={result.split} homes={result.max_homes} /></div>}
+            {result.parcel && <div style={{ flex: "1 1 280px" }}><LotSvg parcel={result.parcel} split={result.split} homes={result.max_homes} buildings={result.buildings} keep={result.keep_house} /></div>}
             <div style={{ flex: "1 1 320px" }}><CostCompare price={result.asking_price} homes={result.max_homes} perHome={result.land_cost_per_home} /></div>
           </div>
           <Checklist result={result} />
+          <CallSheet result={result} />
         </>
       )}
     </div>

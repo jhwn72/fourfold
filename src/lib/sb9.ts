@@ -11,6 +11,8 @@
 // - HCD SB 9 Fact Sheet, September 2024: https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/sb-9-fact-sheet.pdf
 //   p.2 single-family zones only; p.7 up to four units with a lot split.
 import { fireCheck } from "./checks/fire";
+import { footprintCheck } from "./checks/footprint";
+import { transitCheck } from "./checks/transit";
 import { floodCheck } from "./checks/flood";
 import { historicCheck } from "./checks/historic";
 import { landslideCheck } from "./checks/landslide";
@@ -106,14 +108,21 @@ export async function checkSite(input: ListingInput, evidence: ListingEvidence =
 
   const checks: CheckResult[] = [parcelCheck];
   let split = null;
+  let buildings: number[][][] = [];
+  let keep_house: SiteResult["keep_house"] = "unknown";
   if (found.parcel) {
     const p = found.parcel;
     const ls = lotSplitCheck(p);
     split = ls.split;
-    const live = await Promise.all([zoningCheck(p), floodCheck(p), fireCheck(p), historicCheck(p), landslideCheck(p)]);
-    checks.push(live[0], ls.check, live[1], live[2], live[3]);
+    const [zoning, flood, fire, historic, landslide, parking, fp] = await Promise.all([
+      zoningCheck(p), floodCheck(p), fireCheck(p), historicCheck(p), landslideCheck(p), transitCheck(p), footprintCheck(p, ls.split),
+    ]);
+    buildings = fp.buildings;
+    if (ls.check.status === "PASS") split = fp.split;
+    keep_house = fp.keep;
+    checks.push(zoning, ls.check, flood, fire, historic);
     checks.push(...manualChecks(evidence));
-    checks.push(live[4]);
+    checks.push(fp.check, parking, landslide);
   } else {
     checks.push(...manualChecks(evidence));
   }
@@ -133,6 +142,8 @@ export async function checkSite(input: ListingInput, evidence: ListingEvidence =
     max_homes: d.max_homes,
     land_cost_per_home: d.land_cost_per_home,
     split,
+    buildings,
+    keep_house,
     listing_evidence: evidence,
     unknown_count: checks.filter((c) => c.status === "UNKNOWN").length,
     computed_at: now(),

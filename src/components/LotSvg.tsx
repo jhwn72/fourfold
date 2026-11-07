@@ -1,8 +1,8 @@
-import type { Parcel, SplitPlan } from "@/lib/types";
+import type { KeepHouse, Parcel, SplitPlan } from "@/lib/types";
 import { centroid, largestRing } from "@/lib/geometry";
 
 // 2D drawing of the real parcel polygon (State Plane feet) with the sketched split line and house icons.
-export default function LotSvg({ parcel, split, homes }: { parcel: Parcel; split: SplitPlan | null; homes: number | null }) {
+export default function LotSvg({ parcel, split, homes, buildings = [], keep }: { parcel: Parcel; split: SplitPlan | null; homes: number | null; buildings?: number[][][]; keep?: KeepHouse }) {
   const ring = largestRing(parcel.rings);
   const xs = ring.map((p) => p[0]), ys = ring.map((p) => p[1]);
   const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
@@ -40,11 +40,13 @@ export default function LotSvg({ parcel, split, homes }: { parcel: Parcel; split
         ) : (
           <polygon points={pts(ring)} fill="#f1f1f1" stroke="#555" strokeWidth={1.5} />
         )}
+        {buildings.map((b, i) => <polygon key={`b${i}`} points={pts(b)} fill="rgba(80,80,80,0.35)" stroke="#333" strokeWidth={1} />)}
         {icons}
       </svg>
       <figcaption className="muted">
         Real parcel outline (APN {parcel.apn}), north up, {Math.round(w)} × {Math.round(h)} ft bounding box.
         {split && homes && homes >= 4 ? ` Dashed line: a sketch of one equal split (${Math.round(split.lot_a_sqft).toLocaleString()} + ${Math.round(split.lot_b_sqft).toLocaleString()} sq ft), not a surveyed map.` : ""}
+        {buildings.length ? ` Gray: existing building footprint (OC Public Works)${keep === "fits_a" || keep === "fits_b" ? ", fits on one half: keep it and build 3." : keep === "straddles" ? ", crosses the sketched line." : "."}` : ""}
       </figcaption>
     </figure>
   );

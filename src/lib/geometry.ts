@@ -70,7 +70,7 @@ function clipX(ring: Pt[], c: number, keepLeft: boolean): Pt[] {
  * Split the lot into two equal-area parts with a straight cut across its long side.
  * This is a sketch of one possible split, not a surveyed parcel map.
  */
-export function equalSplit(ring: Pt[]) {
+export function equalSplit(ring: Pt[], flip = false) {
   // Orient by the longest edge, so the cut runs across the lot's depth.
   let best = 0, angle = 0;
   for (let i = 1; i < ring.length; i++) {
@@ -82,7 +82,7 @@ export function equalSplit(ring: Pt[]) {
   let xs = r.map((p) => p[0]), ys = r.map((p) => p[1]);
   // If the lot is taller than wide in this frame, turn it 90 degrees so we always cut along x.
   let extra = 0;
-  if (Math.max(...ys) - Math.min(...ys) > Math.max(...xs) - Math.min(...xs)) {
+  if ((Math.max(...ys) - Math.min(...ys) > Math.max(...xs) - Math.min(...xs)) !== flip) {
     extra = Math.PI / 2;
     r = r.map((p) => rotate(p, -extra));
     xs = r.map((p) => p[0]); ys = r.map((p) => p[1]);
@@ -105,4 +105,52 @@ export function equalSplit(ring: Pt[]) {
     lot_b_sqft: Math.abs(signedArea(b)),
     line: [back([c, yLo]), back([c, yHi])] as [number, number][],
   };
+}
+
+/** Even-odd point in polygon. */
+export function pointInRing(p: Pt, ring: Pt[]): boolean {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i], [xj, yj] = ring[j];
+    if (yi > p[1] !== yj > p[1] && p[0] < ((xj - xi) * (p[1] - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
+/**
+ * Find a straight split line that keeps every existing building wholly on one lot, with both lots at least
+ * minLot sq ft and the smaller at least minShare of the total. Tries both cut directions. Returns null if none.
+ * A sketch for screening, not a surveyed parcel map.
+ */
+export function splitClearing(ring: Pt[], buildings: Pt[][], minLot: number, minShare: number) {
+  let best: ReturnType<typeof equalSplit> | null = null;
+  let bestGap = Infinity;
+  const total = Math.abs(signedArea(ring));
+  for (const flip of [false, true]) {
+    const eq = equalSplit(ring, flip);
+    // Rebuild the rotated frame used by equalSplit from its cut line direction.
+    const [p0, p1] = eq.line;
+    const lineAngle = Math.atan2(p1[1] - p0[1], p1[0] - p0[0]); // cut runs along local y
+    const a = lineAngle - Math.PI / 2; // local x axis
+    const r = ring.map((p) => rotate(p, -a));
+    const bx = buildings.flatMap((b) => b.map((p) => rotate(p, -a)[0]));
+    const bx0 = Math.min(...bx), bx1 = Math.max(...bx);
+    for (const c of [bx1 + 2, bx0 - 2]) {
+      const left = clipX(r, c, true), right = clipX(r, c, false);
+      if (left.length < 3 || right.length < 3) continue;
+      const la = Math.abs(signedArea(left)), ra = Math.abs(signedArea(right));
+      if (la < minLot || ra < minLot || Math.min(la, ra) / total < minShare) continue;
+      const gap = Math.abs(la - ra);
+      if (gap < bestGap) {
+        bestGap = gap;
+        const ys = r.map((p) => p[1]);
+        const back = (p: Pt) => rotate(p, a);
+        best = {
+          lot_a: left.map(back), lot_b: right.map(back), lot_a_sqft: la, lot_b_sqft: ra,
+          line: [back([c, Math.min(...ys)]), back([c, Math.max(...ys)])] as [number, number][],
+        };
+      }
+    }
+  }
+  return best;
 }

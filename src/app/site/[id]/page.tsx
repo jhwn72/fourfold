@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Checklist from "@/components/Checklist";
+import CallSheet from "@/components/CallSheet";
 import CostCompare from "@/components/CostCompare";
+import InvestorCard from "@/components/InvestorCard";
 import LotSvg from "@/components/LotSvg";
 import { RESULTS, getSite } from "@/lib/results";
 
@@ -29,7 +31,8 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
       </p>
       <div style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "flex-start" }}>
         <div style={{ flex: "1 1 300px" }}>
-          {r.parcel ? <LotSvg parcel={r.parcel} split={r.split} homes={r.max_homes} /> : <p>No parcel polygon.</p>}
+          {r.parcel ? <LotSvg parcel={r.parcel} split={r.split} homes={r.max_homes} buildings={r.buildings} keep={r.keep_house} /> : <p>No parcel polygon.</p>}
+          <InvestorCard r={r} />
         </div>
         <div style={{ flex: "1 1 340px" }}>
           <CostCompare price={r.asking_price} homes={r.max_homes} perHome={r.land_cost_per_home} />
@@ -49,6 +52,7 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
       </div>
       <h2>SB 9 checklist</h2>
       <Checklist result={r} />
+      <CallSheet result={r} />
       <p className="muted">
         Rules from the <a href="https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf" target="_blank" rel="noreferrer">HCD SB 9 fact sheet (April 2026)</a> and the{" "}
         <a href="https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/sb-9-fact-sheet.pdf" target="_blank" rel="noreferrer">HCD SB 9 Fact Sheet (Sept 2024)</a>, read 2026-11-07. Results computed {r.computed_at.slice(0, 16).replace("T", " ")} UTC.

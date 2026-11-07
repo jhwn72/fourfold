@@ -57,6 +57,8 @@ export type SiteResult = {
   unknown_count: number;
   computed_at: string;
   listed_lot_sqft?: number | null;
+  buildings?: number[][][]; // existing building footprints on the parcel, wkid 2230 rings
+  keep_house?: KeepHouse;
   description?: string;
   description_type?: string | null;
 };
@@ -68,3 +70,5 @@ export type SplitPlan = {
   lot_a: number[][]; // polygon ring
   lot_b: number[][];
 };
+
+export type KeepHouse = "fits_a" | "fits_b" | "straddles" | "none" | "unknown";

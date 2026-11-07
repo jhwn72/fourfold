@@ -38,6 +38,14 @@ export const SRC = {
     name: "California Geological Survey, Landslide Zones",
     url: "https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0",
   },
+  ocFootprints: {
+    name: "OC Public Works, Building Footprints",
+    url: "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Building_Footprints/MapServer/0",
+  },
+  hqta: {
+    name: "Caltrans, California High Quality Transit Areas",
+    url: "https://caltrans-gis.dot.ca.gov/arcgis/rest/services/CHrailroad/CA_HQ_Transit_Areas/FeatureServer/0",
+  },
   hcdSb9Short: {
     name: "HCD Housing Law Fact Sheet: Duplexes and Lot Splits (SB 9), April 2026",
     url: "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf",
