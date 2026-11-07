@@ -263,3 +263,34 @@ pre { background: var(--surface-2); border: 1px solid var(--line); border-radius
 /* Windows: rounded glass sheets */
 .ff-win { border-radius: 22px !important; background: var(--glass-strong) !important; border-color: var(--glass-line) !important; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4); animation: winIn 0.35s var(--ease-out) both; }
 @keyframes winIn { from { opacity: 0; transform: translateY(10px) scale(0.99); } to { opacity: 1; transform: none; } }
+
+/* ---------- Motion (pitch/MOTION-PLAN.md) ---------- */
+:root { --ease-in: cubic-bezier(0.4, 0, 0.9, 0.5); --stage: 0.6s; --stagger: 35ms; }
+/* City and lot layers on the stage crossfade instead of cutting. */
+.ff-layer { transition: opacity var(--stage) var(--ease-out); }
+/* Windows: the card grows from its button (Window.tsx); the scrim and content fade. */
+.ff-scrim { animation: ffFade var(--medium) var(--ease-out) both; transition: opacity var(--medium) var(--ease-in); }
+.ff-scrim.ff-closing { opacity: 0; }
+.ff-scrim .ff-win { animation: none; }
+.ff-scrim .ff-win-body { animation: ffFade var(--medium) var(--ease-out) 0.12s both; }
+@keyframes ffFade { from { opacity: 0; } to { opacity: 1; } }
+/* Checklist rows tick in; the PASS / FAIL / UNKNOWN chip lands 80 ms after its row. Rows hold their height. */
+.ff-win-body tbody tr { animation: ffRow var(--medium) var(--ease-out) both; animation-delay: calc(0.18s + var(--i, 12) * var(--stagger)); }
+.ff-win-body tbody tr .status { animation: ffFade var(--medium) var(--ease-out) both; animation-delay: calc(0.26s + var(--i, 12) * var(--stagger)); }
+.ff-win-body tbody tr:nth-child(1) { --i: 0; } .ff-win-body tbody tr:nth-child(2) { --i: 1; } .ff-win-body tbody tr:nth-child(3) { --i: 2; }
+.ff-win-body tbody tr:nth-child(4) { --i: 3; } .ff-win-body tbody tr:nth-child(5) { --i: 4; } .ff-win-body tbody tr:nth-child(6) { --i: 5; }
+.ff-win-body tbody tr:nth-child(7) { --i: 6; } .ff-win-body tbody tr:nth-child(8) { --i: 7; } .ff-win-body tbody tr:nth-child(9) { --i: 8; }
+.ff-win-body tbody tr:nth-child(10) { --i: 9; } .ff-win-body tbody tr:nth-child(11) { --i: 10; } .ff-win-body tbody tr:nth-child(12) { --i: 11; }
+@keyframes ffRow { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .ff-scrim .ff-win { transition: none !important; }
+}
+/* Tab content enters from the direction of travel (--dir is +1 moving right, -1 moving left). */
+.ff-tabpane { animation: ffTab var(--medium) var(--ease-out) both; }
+@keyframes ffTab { from { opacity: 0; transform: translateX(calc(var(--dir, 1) * 12px)); } to { opacity: 1; transform: none; } }
+/* Technical view: the parcel outline draws, then the split line, the 4 ft setback line, then labels. */
+.bp .bp-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: bpDraw 0.6s var(--ease-out) forwards; }
+.bp .bp-in { animation: ffFade var(--medium) var(--ease-out) both; }
+.bp .bp-2 { animation-delay: 0.15s; } .bp .bp-3 { animation-delay: 0.3s; } .bp .bp-4 { animation-delay: 0.6s; }
+@keyframes bpDraw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .bp .bp-draw { stroke-dashoffset: 0; } }

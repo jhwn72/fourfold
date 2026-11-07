@@ -15,7 +15,7 @@
   padding: 0 10px 0 12px; height: 32px; align-content: center;
 }
 .glyph span { width: 4px; height: 4px; border-radius: 50%; background: var(--text); }
-.items { display: flex; align-items: center; gap: 2px; }
+.items { display: flex; align-items: center; gap: 2px; position: relative; }
 .link {
   font: inherit; color: var(--muted); text-decoration: none; padding: 7px 12px; border-radius: 999px; border: 0;
   background: transparent; cursor: pointer; transition: color var(--fast) ease, background var(--fast) ease;
@@ -68,3 +68,13 @@
   .short { display: inline; }
 }
 @media print { .nav, .corners { display: none; } }
+
+/* Sliding tab pill: one indicator moves under the active tab. */
+.slid { position: relative; }
+.pill {
+  position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; pointer-events: none;
+  background: var(--glass-btn); box-shadow: inset 0 0 0 1px var(--glass-line);
+  transition: transform var(--medium) var(--ease), width var(--medium) var(--ease);
+}
+.slid .link { position: relative; z-index: 1; }
+.slid .on, .slid .on:hover { background: transparent; box-shadow: none; }

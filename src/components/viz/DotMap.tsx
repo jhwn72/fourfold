@@ -4,7 +4,7 @@
 // is drawn at real shape with its sketched split and homes. The map stays black in both themes.
 import { useEffect, useRef } from "react";
 import { centroid, largestRing } from "@/lib/geometry";
-import { useReducedMotion } from "./useReducedMotion";
+import { lerpK, useReducedMotion } from "./useReducedMotion";
 
 export type MapListing = {
   id: string;
@@ -87,11 +87,14 @@ export default function DotMap({
     let full = 1;
     const t0 = performance.now();
     let raf = 0;
+    let last = 0;
 
     const draw = (now: number) => {
       const t = (now - t0) / 1000;
+      const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60;
+      last = now;
       const tg = target();
-      const k = reducedRef.current ? 1 : 0.08;
+      const k = reducedRef.current ? 1 : lerpK(dt, 0.2); // time-based: same feel at 60 or 120 Hz
       cam.cx += (tg.cx - cam.cx) * k; cam.cy += (tg.cy - cam.cy) * k; cam.span += (tg.span - cam.span) * k;
       const scale = Math.min(W, H) / cam.span; // px per foot
       const sx = (x: number) => W / 2 + (x - cam.cx) * scale;

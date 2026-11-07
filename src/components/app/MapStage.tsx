@@ -16,11 +16,23 @@ import ViewSwitch, { type ViewMode } from "../viz/ViewSwitch";
 const INK = "#f4f4f4";
 const ACCENT = "#ffaa5f";
 
-type Props = { site: SiteResult | null; listings: MapListing[]; onSelect: (id: string) => void; focus: string[] | null; cityView: boolean; inset?: number };
+type Props = { site: SiteResult | null; listings: MapListing[]; onSelect: (id: string) => void; focus: string[] | null; cityView: boolean; inset?: number; lotStart?: number | null; onReplay?: () => void };
 
-export default function MapStage({ site, listings, onSelect, focus, cityView, inset = 0 }: Props) {
+// City to lot handoff: the camera flies for FLY ms, then the lot layer crossfades in over STAGE ms.
+const FLY = 450, STAGE = 600;
+
+export default function MapStage({ site: selected, listings, onSelect, focus, cityView, inset = 0, lotStart = null, onReplay }: Props) {
   const [mode, setMode] = useState<ViewMode>("3d");
-  const [replay, setReplay] = useState(0);
+  // Keep the last site drawn while the lot layer fades out on Back, so nothing blinks.
+  const [held, setHeld] = useState<SiteResult | null>(selected);
+  const [covered, setCovered] = useState(false);
+  useEffect(() => {
+    if (selected) { setHeld(selected); const t = setTimeout(() => setCovered(true), FLY + STAGE + 50); return () => clearTimeout(t); }
+    setCovered(false);
+    const t = setTimeout(() => setHeld(null), STAGE);
+    return () => clearTimeout(t);
+  }, [selected]);
+  const site = selected ?? held;
   const [city, setCity] = useState<{ points: number[][]; bbox: number[] } | null>(null);
   useEffect(() => {
     Promise.all([fetch("/city-points.json").then((r) => r.json()), fetch("/city-points.bin").then((r) => r.arrayBuffer())]).then(([m, b]) => {
@@ -47,17 +59,31 @@ export default function MapStage({ site, listings, onSelect, focus, cityView, in
     return { cx: (Math.min(...xs) + Math.max(...xs)) / 2, cy: (Math.min(...ys) + Math.max(...ys)) / 2, span: Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys)) * 2 + 2500 };
   }, [focus, markers]);
   void DotMap; void cityView;
+  // Selected site: the city camera flies to its parcel before the lot fades in.
+  const siteFocus = useMemo(() => {
+    if (!selected) return null;
+    const m = markers.find((x) => x.id === selected.id);
+    return m ? { cx: m.x, cy: m.y, span: 900 } : null;
+  }, [selected, markers]);
 
-  let stage: React.ReactNode;
-  if (mode === "map" && site && model) {
-    stage = <LotParticles key={site.id} model={model} view="flat" height={"100%" as unknown as number} replayKey={replay} ink={INK} accent={ACCENT} inset={inset} />;
-  } else if (mode === "map") {
-    stage = city ? <ParticleCity points={city.points} bbox={city.bbox} mode="map" height={"100%" as unknown as number} ink={INK} accent={ACCENT} markers={markers} onMarker={onSelect} focus={groupFocus} inset={inset} /> : null;
-  } else if (site && model) {
-    stage = mode === "tech" ? <div style={{ position: "absolute", inset: 0, left: inset, top: 70, bottom: 40 }}><LotBlueprint model={model} height={"100%" as unknown as number} /></div> : <LotParticles key={site.id} model={model} view="3d" height={"100%" as unknown as number} replayKey={replay} ink={INK} accent={ACCENT} inset={inset} />;
-  } else {
-    stage = city ? <ParticleCity points={city.points} bbox={city.bbox} mode={mode === "tech" ? "tech" : "3d"} height={"100%" as unknown as number} ink={INK} accent={ACCENT} focus={groupFocus} inset={inset} /> : null;
-  }
+  // The city stays mounted under the lot (one continuous world: no remount, no replayed intro).
+  const full = "100%" as unknown as number;
+  const lotOn = Boolean(selected && model);
+  const cityLayer = city ? (
+    <ParticleCity points={city.points} bbox={city.bbox} mode={mode === "map" ? "map" : mode === "tech" ? "tech" : "3d"} height={full} ink={INK} accent={ACCENT}
+      markers={mode === "map" && !selected ? markers : undefined} onMarker={onSelect} focus={selected ? siteFocus : groupFocus} inset={inset} paused={covered && lotOn} />
+  ) : null;
+  const lotLayer = site && model ? (
+    mode === "tech"
+      ? <div style={{ position: "absolute", inset: 0, left: inset, top: 70, bottom: 40 }}><LotBlueprint model={model} height={full} /></div>
+      : <LotParticles key={site.id} model={model} view={mode === "map" ? "flat" : "3d"} height={full} startAt={lotStart ?? undefined} ink={INK} accent={ACCENT} inset={inset} paused={!selected && !held} />
+  ) : null;
+  const stage = (
+    <>
+      <div className="ff-layer" style={{ position: "absolute", inset: 0, opacity: lotOn ? 0 : 1, transitionDelay: lotOn ? `${FLY}ms` : "0ms" }}>{cityLayer}</div>
+      <div className="ff-layer" style={{ position: "absolute", inset: 0, background: "#000", opacity: lotOn ? 1 : 0, transitionDelay: lotOn ? `${FLY}ms` : "0ms", pointerEvents: lotOn ? "auto" : "none" }}>{lotLayer}</div>
+    </>
+  );
 
   const labelColor = "var(--muted)";
   return (
@@ -67,7 +93,7 @@ export default function MapStage({ site, listings, onSelect, focus, cityView, in
         {site ? `${site.address}${site.parcel ? " · " + Math.round(site.parcel.area_sqft).toLocaleString() + " sq ft" : ""}` : "Santa Ana · every parcel"}
       </span>
       <span className="ff-viewswitch" style={{ position: "absolute", display: "flex", gap: 8, zIndex: 3 }} data-theme-scope="dark">
-        {site && (mode === "3d" || mode === "map") && <button type="button" onClick={() => setReplay((r) => r + 1)} className="mapbtn" aria-label="Replay the lot split">Replay</button>}
+        {site && (mode === "3d" || mode === "map") && <button type="button" onClick={() => onReplay?.()} className="mapbtn" aria-label="Replay the lot split">Replay</button>}
         <span className="mapseg"><ViewSwitch mode={mode} onChange={setMode} modes={["3d", "map", "tech"]} /></span>
       </span>
       {mode === "map" && (

@@ -4,7 +4,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import type { ViewMode } from "./ViewSwitch";
-import { useReducedMotion } from "./useReducedMotion";
+import { CAMERA_TAU, lerpK, useReducedMotion } from "./useReducedMotion";
 import { useTheme } from "../theme";
 
 const VERT = `
@@ -61,9 +61,11 @@ type Props = {
   markers?: CityMarker[]; onMarker?: (id: string) => void; focus?: CityFocus;
   /** Pixels on the left covered by a floating panel: the frame centers in the space to its right. */
   inset?: number;
+  /** Skip rendering (e.g. while an opaque lot layer covers the city). The scene stays alive. */
+  paused?: boolean;
 };
 
-export default function ParticleCity({ points, bbox, mode, height = 520, ink: inkProp, accent: accentProp, markers, onMarker, focus = null, inset = 0 }: Props) {
+export default function ParticleCity({ points, bbox, mode, height = 520, ink: inkProp, accent: accentProp, markers, onMarker, focus = null, inset = 0, paused = false }: Props) {
   const insetRef = useRef(inset);
   insetRef.current = inset;
   const markersRef = useRef(markers);
@@ -83,6 +85,11 @@ export default function ParticleCity({ points, bbox, mode, height = 520, ink: in
   const reducedRef = useRef(reduced);
   reducedRef.current = reduced;
   modeRef.current = mode;
+  const pausedRef = useRef(paused);
+  pausedRef.current = paused;
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
+  const matRef = useRef<THREE.ShaderMaterial | null>(null);
 
   useEffect(() => {
     const el = wrap.current!;
@@ -111,9 +118,10 @@ export default function ParticleCity({ points, bbox, mode, height = 520, ink: in
     const accent = new THREE.Color(accentProp || css.getPropertyValue("--accent").trim() || "#ffb36b");
     const ink = new THREE.Color(inkProp || css.getPropertyValue("--text").trim() || "#f4f4f4");
     const mat = new THREE.ShaderMaterial({
-      vertexShader: VERT, fragmentShader: FRAG, transparent: true, depthWrite: false, blending: theme === "light" ? THREE.NormalBlending : THREE.AdditiveBlending,
-      uniforms: { uT: { value: reducedRef.current ? 1 : 0 }, uSize: { value: 1 }, uTech: { value: 0 }, uLight: { value: theme === "light" || fixed ? 1 : 0 }, uRef: { value: 4000 }, uPR: { value: renderer.getPixelRatio() }, uAccent: { value: accent }, uInk: { value: ink } },
+      vertexShader: VERT, fragmentShader: FRAG, transparent: true, depthWrite: false, blending: themeRef.current === "light" ? THREE.NormalBlending : THREE.AdditiveBlending,
+      uniforms: { uT: { value: reducedRef.current ? 1 : 0 }, uSize: { value: 1 }, uTech: { value: 0 }, uLight: { value: themeRef.current === "light" || fixed ? 1 : 0 }, uRef: { value: 4000 }, uPR: { value: renderer.getPixelRatio() }, uAccent: { value: accent }, uInk: { value: ink } },
     });
+    matRef.current = mat;
     const cloud = new THREE.Points(geo, mat);
     const scene = new THREE.Scene();
     scene.add(cloud);
@@ -156,16 +164,22 @@ export default function ParticleCity({ points, bbox, mode, height = 520, ink: in
     let zoom = 1; // 1 = whole city
     const start = performance.now();
     let raf = 0;
+    let last = 0;
     const tick = (now: number) => {
+      raf = requestAnimationFrame(tick);
+      const dt = last ? (now - last) / 1000 : 1 / 60;
+      last = now;
+      // Pause when unseen (tab hidden) or covered by the lot layer; camera state holds.
+      if (pausedRef.current || document.hidden) return;
       const t = (now - start) / 1000;
       const m = modeRef.current;
-      const k = reducedRef.current ? 1 : 0.06;
+      const k = reducedRef.current ? 1 : lerpK(dt, CAMERA_TAU);
       blend += ((m === "3d" ? 0 : 1) - blend) * k;
       tech += ((m === "tech" ? 1 : 0) - tech) * k;
       mat.uniforms.uT.value = reducedRef.current ? 1 : Math.min(1, t / 2.6);
       mat.uniforms.uTech.value = tech;
-      mat.blending = tech > 0.5 || theme === "light" ? THREE.NormalBlending : THREE.AdditiveBlending;
-      if (!reducedRef.current && m === "3d") az += 0.0009;
+      mat.blending = tech > 0.5 || themeRef.current === "light" ? THREE.NormalBlending : THREE.AdditiveBlending;
+      if (!reducedRef.current && m === "3d") az += Math.min(0.05, dt) * 0.054;
       const d = fitDist();
       mat.uniforms.uRef.value = d;
       // Focus: zoom the camera to a site or group (feet), else the whole city.
@@ -184,7 +198,6 @@ export default function ParticleCity({ points, bbox, mode, height = 520, ink: in
       renderer.render(scene, camera);
       drawOverlay(tech);
       drawMarkers();
-      raf = requestAnimationFrame(tick);
     };
 
     // Technical overlay: 1-mile grid, scale bar, north arrow, in mono labels.
@@ -275,7 +288,17 @@ export default function ParticleCity({ points, bbox, mode, height = 520, ink: in
       geo.dispose(); mat.dispose(); renderer.dispose();
       if (renderer.domElement.parentNode === el) el.removeChild(renderer.domElement);
     };
-  }, [points, bbox, theme, inkProp, accentProp, fixed]);
+  }, [points, bbox, fixed]);
+
+  // Theme and colors update uniforms in place: no new renderer, no replayed intro.
+  useEffect(() => {
+    const mat = matRef.current;
+    if (!mat) return;
+    const css = getComputedStyle(document.documentElement);
+    mat.uniforms.uAccent.value.set(accentProp || css.getPropertyValue("--accent").trim() || "#ffb36b");
+    mat.uniforms.uInk.value.set(inkProp || css.getPropertyValue("--text").trim() || "#f4f4f4");
+    mat.uniforms.uLight.value = theme === "light" || fixed ? 1 : 0;
+  }, [theme, inkProp, accentProp, fixed]);
 
   return (
     <div style={{ position: "relative", height, width: "100%" }} aria-label="Map of every Santa Ana parcel; highlighted dots pass the first SB 9 screen" role="img">

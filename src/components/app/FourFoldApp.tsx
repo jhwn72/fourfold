@@ -12,7 +12,7 @@ import LiveCheck from "../LiveCheck";
 import OrgProfile from "../OrgProfile";
 import RecommendGate from "../RecommendGate";
 import SupportPanel from "../SupportPanel";
-import AnimatedNumber from "../site/AnimatedNumber";
+import { LotNumbers } from "../site/AnimatedNumber";
 import NextCallCard from "../site/NextCallCard";
 import type { MapListing } from "../viz/DotMap";
 import MapStage from "./MapStage";
@@ -36,12 +36,16 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
   const [sel, setSel] = useState<string | null>(null);
   const [group, setGroup] = useState<string | null>(null);
   const [win, setWin] = useState<Win>(null);
+  // One lot clock shared by the particles and the site card's numbers (performance.now() time the story starts).
+  // Starts after the camera's 0.45 s fly so the lot assembles as it fades in. Replay restarts it.
+  const [lotStart, setLotStart] = useState<number | null>(null);
+  const replay = useCallback(() => setLotStart(performance.now()), []);
 
   // Deep links: ?site=sa-10, ?tab=groups, ?window=fund
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     const t = q.get("tab"); if (t === "groups" || t === "city") setTab(t);
-    const s = q.get("site"); if (s && results.some((r) => r.id === s)) setSel(s);
+    const s = q.get("site"); if (s && results.some((r) => r.id === s)) { setSel(s); setLotStart(performance.now() + 450); }
     const w = q.get("window"); if (w) setWin(w as Win);
   }, [results]);
   useEffect(() => {
@@ -53,11 +57,14 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
 
   const site = results.find((r) => r.id === sel) ?? null;
   const rank = (id: string) => results.findIndex((r) => r.id === id) + 1;
-  const onSelect = useCallback((id: string) => { setSel((s) => (s === id ? null : id)); setTab("sites"); }, []);
+  const onSelect = useCallback((id: string) => { setSel((s) => (s === id ? null : id)); setLotStart(performance.now() + 450); setTab("sites"); }, []);
   const close = useCallback(() => setWin(null), []);
   const g = groups.find((x) => x.key === group) ?? null;
   const groupOf = (id: string) => groups.find((x) => x.ids.length > 1 && x.ids.includes(id));
-  const pickTab = (t: Tab) => { setTab(t); if (t !== "sites") setSel(null); if (t !== "groups") setGroup(null); };
+  // Panel content slides in from the side the tab sits on (Sites, Groups, City, left to right).
+  const ORDER: Tab[] = ["sites", "groups", "city"];
+  const [dir, setDir] = useState(1);
+  const pickTab = (t: Tab) => { if (t !== tab) setDir(ORDER.indexOf(t) > ORDER.indexOf(tab) ? 1 : -1); setTab(t); if (t !== "sites") setSel(null); if (t !== "groups") setGroup(null); };
 
   // The stage fills the viewport; on desktop the floating panel covers its left side, so the 3D frame
   // centers in the space to the right of the panel.
@@ -84,6 +91,7 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
       />
       <CornerControls />
       <aside className={a.panel} ref={panelRef}>
+        <div key={tab} className="ff-tabpane" style={{ "--dir": dir } as React.CSSProperties}>
         {tab === "sites" && !site && (
           <>
             <h1 className={a.title}>One house.<span className="second">Four homes.</span></h1>
@@ -113,12 +121,14 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
             <div className="eyebrow">№{rank(site.id)} · Parcel {site.parcel?.apn ?? "UNKNOWN"}</div>
             <h1 className={a.siteTitle}>{site.address}</h1>
             <p className={a.reason}><span className={vClass(site.verdict)}>{site.verdict}</span> {site.verdict_reason}</p>
+            <LotNumbers startAt={lotStart} asking={site.asking_price ?? null} perHome={site.land_cost_per_home ?? null} homes={site.max_homes ?? null} split={Boolean(site.split && site.max_homes && site.max_homes >= 4 && site.parcel)}>{(v) => (
             <div className={a.nums}>
-              <div><div className="eyebrow">Homes</div><div className={`${a.big} accent`}>{site.max_homes ?? "UNKNOWN"}</div></div>
-              <div><div className="eyebrow">Per home</div><div className={`${a.big} accent`}>{site.max_homes === 0 ? "n/a" : site.asking_price && site.land_cost_per_home ? <AnimatedNumber key={site.id} from={site.asking_price} to={site.land_cost_per_home} /> : "UNKNOWN"}</div></div>
+              <div><div className="eyebrow">Homes</div><div className={`${a.big} accent`}>{v.homes}</div></div>
+              <div><div className="eyebrow">Per home</div><div className={`${a.big} accent`}>{v.perHome}</div></div>
               <div><div className="eyebrow">Asking</div><div className={a.big}>{money(site.asking_price)}</div></div>
               {site.max_homes === 4 && <div><div className="eyebrow">Investor / home</div><div className={a.big}>{money(site.asking_price ? Math.round(site.asking_price / 2) : null)}</div></div>}
             </div>
+            )}</LotNumbers>
             <p className="faint" style={{ fontSize: 11, margin: "6px 0 8px" }}>Brief&apos;s example: $360k per home <span className="label">ASSUMPTION</span></p>
             {groupOf(site.id) && <p className="muted" style={{ margin: "0 0 8px", fontSize: 13 }}>Part of {groupOf(site.id)!.label}: {groupOf(site.id)!.ids.length} sites, <span className="accent">{groupOf(site.id)!.homes} homes</span> within {groupOf(site.id)!.spread}.</p>}
             <div className={a.gate}><RecommendGate verdict={site.verdict} city={site.city}><span className="status verdict-LIKELY_YES">Recommended: make the first call</span></RecommendGate></div>
@@ -167,11 +177,12 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
           </>
         )}
 
+        </div>
         <p className={a.disclaimer}>Prototype. Not legal or financial advice. Confirm with the city and a professional.</p>
       </aside>
 
       <section className={a.stage}>
-        <MapStage site={site} listings={listings} onSelect={onSelect} focus={g ? g.ids : null} cityView={tab === "city"} inset={inset} />
+        <MapStage site={site} listings={listings} onSelect={onSelect} focus={g ? g.ids : null} cityView={tab === "city"} inset={inset} lotStart={lotStart} onReplay={replay} />
       </section>
 
       {win === "checklist" && site && (

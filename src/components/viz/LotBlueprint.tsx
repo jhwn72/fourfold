@@ -61,7 +61,7 @@ export default function LotBlueprint({ model, height = 420 }: { model: LotModel;
   const scaleFt = model.extent > 120 ? 20 : 10;
 
   return (
-    <svg viewBox={`0 0 ${W.toFixed(1)} ${H.toFixed(1)}`} width="100%" height={height} preserveAspectRatio="xMidYMid meet" role="img" aria-label="Technical drawing of the parcel with dimensions, split and setbacks" style={{ display: "block" }}>
+    <svg className="bp" viewBox={`0 0 ${W.toFixed(1)} ${H.toFixed(1)}`} width="100%" height={height} preserveAspectRatio="xMidYMid meet" role="img" aria-label="Technical drawing of the parcel with dimensions, split and setbacks" style={{ display: "block" }}>
       <defs>
         <pattern id="hatch" width={model.extent / 60} height={model.extent / 60} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
           <line x1="0" y1="0" x2="0" y2={model.extent / 60} stroke="var(--faint)" strokeWidth={sw} />
@@ -70,14 +70,14 @@ export default function LotBlueprint({ model, height = 420 }: { model: LotModel;
       {/* Grid every 10 ft */}
       {Array.from({ length: Math.ceil(W / 10) + 1 }, (_, i) => <line key={`gx${i}`} x1={i * 10} y1={0} x2={i * 10} y2={H} stroke="var(--grid)" strokeWidth={sw} />)}
       {Array.from({ length: Math.ceil(H / 10) + 1 }, (_, i) => <line key={`gy${i}`} x1={0} y1={i * 10} x2={W} y2={i * 10} stroke="var(--grid)" strokeWidth={sw} />)}
-      <polygon points={pts(model.ring)} fill="none" stroke={ink} strokeWidth={sw * 2} />
-      {lots && lots.map((l, i) => <polygon key={`sb${i}`} points={pts(inset(l, 4))} fill="none" stroke={faint} strokeWidth={sw} strokeDasharray={`${sw * 6} ${sw * 5}`} />)}
+      <polygon className="bp-draw" pathLength={1} points={pts(model.ring)} fill="none" stroke={ink} strokeWidth={sw * 2} />
+      {lots && lots.map((l, i) => <polygon key={`sb${i}`} className="bp-in bp-3" points={pts(inset(l, 4))} fill="none" stroke={faint} strokeWidth={sw} strokeDasharray={`${sw * 6} ${sw * 5}`} />)}
       {model.buildings.map((b, i) => <polygon key={`b${i}`} points={pts(b)} fill="url(#hatch)" stroke="var(--muted)" strokeWidth={sw} />)}
-      {model.line && <line x1={X(model.line[0][0])} y1={Y(model.line[0][1])} x2={X(model.line[1][0])} y2={Y(model.line[1][1])} stroke={accent} strokeWidth={sw * 2.2} strokeDasharray={`${sw * 10} ${sw * 6}`} />}
+      {model.line && <line className="bp-in bp-2" x1={X(model.line[0][0])} y1={Y(model.line[0][1])} x2={X(model.line[1][0])} y2={Y(model.line[1][1])} stroke={accent} strokeWidth={sw * 2.2} strokeDasharray={`${sw * 10} ${sw * 6}`} />}
       {lots && lots.map((l, i) => {
         const lc = centroid(l);
         return (
-          <g key={`la${i}`} style={{ fontFamily: "var(--font-mono)" }}>
+          <g key={`la${i}`} className="bp-in bp-4" style={{ fontFamily: "var(--font-mono)" }}>
             <text x={X(lc[0])} y={Y(lc[1]) - fs * 0.7} fontSize={fs * 1.05} fill={ink} textAnchor="middle">LOT {i ? "B" : "A"}</text>
             <text x={X(lc[0])} y={Y(lc[1]) + fs * 0.8} fontSize={fs} fill={faint} textAnchor="middle">{Math.round(i ? model.areaB : model.areaA).toLocaleString()} SQ FT</text>
           </g>
@@ -86,7 +86,7 @@ export default function LotBlueprint({ model, height = 420 }: { model: LotModel;
       {model.homes.map((h, i) => (
         <rect key={`h${i}`} x={X(h.x) - fs * 0.45} y={Y(h.y) + fs * 1.6} width={fs * 0.9} height={fs * 0.9} fill={h.existing ? "none" : accent} stroke={h.existing ? ink : "none"} strokeWidth={sw} opacity={0.9} />
       ))}
-      {dims}
+      <g className="bp-in bp-4">{dims}</g>
       {/* North arrow and scale */}
       <g style={{ fontFamily: "var(--font-mono)" }}>
         <line x1={W - fs * 1.6} y1={fs * 3.2} x2={W - fs * 1.6} y2={fs * 1.2} stroke={faint} strokeWidth={sw * 1.4} />

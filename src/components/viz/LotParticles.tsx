@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import type { LotModel } from "./lotModel";
 import { pointInRing } from "./lotModel";
-import { useReducedMotion } from "./useReducedMotion";
+import { lerpK, useReducedMotion } from "./useReducedMotion";
 import { useTheme } from "../theme";
 
 // Groups: 0 ground fill, 1 outline, 2 split line, 3 existing building, 4 new home, 5 existing home marker
@@ -68,7 +68,15 @@ void main() {
 
 export type LotView = "3d" | "flat";
 
-export default function LotParticles({ model, view, height = 420, replayKey = 0, ink: inkProp, accent: accentProp, inset = 0 }: { model: LotModel; view: LotView; height?: number; replayKey?: number; ink?: string; accent?: string; inset?: number }) {
+/** The lot story clock, seconds from its start. Beats: assemble 0 to 1.6, split line 1.25 to 1.85,
+ *  lots part 1.9 to 2.5, homes rise 2.5 to about 3.55. The site card's numbers read the same clock. */
+export const LOT_BEATS = { split: 1.25, splitDone: 1.85, part: 1.9, rise: 2.5, homesDone: 3.55 };
+
+export default function LotParticles({ model, view, height = 420, replayKey = 0, ink: inkProp, accent: accentProp, inset = 0, startAt, paused = false }: { model: LotModel; view: LotView; height?: number; replayKey?: number; ink?: string; accent?: string; inset?: number; /** performance.now() time the story starts (shared clock). */ startAt?: number; paused?: boolean }) {
+  const startRef = useRef(startAt ?? 0);
+  const pausedRef = useRef(paused);
+  pausedRef.current = paused;
+  const matRef = useRef<THREE.ShaderMaterial | null>(null);
   const insetRef = useRef(inset);
   insetRef.current = inset;
   const wrap = useRef<HTMLDivElement>(null);
@@ -79,6 +87,10 @@ export default function LotParticles({ model, view, height = 420, replayKey = 0,
   const theme = inkProp ? "dark" : pageTheme;
   const reducedRef = useRef(reduced);
   reducedRef.current = reduced;
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
+  // Replay or a new shared start time restarts the story without rebuilding the scene.
+  useEffect(() => { startRef.current = startAt ?? performance.now(); }, [startAt, replayKey, model]);
 
   useEffect(() => {
     const el = wrap.current!;
@@ -160,7 +172,7 @@ export default function LotParticles({ model, view, height = 420, replayKey = 0,
     const css = getComputedStyle(document.documentElement);
     const sepAmt = E * 0.035;
     const mat = new THREE.ShaderMaterial({
-      vertexShader: VERT, fragmentShader: FRAG, transparent: true, depthWrite: false, blending: theme === "light" ? THREE.NormalBlending : THREE.AdditiveBlending,
+      vertexShader: VERT, fragmentShader: FRAG, transparent: true, depthWrite: false, blending: themeRef.current === "light" ? THREE.NormalBlending : THREE.AdditiveBlending,
       uniforms: {
         uT: { value: 0 }, uSep: { value: new THREE.Vector2(model.sepDir[0] * sepAmt, -model.sepDir[1] * sepAmt) },
         uRef: { value: 300 }, uGain: { value: inkProp ? 1.6 : 1 }, uPR: { value: renderer.getPixelRatio() }, uScale: { value: 1 },
@@ -168,6 +180,7 @@ export default function LotParticles({ model, view, height = 420, replayKey = 0,
         uAccent: { value: new THREE.Color(accentProp || css.getPropertyValue("--accent").trim() || "#ffaa5f") },
       },
     });
+    matRef.current = mat;
     const scene = new THREE.Scene();
     scene.add(new THREE.Points(geo, mat));
     const camera = new THREE.PerspectiveCamera(30, 1, 1, 5000);
@@ -187,13 +200,17 @@ export default function LotParticles({ model, view, height = 420, replayKey = 0,
 
     let blend = viewRef.current === "3d" ? 0 : 1;
     let az = 0.5;
-    const start = performance.now();
     let raf = 0;
+    let last = 0;
     const tick = (now: number) => {
-      const t = (now - start) / 1000;
-      const k = reducedRef.current ? 1 : 0.07;
+      raf = requestAnimationFrame(tick);
+      const dt = last ? (now - last) / 1000 : 1 / 60;
+      last = now;
+      if (pausedRef.current || document.hidden) return;
+      const t = Math.max(0, (now - startRef.current) / 1000);
+      const k = reducedRef.current ? 1 : lerpK(dt, 0.23);
       blend += ((viewRef.current === "3d" ? 0 : 1) - blend) * k;
-      if (!reducedRef.current && viewRef.current === "3d") az += 0.0012;
+      if (!reducedRef.current && viewRef.current === "3d") az += Math.min(0.05, dt) * 0.072;
       mat.uniforms.uT.value = reducedRef.current ? 10 : t;
       const half = THREE.MathUtils.degToRad(camera.fov / 2);
       const span = E * 1.02;
@@ -207,11 +224,21 @@ export default function LotParticles({ model, view, height = 420, replayKey = 0,
       camera.up.set(0, 1, 0).lerp(new THREE.Vector3(0, 0, -1), blend).normalize();
       camera.lookAt(0, THREE.MathUtils.lerp(6, 0, blend), 0);
       renderer.render(scene, camera);
-      raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => { cancelAnimationFrame(raf); ro.disconnect(); geo.dispose(); mat.dispose(); renderer.dispose(); if (renderer.domElement.parentNode === el) el.removeChild(renderer.domElement); };
-  }, [model, replayKey, theme, inkProp, accentProp]);
+  }, [model]);
+
+  // Theme and colors: update uniforms and blending in place (no rebuild, no replayed split).
+  useEffect(() => {
+    const mat = matRef.current;
+    if (!mat) return;
+    const css = getComputedStyle(document.documentElement);
+    mat.uniforms.uInk.value.set(inkProp || css.getPropertyValue("--text").trim() || "#f4f4f4");
+    mat.uniforms.uAccent.value.set(accentProp || css.getPropertyValue("--accent").trim() || "#ffaa5f");
+    mat.uniforms.uGain.value = inkProp ? 1.6 : 1;
+    mat.blending = theme === "light" ? THREE.NormalBlending : THREE.AdditiveBlending;
+  }, [theme, inkProp, accentProp]);
 
   return <div ref={wrap} style={{ height, width: "100%" }} role="img" aria-label="Particle drawing of the real parcel, split into two lots with homes" />;
 }
