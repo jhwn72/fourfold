@@ -17,7 +17,7 @@ export default function Landing({ listings, bbox, stats }: { listings: TileListi
   const theme = useTheme();
   const reduced = useReducedMotion();
   const [i, setI] = useState(0);
-  const [widths, setWidths] = useState<number[]>([]);
+  const [chipW, setChipW] = useState<number | null>(null);
   const measure = useRef<HTMLSpanElement>(null);
 
   // This page owns the viewport: no page scroll while it is open.
@@ -32,14 +32,18 @@ export default function Landing({ listings, bbox, stats }: { listings: TileListi
     return () => clearInterval(t);
   }, []);
 
+  // The pill fits the word it is showing: measure that word (same font as the pill) every time it
+  // changes, on resize, and once fonts finish loading.
   useLayoutEffect(() => {
     const read = () => {
-      const el = measure.current;
-      if (el) setWidths(Array.from(el.children).map((c) => (c as HTMLElement).offsetWidth));
+      const el = measure.current?.children[i] as HTMLElement | undefined;
+      if (el) setChipW(Math.ceil(el.getBoundingClientRect().width));
     };
     read();
     document.fonts?.ready.then(read).catch(() => {});
-  }, []);
+    window.addEventListener("resize", read);
+    return () => window.removeEventListener("resize", read);
+  }, [i]);
 
   return (
     <div className={s.root}>
@@ -58,7 +62,7 @@ export default function Landing({ listings, bbox, stats }: { listings: TileListi
         <h1 className={s.word}>FOURFOLD<sup>©</sup></h1>
         <p className={s.sub}>
           <span>One house, four homes for</span>
-          <span className={s.chip} style={widths[i] ? { width: widths[i] + 24 } : undefined} aria-live="polite">
+          <span className={s.chip} style={chipW ? { width: chipW + 26 } : undefined} aria-live="polite">
             <span key={i} className={reduced ? s.chipTextStatic : s.chipText}>{WORDS[i]}</span>
           </span>
         </p>

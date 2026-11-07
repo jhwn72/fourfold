@@ -54,6 +54,31 @@ export default function Tunnel({ listings, bbox, theme }: { listings: TileListin
     const geo = new THREE.PlaneGeometry(1.2, 1.2 * (TILE_H / TILE_W));
     const textures: THREE.Texture[] = [];
     const cards: Card[] = [];
+    // Particles that hint at the app: the real Santa Ana parcel cloud waiting at the end of the tunnel
+    // (candidate lots in the accent color), plus faint dust drifting along the walls with the cards.
+    const cityGroup = new THREE.Group();
+    cityGroup.position.set(0, 0, -15);
+    cityGroup.rotation.x = -0.5;
+    scene.add(cityGroup);
+    let cityGeo: THREE.BufferGeometry | null = null, cityMat: THREE.PointsMaterial | null = null;
+    let cityStart: Float32Array | null = null, cityTarget: Float32Array | null = null;
+    let cityT = reduced ? 1 : 0;
+    const DUST = 900;
+    const dustAngle = new Float32Array(DUST), dustRadius = new Float32Array(DUST), dustZ = new Float32Array(DUST);
+    const dustPos = new Float32Array(DUST * 3);
+    const dustGeo = new THREE.BufferGeometry();
+    dustGeo.setAttribute("position", new THREE.BufferAttribute(dustPos, 3));
+    const dustMat = new THREE.PointsMaterial({ size: 0.035, sizeAttenuation: true, transparent: true, depthWrite: false, opacity: theme === "dark" ? 0.5 : 0.35, color: theme === "dark" ? 0xf0f0f0 : 0x222222, blending: theme === "dark" ? THREE.AdditiveBlending : THREE.NormalBlending });
+    const dust = new THREE.Points(dustGeo, dustMat);
+    group.add(dust);
+    const placeDust = () => {
+      for (let i = 0; i < DUST; i++) {
+        dustPos[i * 3] = Math.cos(dustAngle[i]) * dustRadius[i];
+        dustPos[i * 3 + 1] = Math.sin(dustAngle[i]) * dustRadius[i];
+        dustPos[i * 3 + 2] = dustZ[i];
+      }
+      dustGeo.attributes.position.needsUpdate = true;
+    };
 
     const resize = () => {
       const w = el.clientWidth, h = el.clientHeight;
@@ -92,6 +117,34 @@ export default function Tunnel({ listings, bbox, theme }: { listings: TileListin
       } catch {}
       if (disposed) return;
       const pal = paletteFor(theme, accent);
+      {
+        const dr = rand(11);
+        for (let i = 0; i < DUST; i++) { dustAngle[i] = dr() * Math.PI * 2; dustRadius[i] = 2.4 + dr() * 3.6; dustZ[i] = FAR_Z + dr() * (NEAR_Z - FAR_Z); }
+        placeDust();
+      }
+      if (city) {
+        // Every other parcel of Santa Ana, scaled into the tunnel's opening.
+        let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+        for (let i = 0; i < city.n; i++) { minX = Math.min(minX, city.xs[i]); maxX = Math.max(maxX, city.xs[i]); minY = Math.min(minY, city.ys[i]); maxY = Math.max(maxY, city.ys[i]); }
+        const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2, k = 4.2 / Math.max(maxX - minX, maxY - minY);
+        const m = Math.ceil(city.n / 2);
+        cityTarget = new Float32Array(m * 3); cityStart = new Float32Array(m * 3);
+        const col = new Float32Array(m * 3);
+        const ink = new THREE.Color(theme === "dark" ? 0xd8d8d8 : 0x3a3a3a), amb = new THREE.Color(accent);
+        const cr = rand(5);
+        for (let j = 0, i = 0; i < city.n && j < m; i += 2, j++) {
+          cityTarget[j * 3] = (city.xs[i] - cx) * k; cityTarget[j * 3 + 1] = (city.ys[i] - cy) * k; cityTarget[j * 3 + 2] = 0;
+          const a = cr() * Math.PI * 2, r = 3 + cr() * 6;
+          cityStart[j * 3] = Math.cos(a) * r; cityStart[j * 3 + 1] = Math.sin(a) * r; cityStart[j * 3 + 2] = 4 + cr() * 10;
+          const c = city.codes[i] === 1 ? amb : ink;
+          col[j * 3] = c.r; col[j * 3 + 1] = c.g; col[j * 3 + 2] = c.b;
+        }
+        cityGeo = new THREE.BufferGeometry();
+        cityGeo.setAttribute("position", new THREE.BufferAttribute(reduced ? cityTarget.slice() : cityStart.slice(), 3));
+        cityGeo.setAttribute("color", new THREE.BufferAttribute(col, 3));
+        cityMat = new THREE.PointsMaterial({ size: 0.028, sizeAttenuation: true, vertexColors: true, transparent: true, depthWrite: false, opacity: theme === "dark" ? 0.8 : 0.7, blending: theme === "dark" ? THREE.AdditiveBlending : THREE.NormalBlending });
+        cityGroup.add(new THREE.Points(cityGeo, cityMat));
+      }
       const canvases: HTMLCanvasElement[] = listings.map((l) => drawListing(l, pal, mono));
       if (city) {
         // City snippets centered on each listing's neighborhood (about 3,000 ft across).
@@ -139,6 +192,17 @@ export default function Tunnel({ listings, bbox, theme }: { listings: TileListin
       const dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
       last = now;
       group.rotation.z += dt * 0.045;
+      cityGroup.rotation.z -= dt * 0.03;
+      // The city assembles from scattered particles over the first few seconds.
+      if (cityGeo && cityStart && cityTarget && cityT < 1) {
+        cityT = Math.min(1, cityT + dt / 3.2);
+        const e = 1 - Math.pow(1 - cityT, 3);
+        const pos = cityGeo.attributes.position.array as Float32Array;
+        for (let i = 0; i < pos.length; i++) pos[i] = cityStart[i] + (cityTarget[i] - cityStart[i]) * e;
+        cityGeo.attributes.position.needsUpdate = true;
+      }
+      for (let i = 0; i < DUST; i++) { dustZ[i] += dt * 1.1; if (dustZ[i] > NEAR_Z) dustZ[i] -= NEAR_Z - FAR_Z; }
+      placeDust();
       for (const c of cards) {
         c.z += dt * 1.1;
         if (c.z > NEAR_Z) c.z -= NEAR_Z - FAR_Z;
@@ -150,7 +214,7 @@ export default function Tunnel({ listings, bbox, theme }: { listings: TileListin
     const stop = () => { cancelAnimationFrame(raf); raf = 0; last = 0; };
     const start = () => {
       if (disposed) return;
-      if (reduced) { group.rotation.z = 0.3; renderer.render(scene, camera); return; }
+      if (reduced) { group.rotation.z = 0.3; placeDust(); renderer.render(scene, camera); return; }
       if (!raf && !document.hidden) raf = requestAnimationFrame(frame);
     };
     const onVis = () => (document.hidden ? stop() : start());
@@ -168,6 +232,8 @@ export default function Tunnel({ listings, bbox, theme }: { listings: TileListin
       for (const c of cards) c.mat.dispose();
       for (const t of textures) t.dispose();
       geo.dispose();
+      dustGeo.dispose(); dustMat.dispose();
+      cityGeo?.dispose(); cityMat?.dispose();
       renderer.dispose();
       renderer.domElement.remove();
     };
