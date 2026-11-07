@@ -21,11 +21,14 @@ import PillNav from "../chrome/PillNav";
 import CornerControls, { ThemePill } from "../chrome/CornerControls";
 import { FontPanel } from "../FontSwitcher";
 import a from "./FourFoldApp.module.css";
+import GroupCard, { type GroupWindow } from "../group/GroupCard";
+import { GroupCallSheet, GroupChecklist, GroupFund } from "../group/GroupWindows";
+import NextSteps, { NextStepsCompact } from "../next/NextSteps";
 
 export type AppGroup = { key: string; label: string; ids: string[]; homes: number; spread: string; avgPerHome: number | null; nearby: number | null };
 export type AppCity = { total: number; sf: number; splittable: number; candidates: number; inDistrict: number; reasons: [string, number][] };
 type Tab = "sites" | "groups" | "city";
-type Win = null | "checklist" | "calls" | "fund" | "support" | "check" | "more";
+type Win = null | "checklist" | "calls" | "fund" | "support" | "check" | "more" | "next" | GroupWindow;
 
 const money = (n: number | null | undefined) => (n == null ? "UNKNOWN" : "$" + n.toLocaleString("en-US"));
 const vClass = (v: string) => `status verdict-${v.replace(" ", "_")}`;
@@ -47,19 +50,22 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
     const t = q.get("tab"); if (t === "groups" || t === "city") setTab(t);
     const s = q.get("site"); if (s && results.some((r) => r.id === s)) { setSel(s); setLotStart(performance.now() + 450); }
     const w = q.get("window"); if (w) setWin(w as Win);
-  }, [results]);
+    const gq = q.get("group"); if (gq && groups.some((x) => x.key === gq)) { setTab("groups"); setGroup(gq); }
+  }, [results, groups]);
   useEffect(() => {
     const q = new URLSearchParams();
     if (tab !== "sites") q.set("tab", tab);
     if (sel) q.set("site", sel);
+    if (group) q.set("group", group);
     window.history.replaceState(null, "", q.toString() ? `/app?${q}` : "/app");
-  }, [tab, sel]);
+  }, [tab, sel, group]);
 
   const site = results.find((r) => r.id === sel) ?? null;
   const rank = (id: string) => results.findIndex((r) => r.id === id) + 1;
   const onSelect = useCallback((id: string) => { setSel((s) => (s === id ? null : id)); setLotStart(performance.now() + 450); setTab("sites"); }, []);
   const close = useCallback(() => setWin(null), []);
   const g = groups.find((x) => x.key === group) ?? null;
+  const gMembers = g ? g.ids.map((id) => results.find((r) => r.id === id)).filter((r): r is SiteResult => !!r) : [];
   const groupOf = (id: string) => groups.find((x) => x.ids.length > 1 && x.ids.includes(id));
   // Panel content slides in from the side the tab sits on (Sites, Groups, City, left to right).
   const ORDER: Tab[] = ["sites", "groups", "city"];
@@ -136,7 +142,9 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
             <div className={a.next} onClickCapture={(e) => { const t = (e.target as HTMLElement).closest("a"); if (t && t.getAttribute("href") === "#call-sheet") { e.preventDefault(); setWin("calls"); } }}>
               <NextCallCard r={site} />
             </div>
+            <div style={{ marginTop: 14 }}><NextStepsCompact result={site} onOpen={() => setWin("next")} /></div>
             <div className={a.actions}>
+              <button type="button" onClick={() => setWin("next")}>What&apos;s next</button>
               <button type="button" onClick={() => setWin("checklist")}>Checklist</button>
               <button type="button" onClick={() => setWin("calls")}>Call sheet</button>
               {site.max_homes ? <button type="button" onClick={() => setWin("fund")}>Fund the gap</button> : null}
@@ -146,12 +154,21 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
           </div>
         )}
 
-        {tab === "groups" && (
+        {tab === "groups" && g && (
+          <GroupCard
+            group={g}
+            members={gMembers}
+            onBack={() => setGroup(null)}
+            onSelectSite={(id) => { setSel(id); setLotStart(performance.now() + 450); setTab("sites"); }}
+            onOpen={(w) => setWin(w)}
+          />
+        )}
+        {tab === "groups" && !g && (
           <>
             <h1 className={a.title}>Buy close together.<span className="second">One city, one crew.</span></h1>
             <p className={a.lede}>Viable listings within 0.5 mi of each other <span className="label">ASSUMPTION</span>.</p>
             {groups.map((x) => (
-              <button key={x.key} type="button" className={`card ${a.groupCard} ${group === x.key ? a.groupOn : ""}`} onClick={() => setGroup(group === x.key ? null : x.key)}>
+              <button key={x.key} type="button" className={`card ${a.groupCard} ${group === x.key ? a.groupOn : ""}`} onClick={() => setGroup(x.key)}>
                 <div className={a.cardHead}><span className="eyebrow">{x.label}</span><span className="accent" style={{ fontFamily: "var(--font-mono)" }}>{x.homes} homes</span></div>
                 <div style={{ fontSize: 14 }}>{x.ids.map((id) => results.find((r) => r.id === id)?.address).join(" · ")}</div>
                 <div className="muted" style={{ marginTop: 4 }}>{x.ids.length > 1 ? `Within ${x.spread}` : "Stands alone"}{x.avgPerHome ? ` · ${money(x.avgPerHome)} per home` : ""}{x.nearby != null ? ` · ${fmt(x.nearby)} candidate lots nearby` : ""}</div>
@@ -192,6 +209,16 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
       {win === "fund" && site && (
         <Window title={`Fund the gap · ${site.address}`} onClose={close}><InvestorCard r={site} /><FundGap r={site} /></Window>
       )}
+      {win === "next" && site && <Window title={`What's next · ${site.address}`} onClose={close}><NextSteps result={site} /></Window>}
+      {win === "group-checklist" && g && (
+        <Window title={`SB 9 checklist · ${g.label}`} onClose={close}><GroupChecklist members={gMembers} /></Window>
+      )}
+      {win === "group-calls" && g && (
+        <Window title={`Call sheet · ${g.label}`} onClose={close}><GroupCallSheet members={gMembers} /></Window>
+      )}
+      {win === "group-fund" && g && (
+        <Window title={`Fund the gap · ${g.label}`} onClose={close}><GroupFund members={gMembers} /></Window>
+      )}
       {win === "support" && (
         <Window title="Local support" onClose={close}><SupportPanel city={site?.city ?? "Santa Ana"} /><h3 style={{ marginTop: 20 }}>Your organization</h3><OrgProfile /></Window>
       )}
@@ -205,6 +232,7 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
             <Link href="/brief" className="card">Call list (PDF)<div className="muted">All 10 sites, printable</div></Link>
             <a href="/results.csv" download className="card">Results (CSV)<div className="muted">Every check and number</div></a>
             <Link href="/org" className="card">Your organization<div className="muted">Profile for the local support check</div></Link>
+            <Link href="/" className="card">Back to intro<div className="muted">The FourFold landing page</div></Link>
           </div>
           <div className={a.prefs}>
             <div><div className="eyebrow" style={{ marginBottom: 6 }}>Theme</div><ThemePill /></div>
