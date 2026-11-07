@@ -2,6 +2,7 @@ import data from "../../../data/citywide.json";
 import CityHero from "@/components/viz/CityHero";
 import CandidateList from "@/components/CandidateList";
 import s from "./city.module.css";
+import { Star, AssumeNote } from "@/components/Assume";
 
 // The server reads counts, sources and candidates only. The parcel points are drawn by CityHero from
 // public/city-points.bin, so the 57,926-point array is not embedded in this page.
@@ -80,7 +81,8 @@ export default function CityPage() {
         <ul className={s.notes}>
           <li>A first screen, not a verdict. Zoning, flood, fire and historic district are tested at each parcel&apos;s centroid, not its full outline, so lots on a boundary can be misread. The live check tests the whole parcel.</li>
           <li>Lot size comes from the parcel polygon (State Plane feet). Pass = an equal straight split gives two lots of at least 1,200 sq ft, neither under 40% (40% is <span className="label">UNVERIFIED</span> against statute text).</li>
-          <li>Single-family zones are R1 and RE. RE is treated as single-family: <span className="label">ASSUMPTION</span>, confirm in the zoning code.</li>
+          <li>Single-family zones are R1 and RE. RE is treated as single-family<Star />, confirm in the zoning code.</li>
+          <li><AssumeNote style={{ margin: 0 }} /></li>
           <li>Parcels whose outline exactly matches another APN&apos;s are dropped as shared lots (usually condo or mobile-home units). This is a pattern in the data, not a recorded fact about each parcel.</li>
           <li>Flood uses the county copy of FEMA zones only; the live check also asks FEMA. The fire layer may predate CAL FIRE&apos;s 2025 maps.</li>
           <li>Still UNKNOWN for every lot: tenants in the last 3 years, rent restriction or Ellis Act, a prior SB 9 split, earthquake fault zones, wetlands and other environmental limits, and the State historic inventory.</li>

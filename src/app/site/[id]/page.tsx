@@ -14,6 +14,7 @@ import SectionNav from "@/components/site/SectionNav";
 import LotViewer from "@/components/viz/LotViewer";
 import { BRIEF_LAND_PER_HOME } from "@/lib/constants";
 import { RESULTS, getSite } from "@/lib/results";
+import { Star, AssumeNote } from "@/components/Assume";
 
 export function generateStaticParams() {
   return RESULTS.results.map((r) => ({ id: r.id }));
@@ -78,7 +79,8 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
         <div>
           <div className="k">Per home, nonprofit</div>
           <div className="v accent">{r.max_homes === 0 ? "n/a" : r.asking_price && r.land_cost_per_home ? <AnimatedNumber from={r.asking_price} to={r.land_cost_per_home} /> : "UNKNOWN"}</div>
-          {diff != null && <div className="muted" style={{ fontSize: 11.5 }}>{money(Math.abs(diff))} {diff >= 0 ? "below" : "above"} the $360k example <span className="label">ASSUMPTION</span></div>}
+          {diff != null && <div className="muted" style={{ fontSize: 11.5 }}>{money(Math.abs(diff))} {diff >= 0 ? "below" : "above"} the $360k example<Star /></div>}
+          {diff != null && <AssumeNote style={{ marginTop: 4 }} />}
         </div>
         {four && <div><div className="k">Per home, investor</div><div className="v">{money(investor)}</div><div className="muted" style={{ fontSize: 11.5 }}>no split without a 3-year live-in</div></div>}
         <div><div className="k">Open questions</div><div className="v">{open}</div><div className="muted" style={{ fontSize: 11.5 }}><a href="#call-sheet">who to call</a></div></div>

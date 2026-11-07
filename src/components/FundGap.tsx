@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { SiteResult } from "@/lib/types";
 import { computeGap, donationImpact, parseMoney, type CostLine } from "@/lib/fund";
+import { Star, AssumeNote } from "@/components/Assume";
 
 // ASSUMPTION: the brief's worked example, per home (docs/background.md, "Worked example: one home's bill",
 // checked Nov 6, 2026; same numbers in lanes/3-fund-it/data/synthetic-example-deal.json). Mock numbers, not a real deal.
@@ -27,7 +28,7 @@ function MoneyInput({ id, label, value, onChange, chip }: {
         {chip && (chip.fill != null ? (
           <button type="button" onClick={() => onChange(String(chip.fill))}
             style={{ fontSize: 12, padding: "3px 8px", cursor: "pointer", border: "1px solid var(--line)", background: "var(--possible-bg)", color: "var(--possible)", borderRadius: 4 }}>
-            <span className="label">ASSUMPTION</span> use example: {chip.text}
+            Use example: {chip.text}<Star />
           </button>
         ) : (
           <span className="muted" style={{ flex: "1 1 220px" }}>{chip.text}</span>
@@ -148,7 +149,7 @@ export default function FundGap({ r }: { r: SiteResult }) {
       )}
 
       <p className="muted">
-        Prototype. Every number you type is yours; examples are the brief&apos;s mock numbers (ASSUMPTION), not a quote.
+        Prototype. Every number you type is yours; examples are the brief&apos;s mock numbers<Star />, not a quote.
         Not financial or lending advice; check with a professional before deciding.
       </p>
     </div>

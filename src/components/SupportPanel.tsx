@@ -3,6 +3,7 @@ import Link from "next/link";
 import { assessSupport, getCitySignals, LEVEL_CLASS, LEVEL_TEXT, THRESHOLDS, ORG_MAX, type SignalStatus } from "@/lib/support";
 import { useOrgProfile } from "./OrgProfile";
 import s from "./SupportPanel.module.css";
+import { Star, AssumeNote } from "@/components/Assume";
 
 const STATUS_CLASS: Record<SignalStatus, string> = { POSITIVE: "PASS", NEUTRAL: "POSSIBLE", NEGATIVE: "FAIL", UNKNOWN: "UNKNOWN" };
 
@@ -75,7 +76,7 @@ export default function SupportPanel({ city }: { city: string }) {
       )}
 
       <p className={`faint ${s.foot}`}>
-        <span className="label">ASSUMPTION</span> How the level is set: only your organization&apos;s own ties earn points (projects in the city 2, housing division 2, letters of support 2, local funding 2, meeting held 2 or planned 1, planning 1, council office 1, local partners 1, board or volunteers in the city 1). Strong at {THRESHOLDS.strong}+, some at {THRESHOLDS.some}+, else weak; each negative public signal lowers it one step. Public data alone is not local support. FourFold recommends an offer only when the site is LIKELY YES and support is at least some. Prototype, not legal or financial advice.
+        How the level is set<Star />: only your organization&apos;s own ties earn points (projects in the city 2, housing division 2, letters of support 2, local funding 2, meeting held 2 or planned 1, planning 1, council office 1, local partners 1, board or volunteers in the city 1). Strong at {THRESHOLDS.strong}+, some at {THRESHOLDS.some}+, else weak; each negative public signal lowers it one step. Public data alone is not local support. FourFold recommends an offer only when the site is LIKELY YES and support is at least some. Prototype, not legal or financial advice.
       </p>
     </section>
   );

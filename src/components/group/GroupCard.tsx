@@ -6,6 +6,7 @@ import { groupAgentEmail, summarizeGroup } from "@/lib/groupSummary";
 import type { SiteResult } from "@/lib/types";
 import a from "../app/FourFoldApp.module.css";
 import s from "./GroupCard.module.css";
+import { Star, AssumeNote } from "@/components/Assume";
 
 export type GroupWindow = "group-checklist" | "group-calls" | "group-fund";
 export type GroupInfo = { key: string; label: string; ids: string[]; spread: string; nearby: number | null };
@@ -49,7 +50,7 @@ export default function GroupCard({ group, members, onBack, onSelectSite, onOpen
         {sum.cities.length === 1 ? `, one city (${sum.cities[0]}), one planning desk` : sum.cities.length > 1 ? `, ${sum.cities.length} cities` : ""}
         {sum.zone ? `, same zone (${sum.zone})` : ""}
         {group.nearby != null ? `, ${group.nearby.toLocaleString("en-US")} first-screen candidate lots nearby` : ""}.
-        {" "}<span className="label">ASSUMPTION</span> 0.5 mi radius is a team judgment.
+         0.5 mi radius<Star /> is a team judgment.
       </p>
 
       <div className="card" style={{ padding: "8px 6px", margin: "0 0 10px" }}>

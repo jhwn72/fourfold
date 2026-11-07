@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import s from "./CandidateList.module.css";
+import { Star, AssumeNote } from "@/components/Assume";
 
 const LIMIT = 200;
 type Row = [string, string, number, string];
@@ -80,7 +81,7 @@ export default function CandidateList({ rows }: { rows: Row[] }) {
                 <td>{r[0] || <span className={s.none}>No site address in city data</span>}</td>
                 <td className={s.apn}>{r[1]}</td>
                 <td className={s.area}>{r[2].toLocaleString("en-US")}</td>
-                <td>{r[3]}{r[3] === "RE" && <> <span className="label">ASSUMPTION</span></>}</td>
+                <td>{r[3]}{r[3] === "RE" && <Star />}</td>
                 <td>{r[0] ? <Link className={s.go} href={`/check?address=${encodeURIComponent(r[0])}`}>Check live →</Link> : null}</td>
               </tr>
             ))}

@@ -5,6 +5,7 @@ import { computeGap, parseMoney, type CostLine } from "@/lib/fund";
 import { groupAgentEmail, summarizeGroup } from "@/lib/groupSummary";
 import type { CheckResult, SiteResult } from "@/lib/types";
 import s from "./GroupCard.module.css";
+import { Star, AssumeNote } from "@/components/Assume";
 
 const fmt = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
 const short = (m: SiteResult) => m.address.split(",")[0];
@@ -102,7 +103,7 @@ function Money({ id, label, value, onChange, perHome, homes }: { id: string; lab
         {perHome != null && (
           <button type="button" onClick={() => onChange(String(perHome * homes))}
             style={{ fontSize: 12, padding: "3px 8px", cursor: "pointer", border: "1px solid var(--line)", background: "var(--possible-bg)", color: "var(--possible)", borderRadius: 4 }}>
-            <span className="label">ASSUMPTION</span> use example: brief, {fmt(perHome)} per home x {homes} = {fmt(perHome * homes)}
+            Use example: brief, {fmt(perHome)} per home x {homes} = {fmt(perHome * homes)}<Star />
           </button>
         )}
       </div>
@@ -175,7 +176,7 @@ export function GroupFund({ members }: { members: SiteResult[] }) {
           </strong></td></tr>
         </tbody>
       </table>
-      <p className="muted">Prototype. Every number you type is yours; examples are the brief&apos;s mock numbers (ASSUMPTION), not a quote. Not financial or lending advice; check with a professional before deciding.</p>
+      <p className="muted">Prototype. Every number you type is yours; examples are the brief&apos;s mock numbers<Star />, not a quote. Not financial or lending advice; check with a professional before deciding.</p>
     </div>
   );
 }

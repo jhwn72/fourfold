@@ -7,6 +7,7 @@ import { RESULTS } from "@/lib/results";
 import { buildCallSheet } from "@/lib/callsheet";
 import { BRIEF_LAND_PER_HOME } from "@/lib/constants";
 import "../print.css";
+import { Star, AssumeNote } from "@/components/Assume";
 
 export const metadata: Metadata = { title: "FourFold: sites to call this month" };
 
@@ -42,7 +43,7 @@ export default function BatchBrief() {
         </table>
       </div>
       <p className="muted">
-        Per home = asking price ÷ max homes: land and building purchase per home, before construction. $360k is the challenge brief&apos;s worked example <span className="label">ASSUMPTION</span>, not a real deal.
+        Per home = asking price ÷ max homes: land and building purchase per home, before construction. $360k is the challenge brief&apos;s worked example<Star />, not a real deal. * Assumption, see How it works (/method#sources).
         Full checklist with sources for each site: fourfold-splitter.vercel.app/site/[id]/brief.
       </p>
       <p className="disclaimer">Prototype. Not legal or financial advice. Confirm with the city and a professional.</p>

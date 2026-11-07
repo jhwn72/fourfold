@@ -96,16 +96,6 @@ export default function MapStage({ site: selected, listings, onSelect, focus, ci
         {site && (mode === "3d" || mode === "map") && <button type="button" onClick={() => onReplay?.()} className="mapbtn" aria-label="Replay the lot split">Replay</button>}
         <span className="mapseg"><ViewSwitch mode={mode} onChange={setMode} modes={["3d", "map", "tech"]} /></span>
       </span>
-      {mode === "map" && (
-        <div style={{ position: "absolute", bottom: inset ? 64 : 12, right: inset ? 20 : 14, maxWidth: "calc(100% - 120px)", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", zIndex: 2, pointerEvents: "none" }} className="eyebrow">
-          <span style={{ color: "#ffaa5f" }}>●</span> <span style={{ color: "rgba(255,255,255,0.6)" }}>passes first SB 9 screen · click a № tag</span>
-        </div>
-      )}
-      {!site && mode === "3d" && (
-        <div style={{ position: "absolute", bottom: inset ? 26 : 14, left: inset ? inset + 16 : 14, zIndex: 2, pointerEvents: "none" }} className="eyebrow">
-          <span style={{ color: "var(--accent)" }}>●</span> <span style={{ color: labelColor }}>passes first SB 9 screen</span>
-        </div>
-      )}
     </div>
   );
 }

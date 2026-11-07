@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Cluster, ClusterResult, ClusterSite } from "@/lib/clusters";
 import { fmtMiles, DEFAULT_RADIUS_FT } from "@/lib/clusters";
 import s from "./ClusterView.module.css";
+import { Star, AssumeNote } from "@/components/Assume";
 
 const usd = (n: number) => n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 const RADIUS_LABEL: Record<number, string> = { 1320: "0.25 mi", 2640: "0.5 mi", 5280: "1 mi" };
@@ -103,8 +104,8 @@ export default function ClusterView({ results }: { results: ClusterResult[] }) {
             </button>
           ))}
         </div>
-        <span className="label">ASSUMPTION</span>
-        <span className="muted">0.5 mi default: a walkable, one-crew distance. A team judgment, not a rule.</span>
+        <span className="muted">0.5 mi default<Star />: a walkable, one-crew distance. A team judgment, not a rule.</span>
+        <AssumeNote style={{ margin: 0, flexBasis: "100%" }} />
       </div>
 
       <p className="muted">

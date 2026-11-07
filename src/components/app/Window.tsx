@@ -3,10 +3,11 @@
 // Motion: the window grows from the button that opened it and shrinks back into it on close.
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useReducedMotion } from "../viz/useReducedMotion";
+import { AssumeNote } from "../Assume";
 
 const EASE_OUT = "cubic-bezier(0.2, 0.6, 0.2, 1)", EASE_IN = "cubic-bezier(0.4, 0, 0.9, 0.5)";
 
-export default function Window({ title, onClose, children, size = "lg" }: { title: string; onClose: () => void; children: React.ReactNode; size?: "sm" | "lg" }) {
+export default function Window({ title, onClose, children, size = "lg", note = false }: { title: string; onClose: () => void; children: React.ReactNode; size?: "sm" | "lg"; note?: boolean }) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const openerRef = useRef<HTMLElement | null>(null);
@@ -71,7 +72,7 @@ export default function Window({ title, onClose, children, size = "lg" }: { titl
           <span className="eyebrow">{title}</span>
           <button ref={closeRef} type="button" onClick={close} className="iconbtn" aria-label="Close window">×</button>
         </div>
-        <div className="ff-win-body">{children}</div>
+        <div className="ff-win-body">{children}{note && <AssumeNote style={{ marginTop: 18 }} />}</div>
       </div>
     </div>
   );

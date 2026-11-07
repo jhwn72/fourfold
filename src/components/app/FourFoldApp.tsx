@@ -21,6 +21,8 @@ import PillNav from "../chrome/PillNav";
 import CornerControls, { ThemePill } from "../chrome/CornerControls";
 import { FontPanel } from "../FontSwitcher";
 import a from "./FourFoldApp.module.css";
+import { shortReason } from "./shortReason";
+import { Star, AssumeNote } from "../Assume";
 import GroupCard, { type GroupWindow } from "../group/GroupCard";
 import { GroupCallSheet, GroupChecklist, GroupFund } from "../group/GroupWindows";
 import NextSteps, { NextStepsCompact } from "../next/NextSteps";
@@ -101,9 +103,9 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
         {tab === "sites" && !site && (
           <>
             <h1 className={a.title}>One house.<span className="second">Four homes.</span></h1>
-            <p className={a.lede}>Investors can&apos;t split a lot under SB 9 unless they live there 3 years. Nonprofits can (<a href="https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf" target="_blank" rel="noreferrer">HCD, p.2</a>).</p>
+            <p className={a.lede}>Investors can&apos;t split a lot under SB 9 unless they live there 3 years. Nonprofits can.</p>
             <div className="card" style={{ marginTop: 18 }}>
-              <div className={a.cardHead}><span className="eyebrow">Santa Ana listings, ranked</span><span className="chiptag">2026-11-07</span></div>
+              <div className={a.cardHead}><span className="eyebrow">Santa Ana listings, ranked</span></div>
               <ol className={a.list}>
                 {results.map((r, i) => (
                   <li key={r.id}>
@@ -126,16 +128,15 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
             <button type="button" className={a.back} onClick={() => setSel(null)}>← All sites</button>
             <div className="eyebrow">№{rank(site.id)} · Parcel {site.parcel?.apn ?? "UNKNOWN"}</div>
             <h1 className={a.siteTitle}>{site.address}</h1>
-            <p className={a.reason}><span className={vClass(site.verdict)}>{site.verdict}</span> {site.verdict_reason}</p>
+            <p className={a.reason}><span className={vClass(site.verdict)}>{site.verdict}</span> {shortReason(site.verdict_reason)}</p>
             <LotNumbers startAt={lotStart} asking={site.asking_price ?? null} perHome={site.land_cost_per_home ?? null} homes={site.max_homes ?? null} split={Boolean(site.split && site.max_homes && site.max_homes >= 4 && site.parcel)}>{(v) => (
             <div className={a.nums}>
               <div><div className="eyebrow">Homes</div><div className={`${a.big} accent`}>{v.homes}</div></div>
               <div><div className="eyebrow">Per home</div><div className={`${a.big} accent`}>{v.perHome}</div></div>
               <div><div className="eyebrow">Asking</div><div className={a.big}>{money(site.asking_price)}</div></div>
-              {site.max_homes === 4 && <div><div className="eyebrow">Investor / home</div><div className={a.big}>{money(site.asking_price ? Math.round(site.asking_price / 2) : null)}</div></div>}
             </div>
             )}</LotNumbers>
-            <p className="faint" style={{ fontSize: 11, margin: "6px 0 8px" }}>Brief&apos;s example: $360k per home <span className="label">ASSUMPTION</span></p>
+            <p className="faint" style={{ fontSize: 11.5, margin: "0 0 14px" }}>Brief&apos;s example: $360k per home<Star /></p>
             {groupOf(site.id) && <p className="muted" style={{ margin: "0 0 8px", fontSize: 13 }}>Part of {groupOf(site.id)!.label}: {groupOf(site.id)!.ids.length} sites, <span className="accent">{groupOf(site.id)!.homes} homes</span> within {groupOf(site.id)!.spread}.</p>}
             <div className={a.gate}><RecommendGate verdict={site.verdict} city={site.city}><span className="status verdict-LIKELY_YES">Recommended: make the first call</span></RecommendGate></div>
             {/* NextCallCard links to #call-sheet; in the app that opens the Call sheet window instead. */}
@@ -166,7 +167,7 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
         {tab === "groups" && !g && (
           <>
             <h1 className={a.title}>Buy close together.<span className="second">One city, one crew.</span></h1>
-            <p className={a.lede}>Viable listings within 0.5 mi of each other <span className="label">ASSUMPTION</span>.</p>
+            <p className={a.lede}>Viable listings within 0.5 mi<Star /> of each other.</p>
             {groups.map((x) => (
               <button key={x.key} type="button" className={`card ${a.groupCard} ${group === x.key ? a.groupOn : ""}`} onClick={() => setGroup(x.key)}>
                 <div className={a.cardHead}><span className="eyebrow">{x.label}</span><span className="accent" style={{ fontFamily: "var(--font-mono)" }}>{x.homes} homes</span></div>
@@ -195,7 +196,7 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
         )}
 
         </div>
-        <p className={a.disclaimer}>Prototype. Not legal or financial advice. Confirm with the city and a professional.</p>
+        <div className={a.disclaimer}>{(tab !== "city") && <AssumeNote style={{ margin: "0 0 6px" }} />}Prototype. Not legal or financial advice. Confirm with the city and a professional.</div>
       </aside>
 
       <section className={a.stage}>
@@ -207,7 +208,7 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
       )}
       {win === "calls" && site && <Window title={`Call sheet · ${site.address}`} onClose={close}><CallSheet result={site} /></Window>}
       {win === "fund" && site && (
-        <Window title={`Fund the gap · ${site.address}`} onClose={close}><InvestorCard r={site} /><FundGap r={site} /></Window>
+        <Window title={`Fund the gap · ${site.address}`} onClose={close} note><InvestorCard r={site} /><FundGap r={site} /></Window>
       )}
       {win === "next" && site && <Window title={`What's next · ${site.address}`} onClose={close}><NextSteps result={site} /></Window>}
       {win === "group-checklist" && g && (
@@ -217,10 +218,10 @@ export default function FourFoldApp({ results, listings, groups, city, ocProject
         <Window title={`Call sheet · ${g.label}`} onClose={close}><GroupCallSheet members={gMembers} /></Window>
       )}
       {win === "group-fund" && g && (
-        <Window title={`Fund the gap · ${g.label}`} onClose={close}><GroupFund members={gMembers} /></Window>
+        <Window title={`Fund the gap · ${g.label}`} onClose={close} note><GroupFund members={gMembers} /></Window>
       )}
       {win === "support" && (
-        <Window title="Local support" onClose={close}><SupportPanel city={site?.city ?? "Santa Ana"} /><h3 style={{ marginTop: 20 }}>Your organization</h3><OrgProfile /></Window>
+        <Window title="Local support" onClose={close} note><SupportPanel city={site?.city ?? "Santa Ana"} /><h3 style={{ marginTop: 20 }}>Your organization</h3><OrgProfile /></Window>
       )}
       {win === "check" && <Window title="Check any Santa Ana address" onClose={close} size="sm"><LiveCheck heading={false} /></Window>}
       {win === "more" && (
