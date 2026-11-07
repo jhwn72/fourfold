@@ -27,7 +27,7 @@ void main() {
   bool cand = aCode > 0.5 && aCode < 1.5;
   float base = cand ? 1.9 : 1.3;
   base = mix(base, cand ? 1.5 : 1.1, uTech);
-  gl_PointSize = base * uSize * uPR * (uRef / -mv.z);
+  gl_PointSize = min(base * uSize * uPR * (uRef / -mv.z), 9.0 * uPR);
   vCode = aCode;
   vRand = aRand;
 }`;
@@ -53,9 +53,22 @@ void main() {
 }`;
 
 // ink/accent: explicit colors for a fixed dark stage (ignores the page theme). Without them, colors follow the theme.
-type Props = { points: number[][]; bbox: number[]; mode: ViewMode; height?: number; ink?: string; accent?: string };
+export type CityMarker = { id: string; label: string; x: number; y: number; dim?: boolean; selected?: boolean }; // x, y in State Plane feet
+export type CityFocus = { cx: number; cy: number; span: number } | null; // feet
 
-export default function ParticleCity({ points, bbox, mode, height = 520, ink: inkProp, accent: accentProp }: Props) {
+type Props = {
+  points: number[][]; bbox: number[]; mode: ViewMode; height?: number; ink?: string; accent?: string;
+  markers?: CityMarker[]; onMarker?: (id: string) => void; focus?: CityFocus;
+};
+
+export default function ParticleCity({ points, bbox, mode, height = 520, ink: inkProp, accent: accentProp, markers, onMarker, focus = null }: Props) {
+  const markersRef = useRef(markers);
+  markersRef.current = markers;
+  const focusRef = useRef(focus);
+  focusRef.current = focus;
+  const onMarkerRef = useRef(onMarker);
+  onMarkerRef.current = onMarker;
+  const hits = useRef<{ id: string; x: number; y: number; w: number; h: number }[]>([]);
   const wrap = useRef<HTMLDivElement>(null);
   const overlay = useRef<HTMLCanvasElement>(null);
   const modeRef = useRef<ViewMode>(mode);
@@ -131,6 +144,9 @@ export default function ParticleCity({ points, bbox, mode, height = 520, ink: in
     let blend = modeRef.current === "3d" ? 0 : 1; // 0 = 3D, 1 = top-down
     let tech = modeRef.current === "tech" ? 1 : 0;
     let az = 0.6;
+    const toU = (xf: number, yf: number) => [(xf - bbox[0]) / 10 - w / 2, -((yf - bbox[1]) / 10 - h / 2)];
+    const look = { x: 0, z: 0 };
+    let zoom = 1; // 1 = whole city
     const start = performance.now();
     let raf = 0;
     const tick = (now: number) => {
@@ -145,16 +161,22 @@ export default function ParticleCity({ points, bbox, mode, height = 520, ink: in
       if (!reducedRef.current && m === "3d") az += 0.0009;
       const d = fitDist();
       mat.uniforms.uRef.value = d;
+      // Focus: zoom the camera to a site or group (feet), else the whole city.
+      const f = focusRef.current;
+      let tz = 1, tx = 0, tzz = 0;
+      if (f) { const [ux, uz] = toU(f.cx, f.cy); tx = ux; tzz = uz; tz = Math.min(1, Math.max(0.01, (f.span / 10) / extent)); }
+      look.x += (tx - look.x) * k; look.z += (tzz - look.z) * k; zoom += (tz - zoom) * k;
       mat.uniforms.uSize.value = Math.min(1.25, Math.max(0.55, W / 1100));
       // 3D: tilted orbit. Top-down: straight above, north up.
       const tilt = THREE.MathUtils.lerp(0.95, 0.0001, blend); // angle from vertical
       const azUse = THREE.MathUtils.lerp(az, 0, blend);
-      const dist = THREE.MathUtils.lerp(d * 0.78, d, blend);
-      camera.position.set(Math.sin(tilt) * Math.sin(azUse) * dist, Math.cos(tilt) * dist, Math.sin(tilt) * Math.cos(azUse) * dist);
+      const dist = THREE.MathUtils.lerp(d * 0.78, d, blend) * zoom;
+      camera.position.set(look.x + Math.sin(tilt) * Math.sin(azUse) * dist, Math.cos(tilt) * dist, look.z + Math.sin(tilt) * Math.cos(azUse) * dist);
       camera.up.set(0, 1, 0).lerp(new THREE.Vector3(0, 0, -1), blend).normalize();
-      camera.lookAt(0, 0, 0);
+      camera.lookAt(look.x, 0, look.z);
       renderer.render(scene, camera);
       drawOverlay(tech);
+      drawMarkers();
       raf = requestAnimationFrame(tick);
     };
 
@@ -200,8 +222,47 @@ export default function ParticleCity({ points, bbox, mode, height = 520, ink: in
       ctx.fillText("N", W - 25, 97);
       ctx.globalAlpha = 1;
     };
+    // "№" tags for listings, kept apart from each other, clickable.
+    const drawMarkers = () => {
+      const ms = markersRef.current;
+      hits.current = [];
+      if (!ms || !ms.length) return;
+      const c = overlay.current; if (!c) return;
+      const ctx = c.getContext("2d"); if (!ctx) return;
+      const mono = getComputedStyle(document.body).getPropertyValue("--font-mono") || "monospace";
+      ctx.font = `11px ${mono}`;
+      const placed: { x: number; y: number; w: number; h: number }[] = [];
+      const hit = (b: { x: number; y: number; w: number; h: number }) => placed.some((q) => b.x < q.x + q.w + 3 && b.x + b.w + 3 > q.x && b.y < q.y + q.h + 3 && b.y + b.h + 3 > q.y);
+      for (const m of ms) {
+        const [ux, uz] = toU(m.x, m.y);
+        const [X, Y] = project(ux, uz);
+        if (X < -40 || Y < -40 || X > W + 40 || Y > H + 40) continue;
+        const tw = ctx.measureText(m.label).width + 12;
+        const tries: [number, number][] = [[10, -26], [-10 - tw, -26], [10, 8], [-10 - tw, 8], [10, -48], [-10 - tw, -48], [10, 30], [-10 - tw, 30]];
+        let bx = X + 10, by = Y - 26;
+        for (const [dx, dy] of tries) { const b = { x: X + dx, y: Y + dy, w: tw, h: 18 }; if (!hit(b)) { bx = b.x; by = b.y; break; } }
+        placed.push({ x: bx, y: by, w: tw, h: 18 });
+        const line = m.dim ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.85)";
+        ctx.strokeStyle = "rgba(255,255,255,0.35)"; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(X, Y); ctx.lineTo(bx < X ? bx + tw : bx, by + 9); ctx.stroke();
+        ctx.fillStyle = "rgba(0,0,0,0.85)"; ctx.fillRect(bx, by, tw, 18);
+        ctx.strokeStyle = m.selected ? "#fff" : line; ctx.strokeRect(bx + 0.5, by + 0.5, tw - 1, 17);
+        ctx.fillStyle = m.dim ? "rgba(255,255,255,0.55)" : "#fff"; ctx.fillText(m.label, bx + 6, by + 13);
+        ctx.strokeStyle = m.selected ? "#fff" : line; ctx.lineWidth = m.selected ? 2 : 1.4;
+        ctx.strokeRect(X - 4, Y - 4, 8, 8);
+        hits.current.push({ id: m.id, x: Math.min(bx, X - 8), y: Math.min(by, Y - 8), w: Math.abs(bx - X) + tw + 8, h: Math.abs(by - Y) + 26 });
+      }
+    };
+    const onClick = (e: MouseEvent) => {
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      const hb = hits.current.find((b) => x >= b.x && x <= b.x + b.w && y >= b.y && y <= b.y + b.h);
+      if (hb && onMarkerRef.current) onMarkerRef.current(hb.id);
+    };
+    el.addEventListener("click", onClick);
     raf = requestAnimationFrame(tick);
     return () => {
+      el.removeEventListener("click", onClick);
       cancelAnimationFrame(raf);
       ro.disconnect();
       geo.dispose(); mat.dispose(); renderer.dispose();
