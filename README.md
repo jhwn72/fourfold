@@ -1,153 +1,130 @@
-# Claude Impact Lab: UCI × SoCal Affordable Housing
+# FourFold
 
-**Saturday, November 7, 2026 · Paul Merage School of Business, UC Irvine**
+> For a one-person acquisitions lead at a small housing nonprofit: FourFold finds Santa Ana houses for sale where a nonprofit could use SB 9 to turn one home into four, and shows why, with sources.
 
-One day. One equation that does not balance: what a family can afford to pay, plus public subsidy,
-plus fundraising, minus the cost to create the home. In Orange County the cost side wins by six
-figures per home. Small teams build a working prototype with Claude that helps close the gap.
+**Lane:** 1 Find it
+**Built at:** Claude Impact Lab: UCI × SoCal Affordable Housing, November 7, 2026
+**Live demo:** https://fourfold-splitter.vercel.app
 
-Organized by Claude Community Orange County with the UCI Center for Real Estate. Sponsor: EyeOn
-Automations.
+## The pitch
 
-**The challenge brief** (3 pages: the $0 equation, the three lanes, a worked example, judging): [docs/challenge-brief.pdf](docs/challenge-brief.pdf).
-The kickoff slides: [docs/kickoff-slides.pdf](docs/kickoff-slides.pdf).
+Investors can't split a lot under SB 9 unless they sign an affidavit to live there for 3 years. Nonprofits and community land trusts are exempt from that affidavit ([HCD SB 9 fact sheet, April 2026, p.2](https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf)). That gives a nonprofit an edge on ordinary single-family listings. FourFold finds the houses for sale where a nonprofit can turn one home into four.
 
-**First hackathon?** You do not need a team, an idea or coding experience to start. Read
-[your first hackathon](docs/first-hackathon.md). Two minutes.
+## The real user
 
-## One link for everything
+A one-person acquisitions lead at a small housing nonprofit with no GIS team (scenario F02: "Give me ten sites in one city I should call about this month, and why each one"). Today, checking one listing for SB 9 means opening the zoning map, the FEMA flood map, the fire map and the parcel map, then reading the law.
 
-**<https://claudesocal.com/uci-impact-lab>**
+**Before:** an afternoon per listing, by hand, and most listings fail one test you only find at the end.
+**After:** a ranked list of the listings in one city, each with a yes / no / unknown verdict, every test with its source and date, the real lot drawn with a sketched split, the asking price divided by four homes, and the next call to make for each open question.
 
-| On the hub | What it is |
+## What we built
+
+- **Ranked list** of 10 real Santa Ana listings: LIKELY YES first, then lowest land cost per home, then fewest unknowns.
+- **Site page** per listing: verdict and reason, checklist (PASS / FAIL / UNKNOWN with value, source link and date checked), max homes, land and building purchase per home compared with the brief's $360k example (ASSUMPTION), a 2D drawing of the real parcel polygon with a split line and house icons, and Claude's listing evidence with the exact quoted phrase.
+- **Live check** at the bottom of the home page: type any Santa Ana address and run every check against government servers in a few seconds.
+
+## How Claude is used
+
+- **Built with Claude Code:** the whole app, the data probe, and the rule encoding from the HCD fact sheets. A Claude subagent checked every listing Jerry collected against the city parcel layer (see `data/listings-check.md`).
+- **Inside the tool: code decides, Claude reads.** Eligibility is decided only by code using government data. Claude (`claude-sonnet-5-5`, structured JSON output) reads only the free-text listing description and returns tenant-occupied / vacant / owner-occupied flags with a quoted phrase. Code then checks each quote really appears in the text and drops any that do not. A Claude flag can turn the tenant test into "possible FAIL, confirm with agent". It can never make a test PASS.
+
+## SB 9 tests and where each comes from
+
+| Test | Data | Rule source |
+|---|---|---|
+| Address → parcel polygon | Santa Ana Assessor Parcels | needed for every test |
+| Single-family zone (R1, RE) | Santa Ana Zoning Classifications | HCD SB 9 Fact Sheet (Sept 2024) p.2; Gov. Code 65852.21(a), 66411.7(a)(3)(A) |
+| Split into two lots ≥ 1,200 sq ft, neither < 40% | polygon area in State Plane feet (wkid 2230) | HCD fact sheet (April 2026) p.1 (1,200 sq ft, "roughly equal"). 40%: Gov. Code 66411.7(a)(1)(B), not stated in the fact sheets and **not verified** against statute text today |
+| Special flood hazard area | FEMA NFHL, cross-checked with OC Floodplains | HCD fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K). Statute has exceptions |
+| Very high fire hazard severity zone | OC FHSZ LRA (fallback CAL FIRE LRA 2011) | same |
+| Historic property or district | Santa Ana Historic Resources layer (properties + districts) | HCD fact sheet (April 2026) p.3-4 (AB 1061) |
+| Landslide zone (site risk only, does not change verdict) | CGS Landslide Zones | Not an SB 9 exclusion in the HCD fact sheets |
+| Tenant in last 3 years | listing text read by Claude (possible FAIL only) | HCD fact sheet (April 2026) p.2-3 |
+| Rent restriction, rent control, Ellis Act; prior SB 9 split; earthquake fault; wetlands, habitat, farmland, hazardous waste | **always UNKNOWN** in the MVP, each with a next step | HCD fact sheet (April 2026) p.2-3 |
+
+**Max homes:** 4 if every counted test passes or is unknown (two lots, up to two units each: HCD fact sheet April 2026 p.2). 2 if only the lot-size test fails (two units without a split). 0 if any other test fails.
+
+**Land cost per home** = asking price ÷ max homes. Labelled "land and building purchase per home, before construction".
+
+## Sources and assumptions
+
+| Item | Source or assumption | Date checked |
+|---|---|---|
+| SB 9 rules | [HCD Duplexes and Lot Splits fact sheet, April 2026](https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/lot-splits-and-duplexes-sb-9.pdf); [HCD SB 9 Fact Sheet, Sept 2024](https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/sb-9-fact-sheet.pdf) | 2026-11-07 |
+| Parcels | [Santa Ana Assessor Parcels](https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0) | 2026-11-07 |
+| Zoning | [Santa Ana Zoning Classifications](https://gis.santa-ana.org/server/rest/services/Public/PBA_ZoningClassifications/FeatureServer/0) | 2026-11-07 |
+| Historic | [Santa Ana Historic Resources](https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer) | 2026-11-07 |
+| Flood | [FEMA NFHL layer 28](https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28); [OC Floodplains](https://www.ocgis.com/arcpub/rest/services/Map_Layers/Floodplains/MapServer/0) | 2026-11-07 |
+| Fire | [OC FHSZ LRA](https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0); [CAL FIRE LRA 2011](https://services.gis.ca.gov/arcgis/rest/services/Environment/Fire_Severity_Zones/MapServer/1) | 2026-11-07 |
+| Landslide | [CGS Landslide Zones](https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0) | 2026-11-07 |
+| Listings | 10 public Zillow / Redfin listings collected by hand by Jerry; link on each site page; no agent or seller names stored | 2026-11-07 |
+| $360k land and building purchase per home | **ASSUMPTION**: the brief's worked example (`docs/background.md`), mock numbers, not a real deal | 2026-11-06 |
+| RE zone counts as single-family | **ASSUMPTION**: zone description "Residential-Estate"; confirm in the Santa Ana zoning code | 2026-11-07 |
+| Santa Ana is in an urbanized area (SB 9 applies to urbanized areas, fact sheet April 2026 p.1) | **ASSUMPTION**, not checked against Census data | 2026-11-07 |
+| Split line | **ASSUMPTION**: a straight equal-area cut across the lot's long side. A sketch, not a surveyed parcel map | n/a |
+
+## What is UNKNOWN and why
+
+- **Tenant history (3 years):** no public data. Claude reads the listing for clues, but a listing can't prove there was no tenant. Ask the listing agent.
+- **Rent restriction, rent control, Ellis Act withdrawal:** not in free parcel data. Ask the agent and the city housing division.
+- **Prior SB 9 split, or an adjacent split by the same owner:** needs the parcel's map history. Ask the planning desk.
+- **Earthquake fault zone:** the CGS seismic hazard service needed a token when tested. Check CGS EQ Zapp.
+- **Wetlands, habitat, farmland, conservation easement, hazardous waste:** not checked. Check DTSC EnviroStor and the planning desk.
+- **Historic:** we check Santa Ana's own list and districts. The State Historic Resources Inventory is not checked, so a clean city result still says UNKNOWN.
+- **A1 "General Agricultural" zone:** HCD says agricultural zones are not SB 9 zones, but Santa Ana's A1 can hold ordinary houses. Shown as possible FAIL; ask the city.
+
+## What is real and what is mocked
+
+| Part | Status |
 |---|---|
-| `#teams` | Register your team (by 10:00 AM) |
-| `#submit` | The submission form (due 2:30 PM) |
-| `#credits` | Your Claude API credits |
+| Parcel lookup, lot area, zoning, flood, fire, historic, landslide checks | working, live government data |
+| Split sketch and SVG | working; a sketch, not a survey |
+| Claude listing reader | working when `ANTHROPIC_API_KEY` is set; otherwise shows "reader off" and the tenant test stays UNKNOWN |
+| Listings | real public listings, collected by hand on 2026-11-07; prices can change |
+| Ranking and land cost per home | working; uses asking price, not sale price |
+| Other cities | not built; Santa Ana only |
 
-## Bring
+## Where it gets things wrong
 
-- A laptop and its charger
-- A free [GitHub](https://github.com/signup) account. One per team is enough to start
-- A Claude account at [claude.ai](https://claude.ai)
-- Event credits: $100 in Claude API credits per person (API only, not Claude.ai). The claim link is on the hub at 9:15 AM. Claim using your Org ID from [console.anthropic.com](https://console.anthropic.com), not your Claude.ai ID. One claim per person. Credits are tied to the email you registered with, so people who registered on the day may not get them
+- Lot area comes from the city polygon. It can differ from the listing (sa-01: listing 10,001 sq ft, city polygon about 8,682).
+- "Intersects" means any part of the parcel. A parcel that barely touches a flood zone gets FAIL; we pull the outline in 1 ft to avoid edge-touch errors, but a sliver can still count.
+- Fire map vintage may predate CAL FIRE's 2025 LRA maps.
+- Address matching is by text. Some city addresses differ from listings (Valencia St vs Ave, Fay Cir with no "W"). We use a looser match and show the APN so a person can confirm it.
+- Six of the ten listing descriptions are the collector's summaries, not verbatim listing text. Quotes from those are labelled as coming from the summary.
+- A FAIL does not cover statutory exceptions (for example a flood-zone site that meets FEMA requirements).
 
-Wi-Fi: UCI-guest.
+## Next steps
 
-## The day
+- One more week: add Anaheim and Fullerton (their parcel and zoning services are listed in the lane data), a listing feed instead of hand collection, the CGS fault layer, the state historic inventory, and a one-click "questions for the listing agent" draft.
+- Path to the next 100 projects: every check is a public ArcGIS service. A new city needs its parcel and zoning layer plus a list of its single-family zone codes, about an hour of work per city, then the same pipeline ranks every listing in it.
 
-| Time | What |
-|---|---|
-| 8:15 AM | Check-in and breakfast |
-| 9:00 AM | Kickoff in the auditorium. The lanes are revealed |
-| 9:30 AM | Anthropic build workshop, in the auditorium |
-| By 10:00 AM | Register your team on the hub (`#teams`) |
-| 10:00 AM | Go to the room your team picked |
-| Around noon | Lunch |
-| **2:30 PM** | **Submissions due.** Hub form, public repo and a demo video (30 seconds ideal). Anthropic Q&A for anyone who wants it |
-| 3:00 PM | Finalists announced. They present live in the auditorium |
-| 4:00 PM | Judges deliberate |
-| 4:15 PM | Winners and photos |
+## Try it
 
-## The three lanes
+Needs Node 20+.
 
-Teams of up to 5, ideally one of each role: builder/engineer, creative/designer,
-communicator/presenter, organizer/facilitator. Solo is fine to start: the hub's team board shows
-teams with open seats and the roles they want. Each team picks a room on the hub (rooms fill up as teams register), goes there, and picks one
-lane together. Any lane works in any room.
-
-| | Lane | The question | Who is stuck |
-|---|---|---|---|
-| 1 | [**Find it**](lanes/1-find-it/README.md) | Where can the next affordable home go? | An acquisitions lead with no GIS team, a congregation with an underused lot, city housing staff |
-| 2 | [**Clear it**](lanes/2-clear-it/README.md) | How do we turn four years into two? | A nonprofit project manager, a small builder, a homeowner adding an ADU, a city permit tech |
-| 3 | [**Fund it**](lanes/3-fund-it/README.md) | Does it pencil, and who closes the gap? | A nonprofit finance lead, a development director, a donor, a city housing analyst |
-
-Each lane page has the problem, who is stuck, the open question, a few ideas to get you thinking
-(not a spec) and a list of data to start from. Build what your team thinks will help.
-
-New to this field? The short [background](docs/background.md) and the [glossary](docs/glossary.md)
-cover the equation, the laws and the terms you will hear.
-
-## Your first 15 minutes
-
-1. **Get the files.** Use this repo as a template for your team, or download it as a ZIP.
-   [Getting started](docs/getting-started.md) shows both, and three ways to work with Claude:
-   in the browser, in the desktop app, or in a terminal.
-2. **Claim your credits** from the hub (`#credits`) once the link is up at 9:15 AM.
-3. **Register your team** on the hub (`#teams`) by 10:00 AM.
-4. **Name one real user.** Write down who they are and what their day looks like before and after.
-   Then open your lane's data list and look at what is there.
-
-## Before you build
-
-1. **Start with one real person** and the problem they're stuck on. Show their before and after.
-2. **Bend the brief** if it serves the goal: more affordable homes in Southern California.
-3. **Play fair with data.** Public or provided data only. Don't overload or abuse city websites.
-   No private plans or blueprints without permission, and no personal information about real
-   tenants, buyers or residents.
-
-The full version, with the reasons, is in [ground rules](docs/ground-rules.md).
-
-## Submit by 2:30 PM
-
-One per team:
-
-- the submission form at [claudesocal.com/uci-impact-lab](https://claudesocal.com/uci-impact-lab) (`#submit`)
-- a public GitHub repo with a README (see the [repo rules](docs/submission.md#repo-rules-so-judges-can-check-it-works))
-- a demo video made with Claude's help (30 seconds is ideal, up to 2 minutes)
-
-[How to submit](docs/submission.md).
-
-## Judging
-
-Judges first shortlist from all submissions. Finalists present live in the auditorium. Each
-finalist is scored from 1 to 5 in four areas. The areas have equal weight.
-
-| Area | The question |
-|---|---|
-| **Impact** | Would a nonprofit or city use it next month to help get homes built? |
-| **Works** | Does the live demo run on real data, with sources shown? Working beats polished |
-| **Scale** | Is there a believable path to the next 100 projects? |
-| **Innovation** | Is it a new way to see or solve the problem? |
-
-Ties go to Impact.
-
-Prizes: overall 1st, 2nd and 3rd, plus a winner in each lane. A live demo is required for
-finalists. Slides alone do not place. More in [judging](docs/judging.md).
-
-## Help
-
-- **About the day, the repo or your setup:** find an organizer.
-- **About your lane:** ask in your breakout room.
-- **Stuck on setup:** ask early. Nobody should lose the morning to an install.
-- **Something looks like real personal information:** stop and tell an organizer right away.
-
-## What is in this repo
-
-```text
-README.md            this page
-CLAUDE.md            instructions Claude Code reads when you open this repo
-docs/
-  first-hackathon.md   what to expect if this is your first one
-  getting-started.md   get the files, set up Claude
-  ground-rules.md      the rules in full
-  submission.md        what to hand in and how
-  challenge-brief.pdf  the 3-page brief handed out at kickoff
-  kickoff-slides.pdf   the slides from the morning kickoff
-  judging.md           how winners are picked
-  background.md        the $0 equation and the laws, in two pages
-  glossary.md          the terms you will hear
-lanes/
-  1-find-it/     problem, ideas, scenarios.json, data/ (DATA-SOURCES.md, pathways.json)
-  2-clear-it/    problem, ideas, scenarios.json, data/ (DATA-SOURCES.md, oc-cities.json, timeline.json)
-  3-fund-it/     problem, ideas, scenarios.json, data/ (DATA-SOURCES.md, synthetic-example-deal.json)
-templates/TEAM-README.md          the README your team's repo needs
+```bash
+npm install
+cp .env.example .env.local   # add ANTHROPIC_API_KEY to turn on the listing reader
+npm run precompute           # data/listings.json -> data/results.json (raw API responses cached in .cache/)
+npm run dev                  # http://localhost:3000
 ```
+
+Other scripts: `npm run probe` hits each endpoint once and prints the fields; `npx tsx scripts/one.ts "1209 S Townsend St"` checks one address in the terminal.
+
+## Deploy
+
+```bash
+vercel --prod
+```
+
+The app reads `data/results.json` at build time, so pages load instantly. `/api/check` runs a live check; every external call has an 8 second timeout, and a failed call becomes UNKNOWN with the reason while the other checks still return. Set `ANTHROPIC_API_KEY` in the Vercel project's environment variables for the live listing reader.
+
+## Data and privacy
+
+This project uses only public data. It contains no personal information about real tenants, buyers, sellers or agents. It does not file applications or contact any city or person.
+
+Prototype. Not legal or financial advice. Confirm with the city and a professional.
 
 ## License
 
-Code in this repo is released under the [MIT License](LICENSE). The brief, lane pages and glossary
-text are dedicated to the public domain (CC0). Third-party data, laws and documents linked here
-stay under their own terms.
-
-Teams own what they build. See [ground rules](docs/ground-rules.md).
+MIT, see the LICENSE file.
