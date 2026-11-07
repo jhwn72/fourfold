@@ -22,7 +22,7 @@ export default function CallSheet({ result }: { result: SiteResult }) {
       {email && (
         <details>
           <summary>Draft email to the listing agent</summary>
-          <pre style={{ whiteSpace: "pre-wrap", background: "#f6f6f6", padding: 10, fontSize: 13 }}>{email}</pre>
+          <pre style={{ whiteSpace: "pre-wrap", padding: 10, fontSize: 13 }}>{email}</pre>
           <button type="button" onClick={async () => { try { await navigator.clipboard.writeText(email); setCopied(true); } catch {} }}>
             {copied ? "Copied" : "Copy draft"}
           </button>

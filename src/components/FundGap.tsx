@@ -26,7 +26,7 @@ function MoneyInput({ id, label, value, onChange, chip }: {
           onChange={(e) => onChange(e.target.value)} style={{ flex: "1 1 160px", maxWidth: 220 }} />
         {chip && (chip.fill != null ? (
           <button type="button" onClick={() => onChange(String(chip.fill))}
-            style={{ fontSize: 12, padding: "3px 8px", cursor: "pointer", border: "1px solid #e0c98a", background: "#fff9e8", borderRadius: 4 }}>
+            style={{ fontSize: 12, padding: "3px 8px", cursor: "pointer", border: "1px solid var(--line)", background: "var(--possible-bg)", color: "var(--possible)", borderRadius: 4 }}>
             <span className="label">ASSUMPTION</span> use example: {chip.text}
           </button>
         ) : (
@@ -124,8 +124,8 @@ export default function FundGap({ r }: { r: SiteResult }) {
                   <span>{l.label}</span>
                   <span>{(l.uncovered ?? 0) > 0 ? `${fmt(l.uncovered ?? 0)} unfunded of ${fmt(amt)}` : "funded"}</span>
                 </div>
-                <div style={{ height: 8, background: "#fbe4e4", borderRadius: 4, overflow: "hidden" }}>
-                  <div style={{ width: `${pct}%`, height: "100%", background: "#7cc48a" }} />
+                <div style={{ height: 8, background: "var(--fail-bg)", borderRadius: 4, overflow: "hidden" }}>
+                  <div style={{ width: `${pct}%`, height: "100%", background: "var(--pass)" }} />
                 </div>
               </div>
             );

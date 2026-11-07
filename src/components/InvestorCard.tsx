@@ -7,7 +7,7 @@ export default function InvestorCard({ r }: { r: SiteResult }) {
   if (r.max_homes !== 4) return null;
   const keep = r.keep_house === "fits_a" || r.keep_house === "fits_b";
   return (
-    <div className="card" style={{ background: "#f7fbf7" }}>
+    <div className="card" style={{ background: "var(--surface)" }}>
       <h3 style={{ marginTop: 0 }}>Why a nonprofit wins this house</h3>
       <table>
         <thead><tr><th></th><th>Investor who won&apos;t live there</th><th>Nonprofit or land trust</th></tr></thead>

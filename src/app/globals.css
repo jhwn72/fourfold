@@ -1,28 +1,160 @@
+/* FourFold design tokens.
+   Sources: Tango design system (John's, ~/Documents/Tango/design) for surfaces, lines, text levels, the white
+   primary button, segmented control, chips and calm motion; Norrvik reference recording for the black canvas,
+   particles as data, small uppercase mono labels, gray second headline line and the bottom stats strip.
+   Fonts: Geist and Geist Mono (John's pick). Status colors are OPEN (not in either reference): chosen for
+   WCAG AA contrast on #070707 and marked as placeholders. */
+:root {
+  --bg: #070707;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-2: rgba(255, 255, 255, 0.07);
+  --fill-active: rgba(255, 255, 255, 0.16);
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.35);
+  --text: #f4f4f4;
+  --text-soft: rgba(244, 244, 244, 0.86);
+  --muted: rgba(244, 244, 244, 0.58);
+  --faint: rgba(244, 244, 244, 0.36);
+  --on-light: #111111;
+  --accent: #ffaa5f; /* Tango's warm amber, at full strength: the one accent (candidates, key numbers) */
+  --accent-soft: rgba(255, 170, 95, 0.14);
+  /* Status roles: OPEN placeholders, AA on --bg */
+  --pass: #7fd99a;
+  --pass-bg: rgba(127, 217, 154, 0.12);
+  --fail: #ff8a80;
+  --fail-bg: rgba(255, 138, 128, 0.12);
+  --unknown: #cfcfcf;
+  --unknown-bg: rgba(255, 255, 255, 0.08);
+  --possible: #ffcf7a;
+  --possible-bg: rgba(255, 207, 122, 0.12);
+  --radius-card: 12px;
+  --radius-row: 10px;
+  --radius-control: 8px;
+  --ease: cubic-bezier(0.6, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --fast: 0.2s;
+  --medium: 0.3s;
+  --slow: 0.45s;
+  color-scheme: dark;
+}
+
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  color: #1a1a1a; background: #fff; line-height: 1.45;
+  /* Font vars live on body because next/font sets --font-geist-* on the body element. */
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
-a { color: #0b5cad; }
-.site-header { display: flex; gap: 12px; align-items: baseline; padding: 14px 20px; border-bottom: 1px solid #ddd; flex-wrap: wrap; }
-.brand { font-weight: 700; font-size: 20px; text-decoration: none; color: #1a1a1a; }
-.tagline { color: #666; font-size: 14px; }
-.container { max-width: 1100px; margin: 0 auto; padding: 20px 16px 40px; }
-.site-footer { border-top: 1px solid #ddd; padding: 14px 20px; color: #555; font-size: 13px; text-align: center; }
-table { border-collapse: collapse; width: 100%; font-size: 14px; }
-th, td { border-bottom: 1px solid #e5e5e5; padding: 6px 8px; text-align: left; vertical-align: top; }
-th { background: #f6f6f6; }
+a { color: var(--text); text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--text); }
+h1, h2, h3 { font-weight: 300; letter-spacing: -0.01em; color: var(--text-soft); }
+h1 { font-size: clamp(30px, 4.4vw, 52px); line-height: 1.05; margin: 0.2em 0 0.35em; }
+h1 .second, h2 .second { color: var(--faint); display: block; }
+h2 { font-size: 26px; margin: 1.6em 0 0.5em; }
+h3 { font-size: 17px; font-weight: 400; margin: 0 0 0.6em; }
+code, pre, .mono { font-family: var(--font-mono); }
+
+/* Small uppercase mono label (Norrvik) */
+.label, .eyebrow {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--faint); font-weight: 400;
+}
+.label { color: var(--possible); background: var(--possible-bg); padding: 1px 6px; border-radius: 4px; letter-spacing: 0.06em; }
+
+.site-header {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+  padding: 12px 20px; border-bottom: 1px solid var(--line);
+  background: rgba(7, 7, 7, 0.78); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+}
+.brand { font-family: var(--font-mono); font-weight: 500; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--text); }
+.tagline { color: var(--faint); font-size: 13px; }
+.site-header nav { display: flex; gap: 18px; margin-left: auto; flex-wrap: wrap; }
+.site-header nav a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+.site-header nav a:hover { color: var(--text); }
+
+.container { max-width: 1180px; margin: 0 auto; padding: 24px 16px 56px; }
+.site-footer { border-top: 1px solid var(--line); padding: 16px 20px; color: var(--faint); font-size: 12.5px; text-align: center; }
+
+.muted { color: var(--muted); font-size: 13px; }
+.faint { color: var(--faint); }
+
+.card {
+  border: 1px solid var(--line); border-radius: var(--radius-card);
+  background: var(--surface); padding: 18px; margin: 14px 0;
+}
+
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { border-bottom: 1px solid var(--line); padding: 9px 10px; text-align: left; vertical-align: top; }
+th { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); font-weight: 400; background: transparent; }
+tbody tr:hover { background: var(--surface); }
 .table-wrap { overflow-x: auto; }
-.status { font-weight: 700; font-size: 12px; padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
-.PASS { background: #e3f5e5; color: #17642a; }
-.FAIL { background: #fbe4e4; color: #9b1c1c; }
-.UNKNOWN { background: #f1f1f1; color: #555; }
-.verdict-LIKELY_YES { background: #e3f5e5; color: #17642a; }
-.verdict-NO { background: #fbe4e4; color: #9b1c1c; }
-.verdict-UNKNOWN { background: #fff4d6; color: #7a5500; }
-.muted { color: #666; font-size: 13px; }
-.label { font-size: 11px; font-weight: 700; color: #7a5500; background: #fff4d6; padding: 1px 5px; border-radius: 3px; }
-.card { border: 1px solid #ddd; border-radius: 6px; padding: 14px; margin: 14px 0; }
-input, button { font: inherit; padding: 6px 10px; }
+
+.status {
+  font-family: var(--font-mono); font-weight: 500; font-size: 11px; letter-spacing: 0.06em;
+  padding: 3px 8px; border-radius: 999px; white-space: nowrap; text-transform: uppercase;
+}
+.PASS { background: var(--pass-bg); color: var(--pass); }
+.FAIL { background: var(--fail-bg); color: var(--fail); }
+.UNKNOWN { background: var(--unknown-bg); color: var(--unknown); }
+.POSSIBLE { background: var(--possible-bg); color: var(--possible); }
+.verdict-LIKELY_YES { background: var(--pass-bg); color: var(--pass); }
+.verdict-NO { background: var(--fail-bg); color: var(--fail); }
+.verdict-UNKNOWN { background: var(--possible-bg); color: var(--possible); }
+
+input, button, select, textarea { font: inherit; color: var(--text); }
+input[type=text], input[type=number], input:not([type]), textarea, select {
+  background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-control);
+  padding: 8px 10px; transition: border-color var(--fast);
+}
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--line-strong); }
 input[type=text] { width: 100%; max-width: 480px; }
+input[type=checkbox] { accent-color: var(--accent); }
+button {
+  padding: 8px 16px; border-radius: var(--radius-row); border: 1px solid var(--line-strong);
+  background: transparent; cursor: pointer; transition: background var(--fast);
+}
+button:hover { background: rgba(255, 255, 255, 0.08); }
+button[type=submit], .btn-primary { background: rgba(255, 255, 255, 0.92); color: var(--on-light); border-color: transparent; }
+button[type=submit]:hover, .btn-primary:hover { background: #fff; }
+button:disabled { opacity: 0.5; cursor: default; }
+details summary { cursor: pointer; color: var(--muted); }
+pre { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-control); }
+
+/* Segmented control (Tango .tg-seg) */
+.seg { display: inline-flex; padding: 2px; border-radius: var(--radius-control); background: var(--surface-2); gap: 2px; }
+.seg > button { border: 0; padding: 4px 12px; border-radius: 6px; font-size: 12px; color: var(--muted); background: transparent; }
+.seg > button.on { background: var(--fill-active); color: var(--text); }
+
+/* Chip (Tango .tg-chip) */
+.chip { display: inline-block; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,0.03); color: var(--muted); font-size: 12px; cursor: pointer; }
+.chip.on { color: var(--text); background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.22); }
+
+/* Stats strip (Norrvik) */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stats > div { padding: 12px 14px; border-right: 1px solid var(--line); }
+.stats > div:last-child { border-right: 0; }
+.stats .k { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+.stats .v { font-size: 22px; font-weight: 300; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.stats .v.accent { color: var(--accent); }
+
+.accent { color: var(--accent); }
+.num { font-variant-numeric: tabular-nums; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* Print: back to ink on paper */
+@media print {
+  :root { --bg: #fff; --text: #111; --text-soft: #111; --muted: #444; --faint: #666; --line: #ccc; --surface: #fff; --surface-2: #f4f4f4;
+    --pass: #17642a; --pass-bg: #e3f5e5; --fail: #9b1c1c; --fail-bg: #fbe4e4; --unknown: #444; --unknown-bg: #eee; --possible: #7a5500; --possible-bg: #fff4d6; }
+  body { background: #fff; color: #111; }
+  .site-header { position: static; background: #fff; backdrop-filter: none; }
+}

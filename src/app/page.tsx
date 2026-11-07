@@ -1,12 +1,14 @@
 import Link from "next/link";
 import LiveCheck from "@/components/LiveCheck";
 import SiteTable from "@/components/SiteTable";
+import CityHero from "@/components/viz/CityHero";
 import { RESULTS } from "@/lib/results";
 
 export default function Home() {
   const rows = RESULTS.results;
   return (
     <section>
+      <CityHero />
       <h1>FourFold</h1>
       <p>
         Investors can&apos;t split a lot under SB 9 unless they live there for 3 years. Nonprofits and community land trusts

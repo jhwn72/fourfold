@@ -3,7 +3,7 @@
 // Points are [x, y, code] in 10 ft units from the bbox min (State Plane, so north is up). Codes: 0 no, 1 candidate, 2 in district.
 import { useEffect, useRef } from "react";
 
-const COLORS = ["#c4c4c4", "#1f9d3a", "#e0a100"];
+const COLORS = ["rgba(244,244,244,0.25)", "#ffaa5f", "#cfcfcf"];
 
 export default function CityMap({ points, width, height }: { points: number[][]; width: number; height: number }) {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -40,7 +40,7 @@ export default function CityMap({ points, width, height }: { points: number[][];
 
   return (
     <div>
-      <canvas ref={ref} style={{ width: "100%", maxWidth: 820, display: "block", border: "1px solid #ddd", borderRadius: 6 }} aria-label="Map of Santa Ana parcels colored by SB 9 screen result" role="img" />
+      <canvas ref={ref} style={{ width: "100%", maxWidth: 820, display: "block", border: "1px solid var(--line)", borderRadius: 6 }} aria-label="Map of Santa Ana parcels colored by SB 9 screen result" role="img" />
       <p className="muted" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
         <span><Swatch c={COLORS[1]} /> Candidate</span>
         <span><Swatch c={COLORS[2]} /> Would be candidate, but inside a historic district</span>
