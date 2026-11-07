@@ -55,6 +55,11 @@ export default function MapStage({ site, listings, onSelect, focus, cityView }: 
           <span className="mapseg"><ViewSwitch mode={mode} onChange={setMode} modes={["3d", "map", "tech"]} /></span>
         </span>
       </div>
+      {mode === "map" && (
+        <div style={{ position: "absolute", bottom: 12, right: 14, maxWidth: "calc(100% - 120px)", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", zIndex: 2, pointerEvents: "none" }} className="eyebrow">
+          <span style={{ color: "rgba(255,255,255,0.6)" }}>Dot size = lots · brighter = more pass the first SB 9 screen</span>
+        </div>
+      )}
       {!site && mode === "3d" && (
         <div style={{ position: "absolute", bottom: 14, left: 14, zIndex: 2, pointerEvents: "none" }} className="eyebrow">
           <span style={{ color: "var(--accent)" }}>●</span> <span style={{ color: labelColor }}>passes first SB 9 screen</span>

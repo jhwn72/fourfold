@@ -18,7 +18,7 @@ export type MapListing = {
 
 type City = { pts: Int16Array; bbox: number[] };
 
-const CELL = 7; // px between dot centres
+const CELL = 6; // px between dot centres
 
 export default function DotMap({
   listings, selected, onSelect, height = "100%", focusOnly = false, focus = null, cityView = false,
@@ -63,7 +63,7 @@ export default function DotMap({
     const cam = { cx: ov.cx, cy: ov.cy, span: ov.span };
     const target = () => {
       const s = selRef.current ? withRing.find((l) => l.id === selRef.current) : null;
-      if (s) { const c = centroid(largestRing([s.ring!])); const r = largestRing([s.ring!]); const e = Math.max(...r.map((p) => Math.hypot(p[0] - c[0], p[1] - c[1]))); return { cx: c[0], cy: c[1], span: e * 5.2 }; }
+      if (s) { const c = centroid(largestRing([s.ring!])); const r = largestRing([s.ring!]); const e = Math.max(...r.map((p) => Math.hypot(p[0] - c[0], p[1] - c[1]))); return { cx: c[0], cy: c[1], span: e * 8 }; }
       const f = focusRef.current;
       if (f && f.length) {
         const fc = withRing.map((l, i) => (f.includes(l.id) ? cents[i] : null)).filter((c): c is number[] => !!c);
@@ -82,6 +82,9 @@ export default function DotMap({
 
     const seed = new Float32Array(4096).map(() => Math.random());
     let counts = new Float32Array(1);
+    let cands = new Float32Array(1);
+    let frame = 0;
+    let full = 1;
     const t0 = performance.now();
     let raf = 0;
 
@@ -96,41 +99,69 @@ export default function DotMap({
       ctx.setTransform(pr, 0, 0, pr, 0, 0);
       ctx.fillStyle = "#000"; ctx.fillRect(0, 0, W, H);
 
-      // Halftone: bin parcels into screen cells.
+      // Halftone: bin parcels into screen cells, then draw round dots sized by density.
+      // Zoomed in far enough that a cell is smaller than a parcel, draw each parcel as its own dot instead.
+      const intro = reducedRef.current ? 1 : Math.min(1, t / 1.6);
+      const tw = (sd: number) => (reducedRef.current ? 1 : 0.85 + 0.15 * Math.sin(t * 1.2 + sd * 40));
+      const LEVELS = 8;
+      const paths: Path2D[] = Array.from({ length: LEVELS }, () => new Path2D());
+      const base = new Path2D();
       const cols = Math.ceil(W / CELL), rows = Math.ceil(H / CELL);
-      if (counts.length !== cols * rows) counts = new Float32Array(cols * rows); else counts.fill(0);
-      if (city) {
+      const feetPerCell = CELL / scale;
+      if (counts.length !== cols * rows) { counts = new Float32Array(cols * rows); cands = new Float32Array(cols * rows); } else { counts.fill(0); cands.fill(0); }
+      if (city && feetPerCell < 45) {
+        // Parcel-level: one dot per parcel, sized to a house footprint.
+        const [bx, by] = city.bbox, p = city.pts;
+        const rad = Math.max(1.2, Math.min(6, 14 * scale));
+        for (let i = 0; i < p.length; i += 3) {
+          const X = sx(bx + p[i] * 10), Y = sy(by + p[i + 1] * 10);
+          if (X < -10 || Y < -10 || X > W + 10 || Y > H + 10) continue;
+          const sd = seed[(i / 3) & 4095];
+          if (sd > intro * 1.05) continue;
+          const lvl = Math.min(LEVELS - 1, Math.round((p[i + 2] === 1 ? 0.85 : 0.55) * tw(sd) * (LEVELS - 1)));
+          paths[lvl].moveTo(X + rad, Y); paths[lvl].arc(X, Y, rad, 0, Math.PI * 2);
+        }
+        for (let r = 0; r < rows; r += 2) for (let c = 0; c < cols; c += 2) base.rect(c * CELL + CELL / 2, r * CELL + CELL / 2, 1, 1);
+      } else if (city) {
         const [bx, by] = city.bbox, p = city.pts;
         for (let i = 0; i < p.length; i += 3) {
           const X = sx(bx + p[i] * 10), Y = sy(by + p[i + 1] * 10);
           if (X < 0 || Y < 0 || X >= W || Y >= H) continue;
-          counts[((Y / CELL) | 0) * cols + ((X / CELL) | 0)] += p[i + 2] === 1 ? 1.25 : 1;
+          const ci = ((Y / CELL) | 0) * cols + ((X / CELL) | 0);
+          counts[ci] += 1;
+          if (p[i + 2] === 1) cands[ci] += 1;
         }
-      }
-      const intro = reducedRef.current ? 1 : Math.min(1, t / 1.6);
-      const perCellFull = Math.max(0.6, 2.2 * (CELL / scale / 60) ** 2); // parcels per cell for a full dot at this zoom
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const i = r * cols + c;
-          const sd = seed[i & 4095];
-          if (sd > intro * 1.05) continue;
-          const v = counts[i];
-          const x = c * CELL + CELL / 2, y = r * CELL + CELL / 2;
-          if (v <= 0) { // base grid, faint
-            ctx.fillStyle = "rgba(255,255,255,0.07)";
-            ctx.fillRect(x - 0.5, y - 0.5, 1, 1);
-            continue;
+        // Contrast adapts to zoom: a full dot is the 85th percentile of occupied cells.
+        if (frame++ % 15 === 0) {
+          const nz: number[] = [];
+          for (let i = 0; i < counts.length; i += 3) if (counts[i] > 0) nz.push(counts[i]);
+          nz.sort((x, y) => x - y);
+          full = nz.length ? Math.max(1, nz[Math.floor(nz.length * 0.97)]) : 1;
+        }
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const i = r * cols + c;
+            const sd = seed[i & 4095];
+            if (sd > intro * 1.05) continue;
+            const x = c * CELL + CELL / 2, y = r * CELL + CELL / 2;
+            const v = counts[i];
+            if (v <= 0) { if ((r + c) % 2 === 0) base.rect(x - 0.5, y - 0.5, 1, 1); continue; }
+            // Size = how many lots. Brightness = share that pass the first SB 9 screen.
+            const f = Math.min(1, v / full);
+            const share = cands[i] / v;
+            const rad = 0.35 + Math.sqrt(f) * (CELL * 0.4);
+            const lvl = Math.min(LEVELS - 1, Math.round((0.08 + 0.92 * share * share) * tw(sd) * (LEVELS - 1)));
+            paths[lvl].moveTo(x + rad, y); paths[lvl].arc(x, y, rad, 0, Math.PI * 2);
           }
-          const f = Math.min(1, Math.sqrt(v / perCellFull));
-          const tw = reducedRef.current ? 1 : 0.82 + 0.18 * Math.sin(t * 1.3 + sd * 40);
-          ctx.fillStyle = `rgba(255,255,255,${(0.25 + 0.6 * f) * tw})`;
-          const rad = 0.6 + f * (CELL * 0.32);
-          ctx.fillRect(x - rad, y - rad, rad * 2, rad * 2);
         }
       }
+      ctx.fillStyle = "rgba(255,255,255,0.08)"; ctx.fill(base);
+      paths.forEach((pth, lvl) => { ctx.fillStyle = `rgba(255,255,255,${(0.12 + 0.88 * (lvl / (LEVELS - 1))).toFixed(3)})`; ctx.fill(pth); });
 
       // Listings
       hits.current = [];
+      const placed: { x: number; y: number; w: number; h: number }[] = [];
+      const overlaps = (b: { x: number; y: number; w: number; h: number }) => placed.some((q) => b.x < q.x + q.w + 2 && b.x + b.w + 2 > q.x && b.y < q.y + q.h + 2 && b.y + b.h + 2 > q.y);
       ctx.font = `11px ${getComputedStyle(document.documentElement).getPropertyValue("--font-mono") || "monospace"}`;
       const poly = (r: number[][]) => { ctx.beginPath(); r.forEach((p, j) => (j ? ctx.lineTo(sx(p[0]), sy(p[1])) : ctx.moveTo(sx(p[0]), sy(p[1])))); ctx.closePath(); };
       withRing.forEach((l, idx) => {
@@ -173,7 +204,14 @@ export default function DotMap({
         // "№" tag
         const label = `№${l.n}`;
         const tw = ctx.measureText(label).width + 12;
-        const tx = X + Math.max(ext, 8) * 0.7 + 4, ty = Y - Math.max(ext, 8) * 0.7 - 20;
+        const r0 = Math.max(ext, 8) * 0.7 + 4;
+        const tries: [number, number][] = [[r0, -r0 - 16], [-r0 - tw, -r0 - 16], [r0, r0 - 2], [-r0 - tw, r0 - 2], [r0, -r0 - 38], [-r0 - tw, -r0 - 38], [r0, r0 + 20], [-r0 - tw, r0 + 20]];
+        let tx = X + tries[0][0], ty = Y + tries[0][1];
+        for (const [dx, dy] of tries) { const b = { x: X + dx, y: Y + dy, w: tw, h: 18 }; if (!overlaps(b)) { tx = b.x; ty = b.y; break; } }
+        placed.push({ x: tx, y: ty, w: tw, h: 18 });
+        // Leader line from the lot to its tag
+        ctx.strokeStyle = "rgba(255,255,255,0.35)"; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(X, Y); ctx.lineTo(tx < X ? tx + tw : tx, ty + 9); ctx.stroke();
         ctx.fillStyle = "#000"; ctx.fillRect(tx, ty, tw, 18);
         ctx.strokeStyle = isSel ? "#fff" : dim ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.7)"; ctx.lineWidth = 1; ctx.strokeRect(tx + 0.5, ty + 0.5, tw - 1, 17);
         ctx.fillStyle = dim ? "rgba(255,255,255,0.55)" : "#fff"; ctx.fillText(label, tx + 6, ty + 13);

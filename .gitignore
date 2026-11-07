@@ -25,3 +25,4 @@ build/
 .vercel
 next-env.d.ts
 *.tsbuildinfo
+.next-qa/
