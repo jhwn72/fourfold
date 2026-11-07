@@ -14,6 +14,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <header className="site-header">
           <Link href="/" className="brand">FourFold</Link>
+          <Link href="/city">Whole city</Link>
           <span className="tagline">One home into four, for nonprofits. Santa Ana prototype.</span>
         </header>
         <main className="container">{children}</main>

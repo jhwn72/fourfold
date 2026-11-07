@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-07T19:14:42.501Z",
+ "generated_at": "2026-11-07T19:16:33.480Z",
  "city": "Santa Ana",
  "results": [
   {
@@ -50,7 +50,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 109-453-19, 1209 S TOWNSEND ST",
-     "checked_at": "2026-11-07T19:14:26.761Z",
+     "checked_at": "2026-11-07T19:16:31.356Z",
      "note": "Matched APN 109-453-19."
     },
     {
@@ -62,7 +62,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "R1 (Single-Family Residence)",
-     "checked_at": "2026-11-07T19:14:26.810Z",
+     "checked_at": "2026-11-07T19:16:31.357Z",
      "note": "Zoned single-family."
     },
     {
@@ -72,7 +72,7 @@
      "value": "Lot 6,499 sq ft; equal split = 3,250 + 3,250 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:14:26.761Z",
+     "checked_at": "2026-11-07T19:16:31.356Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,499 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -84,7 +84,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:26.927Z",
+     "checked_at": "2026-11-07T19:16:31.358Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -96,7 +96,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:26.927Z",
+     "checked_at": "2026-11-07T19:16:31.358Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -110,7 +110,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:14:26.839Z",
+     "checked_at": "2026-11-07T19:16:31.358Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -190,7 +190,7 @@
      "affects_verdict": false,
      "status": "FAIL",
      "value": "1 building(s), 2,539 sq ft footprint; crosses the sketched split line",
-     "checked_at": "2026-11-07T19:14:26.927Z",
+     "checked_at": "2026-11-07T19:16:31.358Z",
      "note": "No straight split line clears the house while keeping both lots at least 1,200 sq ft and 40%. A surveyor may find another layout.",
      "next_step": "Ask a surveyor to try a split line that clears the house."
     },
@@ -202,7 +202,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: no parking within 1/2 mile walking distance of a high-quality transit corridor or major transit stop.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:26.927Z",
+     "checked_at": "2026-11-07T19:16:31.357Z",
      "value": "In a high-quality transit area (Orange County Transportation Authority, route 66; hq corridor bus)",
      "note": "Likely no parking can be required, which frees lot space for homes. Caltrans areas are straight-line, not walking distance, so confirm with the city."
     },
@@ -214,7 +214,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:26.927Z",
+     "checked_at": "2026-11-07T19:16:31.358Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -321,7 +321,7 @@
     "model": "claude-sonnet-5-5"
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:14:26.927Z",
+   "computed_at": "2026-11-07T19:16:31.358Z",
    "listed_lot_sqft": 6500,
    "description": "Listing summary: Three-bedroom, two-bathroom single-family home with a private backyard. Description does not establish occupancy or tenant history.",
    "description_type": "summary"
@@ -378,7 +378,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 144-372-04, 927 S LAUREL ST",
-     "checked_at": "2026-11-07T19:14:28.932Z",
+     "checked_at": "2026-11-07T19:16:31.661Z",
      "note": "Matched APN 144-372-04."
     },
     {
@@ -390,7 +390,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "R1 (Single-Family Residence)",
-     "checked_at": "2026-11-07T19:14:29.064Z",
+     "checked_at": "2026-11-07T19:16:31.662Z",
      "note": "Zoned single-family."
     },
     {
@@ -400,7 +400,7 @@
      "value": "Lot 6,080 sq ft; equal split = 3,040 + 3,040 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:14:28.932Z",
+     "checked_at": "2026-11-07T19:16:31.661Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,080 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -412,7 +412,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:29.186Z",
+     "checked_at": "2026-11-07T19:16:31.662Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -424,7 +424,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:29.142Z",
+     "checked_at": "2026-11-07T19:16:31.662Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -438,7 +438,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:14:29.091Z",
+     "checked_at": "2026-11-07T19:16:31.663Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -518,7 +518,7 @@
      "affects_verdict": false,
      "status": "FAIL",
      "value": "1 building(s), 2,132 sq ft footprint; crosses the sketched split line",
-     "checked_at": "2026-11-07T19:14:29.142Z",
+     "checked_at": "2026-11-07T19:16:31.662Z",
      "note": "No straight split line clears the house while keeping both lots at least 1,200 sq ft and 40%. A surveyor may find another layout.",
      "next_step": "Ask a surveyor to try a split line that clears the house."
     },
@@ -530,7 +530,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: no parking within 1/2 mile walking distance of a high-quality transit corridor or major transit stop.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:29.142Z",
+     "checked_at": "2026-11-07T19:16:31.662Z",
      "value": "In a high-quality transit area (Orange County Transportation Authority, route 543; hq corridor bus)",
      "note": "Likely no parking can be required, which frees lot space for homes. Caltrans areas are straight-line, not walking distance, so confirm with the city."
     },
@@ -542,7 +542,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:29.142Z",
+     "checked_at": "2026-11-07T19:16:31.662Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -661,7 +661,7 @@
     "model": "claude-sonnet-5-5"
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:14:29.187Z",
+   "computed_at": "2026-11-07T19:16:31.663Z",
    "listed_lot_sqft": 6084,
    "description": "Listing excerpt: The home is ready for a comprehensive renovation. Listing summary: Three bedrooms, two bathrooms, two-car garage and backyard.",
    "description_type": "excerpt+summary"
@@ -718,7 +718,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 109-691-15, 1217 S HURON DR",
-     "checked_at": "2026-11-07T19:14:37.825Z",
+     "checked_at": "2026-11-07T19:16:32.573Z",
      "note": "Matched APN 109-691-15."
     },
     {
@@ -730,7 +730,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "R1 (Single-Family Residence)",
-     "checked_at": "2026-11-07T19:14:37.936Z",
+     "checked_at": "2026-11-07T19:16:32.573Z",
      "note": "Zoned single-family."
     },
     {
@@ -740,7 +740,7 @@
      "value": "Lot 6,098 sq ft; equal split = 3,049 + 3,049 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:14:37.825Z",
+     "checked_at": "2026-11-07T19:16:32.573Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,098 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -752,7 +752,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:37.962Z",
+     "checked_at": "2026-11-07T19:16:32.573Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -764,7 +764,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:37.962Z",
+     "checked_at": "2026-11-07T19:16:32.573Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -778,7 +778,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:14:37.967Z",
+     "checked_at": "2026-11-07T19:16:32.573Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -858,7 +858,7 @@
      "affects_verdict": false,
      "status": "FAIL",
      "value": "1 building(s), 2,523 sq ft footprint; crosses the sketched split line",
-     "checked_at": "2026-11-07T19:14:37.963Z",
+     "checked_at": "2026-11-07T19:16:32.573Z",
      "note": "No straight split line clears the house while keeping both lots at least 1,200 sq ft and 40%. A surveyor may find another layout.",
      "next_step": "Ask a surveyor to try a split line that clears the house."
     },
@@ -870,7 +870,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: no parking within 1/2 mile walking distance of a high-quality transit corridor or major transit stop.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:37.962Z",
+     "checked_at": "2026-11-07T19:16:32.573Z",
      "value": "In a high-quality transit area ( , route  ; major stop bus)",
      "note": "Likely no parking can be required, which frees lot space for homes. Caltrans areas are straight-line, not walking distance, so confirm with the city."
     },
@@ -882,7 +882,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:37.962Z",
+     "checked_at": "2026-11-07T19:16:32.573Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -1009,7 +1009,7 @@
     "model": "claude-sonnet-5-5"
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:14:37.967Z",
+   "computed_at": "2026-11-07T19:16:32.573Z",
    "listed_lot_sqft": 6060,
    "description": "Listing summary: Four-bedroom, two-bathroom single-family home. Description reports a filled backyard pool and claims city approval. Advertises potential ADU and JADU subject to verification.",
    "description_type": "summary"
@@ -1062,7 +1062,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 003-131-15, 2121 VALENCIA AVE",
-     "checked_at": "2026-11-07T19:14:41.723Z",
+     "checked_at": "2026-11-07T19:16:33.177Z",
      "note": "Matched APN 003-131-15."
     },
     {
@@ -1074,7 +1074,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "R1 (Single-Family Residence)",
-     "checked_at": "2026-11-07T19:14:41.847Z",
+     "checked_at": "2026-11-07T19:16:33.178Z",
      "note": "Zoned single-family."
     },
     {
@@ -1084,7 +1084,7 @@
      "value": "Lot 7,433 sq ft; equal split = 3,717 + 3,717 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:14:41.723Z",
+     "checked_at": "2026-11-07T19:16:33.178Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 7,433 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -1096,7 +1096,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:41.946Z",
+     "checked_at": "2026-11-07T19:16:33.178Z",
      "value": "FEMA: X (area of minimal flood hazard)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -1108,7 +1108,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:41.920Z",
+     "checked_at": "2026-11-07T19:16:33.178Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -1122,7 +1122,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:14:41.895Z",
+     "checked_at": "2026-11-07T19:16:33.178Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -1202,7 +1202,7 @@
      "affects_verdict": false,
      "status": "PASS",
      "value": "1 building(s), 2,056 sq ft footprint; all on one half of the sketched split",
-     "checked_at": "2026-11-07T19:14:41.921Z",
+     "checked_at": "2026-11-07T19:16:33.178Z",
      "note": "Keep the existing house and add up to 3 new homes: less demolition, and the existing home can earn rent while you build. Confirm with a surveyor."
     },
     {
@@ -1213,7 +1213,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: no parking within 1/2 mile walking distance of a high-quality transit corridor or major transit stop.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:42.200Z",
+     "checked_at": "2026-11-07T19:16:33.178Z",
      "value": "In a high-quality transit area ( , route  ; major stop bus)",
      "note": "Likely no parking can be required, which frees lot space for homes. Caltrans areas are straight-line, not walking distance, so confirm with the city."
     },
@@ -1225,7 +1225,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:41.945Z",
+     "checked_at": "2026-11-07T19:16:33.178Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -1332,7 +1332,7 @@
     "model": "claude-sonnet-5-5"
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:14:42.200Z",
+   "computed_at": "2026-11-07T19:16:33.178Z",
    "listed_lot_sqft": 7438,
    "description": "Listing summary: Three-bedroom, one-bathroom single-family home with a side driveway, detached two-car garage, covered patio and backyard.",
    "description_type": "summary"
@@ -1461,7 +1461,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 144-283-01, 617 S CORWIN CT",
-     "checked_at": "2026-11-07T19:14:22.603Z",
+     "checked_at": "2026-11-07T19:16:30.750Z",
      "note": "Matched APN 144-283-01."
     },
     {
@@ -1474,7 +1474,7 @@
      "status": "UNKNOWN",
      "possible_fail": true,
      "value": "A1 (General Agricultural)",
-     "checked_at": "2026-11-07T19:14:22.733Z",
+     "checked_at": "2026-11-07T19:16:30.751Z",
      "note": "Possible FAIL: zoned General Agricultural. HCD says agricultural zones are not SB 9 zones, but this one holds a house; the city decides whether its primary purpose is single-family.",
      "next_step": "Ask the Santa Ana planning desk whether SB 9 applies in the A1 zone."
     },
@@ -1485,7 +1485,7 @@
      "value": "Lot 6,935 sq ft; equal split = 3,468 + 3,468 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:14:22.603Z",
+     "checked_at": "2026-11-07T19:16:30.750Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,935 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -1497,7 +1497,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:22.792Z",
+     "checked_at": "2026-11-07T19:16:30.751Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -1509,7 +1509,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:22.791Z",
+     "checked_at": "2026-11-07T19:16:30.751Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -1523,7 +1523,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:14:22.763Z",
+     "checked_at": "2026-11-07T19:16:30.751Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -1603,7 +1603,7 @@
      "affects_verdict": false,
      "status": "FAIL",
      "value": "1 building(s), 2,185 sq ft footprint; crosses the sketched split line",
-     "checked_at": "2026-11-07T19:14:22.792Z",
+     "checked_at": "2026-11-07T19:16:30.751Z",
      "note": "No straight split line clears the house while keeping both lots at least 1,200 sq ft and 40%. A surveyor may find another layout.",
      "next_step": "Ask a surveyor to try a split line that clears the house."
     },
@@ -1615,7 +1615,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: no parking within 1/2 mile walking distance of a high-quality transit corridor or major transit stop.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:22.791Z",
+     "checked_at": "2026-11-07T19:16:30.751Z",
      "value": "In a high-quality transit area (Orange County Transportation Authority, route 543; hq corridor bus)",
      "note": "Likely no parking can be required, which frees lot space for homes. Caltrans areas are straight-line, not walking distance, so confirm with the city."
     },
@@ -1627,7 +1627,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:22.792Z",
+     "checked_at": "2026-11-07T19:16:30.751Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -1818,7 +1818,7 @@
     "model": "claude-sonnet-5-5"
    },
    "unknown_count": 7,
-   "computed_at": "2026-11-07T19:14:22.792Z",
+   "computed_at": "2026-11-07T19:16:30.751Z",
    "listed_lot_sqft": 7104,
    "description": "Listing excerpt: Great corner lot with a large backyard. Listing summary: Three bedrooms, two bathrooms. Description advertises future ADU potential.",
    "description_type": "excerpt+summary"
@@ -1871,7 +1871,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 108-384-06, 1213 S CORTA DR",
-     "checked_at": "2026-11-07T19:14:34.389Z",
+     "checked_at": "2026-11-07T19:16:31.965Z",
      "note": "Matched APN 108-384-06."
     },
     {
@@ -1883,7 +1883,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "R1 (Single-Family Residence)",
-     "checked_at": "2026-11-07T19:14:34.448Z",
+     "checked_at": "2026-11-07T19:16:31.966Z",
      "note": "Zoned single-family."
     },
     {
@@ -1893,7 +1893,7 @@
      "value": "Lot 6,579 sq ft; equal split = 3,289 + 3,289 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:14:34.389Z",
+     "checked_at": "2026-11-07T19:16:31.965Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,579 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -1905,7 +1905,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:34.808Z",
+     "checked_at": "2026-11-07T19:16:31.966Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -1917,7 +1917,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:34.620Z",
+     "checked_at": "2026-11-07T19:16:31.966Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -1931,7 +1931,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:14:34.519Z",
+     "checked_at": "2026-11-07T19:16:31.966Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -2011,7 +2011,7 @@
      "affects_verdict": false,
      "status": "FAIL",
      "value": "1 building(s), 2,481 sq ft footprint; crosses the sketched split line",
-     "checked_at": "2026-11-07T19:14:34.648Z",
+     "checked_at": "2026-11-07T19:16:31.966Z",
      "note": "No straight split line clears the house while keeping both lots at least 1,200 sq ft and 40%. A surveyor may find another layout.",
      "next_step": "Ask a surveyor to try a split line that clears the house."
     },
@@ -2023,7 +2023,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: no parking within 1/2 mile walking distance of a high-quality transit corridor or major transit stop.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:34.808Z",
+     "checked_at": "2026-11-07T19:16:31.966Z",
      "value": "In a high-quality transit area ( , route  ; major stop bus)",
      "note": "Likely no parking can be required, which frees lot space for homes. Caltrans areas are straight-line, not walking distance, so confirm with the city."
     },
@@ -2035,7 +2035,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:34.808Z",
+     "checked_at": "2026-11-07T19:16:31.966Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -2150,7 +2150,7 @@
     "model": "claude-sonnet-5-5"
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:14:34.808Z",
+   "computed_at": "2026-11-07T19:16:31.966Z",
    "listed_lot_sqft": 6578,
    "description": "Listing excerpt: DO NOT DISTURB TENANTS. Tenant-occupied property in a desirable Santa Ana location near Mile Square Park. Listing summary: Occupied with potentially limited access.",
    "description_type": "excerpt+summary"
@@ -2227,7 +2227,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 198-331-18, 4202 FAY CIR",
-     "checked_at": "2026-11-07T19:14:19.097Z",
+     "checked_at": "2026-11-07T19:16:30.441Z",
      "note": "Matched APN 198-331-18."
     },
     {
@@ -2239,7 +2239,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "R1 (Single-Family Residence)",
-     "checked_at": "2026-11-07T19:14:19.164Z",
+     "checked_at": "2026-11-07T19:16:30.449Z",
      "note": "Zoned single-family."
     },
     {
@@ -2249,7 +2249,7 @@
      "value": "Lot 8,682 sq ft; equal split = 4,341 + 4,341 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:14:19.113Z",
+     "checked_at": "2026-11-07T19:16:30.448Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 8,682 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -2261,7 +2261,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "FAIL",
-     "checked_at": "2026-11-07T19:14:19.601Z",
+     "checked_at": "2026-11-07T19:16:30.449Z",
      "value": "FEMA: A",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -2274,7 +2274,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:19.387Z",
+     "checked_at": "2026-11-07T19:16:30.449Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -2288,7 +2288,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:14:19.247Z",
+     "checked_at": "2026-11-07T19:16:30.449Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -2368,7 +2368,7 @@
      "affects_verdict": false,
      "status": "FAIL",
      "value": "1 building(s), 2,476 sq ft footprint; crosses the sketched split line",
-     "checked_at": "2026-11-07T19:14:19.389Z",
+     "checked_at": "2026-11-07T19:16:30.449Z",
      "note": "No straight split line clears the house while keeping both lots at least 1,200 sq ft and 40%. A surveyor may find another layout.",
      "next_step": "Ask a surveyor to try a split line that clears the house."
     },
@@ -2380,7 +2380,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: no parking within 1/2 mile walking distance of a high-quality transit corridor or major transit stop.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:19.446Z",
+     "checked_at": "2026-11-07T19:16:30.449Z",
      "value": "In a high-quality transit area (Orange County Transportation Authority, route 543; hq corridor bus)",
      "note": "Likely no parking can be required, which frees lot space for homes. Caltrans areas are straight-line, not walking distance, so confirm with the city."
     },
@@ -2392,7 +2392,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:19.601Z",
+     "checked_at": "2026-11-07T19:16:30.449Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -2531,7 +2531,7 @@
     "model": "claude-sonnet-5-5"
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:14:19.602Z",
+   "computed_at": "2026-11-07T19:16:30.449Z",
    "listed_lot_sqft": 10001,
    "description": "Listing summary: Single-family fixer with a large backyard. Zillow labels this listing Foreclosure and Real Estate Owned.",
    "description_type": "summary"
@@ -2584,7 +2584,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 408-243-12, 1629 S TOWNSEND ST",
-     "checked_at": "2026-11-07T19:14:24.527Z",
+     "checked_at": "2026-11-07T19:16:31.053Z",
      "note": "Matched APN 408-243-12."
     },
     {
@@ -2596,7 +2596,7 @@
      "affects_verdict": true,
      "status": "FAIL",
      "value": "R2 (Two-Family Residence)",
-     "checked_at": "2026-11-07T19:14:24.575Z",
+     "checked_at": "2026-11-07T19:16:31.053Z",
      "note": "Not a single-family zone, so SB 9 does not apply."
     },
     {
@@ -2606,7 +2606,7 @@
      "value": "Lot 6,001 sq ft; equal split = 3,000 + 3,000 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:14:24.527Z",
+     "checked_at": "2026-11-07T19:16:31.053Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,001 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -2618,7 +2618,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:24.651Z",
+     "checked_at": "2026-11-07T19:16:31.053Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -2630,7 +2630,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:24.651Z",
+     "checked_at": "2026-11-07T19:16:31.053Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -2644,7 +2644,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:14:24.616Z",
+     "checked_at": "2026-11-07T19:16:31.054Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -2724,7 +2724,7 @@
      "affects_verdict": false,
      "status": "FAIL",
      "value": "1 building(s), 2,353 sq ft footprint; crosses the sketched split line",
-     "checked_at": "2026-11-07T19:14:24.739Z",
+     "checked_at": "2026-11-07T19:16:31.054Z",
      "note": "No straight split line clears the house while keeping both lots at least 1,200 sq ft and 40%. A surveyor may find another layout.",
      "next_step": "Ask a surveyor to try a split line that clears the house."
     },
@@ -2736,7 +2736,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: no parking within 1/2 mile walking distance of a high-quality transit corridor or major transit stop.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:24.651Z",
+     "checked_at": "2026-11-07T19:16:31.053Z",
      "value": "In a high-quality transit area ( , route  ; major stop bus)",
      "note": "Likely no parking can be required, which frees lot space for homes. Caltrans areas are straight-line, not walking distance, so confirm with the city."
     },
@@ -2748,7 +2748,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:24.651Z",
+     "checked_at": "2026-11-07T19:16:31.053Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -2863,7 +2863,7 @@
     "model": "claude-sonnet-5-5"
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:14:24.739Z",
+   "computed_at": "2026-11-07T19:16:31.054Z",
    "listed_lot_sqft": 6500,
    "description": "Listing summary: Two-bedroom, two-bathroom single-family home with a garage and backyard. Description does not establish occupancy or tenant history.",
    "description_type": "summary"
@@ -2916,7 +2916,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 099-212-03, 5510 ROOSEVELT AVE",
-     "checked_at": "2026-11-07T19:14:36.167Z",
+     "checked_at": "2026-11-07T19:16:32.269Z",
      "note": "Matched APN 099-212-03."
     },
     {
@@ -2928,7 +2928,7 @@
      "affects_verdict": true,
      "status": "FAIL",
      "value": "R2 (Two-Family Residence)",
-     "checked_at": "2026-11-07T19:14:36.231Z",
+     "checked_at": "2026-11-07T19:16:32.270Z",
      "note": "Not a single-family zone, so SB 9 does not apply."
     },
     {
@@ -2938,7 +2938,7 @@
      "value": "Lot 6,446 sq ft; equal split = 3,223 + 3,223 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:14:36.167Z",
+     "checked_at": "2026-11-07T19:16:32.269Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 6,446 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -2950,7 +2950,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "FAIL",
-     "checked_at": "2026-11-07T19:14:36.395Z",
+     "checked_at": "2026-11-07T19:16:32.270Z",
      "value": "FEMA: A",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -2963,7 +2963,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:36.255Z",
+     "checked_at": "2026-11-07T19:16:32.270Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -2977,7 +2977,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:14:36.264Z",
+     "checked_at": "2026-11-07T19:16:32.271Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -3057,7 +3057,7 @@
      "affects_verdict": false,
      "status": "FAIL",
      "value": "1 building(s), 2,233 sq ft footprint; crosses the sketched split line",
-     "checked_at": "2026-11-07T19:14:36.277Z",
+     "checked_at": "2026-11-07T19:16:32.271Z",
      "note": "No straight split line clears the house while keeping both lots at least 1,200 sq ft and 40%. A surveyor may find another layout.",
      "next_step": "Ask a surveyor to try a split line that clears the house."
     },
@@ -3069,7 +3069,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: no parking within 1/2 mile walking distance of a high-quality transit corridor or major transit stop.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:36.277Z",
+     "checked_at": "2026-11-07T19:16:32.270Z",
      "value": "In a high-quality transit area (Orange County Transportation Authority, route 64; hq corridor bus)",
      "note": "Likely no parking can be required, which frees lot space for homes. Caltrans areas are straight-line, not walking distance, so confirm with the city."
     },
@@ -3081,7 +3081,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:36.277Z",
+     "checked_at": "2026-11-07T19:16:32.270Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -3196,7 +3196,7 @@
     "model": "claude-sonnet-5-5"
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:14:36.396Z",
+   "computed_at": "2026-11-07T19:16:32.271Z",
    "listed_lot_sqft": 6439,
    "description": "Listing summary: Renovated three-bedroom, two-bathroom single-family home. Description advertises a fenced backyard and original garage with utilities and possible future ADU development.",
    "description_type": "summary"
@@ -3253,7 +3253,7 @@
      "affects_verdict": true,
      "status": "PASS",
      "value": "APN 198-241-02, 408 N JACKSON ST",
-     "checked_at": "2026-11-07T19:14:39.910Z",
+     "checked_at": "2026-11-07T19:16:32.874Z",
      "note": "Matched APN 198-241-02."
     },
     {
@@ -3265,7 +3265,7 @@
      "affects_verdict": true,
      "status": "FAIL",
      "value": "R2 (Two-Family Residence)",
-     "checked_at": "2026-11-07T19:14:40.040Z",
+     "checked_at": "2026-11-07T19:16:32.875Z",
      "note": "Not a single-family zone, so SB 9 does not apply."
     },
     {
@@ -3275,7 +3275,7 @@
      "value": "Lot 7,430 sq ft; equal split = 3,715 + 3,715 sq ft",
      "source_name": "City of Santa Ana, Assessor Parcels (ArcGIS REST) (area computed from the polygon, State Plane feet)",
      "source_url": "https://gis.santa-ana.org/server/rest/services/Public/GIS_AssessorParcels/MapServer/0",
-     "checked_at": "2026-11-07T19:14:39.910Z",
+     "checked_at": "2026-11-07T19:16:32.874Z",
      "note": "Big enough for two lots on paper. Access, frontage and the city's objective standards still apply. City layer's own area field: 7,430 sq ft (matches).",
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: two 1,200 sq ft lots, roughly equal size. 40% minimum: Gov. Code 66411.7(a)(1)(B), UNVERIFIED against statute text on 2026-11-07.",
      "next_step": "Confirm access to the street for the rear lot with the city planning desk.",
@@ -3287,7 +3287,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C). Exceptions exist in statute.",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:40.063Z",
+     "checked_at": "2026-11-07T19:16:32.875Z",
      "value": "FEMA: X (area with reduced flood risk due to levee)",
      "source_name": "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
@@ -3299,7 +3299,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3; Gov. Code 65913.4(a)(6)(B)-(K) via 65852.21(a)(2), 66411.7(a)(3)(C).",
      "affects_verdict": true,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:40.062Z",
+     "checked_at": "2026-11-07T19:16:32.875Z",
      "value": "Not in a mapped LRA fire hazard zone",
      "source_name": "OC Public Works, Fire Hazard Severity Zones LRA (county copy of CAL FIRE)",
      "source_url": "https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0",
@@ -3313,7 +3313,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
      "affects_verdict": true,
      "status": "UNKNOWN",
-     "checked_at": "2026-11-07T19:14:40.099Z",
+     "checked_at": "2026-11-07T19:16:32.875Z",
      "value": "Not on Santa Ana's historic list or in a city historic district",
      "note": "City data is clean. The State Historic Resources Inventory was not checked.",
      "next_step": "Ask the city planning desk to confirm no state or local historic listing."
@@ -3393,7 +3393,7 @@
      "affects_verdict": false,
      "status": "PASS",
      "value": "1 building(s), 1,432 sq ft footprint; all on one half of the sketched split",
-     "checked_at": "2026-11-07T19:14:40.063Z",
+     "checked_at": "2026-11-07T19:16:32.875Z",
      "note": "Keep the existing house and add up to 3 new homes: less demolition, and the existing home can earn rent while you build. Confirm with a surveyor."
     },
     {
@@ -3404,7 +3404,7 @@
      "rule": "HCD SB 9 fact sheet (April 2026) p.1: no parking within 1/2 mile walking distance of a high-quality transit corridor or major transit stop.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:40.062Z",
+     "checked_at": "2026-11-07T19:16:32.875Z",
      "value": "In a high-quality transit area (Orange County Transportation Authority, route 543; hq corridor bus)",
      "note": "Likely no parking can be required, which frees lot space for homes. Caltrans areas are straight-line, not walking distance, so confirm with the city."
     },
@@ -3416,7 +3416,7 @@
      "rule": "Not an SB 9 exclusion in the HCD fact sheets. Shown as a buildability risk.",
      "affects_verdict": false,
      "status": "PASS",
-     "checked_at": "2026-11-07T19:14:40.063Z",
+     "checked_at": "2026-11-07T19:16:32.875Z",
      "value": "Not in a mapped landslide zone",
      "note": "No mapped landslide zone."
     }
@@ -3527,7 +3527,7 @@
     "model": "claude-sonnet-5-5"
    },
    "unknown_count": 6,
-   "computed_at": "2026-11-07T19:14:40.099Z",
+   "computed_at": "2026-11-07T19:16:32.875Z",
    "listed_lot_sqft": 7505,
    "description": "Listing excerpt: 2 HOUSE ON A LOT 7500+ SQFT, READY TO BUILT. Listing summary: Corner lot with alley access. Description claims approved plans for a detached 898-square-foot ADU, rather than clearly establishing a completed second home.",
    "description_type": "excerpt+summary"

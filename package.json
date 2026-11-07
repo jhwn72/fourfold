@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "probe": "tsx scripts/probe.ts",
-    "precompute": "tsx scripts/precompute.ts"
+    "precompute": "tsx scripts/precompute.ts",
+    "citywide": "tsx scripts/citywide.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.6.0",

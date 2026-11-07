@@ -43,6 +43,7 @@ export default function Home() {
         </table>
       </div>
       <p className="muted">Per home = asking price ÷ max homes: land and building purchase per home, before construction. $360k is the brief&apos;s worked example <span className="label">ASSUMPTION</span>.</p>
+      <p><Link href="/city">See every lot in Santa Ana where SB 9 likely works, listed or not</Link>.</p>
       <LiveCheck />
     </section>
   );

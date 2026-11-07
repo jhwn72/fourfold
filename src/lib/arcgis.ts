@@ -8,12 +8,13 @@ export const TIMEOUT_MS = 8000;
 
 // The disk cache is only used by local scripts. On Vercel the filesystem is read-only.
 const CACHE_DIR = path.join(process.cwd(), ".cache");
-const useCache = process.env.FOURFOLD_CACHE === "1";
+// Read at call time: scripts set FOURFOLD_CACHE after imports are evaluated.
+const cacheOn = () => process.env.FOURFOLD_CACHE === "1";
 
 export class FetchError extends Error {}
 
 async function readCache(key: string): Promise<unknown | undefined> {
-  if (!useCache) return undefined;
+  if (!cacheOn()) return undefined;
   try {
     return JSON.parse(await fs.readFile(path.join(CACHE_DIR, key + ".json"), "utf8"));
   } catch {
@@ -22,7 +23,7 @@ async function readCache(key: string): Promise<unknown | undefined> {
 }
 
 async function writeCache(key: string, value: unknown) {
-  if (!useCache) return;
+  if (!cacheOn()) return;
   await fs.mkdir(CACHE_DIR, { recursive: true });
   await fs.writeFile(path.join(CACHE_DIR, key + ".json"), JSON.stringify(value));
 }

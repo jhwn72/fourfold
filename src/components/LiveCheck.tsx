@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { SiteResult } from "@/lib/types";
 import Checklist from "./Checklist";
 import CallSheet from "./CallSheet";
@@ -13,6 +13,12 @@ export default function LiveCheck() {
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<SiteResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // Prefill from /?address=... (links from the Whole city page). Does not run the check.
+  useEffect(() => {
+    const a = new URLSearchParams(window.location.search).get("address");
+    if (a) setAddress(a);
+  }, []);
 
   async function run(e: React.FormEvent) {
     e.preventDefault();
@@ -34,7 +40,7 @@ export default function LiveCheck() {
   }
 
   return (
-    <div className="card">
+    <div className="card" id="live">
       <h2>Check a Santa Ana address live</h2>
       <form onSubmit={run}>
         <p><label>Address<br /><input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Street address in Santa Ana" required /></label></p>
