@@ -21,7 +21,7 @@ import { manualChecks } from "./checks/manual";
 import { findParcel } from "./checks/parcel";
 import { zoningCheck } from "./checks/zoning";
 import { now, unknownFromError } from "./checks/util";
-import { SRC } from "./sources";
+import { cityOf, citySources, type City } from "./cities";
 import type { CheckResult, ListingEvidence, SiteResult, Verdict } from "./types";
 
 export { BRIEF_LAND_PER_HOME } from "./constants";
@@ -47,12 +47,12 @@ const FAIL_LABEL: Record<string, string> = {
   lot_split: "lot too small to split",
   flood: "in a FEMA high-risk flood zone",
   fire: "in a very high fire risk zone",
-  historic: "listed historic resource",
+  historic: "historic resource or district",
   tenant: "listing suggests a tenant",
 };
 const label = (c: CheckResult) => FAIL_LABEL[c.id] ?? c.test.toLowerCase();
 
-export function decide(checks: CheckResult[], hasParcel: boolean, price: number | null) {
+export function decide(checks: CheckResult[], hasParcel: boolean, price: number | null, city: City = "Santa Ana") {
   let verdict: Verdict;
   let reason: string;
   const counted = checks.filter((c) => c.affects_verdict);
@@ -63,7 +63,7 @@ export function decide(checks: CheckResult[], hasParcel: boolean, price: number 
 
   if (!hasParcel) {
     verdict = "UNKNOWN";
-    reason = "Could not find this address in the Santa Ana parcel data.";
+    reason = `Could not find this address in the ${city} parcel data.`;
   } else if (fails.length) {
     verdict = "NO";
     reason = "Fails: " + fails.map((c) => `${label(c)}, ${c.value}`).join("; ") + ".";
@@ -93,12 +93,14 @@ export function decide(checks: CheckResult[], hasParcel: boolean, price: number 
 export async function checkSite(input: ListingInput, evidence: ListingEvidence = NO_EVIDENCE): Promise<SiteResult> {
   let parcelCheck: CheckResult;
   let found: Awaited<ReturnType<typeof findParcel>> = { parcel: null, note: "" };
+  const city = cityOf(input.city);
+  const psrc = citySources(city).parcels;
   const pBase = {
-    id: "parcel", test: "Address matches a Santa Ana parcel", source_name: SRC.saParcels.name, source_url: SRC.saParcels.url,
+    id: "parcel", test: `Address matches a ${city} parcel`, source_name: psrc.name, source_url: psrc.url,
     rule: "Needed to run every other test.", affects_verdict: true,
   };
   try {
-    found = await findParcel(input.address);
+    found = await findParcel(input.address, city);
     parcelCheck = found.parcel
       ? { ...pBase, status: "PASS", value: `APN ${found.parcel.apn}, ${found.parcel.site_address}`, checked_at: now(), note: found.note }
       : { ...pBase, status: "UNKNOWN", value: "No match", checked_at: now(), note: found.note, next_step: "Check the address spelling, or look up the APN on the county parcel map." };
@@ -115,7 +117,7 @@ export async function checkSite(input: ListingInput, evidence: ListingEvidence =
     const ls = lotSplitCheck(p);
     split = ls.split;
     const [zoning, flood, fire, historic, landslide, parking, fp] = await Promise.all([
-      zoningCheck(p), floodCheck(p), fireCheck(p), historicCheck(p), landslideCheck(p), transitCheck(p), footprintCheck(p, ls.split),
+      zoningCheck(p, city), floodCheck(p), fireCheck(p), historicCheck(p, city), landslideCheck(p), transitCheck(p), footprintCheck(p, ls.split),
     ]);
     buildings = fp.buildings;
     if (ls.check.status === "PASS") split = fp.split;
@@ -127,7 +129,7 @@ export async function checkSite(input: ListingInput, evidence: ListingEvidence =
     checks.push(...manualChecks(evidence));
   }
 
-  const d = decide(checks, Boolean(found.parcel), input.asking_price);
+  const d = decide(checks, Boolean(found.parcel), input.asking_price, city);
   return {
     id: input.id,
     address: input.address,

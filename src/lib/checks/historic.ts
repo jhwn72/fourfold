@@ -7,8 +7,43 @@ import { largestRing, shrinkRing } from "../geometry";
 import { SRC } from "../sources";
 import type { CheckResult, Parcel } from "../types";
 import { now, polyGeom, unknownFromError } from "./util";
+import type { City } from "../cities";
 
-export async function historicCheck(parcel: Parcel): Promise<CheckResult> {
+export async function historicCheck(parcel: Parcel, city: City = "Santa Ana"): Promise<CheckResult> {
+  if (city !== "Santa Ana") {
+    // Fullerton R-1-7.2P is a "Preservation" zone (ASSUMPTION: it may be a local historic district).
+    if (city === "Fullerton") {
+      try {
+        const z = await arcgisQuery(SRC.fuZoning.url, { ...polyGeom(shrinkRing(largestRing(parcel.rings))), outFields: "ZONE_ABR1" });
+        if (z.features.some((f) => String(f.attributes.ZONE_ABR1 ?? "").trim() === "R1P")) {
+          return {
+            id: "historic", test: "Not historic (landmark, listed, or district contributor)",
+            source_name: SRC.fuZoning.name, source_url: SRC.fuZoning.url,
+            rule: "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
+            affects_verdict: true, status: "UNKNOWN", possible_fail: true, value: "In a Fullerton preservation zone (R-1-7.2P)",
+            checked_at: now(),
+            note: "Possible FAIL: the zone is labeled Preservation, which may be a local historic district (ASSUMPTION). No city historic layer checked for Fullerton.",
+            next_step: "Ask the Fullerton planning desk",
+          };
+        }
+      } catch {
+        // fall through to the plain UNKNOWN below
+      }
+    }
+    return {
+      id: "historic",
+      test: "Not historic (landmark, listed, or district contributor)",
+      source_name: "None checked",
+      source_url: "",
+      rule: "HCD SB 9 fact sheet (April 2026) p.3-4, as amended by AB 1061 (2025). Gov. Code 65852.21, 66411.7.",
+      affects_verdict: true,
+      status: "UNKNOWN",
+      value: "Not checked",
+      checked_at: now(),
+      note: `No city historic layer checked for ${city}.`,
+      next_step: `Ask the ${city} planning desk`,
+    };
+  }
   const base = {
     id: "historic",
     test: "Not historic (landmark, listed, or district contributor)",

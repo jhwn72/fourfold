@@ -1,0 +1,195 @@
+{
+ "note": "Unverified leads, not listings. Addresses only, from an AI web search on 2026-11-07. Prices and lot sizes came from search snippets and were NOT confirmed on a live listing page, so asking_price is null. Confirm every lead on the listing page before use. Excluded on purpose: sold or pending homes, and 6245 E Quartz Ln (small lot with HOA). 2624 W Cherry Ave and 2413 W Oak Ave were reported sold in 2025 by other sources, so they are likely stale.",
+ "source": "AI web search snippets, 2026-11-07",
+ "leads": [
+  {
+   "id": "ld-fu-01",
+   "address": "2624 W Cherry Ave",
+   "city": "Fullerton",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null,
+   "stale_warning": "Other sources reported this home sold in 2025, so the lead is likely stale."
+  },
+  {
+   "id": "ld-fu-02",
+   "address": "400 Jensen Way",
+   "city": "Fullerton",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-fu-03",
+   "address": "2413 W Oak Ave",
+   "city": "Fullerton",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null,
+   "stale_warning": "Other sources reported this home sold in 2025, so the lead is likely stale."
+  },
+  {
+   "id": "ld-fu-04",
+   "address": "238 Kellog Ave",
+   "city": "Fullerton",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-fu-05",
+   "address": "707 S Pine Dr",
+   "city": "Fullerton",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-fu-06",
+   "address": "529 W Whiting Ave",
+   "city": "Fullerton",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-fu-07",
+   "address": "1056 Cerritos Dr",
+   "city": "Fullerton",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-fu-08",
+   "address": "306 W Porter Ave",
+   "city": "Fullerton",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-fu-09",
+   "address": "2518 Greenwich Dr",
+   "city": "Fullerton",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-fu-10",
+   "address": "718 Meade Ave",
+   "city": "Fullerton",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-fu-11",
+   "address": "2100 W Valencia Dr",
+   "city": "Fullerton",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-an-01",
+   "address": "3643 W Myra Ave",
+   "city": "Anaheim",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-an-02",
+   "address": "2806 W Devoy Dr",
+   "city": "Anaheim",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-an-03",
+   "address": "745 N Vine St",
+   "city": "Anaheim",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-an-04",
+   "address": "1336 N Moraga St",
+   "city": "Anaheim",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-an-05",
+   "address": "1115 S Hilda St",
+   "city": "Anaheim",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  },
+  {
+   "id": "ld-an-06",
+   "address": "1640 S Carnelian St",
+   "city": "Anaheim",
+   "asking_price": null,
+   "listing_status": "unverified lead: confirm on the listing page",
+   "lead_note": "The search snippet price and lot size were not passed on with this lead, so none is recorded; not verified.",
+   "source": "AI web search snippets, 2026-11-07",
+   "date_collected": "2026-11-07",
+   "listed_lot_sqft": null
+  }
+ ]
+}

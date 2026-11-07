@@ -18,6 +18,22 @@ export const SRC = {
     name: "City of Santa Ana, Historic Districts (ArcGIS REST)",
     url: "https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/1",
   },
+  anParcels: {
+    name: "City of Anaheim, PropertyInfo Parcels (ArcGIS REST)",
+    url: "https://gis.anaheim.net/map/rest/services/PropertyInfo/MapServer/0",
+  },
+  anZoning: {
+    name: "City of Anaheim, PropertyInfo Zoning (ArcGIS REST)",
+    url: "https://gis.anaheim.net/map/rest/services/PropertyInfo/MapServer/2",
+  },
+  fuParcels: {
+    name: "Fullerton Parcels and HIOZ Sites, Citywide Parcels (ArcGIS Online, published under a Fullerton GIS account, not confirmed official)",
+    url: "https://services6.arcgis.com/yMM0eCpNU0fzBaIm/arcgis/rest/services/Fullerton_Parcels_and_HIOZ_Sites/FeatureServer/0",
+  },
+  fuZoning: {
+    name: "Fullerton Parcels and HIOZ Sites, Zoning (ArcGIS Online, published under a Fullerton GIS account, not confirmed official)",
+    url: "https://services6.arcgis.com/yMM0eCpNU0fzBaIm/arcgis/rest/services/Fullerton_Parcels_and_HIOZ_Sites/FeatureServer/2",
+  },
   fema: {
     name: "FEMA National Flood Hazard Layer, flood hazard zones (layer 28)",
     url: "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
