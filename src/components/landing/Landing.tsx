@@ -7,7 +7,9 @@ import Tunnel from "./Tunnel";
 import type { TileListing } from "./tiles";
 import s from "./landing.module.css";
 
-const WORDS = ["nonprofits", "land trusts", "city housing staff", "acquisitions leads"];
+// Only applicants SB 9 exempts from the 3-year owner-occupancy affidavit: "a community land trust or
+// nonprofit organization" (HCD SB 9 fact sheet, April 2026, p.2). Every word here is one of those.
+const WORDS = ["nonprofits", "community land trusts", "faith-based nonprofits", "nonprofit homebuilders"];
 
 type Stats = { listings: number; parcels: number; date: string };
 
