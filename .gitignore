@@ -26,3 +26,4 @@ build/
 next-env.d.ts
 *.tsbuildinfo
 .next-qa/
+.claude/
