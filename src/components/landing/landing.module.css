@@ -145,3 +145,9 @@
 @media (prefers-reduced-motion: reduce) {
   .chip { transition: none; }
 }
+
+/* Entering the app: UI fades, then a black veil (the app's stage color) covers the route change. */
+.veil { position: absolute; inset: 0; z-index: 50; background: #000; opacity: 0; pointer-events: none; transition: opacity 0.45s var(--ease) 0.7s; }
+.leaving .veil { opacity: 1; }
+.leaving nav, .leaving section, .leaving .meta, .leaving .toggle, .leaving .enter { opacity: 0; transform: scale(0.985); transition: opacity 0.35s var(--ease-out), transform 0.5s var(--ease-out); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .veil { transition: opacity 0.2s linear; } }

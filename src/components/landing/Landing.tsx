@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { setTheme, useTheme } from "../theme";
 import { useReducedMotion } from "../viz/useReducedMotion";
@@ -16,6 +17,27 @@ type Stats = { listings: number; parcels: number; date: string };
 export default function Landing({ listings, bbox, stats }: { listings: TileListing[]; bbox: number[]; stats: Stats }) {
   const theme = useTheme();
   const reduced = useReducedMotion();
+  const router = useRouter();
+  // Entering the app: the UI fades, the tunnel speeds up and the city at its end rushes toward the
+  // viewer, the screen settles to the app's black stage, then the route changes under the black.
+  const [leaving, setLeaving] = useState(false);
+  const warp = useRef(0); // 0 to 1, read by the tunnel every frame
+  useEffect(() => { router.prefetch("/app"); }, [router]);
+  const enter = (e: React.MouseEvent) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // let new-tab clicks through
+    e.preventDefault();
+    if (leaving) return;
+    setLeaving(true);
+    try { sessionStorage.setItem("ff-entered", String(Date.now())); } catch {}
+    if (reduced) { router.push("/app"); return; }
+    const t0 = performance.now();
+    const step = (now: number) => {
+      warp.current = Math.min(1, (now - t0) / 1100);
+      if (warp.current < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+    window.setTimeout(() => router.push("/app"), 1150);
+  };
   const [i, setI] = useState(0);
   const [chipW, setChipW] = useState<number | null>(null);
   const measure = useRef<HTMLSpanElement>(null);
@@ -46,16 +68,17 @@ export default function Landing({ listings, bbox, stats }: { listings: TileListi
   }, [i]);
 
   return (
-    <div className={s.root}>
+    <div className={`${s.root} ${leaving ? s.leaving : ""}`}>
+      <div className={s.veil} aria-hidden="true" />
       <div className={s.stage}>
-        <Tunnel listings={listings} bbox={bbox} theme={theme} />
+        <Tunnel listings={listings} bbox={bbox} theme={theme} warp={warp} />
         <div className={s.vignette} />
       </div>
 
       <nav className={s.nav} aria-label="Main">
         <Link href="/" className={s.glyph} aria-label="FourFold home"><span /><span /><span /><span /></Link>
         <Link href="/method" className={s.link}>How it works</Link>
-        <Link href="/app" className={s.solid}>Open FourFold</Link>
+        <Link href="/app" onClick={enter} className={s.solid}>Open FourFold</Link>
       </nav>
 
       <section className={s.hero}>
@@ -66,7 +89,7 @@ export default function Landing({ listings, bbox, stats }: { listings: TileListi
             <span key={i} className={reduced ? s.chipTextStatic : s.chipText}>{WORDS[i]}</span>
           </span>
         </p>
-        <Link href="/app" className={s.cta}>Enter FourFold <span aria-hidden="true">→</span></Link>
+        <Link href="/app" onClick={enter} className={s.cta}>Enter FourFold <span aria-hidden="true">→</span></Link>
         <span ref={measure} className={s.measure} aria-hidden="true">
           {WORDS.map((w) => <span key={w}>{w}</span>)}
         </span>
@@ -82,7 +105,7 @@ export default function Landing({ listings, bbox, stats }: { listings: TileListi
         <span className={s.disclaimer}>Prototype. Not legal or financial advice. Confirm with the city and a professional.</span>
       </div>
 
-      <Link href="/app" className={s.enter}>
+      <Link href="/app" onClick={enter} className={s.enter}>
         <span>Enter the app</span>
         <span className={s.square} aria-hidden="true">→</span>
       </Link>

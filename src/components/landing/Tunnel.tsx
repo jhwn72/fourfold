@@ -32,7 +32,9 @@ function rand(seed: number) {
   return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
 }
 
-export default function Tunnel({ listings, bbox, theme }: { listings: TileListing[]; bbox: number[]; theme: Theme }) {
+export default function Tunnel({ listings, bbox, theme, warp }: { listings: TileListing[]; bbox: number[]; theme: Theme; warp?: { current: number } }) {
+  const warpRef = useRef(warp);
+  warpRef.current = warp;
   const wrap = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
 
@@ -191,8 +193,16 @@ export default function Tunnel({ listings, bbox, theme }: { listings: TileListin
     const frame = (now: number) => {
       const dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
       last = now;
-      group.rotation.z += dt * 0.045;
+      // Warp (entering the app): cards speed up, the city rushes toward the camera and fills the view.
+      const w = warpRef.current?.current ?? 0;
+      const we = w * w * (3 - 2 * w);
+      const speed = 1 + we * 14;
+      group.rotation.z += dt * 0.045 * (1 + we * 2);
       cityGroup.rotation.z -= dt * 0.03;
+      cityGroup.position.z = -15 + we * 14.2;
+      cityGroup.rotation.x = -0.5 * (1 - we);
+      if (cityMat) cityMat.opacity = (theme === "dark" ? 0.8 : 0.7) + we * 0.2;
+      if (w > 0 && cityT < 1) cityT = 1;
       // The city assembles from scattered particles over the first few seconds.
       if (cityGeo && cityStart && cityTarget && cityT < 1) {
         cityT = Math.min(1, cityT + dt / 3.2);
@@ -201,10 +211,10 @@ export default function Tunnel({ listings, bbox, theme }: { listings: TileListin
         for (let i = 0; i < pos.length; i++) pos[i] = cityStart[i] + (cityTarget[i] - cityStart[i]) * e;
         cityGeo.attributes.position.needsUpdate = true;
       }
-      for (let i = 0; i < DUST; i++) { dustZ[i] += dt * 1.1; if (dustZ[i] > NEAR_Z) dustZ[i] -= NEAR_Z - FAR_Z; }
+      for (let i = 0; i < DUST; i++) { dustZ[i] += dt * 1.1 * speed; if (dustZ[i] > NEAR_Z) dustZ[i] -= NEAR_Z - FAR_Z; }
       placeDust();
       for (const c of cards) {
-        c.z += dt * 1.1;
+        c.z += dt * 1.1 * speed;
         if (c.z > NEAR_Z) c.z -= NEAR_Z - FAR_Z;
         place(c);
       }
