@@ -21,7 +21,12 @@ A one-person acquisitions lead at a small housing nonprofit with no GIS team (sc
 
 - **Ranked list** of 10 real Santa Ana listings: LIKELY YES first, then lowest land cost per home, then fewest unknowns.
 - **Site page** per listing: verdict and reason, checklist (PASS / FAIL / UNKNOWN with value, source link and date checked), max homes, land and building purchase per home compared with the brief's $360k example (ASSUMPTION), a 2D drawing of the real parcel polygon with a split line and house icons, and Claude's listing evidence with the exact quoted phrase.
-- **Live check** at the bottom of the home page: type any Santa Ana address and run every check against government servers in a few seconds.
+- **Live check** at the bottom of the home page: type any Santa Ana address and run every check against government servers in about a second.
+- **Keep the house:** the county's building footprints are drawn on the lot. Code tries to slide the split line so the existing house sits wholly on one lot (both lots still at least 1,200 sq ft and 40%). If it fits, the nonprofit can keep the house and build 3 instead of demolishing.
+- **No parking needed:** flags lots inside a Caltrans High Quality Transit Area. HCD says no parking can be required within 1/2 mile walking distance of high-quality transit (fact sheet April 2026 p.1). Caltrans areas are straight-line, so this is "likely".
+- **Why a nonprofit wins:** a card on each 4-home site comparing an investor (up to 2 homes, or a 3-year live-in promise to split) with a nonprofit (up to 4).
+- **Call sheet:** every UNKNOWN turned into the exact question and who to ask (listing agent, planning desk, housing division, surveyor), plus a copyable draft email to the listing agent. Drafts only; FourFold never sends anything.
+- **Whole city** (`/city`): every one of Santa Ana's 57,926 parcels screened once. 30,590 are zoned single-family, 30,352 are big enough to split, and **25,246 pass flood, fire and the city historic list on a first screen** (347 more sit inside a historic district). Map plus a searchable list that opens the live check. Built by `npm run citywide` (66 requests to public GIS services, cached).
 
 ## How Claude is used
 
@@ -56,6 +61,8 @@ A one-person acquisitions lead at a small housing nonprofit with no GIS team (sc
 | Historic | [Santa Ana Historic Resources](https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer) | 2026-11-07 |
 | Flood | [FEMA NFHL layer 28](https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28); [OC Floodplains](https://www.ocgis.com/arcpub/rest/services/Map_Layers/Floodplains/MapServer/0) | 2026-11-07 |
 | Fire | [OC FHSZ LRA](https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0); [CAL FIRE LRA 2011](https://services.gis.ca.gov/arcgis/rest/services/Environment/Fire_Severity_Zones/MapServer/1) | 2026-11-07 |
+| Building footprints | [OC Building Footprints](https://www.ocgis.com/arcpub/rest/services/Map_Layers/Building_Footprints/MapServer/0) | 2026-11-07 |
+| Transit (parking) | [Caltrans High Quality Transit Areas](https://caltrans-gis.dot.ca.gov/arcgis/rest/services/CHrailroad/CA_HQ_Transit_Areas/FeatureServer/0) | 2026-11-07 |
 | Landslide | [CGS Landslide Zones](https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0) | 2026-11-07 |
 | Listings | 10 public Zillow / Redfin listings collected by hand by Jerry; link on each site page; no agent or seller names stored | 2026-11-07 |
 | $360k land and building purchase per home | **ASSUMPTION**: the brief's worked example (`docs/background.md`), mock numbers, not a real deal | 2026-11-06 |
@@ -79,7 +86,9 @@ A one-person acquisitions lead at a small housing nonprofit with no GIS team (sc
 |---|---|
 | Parcel lookup, lot area, zoning, flood, fire, historic, landslide checks | working, live government data |
 | Split sketch and SVG | working; a sketch, not a survey |
-| Claude listing reader | working when `ANTHROPIC_API_KEY` is set; otherwise shows "reader off" and the tenant test stays UNKNOWN |
+| Claude listing reader | working; all 10 listings read on 2026-11-07 (1213 S Corta flagged: "DO NOT DISTURB TENANTS."). The live check reads listings only when `ANTHROPIC_API_KEY` is set in Vercel |
+| Keep-the-house and no-parking flags | working; footprints may include attached garages, and transit areas are straight-line |
+| Whole-city screen | working; a first screen using parcel centroids, not a verdict. Parcels that share one outline (condo or mobile-home units) are excluded |
 | Listings | real public listings, collected by hand on 2026-11-07; prices can change |
 | Ranking and land cost per home | working; uses asking price, not sale price |
 | Other cities | not built; Santa Ana only |
@@ -92,6 +101,8 @@ A one-person acquisitions lead at a small housing nonprofit with no GIS team (sc
 - Address matching is by text. Some city addresses differ from listings (Valencia St vs Ave, Fay Cir with no "W"). We use a looser match and show the APN so a person can confirm it.
 - Six of the ten listing descriptions are the collector's summaries, not verbatim listing text. Quotes from those are labelled as coming from the summary.
 - A FAIL does not cover statutory exceptions (for example a flood-zone site that meets FEMA requirements).
+- The whole-city screen tests each parcel's center point, not its full outline, and cannot check tenants, rent control, prior splits, fault zones or environmental sites. 105 candidates have no address and 42 are over an acre (possibly parks or schools). Treat it as a list of lots worth a closer look, not a list of eligible lots.
+- The county fire layer has no fire hazard zones inside Santa Ana, so fire never fails here. Other cities will differ.
 
 ## Next steps
 
@@ -109,7 +120,7 @@ npm run precompute           # data/listings.json -> data/results.json (raw API 
 npm run dev                  # http://localhost:3000
 ```
 
-Other scripts: `npm run probe` hits each endpoint once and prints the fields; `npx tsx scripts/one.ts "1209 S Townsend St"` checks one address in the terminal.
+Other scripts: `npm run citywide` rebuilds the whole-city screen (`data/citywide.json`); `npm run probe` hits each endpoint once and prints the fields; `npx tsx scripts/one.ts "1209 S Townsend St"` checks one address in the terminal.
 
 ## Deploy
 
