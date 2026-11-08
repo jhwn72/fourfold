@@ -35,6 +35,7 @@ export type ListingEvidence = {
   note: string;
   flags: ListingFlag[];
   model?: string;
+  paused?: boolean; // true when the reader was skipped because the live AI is paused (lib/paused.ts)
 };
 
 export type Verdict = "LIKELY YES" | "NO" | "UNKNOWN";

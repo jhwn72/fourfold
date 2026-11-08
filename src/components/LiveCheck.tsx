@@ -5,6 +5,7 @@ import Checklist from "./Checklist";
 import CallSheet from "./CallSheet";
 import CostCompare from "./CostCompare";
 import LotSvg from "./LotSvg";
+import { LIVE_AI_PAUSED, SAMPLES } from "@/lib/paused";
 
 const lbl: React.CSSProperties = { display: "flex", flexDirection: "column", gap: 6 };
 
@@ -13,7 +14,7 @@ export default function LiveCheck({ heading = true }: { heading?: boolean }) {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [busy, setBusy] = useState(false);
-  const [result, setResult] = useState<(SiteResult & { matched_address?: string }) | null>(null);
+  const [result, setResult] = useState<(SiteResult & { matched_address?: string; sample?: boolean }) | null>(null);
   const [stop, setStop] = useState<{ title: string; reason: string; matched_address?: string; source_name: string; source_url: string; checked_at: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,18 +24,26 @@ export default function LiveCheck({ heading = true }: { heading?: boolean }) {
     if (a) setAddress(a);
   }, []);
 
-  async function run(e: React.FormEvent) {
-    e.preventDefault();
+  async function post(payload: Record<string, unknown>) {
     setBusy(true); setError(null); setResult(null); setStop(null);
     try {
       const res = await fetch("/api/check", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ address, asking_price: price.replace(/[$,]/g, ""), description }),
+        body: JSON.stringify(payload),
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error ?? `HTTP ${res.status}`);
-      if (json.stop) setStop(json); else setResult(json);
+      if (json.stop) setStop(json);
+      else {
+        setResult(json);
+        // A sample fills the form with the listing it came from, so the saved read has its source text next to it.
+        if (json.sample) {
+          setAddress(json.matched_address ?? json.address);
+          setPrice(json.asking_price ? String(json.asking_price) : "");
+          setDescription(json.description ?? "");
+        }
+      }
     } catch (err) {
       setError((err as Error).message);
     } finally {
@@ -42,16 +51,33 @@ export default function LiveCheck({ heading = true }: { heading?: boolean }) {
     }
   }
 
+  function run(e: React.FormEvent) {
+    e.preventDefault();
+    post({ address, asking_price: price.replace(/[$,]/g, ""), description });
+  }
+
   return (
     <div className="card" id="live" style={{ padding: 22 }}>
       {heading && <h2 style={{ marginTop: 0 }}>Check an Orange County address live</h2>}
+      {LIVE_AI_PAUSED && (
+        <div style={{ marginBottom: 18 }}>
+          <span className="eyebrow">Try a saved sample (Nov 7 run, with Claude&apos;s listing read)</span>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 }}>
+            {SAMPLES.map((x) => (
+              <button key={x.id} type="button" disabled={busy} onClick={() => post({ sample: x.id })} style={{ textAlign: "left" }}>
+                {x.label}<span style={{ opacity: 0.6 }}> · {x.hint}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <form onSubmit={run} style={{ display: "grid", gap: 14, maxWidth: 640 }}>
         <label style={lbl}><span className="eyebrow">Address</span>
           <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Any Orange County address, e.g. 123 Main St, Irvine" required style={{ maxWidth: "100%" }} />
           <span style={{ fontSize: 13, opacity: 0.75 }}>Works across Orange County. Santa Ana, Anaheim and Fullerton use city maps; other cities use county parcels and regional zoning*.</span></label>
         <label style={lbl}><span className="eyebrow">Asking price (optional)</span>
           <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="e.g. 850000" style={{ maxWidth: 240 }} /></label>
-        <label style={lbl}><span className="eyebrow">Listing text (optional; Claude looks for tenant or vacancy clues)</span>
+        <label style={lbl}><span className="eyebrow">{LIVE_AI_PAUSED ? "Listing text (optional; Claude's reading is paused, try a sample above)" : "Listing text (optional; Claude looks for tenant or vacancy clues)"}</span>
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={4} style={{ width: "100%" }} /></label>
         <div><button type="submit" disabled={busy}>{busy ? "Checking public data..." : "Check"}</button></div>
       </form>
@@ -69,6 +95,11 @@ export default function LiveCheck({ heading = true }: { heading?: boolean }) {
             <span className="eyebrow">Matched address</span><br />
             <strong>{result.matched_address ?? result.address}</strong>{result.city ? ` (${result.city})` : ""}
           </p>
+          {result.sample && (
+            <p className="muted" style={{ marginTop: 6, marginBottom: 0 }}>
+              Saved result from {result.computed_at ? result.computed_at.slice(0, 10) : "Nov 7, 2026"}, including Claude&apos;s listing read. Public data may have changed since.
+            </p>
+          )}
           <div style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "flex-start", marginTop: 12 }}>
             {result.parcel && <div style={{ flex: "1 1 280px" }}><LotSvg parcel={result.parcel} split={result.split} homes={result.max_homes} buildings={result.buildings} keep={result.keep_house} /></div>}
             <div style={{ flex: "1 1 320px" }}><CostCompare price={result.asking_price} homes={result.max_homes} perHome={result.land_cost_per_home} /></div>

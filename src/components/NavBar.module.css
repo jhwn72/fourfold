@@ -1,9 +1,9 @@
 /* Reserves room for the fixed pill so page content starts below it. */
-.header { height: 76px; }
+.header { height: calc(76px + var(--banner-h)); }
 .tools { display: inline-flex; gap: 4px; margin-left: 4px; }
 .tools :global(.iconbtn) { width: 32px; height: 32px; background: var(--glass-btn); border-color: var(--glass-line); }
 @media (max-width: 720px) {
-  .header { height: 64px; }
+  .header { height: calc(64px + var(--banner-h)); }
   .tools { display: none; }
 }
 @media print { .header { display: none; } }

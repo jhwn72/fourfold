@@ -1,6 +1,6 @@
 /* Shared chrome: the landing's floating glass pill nav and corner controls. Tokens in globals.css. */
 .nav {
-  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  position: fixed; top: calc(20px + var(--banner-h)); left: 50%; transform: translateX(-50%);
   display: flex; align-items: center; gap: 4px;
   padding: 5px; border-radius: 999px;
   background: var(--glass); border: 1px solid var(--glass-line);
@@ -59,7 +59,7 @@
   .corners { display: none; }
 }
 @media (max-width: 720px) {
-  .nav { top: 12px; max-width: calc(100vw - 24px); }
+  .nav { top: calc(12px + var(--banner-h)); max-width: calc(100vw - 24px); }
   .glyph { padding: 0 6px 0 8px; }
   .link { padding: 7px 9px; }
   .ghost { margin-left: 2px; padding: 7px 11px; }

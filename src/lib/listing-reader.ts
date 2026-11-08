@@ -9,6 +9,7 @@ import { promises as fs } from "fs";
 import path from "path";
 import { z } from "zod";
 import type { ListingEvidence, ListingFlag } from "./types";
+import { LIVE_AI_PAUSED } from "./paused";
 
 export const LISTING_MODEL = "claude-sonnet-5-5";
 
@@ -40,6 +41,9 @@ export async function readListing(description: string, lessons: string[] = []): 
   const system = lessons.length ? SYSTEM + "\nLessons from past projects (clues only; quote rules still apply):\n- " + lessons.slice(0, 10).join("\n- ") : SYSTEM;
   const text = (description ?? "").trim();
   if (!text) return { status: "skipped", note: "No listing description to read.", flags: [] };
+  if (LIVE_AI_PAUSED) {
+    return { status: "skipped", note: "Listing reader paused in this archive.", flags: [], paused: true };
+  }
   if (!process.env.ANTHROPIC_API_KEY) {
     return { status: "skipped", note: "Listing reader off: no ANTHROPIC_API_KEY set.", flags: [] };
   }

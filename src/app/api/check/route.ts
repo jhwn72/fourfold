@@ -3,6 +3,7 @@ import { checkSite } from "@/lib/sb9";
 import { readListing } from "@/lib/listing-reader";
 import { geocode, OC_FIPS } from "@/lib/geocode";
 import { SRC } from "@/lib/sources";
+import { getSite } from "@/lib/results";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -10,11 +11,17 @@ export const maxDuration = 60;
 // Live check for one address. Every external call has an 8 second timeout; a failed call
 // becomes UNKNOWN with the reason and the other checks still return.
 export async function POST(req: Request) {
-  let body: { address?: string; city?: string; asking_price?: number | string | null; description?: string };
+  let body: { address?: string; city?: string; asking_price?: number | string | null; description?: string; sample?: string };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Send JSON with an address." }, { status: 400 });
+  }
+  // A saved sample: the Nov 7 result for one of the 10 listings, including Claude's listing read. No live calls.
+  if (body.sample) {
+    const saved = getSite(String(body.sample));
+    if (!saved) return NextResponse.json({ error: "Unknown sample." }, { status: 404 });
+    return NextResponse.json({ ...saved, matched_address: `${saved.address}, ${saved.city}, CA`, sample: true });
   }
   const address = String(body.address ?? "").trim().slice(0, 200);
   if (!address) return NextResponse.json({ error: "Address is required." }, { status: 400 });

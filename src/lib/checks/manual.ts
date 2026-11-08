@@ -16,7 +16,10 @@ export function manualChecks(evidence: ListingEvidence): CheckResult[] {
   const owner = evidence.flags.find((f) => f.flag === "owner_occupied" && f.present);
   let tValue = "Not checked: no public data on tenancy";
   let tNote = "Only the seller can confirm.";
-  if (tenant) {
+  if (evidence.paused) {
+    tValue = "Not checked: the AI listing reader is paused";
+    tNote = "Claude's listing reader is paused in this archive. Try a sample listing to see a saved read. Only the seller can confirm tenancy.";
+  } else if (tenant) {
     tValue = `Listing says: "${tenant.quote}"`;
     tNote = "Possible fail: the listing suggests a tenant. A tenant in the last 3 years rules out SB 9. Confirm with the agent.";
   } else if (vacant || owner) {

@@ -1,5 +1,5 @@
 /* Full-bleed stage behind everything (like the landing's tunnel); the panel floats over it as a glass card. */
-.app { position: fixed; inset: 0; z-index: 40; overflow: hidden; background: #000; }
+.app { position: fixed; inset: var(--banner-h) 0 0 0; z-index: 40; overflow: hidden; background: #000; }
 .stage { position: absolute; inset: 0; min-width: 0; animation: stageIn 0.7s var(--ease-out) both; }
 .panel {
   position: absolute; top: 88px; left: 20px; bottom: 74px; width: clamp(380px, 32vw, 440px); z-index: 10;
