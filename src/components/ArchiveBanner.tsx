@@ -8,9 +8,9 @@ export default function ArchiveBanner() {
   return (
     <div role="status" className="archive-banner">
       <span className="archive-banner-long">
-        Built in one day at Claude Impact Lab, Nov 7, 2026. Live AI is paused; sample checks show saved results.
+        FourFold won 3rd place at Claude Impact Lab (UCI), Nov 7, 2026. Live AI is paused; sample checks show saved results.
       </span>
-      <span className="archive-banner-short">Hackathon build, Nov 7, 2026. AI paused.</span>
+      <span className="archive-banner-short">3rd place, Claude Impact Lab. AI paused.</span>
       <Link href="/method#real-vs-mock">How it works</Link>
     </div>
   );
