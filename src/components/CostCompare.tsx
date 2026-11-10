@@ -14,7 +14,7 @@ export default function CostCompare({ price, homes, perHome }: { price: number |
         <p>{homes === 0 ? "n/a: SB 9 does not appear to apply, so there is no 4-home split to divide by." : price == null ? "UNKNOWN: no asking price." : "UNKNOWN."}</p>
       )}
       <p className="muted">
-        Compare: the brief&apos;s worked example uses {money(BRIEF_LAND_PER_HOME)} per home for land and building purchase<Star /> (mock numbers from docs/background.md, not a real deal).
+        Compare: a sample budget from the Claude Impact Lab challenge uses {money(BRIEF_LAND_PER_HOME)} per home for land and building purchase<Star /> (illustrative, not a real deal).
         {perHome != null && (perHome <= BRIEF_LAND_PER_HOME
           ? ` This site is ${money(BRIEF_LAND_PER_HOME - perHome)} below it.`
           : ` This site is ${money(perHome - BRIEF_LAND_PER_HOME)} above it.`)}

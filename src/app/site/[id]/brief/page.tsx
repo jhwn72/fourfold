@@ -65,7 +65,7 @@ export default async function SiteBrief({ params }: { params: Promise<{ id: stri
           <p className="muted">
             Lot: {r.parcel ? `${Math.round(r.parcel.area_sqft).toLocaleString()} sq ft from the city parcel polygon` : "UNKNOWN"}
             {r.listed_lot_sqft ? `; listing says ${r.listed_lot_sqft.toLocaleString()} sq ft` : ""}.
-            Per home = asking price ÷ max homes. The $360k figure is the challenge brief&apos;s worked example, not a real deal.
+            Per home = asking price ÷ max homes. The $360k figure is a sample budget from the Claude Impact Lab challenge, not a real deal.
           </p>
           <p className="url">Listing: {r.listing_source_url || "none"}</p>
         </div>

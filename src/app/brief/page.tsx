@@ -43,7 +43,7 @@ export default function BatchBrief() {
         </table>
       </div>
       <p className="muted">
-        Per home = asking price ÷ max homes: land and building purchase per home, before construction. $360k is the challenge brief&apos;s worked example<Star />, not a real deal. * Assumption, see How it works (/method#sources).
+        Per home = asking price ÷ max homes: land and building purchase per home, before construction. $360k is a sample budget from the Claude Impact Lab challenge<Star />, not a real deal. * Assumption, see How it works (/method#sources).
         Full checklist with sources for each site: fourfold-splitter.vercel.app/site/[id]/brief.
       </p>
       <p className="disclaimer">Prototype. Not legal or financial advice. Confirm with the city and a professional.</p>

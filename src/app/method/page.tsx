@@ -12,7 +12,7 @@ const SECTIONS = [
   ["#tests", "SB 9 tests"],
   ["#sources", "Sources and assumptions"],
   ["#unknown", "What is UNKNOWN"],
-  ["#real-vs-mock", "Real vs mocked"],
+  ["#real-vs-mock", "What's live vs. assumed"],
   ["#wrong", "Where it can be wrong"],
   ["#claude", "How Claude is used"],
 ];
@@ -69,9 +69,9 @@ export default function MethodPage() {
               <tr><td>Transit (parking)</td><td><A href="https://caltrans-gis.dot.ca.gov/arcgis/rest/services/CHrailroad/CA_HQ_Transit_Areas/FeatureServer/0">Caltrans High Quality Transit Areas</A></td><td className="mono">2026-11-07</td></tr>
               <tr><td>Landslide</td><td><A href="https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0">CGS Landslide Zones</A></td><td className="mono">2026-11-07</td></tr>
               <tr><td>Recent SB 9 projects</td><td><A href="https://data.ca.gov/@california-department-of-housing-and-community-development/housing-element-annual-progress-report-apr-data-by-jurisdiction-and-year">HCD Housing Element APR data</A>, matched on &quot;SB 9 / SB9 / lot split&quot; in project notes; only projects a city chose to label</td><td className="mono">2026-11-07</td></tr>
-              <tr><td>Cost examples in the fund calculator</td><td><ASSUMPTION />: the brief&apos;s worked example per home ($85k time costs, $50k fees, $285k family price, $100k subsidies, $55k rent), offered as optional examples only</td><td className="mono">2026-11-06</td></tr>
+              <tr><td>Cost examples in the fund calculator</td><td><ASSUMPTION />: the Claude Impact Lab challenge&apos;s sample per-home budget ($85k time costs, $50k fees, $285k family price, $100k subsidies, $55k rent), offered as optional examples only</td><td className="mono">2026-11-06</td></tr>
               <tr><td>Listings</td><td>10 public Zillow / Redfin listings collected by hand by Jerry; link on each site page; no agent or seller names stored</td><td className="mono">2026-11-07</td></tr>
-              <tr><td>$360k land and building purchase per home</td><td><ASSUMPTION />: the brief&apos;s worked example (<code>docs/background.md</code>), mock numbers, not a real deal</td><td className="mono">2026-11-06</td></tr>
+              <tr><td>$360k land and building purchase per home</td><td><ASSUMPTION />: the Claude Impact Lab challenge&apos;s sample budget; illustrative, not a real deal</td><td className="mono">2026-11-06</td></tr>
               <tr><td>RE zone counts as single-family</td><td><ASSUMPTION />: zone description &quot;Residential-Estate&quot;; confirm in the Santa Ana zoning code</td><td className="mono">2026-11-07</td></tr>
               <tr><td>Santa Ana is in an urbanized area (SB 9 applies to urbanized areas, fact sheet April 2026 p.1)</td><td><ASSUMPTION />, not checked against Census data</td><td className="mono">2026-11-07</td></tr>
               <tr><td>Split line</td><td><ASSUMPTION />: a straight equal-area cut across the lot&apos;s long side. A sketch, not a surveyed parcel map</td><td className="mono">n/a</td></tr>
@@ -96,7 +96,7 @@ export default function MethodPage() {
 
       <section id="real-vs-mock" style={sec}>
         <div className="eyebrow">04</div>
-        <h2 style={{ marginTop: 4 }}>Real vs. mocked</h2>
+        <h2 style={{ marginTop: 4 }}>What&apos;s live vs. assumed</h2>
         <div className="table-wrap">
           <table>
             <thead><tr><th>Part</th><th>Status</th></tr></thead>

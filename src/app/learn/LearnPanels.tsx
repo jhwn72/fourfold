@@ -22,7 +22,7 @@ export default function LearnPanels({ real, example, rejected, apr }: Props) {
     <>
       <div className={s.status}>
         {real.record_count === 0 ? (
-          <p className={s.zero}>0 real project outcomes recorded. FourFold is using public data and the brief&apos;s assumptions only.</p>
+          <p className={s.zero}>0 real project outcomes recorded. FourFold is using public data and labelled sample assumptions only.</p>
         ) : (
           <p className={s.zero}>{real.record_count} real project outcome{real.record_count === 1 ? "" : "s"} recorded: {real.project_ids.join(", ")}.</p>
         )}
@@ -113,7 +113,7 @@ export default function LearnPanels({ real, example, rejected, apr }: Props) {
         <section className={s.section}>
           <h2>Costs per home</h2>
           {L.costs.length === 0 ? (
-            <p className={s.empty}>No real costs yet. The fund calculator keeps the brief&apos;s ASSUMPTION examples.</p>
+            <p className={s.empty}>No real costs yet. The fund calculator keeps its labelled sample (ASSUMPTION) examples.</p>
           ) : (
             <div className="table-wrap">
               <table>

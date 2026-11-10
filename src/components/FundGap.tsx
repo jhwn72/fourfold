@@ -69,7 +69,7 @@ export default function FundGap({ r }: { r: SiteResult }) {
       <h3 style={{ marginTop: 0, marginBottom: 4 }}>Fund the gap · {homes} homes</h3>
       <p className="muted" style={{ marginTop: 0 }}>
         What the family can afford to pay + public subsidies + fundraising − the cost to create the home = $0.
-        Source: Claude Impact Lab challenge brief, as quoted in docs/background.md (checked Nov 6, 2026).
+        Source: Claude Impact Lab challenge brief, sample numbers (checked Nov 6, 2026).
       </p>
 
       <h4 style={{ marginBottom: 4 }}>Cost to create</h4>
@@ -85,7 +85,7 @@ export default function FundGap({ r }: { r: SiteResult }) {
         </div>
       </div>
       <MoneyInput id="fg-build" label={`New construction cost (for the ${added} home${added === 1 ? "" : "s"} being added)`} value={build} onChange={setBuild}
-        chip={{ text: "No example: the brief's $40k \"construction and repairs\" is for repairing one existing home, not building new homes. Enter a builder's estimate." }} />
+        chip={{ text: "No example: the sample budget's $40k \"construction and repairs\" is for repairing one existing home, not building new homes. Enter a builder's estimate." }} />
       <MoneyInput id="fg-time" label="Time costs while waiting (loan interest, taxes, insurance)" value={time} onChange={setTime}
         chip={{ text: `brief example, $85k per home for time costs x ${homes} = ${fmt(EX_TIME * homes)}`, fill: EX_TIME * homes }} />
       <MoneyInput id="fg-fees" label="Fees, design, legal, sales" value={fees} onChange={setFees}
@@ -149,7 +149,7 @@ export default function FundGap({ r }: { r: SiteResult }) {
       )}
 
       <p className="muted">
-        Prototype. Every number you type is yours; examples are the brief&apos;s mock numbers<Star />, not a quote.
+        Prototype. Every number you type is yours; examples are illustrative sample numbers<Star />, not a quote.
         Not financial or lending advice; check with a professional before deciding.
       </p>
     </div>

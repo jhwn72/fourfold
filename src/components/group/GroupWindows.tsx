@@ -137,7 +137,7 @@ export function GroupFund({ members }: { members: SiteResult[] }) {
     <div>
       <p className="muted" style={{ marginTop: 0 }}>
         What the family can afford to pay + public subsidies + fundraising − the cost to create the home = $0, across {members.length} sites and {homes} homes.
-        Source: Claude Impact Lab challenge brief, as quoted in docs/background.md (checked Nov 6, 2026).
+        Source: Claude Impact Lab challenge brief, sample numbers (checked Nov 6, 2026).
       </p>
       <h4 style={{ marginBottom: 4 }}>Land and building purchase</h4>
       <table>
@@ -155,7 +155,7 @@ export function GroupFund({ members }: { members: SiteResult[] }) {
       <p className="faint" style={{ fontSize: 11.5 }}>Asking price is not the sale price.</p>
 
       <h4 style={{ marginBottom: 4 }}>Other costs</h4>
-      <Money id="gf-build" label="New construction cost, all sites (enter a builder's estimate; the brief has no new-build example)" value={build} onChange={setBuild} homes={homes} />
+      <Money id="gf-build" label="New construction cost, all sites (enter a builder's estimate; the sample budget has no new-build example)" value={build} onChange={setBuild} homes={homes} />
       <Money id="gf-time" label="Time costs while waiting (loan interest, taxes, insurance)" value={time} onChange={setTime} perHome={EX.time} homes={homes} />
       <Money id="gf-fees" label="Fees, design, legal, sales" value={fees} onChange={setFees} perHome={EX.fees} homes={homes} />
 
@@ -176,7 +176,7 @@ export function GroupFund({ members }: { members: SiteResult[] }) {
           </strong></td></tr>
         </tbody>
       </table>
-      <p className="muted">Prototype. Every number you type is yours; examples are the brief&apos;s mock numbers<Star />, not a quote. Not financial or lending advice; check with a professional before deciding.</p>
+      <p className="muted">Prototype. Every number you type is yours; examples are illustrative sample numbers<Star />, not a quote. Not financial or lending advice; check with a professional before deciding.</p>
     </div>
   );
 }
