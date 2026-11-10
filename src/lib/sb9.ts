@@ -102,7 +102,7 @@ export async function checkSite(input: ListingInput, evidence: ListingEvidence =
   const cityName = county ? input.geo!.city : city;
   const psrc = county ? SRC.ocParcels : citySources(city).parcels;
   const pBase = {
-    id: "parcel", test: `Address matches a ${cityName} parcel`, source_name: psrc.name as string, source_url: psrc.url as string,
+    id: "parcel", test: `Address matches a parcel in ${cityName}`, source_name: psrc.name as string, source_url: psrc.url as string,
     rule: "Needed to run every other test.", affects_verdict: true,
   };
   try {

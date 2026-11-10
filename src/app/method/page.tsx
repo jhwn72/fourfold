@@ -43,7 +43,7 @@ export default function MethodPage() {
               <tr><td>Historic property or district</td><td>Santa Ana Historic Resources layer (properties + districts)</td><td>HCD fact sheet (April 2026) p.3-4 (AB 1061)</td></tr>
               <tr><td>Landslide zone (site risk only, does not change verdict)</td><td>CGS Landslide Zones</td><td>Not an SB 9 exclusion in the HCD fact sheets</td></tr>
               <tr><td>Tenant in last 3 years</td><td>listing text read by Claude (possible FAIL only)</td><td>HCD fact sheet (April 2026) p.2-3</td></tr>
-              <tr><td>Rent restriction, rent control, Ellis Act; prior SB 9 split; earthquake fault; wetlands, habitat, farmland, hazardous waste</td><td><strong>always UNKNOWN</strong> in the MVP, each with a next step</td><td>HCD fact sheet (April 2026) p.2-3</td></tr>
+              <tr><td>Rent restriction, rent control, Ellis Act; prior SB 9 split; earthquake fault; wetlands, habitat, farmland, hazardous waste</td><td><strong>always UNKNOWN</strong> for now, each with a next step</td><td>HCD fact sheet (April 2026) p.2-3</td></tr>
             </tbody>
           </table>
         </div>
@@ -103,12 +103,12 @@ export default function MethodPage() {
             <tbody>
               <tr><td>Parcel lookup, lot area, zoning, flood, fire, historic, landslide checks</td><td>working, live government data</td></tr>
               <tr><td>Split sketch and SVG</td><td>working; a sketch, not a survey</td></tr>
-              <tr><td>Claude listing reader</td><td>working; all 10 listings read on 2026-11-07 (1213 S Corta flagged: &quot;DO NOT DISTURB TENANTS.&quot;). Paused in the live check since 2026-11-08, after the hackathon; the sample listings in the live check show the saved reads</td></tr>
+              <tr><td>Claude listing reader</td><td>working; all 10 listings read on 2026-11-07 (1213 S Corta flagged: &quot;DO NOT DISTURB TENANTS.&quot;). The live check reads pasted listing text the same way; its sample listings show the saved reads</td></tr>
               <tr><td>Keep-the-house and no-parking flags</td><td>working; footprints may include attached garages, and transit areas are straight-line</td></tr>
               <tr><td>Whole-city screen</td><td>working; a first screen using parcel centroids, not a verdict. Parcels that share one outline (condo or mobile-home units) are excluded</td></tr>
               <tr><td>Listings</td><td>real public listings, collected by hand on 2026-11-07; prices can change</td></tr>
               <tr><td>Ranking and land cost per home</td><td>working; uses asking price, not sale price</td></tr>
-              <tr><td>Other cities</td><td>not built; Santa Ana only</td></tr>
+              <tr><td>Other cities</td><td>ranked listings are Santa Ana only. The live check covers Orange County: Santa Ana, Anaheim and Fullerton use city maps; other cities use county parcels and regional zoning</td></tr>
             </tbody>
           </table>
         </div>

@@ -82,7 +82,7 @@ export default function CandidateList({ rows }: { rows: Row[] }) {
                 <td className={s.apn}>{r[1]}</td>
                 <td className={s.area}>{r[2].toLocaleString("en-US")}</td>
                 <td>{r[3]}{r[3] === "RE" && <Star />}</td>
-                <td>{r[0] ? <Link className={s.go} href={`/check?address=${encodeURIComponent(r[0])}`}>Check live →</Link> : null}</td>
+                <td>{r[0] && r[0] !== "SITUS PENDING" ? <Link className={s.go} href={`/check?address=${encodeURIComponent(r[0])}`}>Check live →</Link> : null}</td>
               </tr>
             ))}
             {!matches.length && (
