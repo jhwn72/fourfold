@@ -59,18 +59,16 @@ export default function LiveCheck({ heading = true }: { heading?: boolean }) {
   return (
     <div className="card" id="live" style={{ padding: 22 }}>
       {heading && <h2 style={{ marginTop: 0 }}>Check an Orange County address live</h2>}
-      {LIVE_AI_PAUSED && (
-        <div style={{ marginBottom: 18 }}>
-          <span className="eyebrow">Try a saved sample (Nov 7 run, with Claude&apos;s listing read)</span>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 }}>
-            {SAMPLES.map((x) => (
-              <button key={x.id} type="button" disabled={busy} onClick={() => post({ sample: x.id })} style={{ textAlign: "left" }}>
-                {x.label}<span style={{ opacity: 0.6 }}> · {x.hint}</span>
-              </button>
-            ))}
-          </div>
+      <div style={{ marginBottom: 18 }}>
+        <span className="eyebrow">{LIVE_AI_PAUSED ? "Try a saved sample (Nov 7 run, with Claude's listing read)" : "Or try a saved sample listing (Nov 7 run)"}</span>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 }}>
+          {SAMPLES.map((x) => (
+            <button key={x.id} type="button" disabled={busy} onClick={() => post({ sample: x.id })} style={{ textAlign: "left" }}>
+              {x.label}<span style={{ opacity: 0.6 }}> · {x.hint}</span>
+            </button>
+          ))}
         </div>
-      )}
+      </div>
       <form onSubmit={run} style={{ display: "grid", gap: 14, maxWidth: 640 }}>
         <label style={lbl}><span className="eyebrow">Address</span>
           <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Any Orange County address, e.g. 123 Main St, Irvine" required style={{ maxWidth: "100%" }} />
