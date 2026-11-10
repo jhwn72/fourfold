@@ -252,7 +252,7 @@ export default function FourFoldApp({ results, listings, groups, areas, city, ci
               <div><div className="eyebrow">Asking</div><div className={a.big}>{isLead && site.asking_price == null ? "Confirm price" : money(site.asking_price)}</div></div>
             </div>
             )}</LotNumbers>
-            <p className="faint" style={{ fontSize: 11.5, margin: "0 0 14px" }}>Brief&apos;s example: $360k per home<Star /></p>
+            <p className="faint" style={{ fontSize: 11.5, margin: "0 0 14px" }}>Sample budget: $360k per home<Star /></p>
             {groupOf(site.id) && <p className="muted" style={{ margin: "0 0 8px", fontSize: 13 }}>Part of {groupOf(site.id)!.label}: {groupOf(site.id)!.ids.length} sites, <span className="accent">{groupOf(site.id)!.homes} homes</span> within {groupOf(site.id)!.spread}.</p>}
             <div className={a.gate}><RecommendGate verdict={site.verdict} city={site.city}><span className="status verdict-LIKELY_YES">Recommended: make the first call</span></RecommendGate></div>
             {/* NextCallCard links to #call-sheet; in the app that opens the Call sheet window instead. */}

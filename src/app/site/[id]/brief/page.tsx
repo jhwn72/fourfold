@@ -56,7 +56,7 @@ export default async function SiteBrief({ params }: { params: Promise<{ id: stri
             <div><div className="muted">Max homes under SB 9</div><strong>{r.max_homes ?? "UNKNOWN"}</strong></div>
             <div><div className="muted">Land and building purchase per home, before construction</div><strong>{perHomeText(per, r.max_homes)}</strong></div>
             <div>
-              <div className="muted">Brief&apos;s worked example per home<Star /></div>
+              <div className="muted">Sample budget per home<Star /></div>
               <strong>{money(BRIEF_LAND_PER_HOME)}</strong>
               <AssumeNote style={{ marginTop: 4 }} />
               {per != null && <div className="muted">This site is {per <= BRIEF_LAND_PER_HOME ? "below" : "above"} the example by {money(Math.abs(BRIEF_LAND_PER_HOME - per))}.</div>}
