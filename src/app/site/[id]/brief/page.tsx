@@ -1,4 +1,6 @@
 // Print-optimized one-site briefing. Users save it as a PDF from the browser print dialog.
+import OffMarketTag from "@/components/OffMarketTag";
+import { offMarket } from "@/lib/listing-status";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -43,6 +45,7 @@ export default async function SiteBrief({ params }: { params: Promise<{ id: stri
       </p>
       <p>
         <span className={`status verdict-${r.verdict.replace(" ", "_")}`}>{r.verdict}</span> {r.verdict_reason}
+        {offMarket(r.id) && <div style={{ marginTop: 6 }}><OffMarketTag id={r.id} note /></div>}
       </p>
 
       <div className="brief-top">

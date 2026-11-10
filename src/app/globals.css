@@ -328,3 +328,6 @@ html[data-archive] { --banner-h: 30px; }
   .archive-banner-short { display: inline; }
 }
 @media print { .archive-banner { display: none; } }
+
+/* Listing no longer for sale (components/OffMarketTag.tsx). */
+.off-market { background: var(--surface-2); color: var(--muted); border: 1px dashed var(--line-strong); margin-left: 6px; }

@@ -9,6 +9,8 @@ import Checklist from "../Checklist";
 import FundGap from "../FundGap";
 import InvestorCard from "../InvestorCard";
 import LiveCheck from "../LiveCheck";
+import OffMarketTag from "../OffMarketTag";
+import { offMarket } from "@/lib/listing-status";
 import OrgProfile from "../OrgProfile";
 import RecommendGate from "../RecommendGate";
 import SupportPanel from "../SupportPanel";
@@ -218,7 +220,7 @@ export default function FourFoldApp({ results, listings, groups, areas, city, ci
         )}
         {tab === "sites" && !site && !off && mode === "sale" && (
           <div key="m-sale" className="ff-tabpane" style={{ "--dir": modeDir } as React.CSSProperties}>
-            <h1 className={a.title}><Tick value={results.length} /> houses for sale<span className="second"><Tick value={results.filter((r) => r.verdict === "LIKELY YES").length} /> can likely become 4 homes each</span></h1>
+            <h1 className={a.title}><Tick value={results.filter((r) => !offMarket(r.id)).length} /> houses for sale<span className="second"><Tick value={results.filter((r) => r.verdict === "LIKELY YES" && !offMarket(r.id)).length} /> can likely become 4 homes each</span></h1>
             <p className={a.lede}>Investors can&apos;t split a lot under SB 9 unless they live there 3 years. Nonprofits can.</p>
             <div className="card" style={{ marginTop: 18 }}>
               <div className={a.cardHead}><span className="eyebrow">Ranked: best per home first</span></div>
@@ -228,13 +230,13 @@ export default function FourFoldApp({ results, listings, groups, areas, city, ci
                     <button type="button" className={a.row} onClick={() => onSelect(r.id)}>
                       <span className={a.n}>№{i + 1}</span>
                       <span className={a.addr}>{r.address}</span>
-                      <span className={vClass(r.verdict)}>{r.verdict === "LIKELY YES" ? "Yes" : r.verdict === "UNKNOWN" ? "Check" : "No"}</span>
+                      <span className={vClass(r.verdict)}>{r.verdict === "LIKELY YES" ? "Yes" : r.verdict === "UNKNOWN" ? "Check" : "No"}</span>{offMarket(r.id) && <OffMarketTag id={r.id} />}
                       <span className={a.per}>{r.max_homes === 0 ? "n/a" : money(r.land_cost_per_home)}</span>
                     </button>
                   </li>
                 ))}
               </ol>
-              <p className="faint" style={{ fontSize: 11.5, margin: "8px 0 0" }}>Per home = asking ÷ homes, before construction.</p>
+              <p className="faint" style={{ fontSize: 11.5, margin: "8px 0 0" }}>Per home = asking ÷ homes, before construction.{results.some((r) => offMarket(r.id)) && " Off market: the listing was removed after it was collected; kept for reference."}</p>
             </div>
           </div>
         )}
@@ -245,6 +247,7 @@ export default function FourFoldApp({ results, listings, groups, areas, city, ci
             <div className="eyebrow">{isLead ? `Unverified lead · ${site.city}` : `№${rank(site.id)}`} · Parcel {site.parcel?.apn ?? "UNKNOWN"}</div>
             <h1 className={a.siteTitle}>{site.address}</h1>
             <p className={a.reason}><span className={vClass(site.verdict)}>{site.verdict}</span> {shortReason(site.verdict_reason)}</p>
+            {offMarket(site.id) && <p className={a.reason} style={{ marginTop: 6 }}><OffMarketTag id={site.id} note /></p>}
             <LotNumbers startAt={lotStart} asking={site.asking_price ?? null} perHome={site.land_cost_per_home ?? null} homes={site.max_homes ?? null} split={Boolean(site.split && site.max_homes && site.max_homes >= 4 && site.parcel)}>{(v) => (
             <div className={a.nums}>
               <div><div className="eyebrow">Homes</div><div className={`${a.big} accent`}>{v.homes}</div></div>
@@ -254,7 +257,7 @@ export default function FourFoldApp({ results, listings, groups, areas, city, ci
             )}</LotNumbers>
             <p className="faint" style={{ fontSize: 11.5, margin: "0 0 14px" }}>Sample budget: $360k per home<Star /></p>
             {groupOf(site.id) && <p className="muted" style={{ margin: "0 0 8px", fontSize: 13 }}>Part of {groupOf(site.id)!.label}: {groupOf(site.id)!.ids.length} sites, <span className="accent">{groupOf(site.id)!.homes} homes</span> within {groupOf(site.id)!.spread}.</p>}
-            <div className={a.gate}><RecommendGate verdict={site.verdict} city={site.city}><span className="status verdict-LIKELY_YES">Recommended: make the first call</span></RecommendGate></div>
+            {!offMarket(site.id) && <div className={a.gate}><RecommendGate verdict={site.verdict} city={site.city}><span className="status verdict-LIKELY_YES">Recommended: make the first call</span></RecommendGate></div>}
             {/* NextCallCard links to #call-sheet; in the app that opens the Call sheet window instead. */}
             <div className={a.next} onClickCapture={(e) => { const t = (e.target as HTMLElement).closest("a"); if (t && t.getAttribute("href") === "#call-sheet") { e.preventDefault(); setWin("calls"); } }}>
               <NextCallCard r={site} />

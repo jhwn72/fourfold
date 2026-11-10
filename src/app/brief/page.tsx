@@ -1,4 +1,5 @@
 // Printable handout: the ranked sites on one page, with the first open question for each from the call sheet.
+import OffMarketTag from "@/components/OffMarketTag";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PrintButton from "@/components/PrintButton";
@@ -32,7 +33,7 @@ export default function BatchBrief() {
                 <tr key={r.id}>
                   <td>{i + 1}</td>
                   <td>{r.address}<div className="muted">{r.parcel ? `APN ${r.parcel.apn}` : "no parcel match"} · {money(r.asking_price)}</div></td>
-                  <td><span className={`status verdict-${r.verdict.replace(" ", "_")}`}>{r.verdict}</span></td>
+                  <td><span className={`status verdict-${r.verdict.replace(" ", "_")}`}>{r.verdict}</span><OffMarketTag id={r.id} /></td>
                   <td>{r.max_homes ?? "UNKNOWN"}</td>
                   <td>{perHomeText(r.land_cost_per_home, r.max_homes)}{r.land_cost_per_home != null && <div className="muted">{r.land_cost_per_home <= BRIEF_LAND_PER_HOME ? "below" : "above"} $360k example</div>}</td>
                   <td>{q ? <>{q.question}<div className="muted">Ask: {first[0]}</div></> : "None from the checklist"}</td>

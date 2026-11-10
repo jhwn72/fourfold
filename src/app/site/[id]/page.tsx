@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import OffMarketTag from "@/components/OffMarketTag";
+import { offMarket } from "@/lib/listing-status";
 import Checklist from "@/components/Checklist";
 import CallSheet from "@/components/CallSheet";
 import ClusterBadge from "@/components/ClusterBadge";
@@ -66,11 +68,12 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
         {!firstFail && possible?.id === "tenant" && tenantQuote && <span className="muted"> Listing says &ldquo;{tenantQuote}&rdquo; Confirm with the agent.</span>}
       </p>
 
+      {offMarket(r.id) && <p style={{ margin: "0 0 12px" }}><OffMarketTag id={r.id} note /></p>}
       <ClusterBadge id={r.id} />
       <div style={{ margin: "10px 0 16px" }}>
-        <RecommendGate verdict={r.verdict} city={r.city}>
+        {!offMarket(r.id) && <RecommendGate verdict={r.verdict} city={r.city}>
           <a className="btn-primary" href="#call-sheet" style={{ display: "inline-block", padding: "8px 16px", borderRadius: 10, textDecoration: "none" }}>Recommended: start with the call sheet</a>
-        </RecommendGate>
+        </RecommendGate>}
       </div>
 
       <div className="stats" style={{ marginBottom: 18 }}>
